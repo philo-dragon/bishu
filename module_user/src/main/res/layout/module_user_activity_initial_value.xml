@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.pfl.module_user.activity.ModuleUserInitialValueActivity">
+
+        <include
+            android:id="@+id/in_toolbar_layout"
+            layout="@layout/common_databinding_toolbar_layout" />
+
+        <RelativeLayout
+            android:id="@+id/module_user_rl_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="180px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="90px"
+                android:text="实名认证"
+                android:textColor="#63727D"
+                android:textSize="54px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="45px"
+                android:text="未填写 >"
+                android:textColor="#63727D"
+                android:textSize="42px" />
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/line_wallet"
+            layout="@layout/common_line"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="45px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="90px"
+                android:text="性别"
+                android:textColor="#ff63727d"
+                android:textSize="54px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="45px"
+                android:text="未选择 >"
+                android:textColor="#63727D"
+                android:textSize="42px" />
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/line_wallet"
+            layout="@layout/common_line"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_marginLeft="90px"
+            android:layout_marginRight="45px" />
+
+    </LinearLayout>
+</layout>

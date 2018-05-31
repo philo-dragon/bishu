@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="cn.com.topzuqiu.MainActivity">
+
+        <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+            android:id="@+id/bottom_navigation_view_ex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@color/app_main_bottom_text_color_selector"
+            app:itemTextColor="@color/app_main_bottom_text_color_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_navigation_with_view_pager" />
+
+        <com.knifestone.hyena.view.viewgroup.NoSlidingViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_navigation_view_ex" />
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/in_toolbar_layout"
+            layout="@layout/common_databinding_toolbar_layout" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="744px"
+            android:layout_height="744px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="200px"
+            app:cardCornerRadius="348px"
+            app:cardElevation="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="165px"
+                android:text="我的积分"
+                android:textColor="#ff63727d"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="318px"
+                android:text="10000000"
+                android:textColor="#ff63727d"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="517px"
+                android:text="昨日获得：1000 积分"
+                android:textColor="#ff63727d"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="45px"
+                android:text="我的钱包>"
+                android:textColor="#ff63727d"
+                android:textSize="12sp" />
+
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="160px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="435px"
+                android:layout_height="234px"
+                app:cardCornerRadius="30px"
+                app:cardElevation="15px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="21px"
+                    android:text="赚积分"
+                    android:textColor="#ff63727d"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="17dp"
+                    android:layout_marginLeft="21px"
+                    android:layout_marginTop="99px"
+                    android:text="邀请好友赚积分"
+                    android:textColor="#ff63727d"
+                    android:textSize="12sp" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="435px"
+                android:layout_height="234px"
+                android:layout_marginLeft="80px"
+                app:cardCornerRadius="30px"
+                app:cardElevation="15px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="21px"
+                    android:text="每日签到"
+                    android:textColor="#ff63727d"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="84dp"
+                    android:layout_height="17dp"
+                    android:layout_marginLeft="21px"
+                    android:layout_marginTop="99px"
+                    android:text="每日签到，获得积分"
+                    android:textColor="#ff63727d"
+                    android:textSize="12sp" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
