@@ -19,9 +19,6 @@ import com.pfl.common.utils.AppManager;
 import com.pfl.common.utils.BaseUrlManager;
 import com.pfl.common.utils.CallBacks;
 import com.pfl.common.utils.CrashHandler;
-import com.pfl.common.weidget.InfAutoInflaterConvert;
-import com.yan.inflaterauto.AutoBaseOn;
-import com.yan.inflaterauto.InflaterAuto;
 
 /**
  * Created by Administrator on 2017/12/14 0014.
@@ -37,7 +34,7 @@ public class BaseApplication extends Application {
      */
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(InflaterAuto.wrap(base));
+        super.attachBaseContext(/*InflaterAuto.wrap(*/base/*)*/);
         MultiDex.install(this);
     }
 
@@ -46,7 +43,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CrashHandler.getInstance().init(this);
-        initAutoUI();
         initRouter();//初始化Router
         initBaseUrl();
         registerLifecycleCallbacks();//注册Activity生命周期监听
@@ -56,27 +52,6 @@ public class BaseApplication extends Application {
 
     protected void initBaseUrl() {
         BaseUrlManager.init("http://apitest.topzuqiu.cn/", "http://apitest.topzuqiu.cn/", false);//动态切换BaseUrl
-    }
-
-    /**
-     * 以下可以写在任何地方，只要在生成View之前
-     */
-    private void initAutoUI() {
-        setAutoUI(1080, 1920);
-    }
-
-    protected void setAutoUI(int w, int h) {
-
-        InflaterAuto.init(new InflaterAuto.Builder()
-                .width(w)
-                .height(h)
-                .baseOnDirection(AutoBaseOn.Both)// 宽度根据宽度比例缩放，长度根据长度比例缩放
-                // 由 com.yan.inflaterautotest.InflaterConvert 编译生成，自动添加前缀InfAuto
-                // 你也可以添加你自己的实现了Convert的类，替换任何一种view成为你想替换的view
-                .inflaterConvert(new InfAutoInflaterConvert())
-                .build()
-        );
-
     }
 
     protected void initAppComponent() {

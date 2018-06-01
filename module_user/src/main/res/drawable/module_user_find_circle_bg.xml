@@ -3,20 +3,20 @@
 
     <item android:gravity="center">
         <shape android:shape="oval">
-            <solid android:color="#4A90E2" />
+            <solid android:color="#3DC9C0" />
             <size
-                android:width="195px"
-                android:height="195px" />
+                android:width="55dp"
+                android:height="55dp" />
         </shape>
     </item>
 
     <item android:gravity="center">
 
         <shape android:shape="oval">
-            <solid android:color="#FFFFFF" />
+            <solid android:color="#cfffffff" />
             <size
-                android:width="180px"
-                android:height="180px" />
+                android:width="51dp"
+                android:height="51dp" />
         </shape>
 
     </item>

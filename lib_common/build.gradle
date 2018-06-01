@@ -59,8 +59,8 @@ dependencies {
     api rootProject.ext.deps.annotation
 
     // UI适配库
-    api rootProject.ext.deps.inflaterauto
-    annotationProcessor rootProject.ext.deps.inflaterauto_compiler
+    //api rootProject.ext.deps.inflaterauto
+    //annotationProcessor rootProject.ext.deps.inflaterauto_compiler
 
     // RxJava2 Retrofit2 RxLifecycle
     api rootProject.ext.deps.rxjava

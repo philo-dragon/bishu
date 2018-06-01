@@ -50,9 +50,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mBinding.bottomNavigationViewEx.enableItemShiftingMode(false);
 
         mBinding.bottomNavigationViewEx.setItemHeight(144);
-        mBinding.bottomNavigationViewEx.setIconsMarginTop(20);
-        mBinding.bottomNavigationViewEx.setTextSize(11);
-        mBinding.bottomNavigationViewEx.setIconSize(20, 20);
+        mBinding.bottomNavigationViewEx.setIconsMarginTop(16);
+        mBinding.bottomNavigationViewEx.setTextSize(10);
+        mBinding.bottomNavigationViewEx.setIconSize(24, 24);
 
         fragments = new ArrayList(5);
         items = new SparseIntArray(5);

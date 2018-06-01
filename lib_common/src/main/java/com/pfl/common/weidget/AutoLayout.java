@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.yan.inflaterauto.AutoUtils;
 
 public class AutoLayout extends LinearLayout {
 
@@ -22,7 +21,7 @@ public class AutoLayout extends LinearLayout {
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         ViewGroup.LayoutParams vlp = super.generateLayoutParams(attrs);
-        AutoUtils.autoLayout(vlp,getContext(),attrs);
+        //AutoUtils.autoLayout(vlp,getContext(),attrs);
         return super.generateLayoutParams(attrs);
     }
 }

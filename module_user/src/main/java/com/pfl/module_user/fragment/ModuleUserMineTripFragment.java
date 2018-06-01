@@ -35,6 +35,7 @@ import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 import static android.widget.LinearLayout.HORIZONTAL;
+import static android.widget.LinearLayout.VERTICAL;
 
 /**
  * 我的行程
@@ -59,7 +60,7 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
         setToolBar();
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
-        mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, HORIZONTAL));
+        mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, VERTICAL));
         adapter = new VHAdapter(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setAdapter(adapter);
 
@@ -80,8 +81,6 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     @Override
     public void setToolBar() {
         mBinding.inToolbarLayout.titleBar.setTitle("我的行程");
-        mBinding.inToolbarLayout.titleBar.setHeight(96 * 3);
-        mBinding.inToolbarLayout.titleBar.setDividerColor(Color.parseColor("#9B9B9B"));
         mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分规则") {
             @Override
             public void performAction(View view) {

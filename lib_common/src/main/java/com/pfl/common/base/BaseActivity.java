@@ -1,10 +1,8 @@
 package com.pfl.common.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -16,7 +14,6 @@ import com.pfl.common.utils.App;
 import com.pfl.common.utils.StatusBarUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.yan.inflaterauto.InflaterAuto;
 
 /**
  * Created by rocky on 2018/4/2.
@@ -27,16 +24,16 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected T mBinding;
     protected Activity mContext;
 
-    @Override
+  /*  @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(InflaterAuto.wrap(newBase));
-    }
+    }*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.mContext = this;
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.color.withe);
+        getWindow().setBackgroundDrawableResource(R.color.app_background);
         setContentView();
         drakMode();
         ARouter.getInstance().inject(this);
