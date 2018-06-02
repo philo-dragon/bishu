@@ -75,14 +75,17 @@
             android:name=".activity.ModuleUserChannelManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_channel_manager" />
-        <activity android:name=".activity.ModuleUserInitialValueActivity"
+        <activity
+            android:name=".activity.ModuleUserInitialValueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_initial_value"
-            />
-        <activity android:name=".activity.ModuleUserInputNickNameActivity"
+            android:label="@string/module_user_initial_value" />
+        <activity
+            android:name=".activity.ModuleUserInputNickNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_input_nick_name"
-            />
+            android:label="@string/module_user_input_nick_name" />
+        <activity android:name=".activity.ModuleUserUploadIdentityCardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_upload_identity_card"/>
     </application>
 
 </manifest>

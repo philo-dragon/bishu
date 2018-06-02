@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,11 +81,12 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     @Override
     public void setToolBar() {
-        mBinding.inToolbarLayout.titleBar.setTitle("我的行程");
+
+        setToolBarNoBack(mBinding.inToolbarLayout.titleBar,getResources().getString(R.string.module_user_my_trip));
         mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分规则") {
             @Override
             public void performAction(View view) {
-                Toast.makeText(App.getInstance(), "点击了发布", Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getInstance(), "积分规则", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -121,8 +123,10 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
             MineTripBean tripBean = mDatas.get(position);
             holder.tvName.setText(tripBean.getName());
-            holder.tvTime.setText(tripBean.getStartTime() + " ~ " + tripBean.getEndTime());
+            holder.tvTimeStart.setText(tripBean.getStartTime());
+            holder.tvTimeEnd.setText(tripBean.getEndTime());
             holder.tvMoney.setText(tripBean.getMoney());
+            holder.imgState.setImageResource(tripBean.getType() == 1 ? R.drawable.module_user_ic_sold_out : R.drawable.module_user_ic_for_sale);
 
         }
 
@@ -139,14 +143,18 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     static class VH extends RecyclerView.ViewHolder {
         public TextView tvName;
-        public TextView tvTime;
+        public TextView tvTimeStart;
+        public TextView tvTimeEnd;
         public TextView tvMoney;
+        public ImageView imgState;
 
         public VH(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.module_user_tv_name);
-            tvTime = itemView.findViewById(R.id.module_user_tv_time);
+            tvTimeStart = itemView.findViewById(R.id.module_user_tv_time_start);
+            tvTimeEnd = itemView.findViewById(R.id.module_user_tv_time_end);
             tvMoney = itemView.findViewById(R.id.module_user_tv_money);
+            imgState = itemView.findViewById(R.id.module_user_img_state);
         }
     }
 
@@ -160,6 +168,7 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
             tripBean.setEndTime("2018-05-26 13:54");
             tripBean.setMoney(i % 2 == 0 ? "+5" : "0");
             tripBean.setName(i % 2 == 0 ? "已售行程" : "待售行程");
+            tripBean.setType(i % 2 == 0 ? 1 : 0);
             tripBeans.add(tripBean);
         }
 
@@ -171,6 +180,7 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
         private String startTime;
         private String endTime;
         private String money;
+        private int type;
 
         public String getName() {
             return name;
@@ -202,6 +212,14 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
         public void setMoney(String money) {
             this.money = money;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
         }
     }
 }

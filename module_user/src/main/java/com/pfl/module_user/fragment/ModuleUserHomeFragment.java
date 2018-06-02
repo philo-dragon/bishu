@@ -15,11 +15,13 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.utils.RxClickUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentHomeBinding;
@@ -51,22 +53,21 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void initView() {
         setToolBar();
+
+        RxClickUtil.RxClick(mBinding.moduleUserTvMyWallet, this);
     }
 
     @Override
     public void setToolBar() {
-        mBinding.inToolbarLayout.titleBar.setTitle("比数智能出行");
-        mBinding.inToolbarLayout.titleBar.setTitleColor(R.color.title_color);
+        setToolBarNoBack(mBinding.inToolbarLayout.titleBar, getResources().getString(R.string.module_user_bishu));
         ImageView tvMesage = (ImageView) mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.ImageAction(R.drawable.module_user_ic_home_message) {
             @Override
             public void performAction(View view) {
-                //Toast.makeText(MainActivity.this, "点击了收藏", Toast.LENGTH_SHORT).show();
-                //mCollectView.setImageResource(R.mipmap.fabu);
+                Toast.makeText(App.getInstance(), "点击了消息", Toast.LENGTH_SHORT).show();
             }
         });
         tvMesage.getLayoutParams().width = ConvertUtils.dp2px(30);
         tvMesage.getLayoutParams().height = ConvertUtils.dp2px(40);
-
     }
 
     @Override
@@ -76,6 +77,9 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void onClick(View v) {
 
+        if (v.getId() == R.id.module_user_tv_my_wallet) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET);
+        }
     }
 
 
@@ -88,6 +92,6 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void onPause() {
         super.onPause();
-        AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
+        //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
     }
 }

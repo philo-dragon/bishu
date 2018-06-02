@@ -18,11 +18,14 @@
     <string name="module_user_feed_back">意见反馈</string>
     <string name="module_user_home_page">用户主页</string>
     <string name="module_user_sfs_list">胜负师列表</string>
-    <string name="module_user_my_wallet">我的钱包</string>
+    <string name="module_user_my_wallet">钱包</string>
     <string name="module_user_h5">H5界面</string>
     <string name="module_user_channel_manager">频道管理</string>
     <string name="finish">完成</string>
     <string name="edit">编辑</string>
     <string name="module_user_initial_value">基础资料</string>
     <string name="module_user_input_nick_name">输入昵称</string>
+    <string name="module_user_upload_identity_card">上传身份证</string>
+    <string name="module_user_bishu">比数智能出行</string>
+    <string name="module_user_my_trip">我的行程</string>
 </resources>

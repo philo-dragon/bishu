@@ -19,9 +19,7 @@ public class RouteUtils {
      */
     public static final String APP_MAIN_ACTIVITY = "/app/main";
 
-
     public static final String APP_FRAGMENT_FAST_NEWS = "/app/fast_news";
-
     /**
      * module_user 模块
      */
@@ -45,6 +43,7 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_CHANNEL_MANAGER = "/module_user/activity_channel_manager";
     public static final String MODULE_USER_ACTIVITY_INITIAL_VALUE  = "/module_user/activity_initial_value";
     public static final String MODULE_USER_ACTIVITY_INPUT_NICK_NAME  = "/module_user/activity_input_nick_name";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD  = "/module_user/activity_upload_identity_card";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";

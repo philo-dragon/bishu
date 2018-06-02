@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.pfl.common.R;
 import com.pfl.common.listener.IActivity;
 import com.pfl.common.utils.App;
+import com.pfl.common.utils.TitleBarUtil;
 import com.pfl.common.weidget.TitleBar;
 
 /**
@@ -58,18 +59,11 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     }
 
     protected void setToolBarHasBack(TitleBar titleBar, String title) {
-        titleBar.setTitle(title);
-        titleBar.setTitleColor(getResources().getColor(R.color.title_color));
-        titleBar.setLeftText("返回");
-        titleBar.setLeftImageResource(R.drawable.common_left_back_arror_selector);
-        titleBar.setLeftTextColor(getResources().getColor(R.color.title_color));
-        titleBar.setDividerColor(getResources().getColor(R.color.title_divider_color));
+        TitleBarUtil.setToolBarHasBack(titleBar,title);
 
     }
 
     protected void setToolBarNoBack(TitleBar titleBar, String title) {
-        titleBar.setTitle(title);
-        titleBar.setDividerColor(getResources().getColor(R.color.title_divider_color));
-        titleBar.setTitleColor(getResources().getColor(R.color.title_color));
+        TitleBarUtil.setToolBarNoBack(titleBar,title);
     }
 }

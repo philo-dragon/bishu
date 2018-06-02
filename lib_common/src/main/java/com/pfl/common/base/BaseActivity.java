@@ -12,6 +12,7 @@ import com.pfl.common.R;
 import com.pfl.common.listener.IActivity;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.StatusBarUtil;
+import com.pfl.common.utils.TitleBarUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -24,16 +25,11 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected T mBinding;
     protected Activity mContext;
 
-  /*  @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(InflaterAuto.wrap(newBase));
-    }*/
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.mContext = this;
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.color.app_background);
+        getWindow().setBackgroundDrawableResource(R.color.lib_resource_background);
         setContentView();
         drakMode();
         ARouter.getInstance().inject(this);
@@ -64,24 +60,18 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     }
 
     protected void setToolBarHasBack(TitleBar titleBar) {
-        titleBar.setTitle(getTitle());
-        titleBar.setTitleColor(getResources().getColor(R.color.title_color));
-        titleBar.setLeftText("返回");
-        titleBar.setLeftImageResource(R.drawable.common_left_back_arror_selector);
-        titleBar.setLeftTextColor(getResources().getColor(R.color.title_color));
-        titleBar.setDividerColor(getResources().getColor(R.color.title_divider_color));
+        TitleBarUtil.setToolBarHasBack(titleBar,getTitle().toString());
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
     }
 
     protected void setToolBarNoBack(TitleBar titleBar) {
-        titleBar.setTitle(getTitle());
-        titleBar.setDividerColor(getResources().getColor(R.color.title_divider_color));
-        titleBar.setTitleColor(getResources().getColor(R.color.title_color));
+        TitleBarUtil.setToolBarNoBack(titleBar,getTitle().toString());
     }
 
     private boolean isSupportDataBinding() {

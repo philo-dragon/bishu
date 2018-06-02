@@ -31,8 +31,7 @@ public class ModuleUserFindFragment extends BaseFragment<ModuleUserFragmentFindB
 
     @Override
     public void setToolBar() {
-        mBinding.inToolbarLayout.titleBar.setTitle("发现");
-        mBinding.inToolbarLayout.titleBar.setHeight(96 * 3);
+        setToolBarNoBack(mBinding.inToolbarLayout.titleBar, "发现");
     }
 
     @Override

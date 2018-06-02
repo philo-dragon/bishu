@@ -13,72 +13,286 @@
             android:id="@+id/in_toolbar_layout"
             layout="@layout/common_databinding_toolbar_layout" />
 
+
         <RelativeLayout
-            android:id="@+id/rl_img_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/in_toolbar_layout"
-            android:layout_marginTop="10px"
-            android:gravity="center_horizontal">
+            android:layout_height="150dp"
+            android:layout_below="@+id/in_toolbar_layout">
 
-            <ImageView
-                android:id="@+id/img_1"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+            <View
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/module_user_wallet_circle_shape" />
 
-            <ImageView
-                android:id="@+id/img_2"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_marginLeft="10px"
-                android:layout_marginRight="10px"
-                android:layout_toRightOf="@+id/img_1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="-17dp"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@+id/module_user_cv_content"
+                android:background="@drawable/module_user_wallet_circle_shape" />
 
-            <ImageView
-                android:id="@+id/img_3"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_toRightOf="@+id/img_2"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
 
-            <ImageView
-                android:id="@+id/img_4"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_below="@+id/img_1"
-                android:layout_marginTop="10px"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+            <android.support.v7.widget.CardView
+                android:id="@+id/module_user_cv_content"
+                android:layout_width="265dp"
+                android:layout_height="109dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#F1F4F9"
+                app:cardCornerRadius="3dp">
 
-            <ImageView
-                android:id="@+id/img_5"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_below="@+id/img_1"
-                android:layout_marginLeft="10px"
-                android:layout_marginRight="10px"
-                android:layout_marginTop="10px"
-                android:layout_toRightOf="@+id/img_4"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="可用积分"
+                    android:textColor="#ff1c2737"
+                    android:textSize="15dp" />
 
-            <ImageView
-                android:id="@+id/img_6"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_below="@+id/img_1"
-                android:layout_marginTop="10px"
-                android:layout_toRightOf="@+id/img_5"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="42dp"
+                    android:text="1000000"
+                    android:textColor="#ff3dc9c0"
+                    android:textSize="35sp" />
+
+            </android.support.v7.widget.CardView>
 
         </RelativeLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/in_toolbar_layout"
+            android:layout_marginTop="115dp"
+            android:background="@color/withe"
+            android:fillViewport="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:text="+5"
+                        android:textColor="#ff3dc9c0"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="每日登陆"
+                            android:textColor="#1C2737"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2018-05-25 16:12"
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:text="+5"
+                        android:textColor="#ff3dc9c0"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="出售行程"
+                            android:textColor="#1C2737"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2018-05-25 16:12"
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:text="-100"
+                        android:textColor="#FF9800"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="商品兑换"
+                            android:textColor="#1C2737"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2018-05-25 16:12"
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:text="+5"
+                        android:textColor="#ff3dc9c0"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="车主认证"
+                            android:textColor="#1C2737"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2018-05-25 16:12"
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:text="+5"
+                        android:textColor="#ff3dc9c0"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="出售行程"
+                            android:textColor="#1C2737"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2018-05-25 16:12"
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_line" />
+
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 
 </layout>

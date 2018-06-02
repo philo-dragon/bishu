@@ -3,82 +3,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:context="com.pfl.module_user.activity.ModuleUserInitialValueActivity">
 
         <include
             android:id="@+id/in_toolbar_layout"
             layout="@layout/common_databinding_toolbar_layout" />
 
-        <RelativeLayout
-            android:id="@+id/module_user_rl_nick_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180px">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/in_toolbar_layout"
+            android:layout_marginTop="20dp"
+            android:background="@color/withe"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/module_user_rl_nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:text="实名认证"
+                    android:textColor="#63727D"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
+                    android:text="未填写"
+                    android:textColor="#63727D"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/line_wallet"
+                layout="@layout/common_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="18dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:text="性别"
+                    android:textColor="#ff63727d"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
+                    android:text="未选择"
+                    android:textColor="#63727D"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/module_user_cv_commit"
+            android:layout_width="250dp"
+            android:layout_height="42dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="127dp"
+            android:layout_marginTop="301dp"
+            app:cardBackgroundColor="#3DC9C0"
+            app:cardCornerRadius="21dp"
+            app:cardElevation="3dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="90px"
-                android:text="实名认证"
-                android:textColor="#63727D"
-                android:textSize="54px" />
+                android:layout_gravity="center"
+                android:text="提交"
+                android:textColor="#ffffffff"
+                android:textSize="17dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="45px"
-                android:text="未填写 >"
-                android:textColor="#63727D"
-                android:textSize="42px" />
+        </android.support.v7.widget.CardView>
 
-        </RelativeLayout>
-
-        <include
-            android:id="@+id/line_wallet"
-            layout="@layout/common_line"
-            android:layout_width="match_parent"
-            android:layout_height="3px"
-            android:layout_marginLeft="90px"
-            android:layout_marginRight="45px" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="180px">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="90px"
-                android:text="性别"
-                android:textColor="#ff63727d"
-                android:textSize="54px" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="45px"
-                android:text="未选择 >"
-                android:textColor="#63727D"
-                android:textSize="42px" />
-
-        </RelativeLayout>
-
-        <include
-            android:id="@+id/line_wallet"
-            layout="@layout/common_line"
-            android:layout_width="match_parent"
-            android:layout_height="3px"
-            android:layout_marginLeft="90px"
-            android:layout_marginRight="45px" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
