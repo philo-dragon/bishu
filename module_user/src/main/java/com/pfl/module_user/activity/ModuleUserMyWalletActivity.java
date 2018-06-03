@@ -1,28 +1,17 @@
 package com.pfl.module_user.activity;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.bumptech.glide.Glide;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.imageloader.ImageLoader;
-import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
-import com.pfl.common.utils.RxClickUtil;
 import com.pfl.common.weidget.TitleBar;
-import com.pfl.common.weidget.atlas.ImageWatcher;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityMyWalletBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 我的钱包

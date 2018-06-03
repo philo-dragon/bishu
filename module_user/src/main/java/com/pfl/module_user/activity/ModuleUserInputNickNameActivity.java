@@ -8,6 +8,9 @@ import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityInitialValueBinding;
 import com.pfl.module_user.databinding.ModuleUserActivityInputNickNameBinding;
 
+/**
+ *
+ */
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_INPUT_NICK_NAME)
 public class ModuleUserInputNickNameActivity extends BaseActivity<ModuleUserActivityInputNickNameBinding> {
 

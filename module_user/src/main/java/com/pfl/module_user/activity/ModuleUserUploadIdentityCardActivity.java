@@ -5,7 +5,6 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
-import com.pfl.module_user.databinding.ModuleUserActivityUpdatePasswordBinding;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
