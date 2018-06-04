@@ -1,6 +1,5 @@
 package com.pfl.module_user.activity;
 
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -10,19 +9,18 @@ import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
-import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
+import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceBinding;
 
 import me.shaohui.bottomdialog.BaseBottomDialog;
 
-@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
-public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements View.OnClickListener {
-
+@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE)
+public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceBinding> implements View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
 
     @Override
     public int getContentView() {
-        return R.layout.module_user_activity_upload_identity_card;
+        return R.layout.module_user_activity_upload_driving_licence;
     }
 
     @Override
@@ -55,6 +53,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
             showUploadDialog(i);
         }
     }
+
 
     private void showUploadDialog(int id) {
         uploadDialog = BottomDialogManager.uploadDialog(getSupportFragmentManager(), new BottomDialogManager.OnUploadDialogListener() {

@@ -31,6 +31,8 @@ public class ModuleUserMineFragment extends BaseFragment<ModuleUserFragmentMineB
         setToolBar();
         RxClickUtil.RxClick(mBinding.moduleUserImgPhoto, this);
         RxClickUtil.RxClick(mBinding.moduleUserRlRealNameAuth, this);
+        RxClickUtil.RxClick(mBinding.moduleUserRlDriverAuth, this);
+        RxClickUtil.RxClick(mBinding.moduleUserRlCarAuth, this);
     }
 
     @Override
@@ -50,6 +52,10 @@ public class ModuleUserMineFragment extends BaseFragment<ModuleUserFragmentMineB
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INITIAL_VALUE);
         } else if (i == R.id.module_user_rl_real_name_auth) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD);
+        } else if (i == R.id.module_user_rl_driver_auth) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE);
+        } else if (i == R.id.module_user_rl_car_auth) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_CAR);
         }
     }
 }

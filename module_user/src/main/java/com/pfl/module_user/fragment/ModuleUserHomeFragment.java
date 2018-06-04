@@ -39,6 +39,7 @@ import java.util.List;
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_HOME)
 public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements View.OnClickListener {
 
+    private boolean isInit;
 
     @Override
     public int getContentView() {
@@ -86,7 +87,11 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void onResume() {
         super.onResume();
-        AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
+        if (!isInit) {
+            isInit = true;
+            AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
+            AnimationManager.setAnimText(mBinding.moduleUserTvIntegral, 10000000);
+        }
     }
 
     @Override

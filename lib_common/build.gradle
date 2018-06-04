@@ -109,4 +109,7 @@ dependencies {
     //卡牌翻转动画
     api rootProject.ext.deps.Rotatable
 
+    //底部弹窗
+    api rootProject.ext.deps.bottomdialog
+
 }

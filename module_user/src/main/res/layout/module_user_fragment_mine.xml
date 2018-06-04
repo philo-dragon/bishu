@@ -105,6 +105,7 @@
                 android:background="#BEC7D3" />
 
             <RelativeLayout
+                android:id="@+id/module_user_rl_driver_auth"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:foreground="?attr/selectableItemBackground">
@@ -143,6 +144,7 @@
                 android:layout_marginLeft="16dp" />
 
             <RelativeLayout
+                android:id="@+id/module_user_rl_car_auth"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:foreground="?attr/selectableItemBackground">
@@ -234,7 +236,6 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text="已认证"
                     android:textColor="#ff1dbdaa"
                     android:textSize="15dp" />
 

@@ -23,9 +23,19 @@
             android:name=".activity.ModuleUserInputNickNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_input_nick_name" />
-        <activity android:name=".activity.ModuleUserUploadIdentityCardActivity"
+        <activity
+            android:name=".activity.ModuleUserUploadIdentityCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card"/>
+            android:label="@string/module_user_upload_identity_card" />
+        <activity
+            android:name=".activity.ModuleUserUploadDrivingLicenceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_upload_driving_licence" />
+        <activity
+            android:name=".activity.ModuleUserAddCarActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_add_car" />
+        <activity android:name=".activity.ModuleUserUploadDrivingBookActivity"></activity>
     </application>
 
 </manifest>

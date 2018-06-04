@@ -28,4 +28,6 @@
     <string name="module_user_upload_identity_card">上传身份证</string>
     <string name="module_user_bishu">比数智能出行</string>
     <string name="module_user_my_trip">我的行程</string>
+    <string name="module_user_upload_driving_licence">上传驾驶证</string>
+    <string name="module_user_add_car">添加车辆</string>
 </resources>
