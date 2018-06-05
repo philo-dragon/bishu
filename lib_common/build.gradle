@@ -39,6 +39,7 @@ dependencies {
     androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     api project(':lib_resource')
+    api project(':lib_permission')
 
     api rootProject.ext.deps.multidex
 

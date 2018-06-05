@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">开易</string>
+    <string name="app_name">比数</string>
 
     <string name="app_bottom_navigation_home">首页</string>
     <string name="app_bottom_navigation_action">行程</string>
