@@ -18,10 +18,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.pfl.common.base.BaseFragment;
+import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.TitleBar;
+import com.pfl.module_user.BR;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineBinding;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
@@ -44,7 +46,7 @@ import static android.widget.LinearLayout.VERTICAL;
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
 public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentMineTripBinding> implements View.OnClickListener {
 
-    private VHAdapter adapter;
+    private MultiTypeAdapter multiTypeAdapter;
 
     @Override
     public int getContentView() {
@@ -59,12 +61,31 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     @Override
     public void initView() {
         setToolBar();
+        setRecyclerView();
+        setRefreshView();
+    }
+
+    @Override
+    public void setToolBar() {
+
+        setToolBarNoBack(mBinding.inToolbarLayout.titleBar, getResources().getString(R.string.module_user_my_trip));
+        mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分规则") {
+            @Override
+            public void performAction(View view) {
+                Toast.makeText(App.getInstance(), "积分规则", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
         mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, VERTICAL));
-        adapter = new VHAdapter(mContext);
-        mBinding.moduleRefreshLayout.commonRecyclerView.setAdapter(adapter);
+        multiTypeAdapter = new MultiTypeAdapter();
+        mBinding.moduleRefreshLayout.commonRecyclerView.setAdapter(multiTypeAdapter);
+    }
 
+    private void setRefreshView() {
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
@@ -80,20 +101,9 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     }
 
     @Override
-    public void setToolBar() {
-
-        setToolBarNoBack(mBinding.inToolbarLayout.titleBar,getResources().getString(R.string.module_user_my_trip));
-        mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分规则") {
-            @Override
-            public void performAction(View view) {
-                Toast.makeText(App.getInstance(), "积分规则", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
     public void initData() {
-        adapter.addData(getData());
+        multiTypeAdapter.setItems(getData());
+        multiTypeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -101,68 +111,11 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     }
 
-    class VHAdapter extends RecyclerView.Adapter<VH> {
 
-        private final LayoutInflater inflater;
-        private List<MineTripBean> mDatas;
+    public List<MultiTypeAdapter.IItem> getData() {
 
-        public VHAdapter(Context context) {
-            inflater = LayoutInflater.from(context);
-            mDatas = new ArrayList<>();
-        }
-
-        @Override
-        public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = inflater.inflate(R.layout.module_user_item_mine_trip, parent, false);
-            VH viewHolder = new VH(view);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(VH holder, int position) {
-
-            MineTripBean tripBean = mDatas.get(position);
-            holder.tvName.setText(tripBean.getName());
-            holder.tvTimeStart.setText(tripBean.getStartTime());
-            holder.tvTimeEnd.setText(tripBean.getEndTime());
-            holder.tvMoney.setText(tripBean.getMoney());
-            holder.imgState.setImageResource(tripBean.getType() == 1 ? R.drawable.module_user_ic_sold_out : R.drawable.module_user_ic_for_sale);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return mDatas == null ? 0 : mDatas.size();
-        }
-
-        public void addData(List<MineTripBean> datas) {
-            mDatas.addAll(datas);
-            notifyDataSetChanged();
-        }
-    }
-
-    static class VH extends RecyclerView.ViewHolder {
-        public TextView tvName;
-        public TextView tvTimeStart;
-        public TextView tvTimeEnd;
-        public TextView tvMoney;
-        public ImageView imgState;
-
-        public VH(View itemView) {
-            super(itemView);
-            tvName = itemView.findViewById(R.id.module_user_tv_name);
-            tvTimeStart = itemView.findViewById(R.id.module_user_tv_time_start);
-            tvTimeEnd = itemView.findViewById(R.id.module_user_tv_time_end);
-            tvMoney = itemView.findViewById(R.id.module_user_tv_money);
-            imgState = itemView.findViewById(R.id.module_user_img_state);
-        }
-    }
-
-
-    public List<MineTripBean> getData() {
-
-        List<MineTripBean> tripBeans = new ArrayList<>();
-        for (int i = 0; i < 60; i++) {
+        List<MultiTypeAdapter.IItem> tripBeans = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
             MineTripBean tripBean = new MineTripBean();
             tripBean.setStartTime("2018-05-25 16:12");
             tripBean.setEndTime("2018-05-26 13:54");
@@ -175,7 +128,7 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
         return tripBeans;
     }
 
-    public static class MineTripBean {
+    public static class MineTripBean implements MultiTypeAdapter.IItem {
         private String name;
         private String startTime;
         private String endTime;
@@ -220,6 +173,16 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
         public void setType(int type) {
             this.type = type;
+        }
+
+        @Override
+        public int getLayout() {
+            return R.layout.module_user_item_my_trip;
+        }
+
+        @Override
+        public int getVariableId() {
+            return BR.item;
         }
     }
 }
