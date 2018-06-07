@@ -63,6 +63,8 @@ ext {
 
             bottomdialog          : "1.1.9",
 
+            lottie                : "2.5.4",
+
     ]
 
     deps = [
@@ -126,6 +128,8 @@ ext {
             Rotatable             : "com.yayandroid:Rotatable:${depsVersion.Rotatable}",//卡片翻转动画库
 
             bottomdialog          : "me.shaohui:bottomdialog:${depsVersion.bottomdialog}",//底部弹出窗
+
+            lottie                : "com.airbnb.android:lottie:${depsVersion.lottie}",//底部弹出窗
 
     ]
 

@@ -35,7 +35,7 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     testApi 'junit:junit:4.12'
-    androidTestApi 'com.android.support.test:runner:1.0.1'
+    androidTestApi 'com.android.support.test:runner:1.0.2'
     androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     api project(':lib_resource')
@@ -112,5 +112,10 @@ dependencies {
 
     //底部弹窗
     api rootProject.ext.deps.bottomdialog
+
+    // lottie 动画库
+    api (rootProject.ext.deps.lottie){
+        exclude group: 'com.android.support'
+    }
 
 }

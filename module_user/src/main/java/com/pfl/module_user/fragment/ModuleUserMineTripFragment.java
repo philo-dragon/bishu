@@ -1,31 +1,22 @@
 package com.pfl.module_user.fragment;
 
 
-import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.ScreenUtils;
-import com.bumptech.glide.Glide;
 import com.pfl.common.base.BaseFragment;
 import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.weidget.CommonHeader;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.BR;
 import com.pfl.module_user.R;
-import com.pfl.module_user.databinding.ModuleUserFragmentMineBinding;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -34,10 +25,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayer;
-import cn.jzvd.JZVideoPlayerStandard;
-
-import static android.widget.LinearLayout.HORIZONTAL;
 import static android.widget.LinearLayout.VERTICAL;
 
 /**
@@ -47,6 +34,7 @@ import static android.widget.LinearLayout.VERTICAL;
 public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentMineTripBinding> implements View.OnClickListener {
 
     private MultiTypeAdapter multiTypeAdapter;
+    private CommonHeader commonHeader;
 
     @Override
     public int getContentView() {
@@ -78,6 +66,9 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     }
 
     private void setRecyclerView() {
+
+        commonHeader = new CommonHeader(mContext);
+        mBinding.moduleRefreshLayout.commonRefreshLayout.setRefreshHeader(commonHeader);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
         mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, VERTICAL));
@@ -88,8 +79,17 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     private void setRefreshView() {
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
+            public void onRefresh(final RefreshLayout refreshlayout) {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        commonHeader.getCompleteView().setVisibility(View.VISIBLE);
+                        refreshlayout.finishRefresh(500);
+
+                    }
+                }, 2000);
+
             }
         });
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
