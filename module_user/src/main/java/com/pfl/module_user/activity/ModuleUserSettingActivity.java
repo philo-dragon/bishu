@@ -1,17 +1,11 @@
 package com.pfl.module_user.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.CacheUtils;
-import com.kongzue.dialog.v2.InputDialog;
-import com.kongzue.dialog.v2.SelectDialog;
-import com.kongzue.dialog.v2.WaitDialog;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.App;

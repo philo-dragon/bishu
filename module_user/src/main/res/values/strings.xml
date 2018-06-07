@@ -30,4 +30,6 @@
     <string name="module_user_my_trip">我的行程</string>
     <string name="module_user_upload_driving_licence">上传驾驶证</string>
     <string name="module_user_add_car">添加车辆</string>
+    <string name="module_user_upload_driving_book">上传行驶证</string>
+    <string name="module_user_upload_identity_card_result">上传身份证</string>
 </resources>

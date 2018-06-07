@@ -23,6 +23,17 @@
             android:name=".activity.ModuleUserInputNickNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_input_nick_name" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity
             android:name=".activity.ModuleUserUploadIdentityCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -35,7 +46,12 @@
             android:name=".activity.ModuleUserAddCarActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_add_car" />
-        <activity android:name=".activity.ModuleUserUploadDrivingBookActivity"></activity>
+        <activity android:name=".activity.ModuleUserUploadDrivingBookActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_upload_driving_book"/>
+        <activity android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_upload_identity_card_result"/>
     </application>
 
 </manifest>

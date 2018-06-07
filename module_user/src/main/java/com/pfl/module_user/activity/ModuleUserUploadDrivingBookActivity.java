@@ -1,14 +1,18 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.BottomDialogManager;
+import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingBookBinding;
+import com.pfl.module_user.utils.SelectPictureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +22,11 @@ import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
+@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK)
 public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUserActivityUploadDrivingBookBinding> implements View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
+    private SelectPictureHelper pictureHelper;
 
     @Override
     public int getContentView() {
@@ -34,7 +40,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
 
     @Override
     public void initView() {
-        setToolBar();
+        pictureHelper = new SelectPictureHelper(this);
     }
 
     @Override
@@ -55,16 +61,20 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         }
     }
 
-    private void showUploadDialog(int id) {
+    private void showUploadDialog(final int id) {
         uploadDialog = BottomDialogManager.uploadDialog(getSupportFragmentManager(), new BottomDialogManager.OnUploadDialogListener() {
             @Override
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
+                String fileName = "file_front";
+                pictureHelper.getPicFromCamera(fileName);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
+                String fileName = "file_front";
+                pictureHelper.getPicFromAlbm(fileName);
             }
 
             @Override
@@ -81,7 +91,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
-        HiPermission.create(ModuleUserUploadDrivingBookActivity.this)
+        HiPermission.create(mContext)
                 .title("比数权限")
                 .permissions(permissionItems)
                 .filterColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, getTheme()))//permission icon color
@@ -109,4 +119,10 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
                 });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        pictureHelper.onActivityResult(requestCode, resultCode, intent);
+    }
+
 }

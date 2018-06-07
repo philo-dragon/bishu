@@ -13,6 +13,7 @@ import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceBinding;
+import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceResultBinding;
 import com.pfl.module_user.utils.SelectPictureHelper;
 
 import java.util.ArrayList;
@@ -23,15 +24,15 @@ import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
-@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE)
-public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceBinding> implements View.OnClickListener {
+@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT)
+public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceResultBinding> implements View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
 
     @Override
     public int getContentView() {
-        return R.layout.module_user_activity_upload_driving_licence;
+        return R.layout.module_user_activity_upload_driving_licence_result;
     }
 
     @Override
@@ -141,5 +142,4 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         pictureHelper.onActivityResult(requestCode, resultCode, intent);
     }
-
 }
