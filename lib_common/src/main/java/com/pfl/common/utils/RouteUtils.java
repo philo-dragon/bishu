@@ -37,6 +37,8 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK  = "/module_user/activity_upload_driving_driving_book";
     public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT  = "/module_user/activity_upload_driving_book_result";
     public static final String MODULE_USER_ACTIVITY_ADD_CAR  = "/module_user/activity_user_add_car";
+    public static final String MODULE_USER_ACTIVITY_FEED_BACK  = "/module_user/activity_user_feed_back";
+    public static final String MODULE_USER_ACTIVITY_ABOU_US  = "/module_user/activity_user_abou_us";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";

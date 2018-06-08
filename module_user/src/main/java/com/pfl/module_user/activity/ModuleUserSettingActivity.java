@@ -51,19 +51,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void initView() {
-
-        boolean flag = UserInfoManager.getInstance() == null;
-        mBinding.tvAccountInfo.setVisibility(flag ? View.GONE : View.VISIBLE);
-        mBinding.line.setVisibility(flag ? View.GONE : View.VISIBLE);
-
-        RxClickUtil.RxClick(mBinding.tvAbout, this);
-        RxClickUtil.RxClick(mBinding.tvAccountInfo, this);
-        RxClickUtil.RxClick(mBinding.tvClearCache, this);
-        RxClickUtil.RxClick(mBinding.tvMzsm, this);
-        RxClickUtil.RxClick(mBinding.tvPf, this);
-        RxClickUtil.RxClick(mBinding.tvTkys, this);
-        RxClickUtil.RxClick(mBinding.rlHistoryVersion, this);
-        RxClickUtil.RxClick(mBinding.btnLogin, this);
+        /*RxClickUtil.RxClick(mBinding.tvAbout, this);*/
     }
 
     @Override
@@ -86,7 +74,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
     public void onClick(View v) {
 
         int i = v.getId();
-        if (i == R.id.tv_account_info) {
+        /*if (i == R.id.tv_account_info) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ACCOUNT_INFO);
         } else if (i == R.id.rl_clear_cache) {
             DialogManager.showTwoBtnDialog(mContext, "确定要清空缓存吗？");
@@ -111,7 +99,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
         } else if (i == R.id.btn_login) {
 
             DialogManager.showTwoBtnDialog(mContext, "确定要退出登录吗？");
-        }
+        }*/
 
     }
 

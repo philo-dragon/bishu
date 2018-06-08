@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/module_user_tv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="13dp"
+            android:drawableTop="@drawable/module_user_ic_login_logo"
+            android:gravity="center"
+            android:text="比数出行"
+            android:textColor="#3DC9C0"
+            android:textSize="17dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/module_user_tv_phone_prefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="70dp"
+            android:text="+86"
+            android:textColor="#ff6a7e9a"
+            android:textSize="19dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/module_user_tv_logo" />
+
+        <EditText
+            android:id="@+id/module_user_et_mobile_no"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_marginLeft="14dp"
+            android:background="@android:color/transparent"
+            android:hint="请输入手机号登录／注册"
+            android:minWidth="200dp"
+            android:textColor="#6A7E9A"
+            android:textSize="15dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/module_user_tv_phone_prefix"
+            app:layout_constraintLeft_toRightOf="@+id/module_user_tv_phone_prefix" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="87dp"
+            android:layout_marginRight="52dp"
+            android:background="#90A4AE"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/module_user_et_mobile_no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="12dp"
+            android:textColor="#FF9800"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/module_user_tv_phone_prefix"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            tools:text="请输入正确的手机号码" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/module_user_cv_next"
+            android:layout_width="250dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="100dp"
+            app:cardBackgroundColor="#3DC9C0"
+            app:cardCornerRadius="21dp"
+            app:cardElevation="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="下一步"
+                android:textColor="#ffffffff"
+                android:textSize="17dp" />
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

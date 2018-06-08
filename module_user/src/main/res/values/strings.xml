@@ -32,4 +32,19 @@
     <string name="module_user_add_car">添加车辆</string>
     <string name="module_user_upload_driving_book">上传行驶证</string>
     <string name="module_user_upload_identity_card_result">上传身份证</string>
+    <string name="title_activity_module_user_login_regist">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="module_user_str_registed_hint">13800138000已注册\n您可以输入密码直接登录</string>
 </resources>

@@ -29,7 +29,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.mContext = this;
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.color.lib_resource_background);
+        getWindow().setBackgroundDrawableResource(getBackgroundColorRes());
         setContentView();
         drakMode();
         ARouter.getInstance().inject(this);
@@ -37,6 +37,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
         initView();
         setToolBar();
         initData();
+    }
+
+    protected int getBackgroundColorRes() {
+        return R.color.lib_resource_background;
     }
 
     private void setContentView() {

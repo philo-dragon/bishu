@@ -26,10 +26,11 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     @Inject
     ImageLoader imageLoader;
-    @Inject
-    RegistViewModel registViewModel;
-    @Inject
-    ModuleUserPoUser user;
+
+    @Override
+    protected int getBackgroundColorRes() {
+        return R.color.white;
+    }
 
     @Override
     public int getContentView() {
@@ -56,44 +57,19 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
                 imageView(mBinding.imgUser).
                 build());*/
 
-        mBinding.setUser(user);
-        mBinding.btnCheckCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.btnCheckCode.onStart();
-            }
-        });
-        mBinding.btnRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.btnRegist.onStart();
-                Toast.makeText(ModuleUserRegistActivity.this.getApplicationContext(), user.toString(), Toast.LENGTH_SHORT).show();
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_SETTING);
-            }
-        });
+
     }
 
     @Override
     public void setToolBar() {
-        setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
     }
 
     @Override
     public void initData() {
-        registViewModel.requestData();
     }
 
     @Override
     public void onSuccess(String token) {
-        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        mBinding.btnRegist.onStop();
-        mBinding.btnCheckCode.onStop();
-
-    }
 }

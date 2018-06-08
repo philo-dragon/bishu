@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pfl.module_user">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application>
         <activity
             android:name=".activity.ModuleUserRegistActivity"
@@ -27,8 +32,8 @@
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
@@ -46,12 +51,21 @@
             android:name=".activity.ModuleUserAddCarActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_add_car" />
-        <activity android:name=".activity.ModuleUserUploadDrivingBookActivity"
+        <activity
+            android:name=".activity.ModuleUserUploadDrivingBookActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_book"/>
-        <activity android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
+            android:label="@string/module_user_upload_driving_book" />
+        <activity
+            android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card_result"/>
+            android:label="@string/module_user_upload_identity_card_result" />
+        <activity
+            android:name=".ModuleUserLoginRegistActivity"
+            android:label="@string/title_activity_module_user_login_regist"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ModuleUserLoginActivity" />
+        <activity android:name=".activity.ModuleUserFeedBackActivity" />
+        <activity android:name=".activity.ModuleUserAbouUsActivity"></activity>
     </application>
 
 </manifest>

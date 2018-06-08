@@ -215,6 +215,7 @@
                 android:layout_marginLeft="16dp" />
 
             <RelativeLayout
+                android:id="@+id/module_user_rl_setting"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:foreground="?attr/selectableItemBackground">
