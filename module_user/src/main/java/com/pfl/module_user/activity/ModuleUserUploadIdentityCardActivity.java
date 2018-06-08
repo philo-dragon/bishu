@@ -1,7 +1,16 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,7 +22,11 @@ import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
+import com.pfl.module_user.utils.SelectPictureHelper;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +38,8 @@ import me.weyye.hipermission.PermissionItem;
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
 public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements View.OnClickListener {
 
-
     private BaseBottomDialog uploadDialog;
+    private SelectPictureHelper pictureHelper;
 
     @Override
     public int getContentView() {
@@ -40,6 +53,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
     @Override
     public void initView() {
+        pictureHelper = new SelectPictureHelper(this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -64,16 +78,33 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         }
     }
 
-    private void showUploadDialog(int id) {
+    private void showUploadDialog(final int id) {
         uploadDialog = BottomDialogManager.uploadDialog(getSupportFragmentManager(), new BottomDialogManager.OnUploadDialogListener() {
             @Override
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
+
+                String fileName = "file_front";
+                if (id == R.id.module_user_img_upload_file_front) {
+                    fileName = "file_front";
+                } else if (id == R.id.module_user_img_upload_file_back) {
+                    fileName = "file_back";
+                }
+
+                pictureHelper.getPicFromCamera(fileName);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
+
+                String fileName = "file_front";
+                if (id == R.id.module_user_img_upload_file_front) {
+                    fileName = "file_front";
+                } else if (id == R.id.module_user_img_upload_file_back) {
+                    fileName = "file_back";
+                }
+                pictureHelper.getPicFromAlbm(fileName);
             }
 
             @Override
@@ -83,14 +114,13 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         });
     }
 
-
     private void requestPermission(final int id) {
 
         List<PermissionItem> permissionItems = new ArrayList<>();
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
-        HiPermission.create(ModuleUserUploadIdentityCardActivity.this)
+        HiPermission.create(mContext)
                 .title("比数权限")
                 .permissions(permissionItems)
                 .filterColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, getTheme()))//permission icon color
@@ -116,6 +146,13 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
                     public void onGuarantee(String permission, int position) {
                     }
                 });
-
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        pictureHelper.onActivityResult(requestCode, resultCode, intent);
+    }
+
+
 }

@@ -31,7 +31,11 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_INITIAL_VALUE  = "/module_user/activity_initial_value";
     public static final String MODULE_USER_ACTIVITY_INPUT_NICK_NAME  = "/module_user/activity_input_nick_name";
     public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD  = "/module_user/activity_upload_identity_card";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT  = "/module_user/activity_upload_identity_card_result";
     public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE  = "/module_user/activity_upload_driving_licence";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT  = "/module_user/activity_upload_driving_licence_result";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK  = "/module_user/activity_upload_driving_driving_book";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT  = "/module_user/activity_upload_driving_book_result";
     public static final String MODULE_USER_ACTIVITY_ADD_CAR  = "/module_user/activity_user_add_car";
 
 

@@ -1,7 +1,6 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
@@ -12,8 +11,8 @@ import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
-import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceBinding;
-import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
+import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardResultBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +22,15 @@ import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
-@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE)
-public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceBinding> implements View.OnClickListener {
+@Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT)
+public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardResultBinding> implements View.OnClickListener {
+
 
     private BaseBottomDialog uploadDialog;
-    private SelectPictureHelper pictureHelper;
 
     @Override
     public int getContentView() {
-        return R.layout.module_user_activity_upload_driving_licence;
+        return R.layout.module_user_activity_upload_identity_card_result;
     }
 
     @Override
@@ -41,7 +40,6 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
 
     @Override
     public void initView() {
-        pictureHelper = new SelectPictureHelper(this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -66,33 +64,16 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
         }
     }
 
-    private void showUploadDialog(final int id) {
+    private void showUploadDialog(int id) {
         uploadDialog = BottomDialogManager.uploadDialog(getSupportFragmentManager(), new BottomDialogManager.OnUploadDialogListener() {
             @Override
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
-
-                String fileName = "file_front";
-                if (id == R.id.module_user_img_upload_file_front) {
-                    fileName = "file_front";
-                } else if (id == R.id.module_user_img_upload_file_back) {
-                    fileName = "file_back";
-                }
-
-                pictureHelper.getPicFromCamera(fileName);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
-
-                String fileName = "file_front";
-                if (id == R.id.module_user_img_upload_file_front) {
-                    fileName = "file_front";
-                } else if (id == R.id.module_user_img_upload_file_back) {
-                    fileName = "file_back";
-                }
-                pictureHelper.getPicFromAlbm(fileName);
             }
 
             @Override
@@ -101,6 +82,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
             }
         });
     }
+
 
     private void requestPermission(final int id) {
 
@@ -136,10 +118,4 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
                 });
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        pictureHelper.onActivityResult(requestCode, resultCode, intent);
-    }
-
 }
