@@ -106,6 +106,7 @@ public class SelectPictureHelper {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (resultCode == RESULT_OK) {

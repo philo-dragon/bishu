@@ -18,7 +18,10 @@ import com.pfl.module_user.utils.SelectPictureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import me.shaohui.bottomdialog.BaseBottomDialog;
 import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
@@ -108,7 +111,12 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
                     @Override
                     public void onFinish() {//所有权限申请完成
-                        showUploadDialog(id);
+                        Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                showUploadDialog(id);
+                            }
+                        });
                     }
 
                     @Override

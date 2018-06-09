@@ -51,7 +51,11 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void initView() {
-        /*RxClickUtil.RxClick(mBinding.tvAbout, this);*/
+        RxClickUtil.RxClick(mBinding.moduleUserCvMessage, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvHelpFeedback, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvAboutUs, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvClearMemory, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvExitLogin, this);
     }
 
     @Override
@@ -61,7 +65,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void initData() {
-        settingViewModel.requestData();
+        //settingViewModel.requestData();
     }
 
     @Override
@@ -74,52 +78,18 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
     public void onClick(View v) {
 
         int i = v.getId();
-        /*if (i == R.id.tv_account_info) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ACCOUNT_INFO);
-        } else if (i == R.id.rl_clear_cache) {
+        if (i == R.id.module_user_cv_message) {
+            mBinding.moduleUserSwitch.setChecked(mBinding.moduleUserSwitch.isChecked());
+        } else if (i == R.id.module_user_cv_help_feedback) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FEED_BACK);
+        } else if (i == R.id.module_user_cv_about_us) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ABOU_US);
+        } else if (i == R.id.module_user_cv_clear_memory) {
             DialogManager.showTwoBtnDialog(mContext, "确定要清空缓存吗？");
-        } else if (i == R.id.tv_pf) {
-            launchAppDetail();
-        } else if (i == R.id.tv_tkys) {
-            HashMap<String, String> parameter = new HashMap<>();
-            parameter.put("title", "使用条款与隐私政策");
-            parameter.put("url", BaseUrlManager.getBaseUrl() + "help/privacy");
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5, parameter);
-        } else if (i == R.id.tv_mzsm) {
-            HashMap<String, String> parameter = new HashMap<>();
-            parameter.put("title", "免责声明");
-            parameter.put("url", BaseUrlManager.getBaseUrl() + "help/proclaim");
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5, parameter);
-        } else if (i == R.id.tv_about) {
-            HashMap<String, String> parameter = new HashMap<>();
-            parameter.put("title", "关于我们");
-            parameter.put("url", BaseUrlManager.getBaseUrl() + "help/aboutme");
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5, parameter);
-        } else if (i == R.id.rl_history_version) {
-        } else if (i == R.id.btn_login) {
-
+        } else if (i == R.id.module_user_cv_exit_login) {
             DialogManager.showTwoBtnDialog(mContext, "确定要退出登录吗？");
-        }*/
-
-    }
-
-    /**
-     * 跳转到应用市场app详情界面
-     */
-    public void launchAppDetail() {
-        try {
-            try {
-                Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(App.getInstance(), "您的手机没有安装Android应用市场", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 
 }

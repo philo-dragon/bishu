@@ -124,7 +124,12 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
 
                     @Override
                     public void onFinish() {//所有权限申请完成
-                        showUploadDialog(id);
+                        Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                showUploadDialog(id);
+                            }
+                        });
                     }
 
                     @Override
