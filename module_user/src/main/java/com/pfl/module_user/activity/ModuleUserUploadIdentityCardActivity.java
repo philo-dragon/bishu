@@ -132,7 +132,6 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         List<PermissionItem> permissionItems = new ArrayList<>();
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
-        permissionItems.add(new PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
         HiPermission.create(mContext)
                 .title("比数权限")

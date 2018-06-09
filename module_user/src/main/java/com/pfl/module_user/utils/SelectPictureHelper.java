@@ -96,7 +96,7 @@ public class SelectPictureHelper {
      * 裁剪图片
      */
     private void cropPhoto(Uri uri) {
-       Intent intent = new Intent("com.android.camera.action.CROP");
+        Intent intent = new Intent("com.android.camera.action.CROP");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.setDataAndType(uri, "image*//*");
