@@ -62,9 +62,9 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
             public void onSelected(String path, Bitmap bitmap) {
 
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
-                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
-                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
                 }
             }
         });
