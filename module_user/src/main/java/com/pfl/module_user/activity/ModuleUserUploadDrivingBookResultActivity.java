@@ -2,6 +2,7 @@ package com.pfl.module_user.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
@@ -46,6 +47,15 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
     @Override
     public void initView() {
         pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                }
+            }
+        });
     }
 
     @Override
@@ -72,14 +82,14 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
-                pictureHelper.getPicFromCamera(fileName);
+                pictureHelper.getPicFromCamera(fileName, id);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
-                pictureHelper.getPicFromAlbm(fileName);
+                pictureHelper.getPicFromAlbm(fileName, id);
             }
 
             @Override

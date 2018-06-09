@@ -57,6 +57,17 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
     @Override
     public void initView() {
         pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
+                }
+            }
+        });
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -94,20 +105,19 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
                     fileName = "file_back";
                 }
 
-                pictureHelper.getPicFromCamera(fileName);
+                pictureHelper.getPicFromCamera(fileName, id);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
-
                 String fileName = "file_front";
                 if (id == R.id.module_user_img_upload_file_front) {
                     fileName = "file_front";
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
-                pictureHelper.getPicFromAlbm(fileName);
+                pictureHelper.getPicFromAlbm(fileName, id);
             }
 
             @Override
@@ -122,6 +132,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         List<PermissionItem> permissionItems = new ArrayList<>();
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
+        permissionItems.add(new PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
         HiPermission.create(mContext)
                 .title("比数权限")

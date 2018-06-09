@@ -79,7 +79,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
         int i = v.getId();
         if (i == R.id.module_user_cv_message) {
-            mBinding.moduleUserSwitch.setChecked(mBinding.moduleUserSwitch.isChecked());
+            mBinding.moduleUserSwitch.setChecked(!mBinding.moduleUserSwitch.isChecked());
         } else if (i == R.id.module_user_cv_help_feedback) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FEED_BACK);
         } else if (i == R.id.module_user_cv_about_us) {

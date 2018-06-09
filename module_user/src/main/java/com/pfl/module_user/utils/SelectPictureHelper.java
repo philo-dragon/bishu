@@ -3,6 +3,7 @@ package com.pfl.module_user.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class SelectPictureHelper {
     private File tempFile;
 
     private String fileName = "crop";
+    private int tag = -1;
 
     private Activity mActivity;
 
@@ -42,8 +44,8 @@ public class SelectPictureHelper {
     /**
      * 从相机获取图片
      */
-    public void getPicFromCamera() {
-        getPicFromCamera(fileName);
+    public void getPicFromCamera(int resid) {
+        getPicFromCamera(fileName, resid);
     }
 
     /**
@@ -51,8 +53,9 @@ public class SelectPictureHelper {
      * <p>
      * fileName 保存图片名称
      */
-    public void getPicFromCamera(String fileName) {
+    public void getPicFromCamera(String fileName, int resid) {
         this.fileName = fileName;
+        this.tag = resid;
         //用于保存调用相机拍照后所生成的文件
         tempFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu", System.currentTimeMillis() + ".jpg");
         //跳转到调用系统相机
@@ -72,8 +75,8 @@ public class SelectPictureHelper {
     /**
      * 从相册获取图片
      */
-    public void getPicFromAlbm() {
-        getPicFromAlbm(fileName);
+    public void getPicFromAlbm(int resid) {
+        getPicFromAlbm(fileName, resid);
     }
 
     /**
@@ -81,8 +84,9 @@ public class SelectPictureHelper {
      * <p>
      * fileName 保存图片名称
      */
-    public void getPicFromAlbm(String fileName) {
+    public void getPicFromAlbm(String fileName, int resid) {
         this.fileName = fileName;
+        this.tag = resid;
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         mActivity.startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
@@ -92,10 +96,10 @@ public class SelectPictureHelper {
      * 裁剪图片
      */
     private void cropPhoto(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
+       Intent intent = new Intent("com.android.camera.action.CROP");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        intent.setDataAndType(uri, "image/*");
+        intent.setDataAndType(uri, "image*//*");
         intent.putExtra(fileName, "true");
         intent.putExtra("aspectX", 800);
         intent.putExtra("aspectY", 500);
@@ -134,6 +138,9 @@ public class SelectPictureHelper {
                     //mHeader_iv.setImageBitmap(image);
                     //也可以进行一些保存、压缩等操作后上传
                     String path = saveImage(fileName, image);
+                    if (mOnSelectPictureSuccess != null) {
+                        mOnSelectPictureSuccess.onSelected(path, image);
+                    }
                 }
                 break;
         }
@@ -156,6 +163,22 @@ public class SelectPictureHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private OnSelectPictureSuccess mOnSelectPictureSuccess;
+
+    public void setOnSelectPictureSuccess(OnSelectPictureSuccess onSelectPictureSuccess) {
+        this.mOnSelectPictureSuccess = onSelectPictureSuccess;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public interface OnSelectPictureSuccess {
+
+        void onSelected(String path, Bitmap bitmap);
+
     }
 
 }
