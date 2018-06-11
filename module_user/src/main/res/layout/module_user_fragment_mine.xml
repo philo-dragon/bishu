@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/module_user_rl_header_view"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:background="@drawable/module_user_ic_mine_header_bg"

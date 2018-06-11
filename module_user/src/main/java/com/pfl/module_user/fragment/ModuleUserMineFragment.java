@@ -34,6 +34,7 @@ public class ModuleUserMineFragment extends BaseFragment<ModuleUserFragmentMineB
         RxClickUtil.RxClick(mBinding.moduleUserRlDriverAuth, this);
         RxClickUtil.RxClick(mBinding.moduleUserRlCarAuth, this);
         RxClickUtil.RxClick(mBinding.moduleUserRlSetting, this);
+        RxClickUtil.RxClick(mBinding.moduleUserRlHeaderView, this);
     }
 
     @Override
@@ -59,6 +60,8 @@ public class ModuleUserMineFragment extends BaseFragment<ModuleUserFragmentMineB
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_CAR);
         } else if (i == R.id.module_user_rl_setting) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_SETTING);
+        } else if (i == R.id.module_user_rl_header_view) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
         }
     }
 }

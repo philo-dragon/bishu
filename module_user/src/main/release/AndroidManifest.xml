@@ -31,7 +31,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}"
+            android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -61,11 +61,18 @@
             android:label="@string/module_user_upload_identity_card_result" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
-            android:label="@string/title_activity_module_user_login_regist"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".activity.ModuleUserLoginActivity" />
-        <activity android:name=".activity.ModuleUserFeedBackActivity" />
-        <activity android:name=".activity.ModuleUserAbouUsActivity"></activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+            android:name=".activity.ModuleUserLoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".activity.ModuleUserFeedBackActivity"
+            android:label="@string/module_user_str_help_feedback"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".activity.ModuleUserAbouUsActivity"
+            android:label="@string/module_user_str_about_us"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>

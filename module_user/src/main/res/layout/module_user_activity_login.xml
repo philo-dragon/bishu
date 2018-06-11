@@ -8,6 +8,7 @@
         tools:context="com.pfl.module_user.ModuleUserLoginActivity">
 
         <ViewFlipper
+            android:id="@+id/module_user_vf_flipper"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

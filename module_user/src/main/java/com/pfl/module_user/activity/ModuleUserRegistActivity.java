@@ -8,6 +8,7 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityRegistBinding;
 import com.pfl.module_user.di.module_regist.DaggerRegistComponent;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
  * 用户注册
  */
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_REGIST)
-public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityRegistBinding> implements RegistView {
+public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityRegistBinding> implements RegistView, View.OnClickListener {
 
     @Inject
     ImageLoader imageLoader;
@@ -58,6 +59,8 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
                 build());*/
 
 
+        RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserCvNext, this);
+        RxClickUtil.RxClick(mBinding.inRegistView2.moduleUserCvRegist, this);
     }
 
     @Override
@@ -72,4 +75,13 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
     public void onSuccess(String token) {
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.module_user_cv_next) {
+            mBinding.modulerUserVfFlipper.showNext();
+        } else if (id == R.id.module_user_cv_regist) {
+
+        }
+    }
 }
