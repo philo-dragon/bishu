@@ -65,7 +65,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void initData() {
-        settingViewModel.requestData();
+        //settingViewModel.requestData();
     }
 
     @Override
@@ -109,6 +109,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 }

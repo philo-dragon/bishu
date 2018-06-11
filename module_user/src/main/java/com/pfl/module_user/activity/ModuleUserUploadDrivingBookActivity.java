@@ -2,6 +2,7 @@ package com.pfl.module_user.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
@@ -16,7 +17,10 @@ import com.pfl.module_user.utils.SelectPictureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import me.shaohui.bottomdialog.BaseBottomDialog;
 import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
@@ -41,6 +45,15 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
     @Override
     public void initView() {
         pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                }
+            }
+        });
     }
 
     @Override
@@ -67,14 +80,14 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
-                pictureHelper.getPicFromCamera(fileName);
+                pictureHelper.getPicFromCamera(fileName, id);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
-                pictureHelper.getPicFromAlbm(fileName);
+                pictureHelper.getPicFromAlbm(fileName, id);
             }
 
             @Override
@@ -106,7 +119,17 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
 
                     @Override
                     public void onFinish() {//所有权限申请完成
-                        showUploadDialog(id);
+                        Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        showUploadDialog(id);
+                                    }
+                                });
+                            }
+                        });
                     }
 
                     @Override

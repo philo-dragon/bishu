@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,7 +79,6 @@ public class PermissionActivity extends AppCompatActivity {
             showPermissionDialog();
         }
     }
-
 
     private String getPermissionTitle() {
         return TextUtils.isEmpty(mTitle) ? String.format(getString(R.string.permission_dialog_title), mAppName) : mTitle;
@@ -307,7 +307,9 @@ public class PermissionActivity extends AppCompatActivity {
     private void onFinish() {
         if (mCallback != null)
             mCallback.onFinish();
-        finish();
+
+        onBackPressed();
+        //finish();
     }
 
     private void onClose() {

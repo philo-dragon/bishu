@@ -3,6 +3,7 @@ package com.pfl.module_user.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
@@ -37,6 +38,7 @@ public class SelectPictureHelper {
     private File tempFile;
 
     private String fileName = "crop";
+    private int tag = -1;
 
     private Activity mActivity;
     private OnSelectPictureListener mOnSelectPictureListener;
@@ -48,8 +50,8 @@ public class SelectPictureHelper {
     /**
      * 从相机获取图片
      */
-    public void getPicFromCamera() {
-        getPicFromCamera(fileName);
+    public void getPicFromCamera(int resid) {
+        getPicFromCamera(fileName, resid);
     }
 
     /**
@@ -57,8 +59,9 @@ public class SelectPictureHelper {
      * <p>
      * fileName 保存图片名称
      */
-    public void getPicFromCamera(String fileName) {
+    public void getPicFromCamera(String fileName, int resid) {
         this.fileName = fileName;
+        this.tag = resid;
         //用于保存调用相机拍照后所生成的文件
         tempFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu", System.currentTimeMillis() + ".jpg");
         //跳转到调用系统相机
@@ -78,8 +81,8 @@ public class SelectPictureHelper {
     /**
      * 从相册获取图片
      */
-    public void getPicFromAlbm() {
-        getPicFromAlbm(fileName);
+    public void getPicFromAlbm(int resid) {
+        getPicFromAlbm(fileName, resid);
     }
 
     /**
@@ -87,8 +90,9 @@ public class SelectPictureHelper {
      * <p>
      * fileName 保存图片名称
      */
-    public void getPicFromAlbm(String fileName) {
+    public void getPicFromAlbm(String fileName, int resid) {
         this.fileName = fileName;
+        this.tag = resid;
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         mActivity.startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
@@ -138,6 +142,7 @@ public class SelectPictureHelper {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (resultCode == RESULT_OK) {
@@ -236,6 +241,22 @@ public class SelectPictureHelper {
 
     public interface OnSelectPictureListener {
         void onSelectedPicetre(String path);
+    }
+
+    private OnSelectPictureSuccess mOnSelectPictureSuccess;
+
+    public void setOnSelectPictureSuccess(OnSelectPictureSuccess onSelectPictureSuccess) {
+        this.mOnSelectPictureSuccess = onSelectPictureSuccess;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public interface OnSelectPictureSuccess {
+
+        void onSelected(String path, Bitmap bitmap);
+
     }
 
 }

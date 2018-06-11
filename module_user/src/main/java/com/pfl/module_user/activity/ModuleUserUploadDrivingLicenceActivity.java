@@ -2,6 +2,7 @@ package com.pfl.module_user.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
@@ -17,7 +18,10 @@ import com.pfl.module_user.utils.SelectPictureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import me.shaohui.bottomdialog.BaseBottomDialog;
 import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
@@ -42,6 +46,17 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
     @Override
     public void initView() {
         pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
+                }
+            }
+        });
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -79,7 +94,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
                     fileName = "file_back";
                 }
 
-                pictureHelper.getPicFromCamera(fileName);
+                pictureHelper.getPicFromCamera(fileName,id);
             }
 
             @Override
@@ -92,7 +107,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
-                pictureHelper.getPicFromAlbm(fileName);
+                pictureHelper.getPicFromAlbm(fileName,id);
             }
 
             @Override
@@ -123,7 +138,12 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
 
                     @Override
                     public void onFinish() {//所有权限申请完成
-                        showUploadDialog(id);
+                        Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                showUploadDialog(id);
+                            }
+                        });
                     }
 
                     @Override

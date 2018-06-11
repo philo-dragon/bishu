@@ -57,6 +57,17 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
     @Override
     public void initView() {
         pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
+                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
+                }
+            }
+        });
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -94,20 +105,19 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
                     fileName = "file_back";
                 }
 
-                pictureHelper.getPicFromCamera(fileName);
+                pictureHelper.getPicFromCamera(fileName, id);
             }
 
             @Override
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
-
                 String fileName = "file_front";
                 if (id == R.id.module_user_img_upload_file_front) {
                     fileName = "file_front";
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
-                pictureHelper.getPicFromAlbm(fileName);
+                pictureHelper.getPicFromAlbm(fileName, id);
             }
 
             @Override
@@ -138,13 +148,17 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
                     @Override
                     public void onFinish() {//所有权限申请完成
-                        Observable.just(id).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                        Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
                             @Override
-                            public void accept(Integer id) throws Exception {
-                                showUploadDialog(id);
+                            public void accept(Integer integer) throws Exception {
+                                Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        showUploadDialog(id);
+                                    }
+                                });
                             }
                         });
-
                     }
 
                     @Override
