@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.pfl.common.R;
 import com.pfl.common.listener.IActivity;
 import com.pfl.common.utils.App;
@@ -29,7 +30,9 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.mContext = this;
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(getBackgroundColorRes());
+        SwipeBackHelper.onCreate(this);
+        SwipeBackHelper.getCurrentPage(this)
+                .setSwipeBackEnable(isSwipeBackEnable());
         setContentView();
         drakMode();
         ARouter.getInstance().inject(this);
@@ -39,6 +42,18 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
         initData();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SwipeBackHelper.onDestroy(this);
+    }
+
     protected int getBackgroundColorRes() {
         return R.color.lib_resource_background;
     }
@@ -46,6 +61,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     private void setContentView() {
         if (isSupportDataBinding()) {
             mBinding = DataBindingUtil.setContentView(this, getContentView());
+            mBinding.getRoot().setBackgroundResource(getBackgroundColorRes());
         } else {
             setContentView(getContentView());
         }
@@ -59,12 +75,16 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
         }
     }
 
-    private boolean isDrakMode() {
+    protected boolean isDrakMode() {
+        return true;
+    }
+
+    protected boolean isSwipeBackEnable() {
         return true;
     }
 
     protected void setToolBarHasBack(TitleBar titleBar) {
-        TitleBarUtil.setToolBarHasBack(titleBar,getTitle().toString());
+        TitleBarUtil.setToolBarHasBack(titleBar, getTitle().toString());
         titleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +95,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     }
 
     protected void setToolBarNoBack(TitleBar titleBar) {
-        TitleBarUtil.setToolBarNoBack(titleBar,getTitle().toString());
+        TitleBarUtil.setToolBarNoBack(titleBar, getTitle().toString());
     }
 
     private boolean isSupportDataBinding() {

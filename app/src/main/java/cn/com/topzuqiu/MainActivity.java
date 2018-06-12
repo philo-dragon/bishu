@@ -33,6 +33,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private long firstTime;
 
     @Override
+    protected boolean isSwipeBackEnable() {
+        return false;
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.activity_main;
     }

@@ -51,9 +51,9 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
             public void onSelected(String path, Bitmap bitmap) {
 
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
-                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
-                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
                 }
             }
         });
@@ -93,7 +93,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
-
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromCamera(fileName,id);
             }
 
@@ -107,6 +107,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromAlbm(fileName,id);
             }
 
