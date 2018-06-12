@@ -1,23 +1,10 @@
 package com.pfl.common.http;
 
-import com.pfl.common.http.converter.GsonConverterFactory;
-
-import java.io.IOException;
 import java.lang.reflect.Proxy;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class RetrofitFactory {
 
     private static RetrofitFactory INSTANCE;
-    private static final long MAX_TRY_COUNT = 3;
 
     private RetrofitFactory() {
     }

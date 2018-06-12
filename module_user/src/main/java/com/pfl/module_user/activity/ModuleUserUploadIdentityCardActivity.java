@@ -105,6 +105,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
                     fileName = "file_back";
                 }
 
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromCamera(fileName, id);
             }
 
@@ -117,6 +118,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromAlbm(fileName, id);
             }
 

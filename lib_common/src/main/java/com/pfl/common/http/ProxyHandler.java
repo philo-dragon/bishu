@@ -102,20 +102,18 @@ public class ProxyHandler implements InvocationHandler {
                         @Override
                         public Observable<?> apply(Throwable throwable) throws Exception {
                             if (++retryCount <= maxRetries) {
-
                                 if (throwable instanceof HttpException) {
                                     HttpException httpException = (HttpException) throwable;
                                     int code = httpException.code();
                                     if (code == 401) {
                                         return refreshTokenWhenTokenInvalid();
+                                    } else if (code == 503 || code == 504) {
+                                        return Observable.timer(retryDelayMillis,
+                                                TimeUnit.MILLISECONDS);
                                     }
-
                                 } else if (throwable instanceof TokenInvalidException) {
                                     return refreshTokenWhenTokenInvalid();
                                 }
-
-                                return Observable.timer(retryDelayMillis,
-                                        TimeUnit.MILLISECONDS);
                             }
                             return Observable.error(throwable);
                         }

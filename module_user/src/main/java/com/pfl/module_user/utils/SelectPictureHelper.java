@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 
 import java.io.ByteArrayInputStream;
@@ -43,8 +44,31 @@ public class SelectPictureHelper {
     private Activity mActivity;
     private Uri uritempFile;
 
+    // aspectX aspectY 是宽高的比例
+    private int aspectX = 1;
+    private int aspectY = 1;
+    // outputX,outputY 是剪裁图片的宽高
+    private int outputX = 300;
+    private int outputY = 300;
+
     public SelectPictureHelper(Activity activity) {
         this.mActivity = activity;
+    }
+
+
+    /**
+     * 设置图片宽高比，输出图片宽高
+     *
+     * @param aspectX
+     * @param aspectY
+     * @param outputX
+     * @param outputY
+     */
+    public void setImageStyle(int aspectX, int aspectY, int outputX, int outputY) {
+        this.aspectX = aspectX;
+        this.aspectY = aspectY;
+        this.outputX = outputX;
+        this.outputY = outputY;
     }
 
     /**
@@ -62,10 +86,7 @@ public class SelectPictureHelper {
     public void getPicFromCamera(String fileName, int resid) {
         this.fileName = fileName;
         this.tag = resid;
-        File parentFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu");
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
+        File parentFile = getParentFile();
         //用于保存调用相机拍照后所生成的文件
         tempFile = new File(parentFile, System.currentTimeMillis() + ".jpg");
         //跳转到调用系统相机
@@ -79,6 +100,15 @@ public class SelectPictureHelper {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
         }
         mActivity.startActivityForResult(intent, CAMERA_REQUEST_CODE);
+    }
+
+    @NonNull
+    private File getParentFile() {
+        File parentFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu");
+        if (!parentFile.exists()) {
+            parentFile.mkdirs();
+        }
+        return parentFile;
     }
 
 
@@ -114,21 +144,17 @@ public class SelectPictureHelper {
         // crop为true是设置在开启的intent中设置显示的view可以剪裁
         intent.putExtra("crop", "true");
         // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 855);
-        intent.putExtra("aspectY", 510);
+        intent.putExtra("aspectX", aspectX);
+        intent.putExtra("aspectY", aspectY);
         // outputX,outputY 是剪裁图片的宽高
-        intent.putExtra("outputX", 855);
-        intent.putExtra("outputY", 510);
+        intent.putExtra("outputX", outputX);
+        intent.putExtra("outputY", outputY);
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
-        File parentFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu");
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-        uritempFile = Uri.parse("file://" + "/" + parentFile.getAbsolutePath() + "/" + "small.jpg");
+        File parentFile = getParentFile();
+        uritempFile = Uri.parse("file://" + "/" + parentFile.getAbsolutePath() + "/" + fileName + ".jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         mActivity.startActivityForResult(intent, CROP_REQUEST_CODE);
-
 
     }
 
@@ -171,12 +197,9 @@ public class SelectPictureHelper {
 
 
     public String saveImage(String name, Bitmap bmp) {
-        File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu");
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
+        File parentFile = getParentFile();
         String fileName = name + ".jpg";
-        File file = new File(appDir, fileName);
+        File file = new File(parentFile, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
