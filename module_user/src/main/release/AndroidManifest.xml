@@ -61,18 +61,19 @@
             android:label="@string/module_user_upload_identity_card_result" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserLoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserFeedBackActivity"
-            android:label="@string/module_user_str_help_feedback"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_help_feedback" />
         <activity
             android:name=".activity.ModuleUserAbouUsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_about_us"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+            />
     </application>
 
 </manifest>
