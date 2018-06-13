@@ -113,8 +113,11 @@ dependencies {
     //底部弹窗
     api rootProject.ext.deps.bottomdialog
 
+    //修改状态栏颜色
+    api rootProject.ext.deps.statusbarutil
+
     // lottie 动画库
-    api (rootProject.ext.deps.lottie){
+    api(rootProject.ext.deps.lottie) {
         exclude group: 'com.android.support'
     }
 

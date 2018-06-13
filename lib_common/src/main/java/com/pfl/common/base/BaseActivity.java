@@ -36,6 +36,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
                 .setSwipeBackEnable(isSwipeBackEnable());
 
         setContentView();
+        StatusBarUtil.immersive(this);
         drakMode();
         ARouter.getInstance().inject(this);
 

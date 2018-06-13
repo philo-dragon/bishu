@@ -17,6 +17,7 @@ public class TitleBarUtil {
         titleBar.setLeftTextColor(App.getInstance().getResources().getColor(R.color.lib_resource_title_color));
         titleBar.setDividerHeight(0);
         titleBar.setDividerColor(App.getInstance().getResources().getColor(R.color.title_divider_color));
+        StatusBarUtil.setMargin(App.getInstance(), titleBar);
     }
 
     public static void setToolBarNoBack(TitleBar titleBar, String title) {
@@ -24,6 +25,7 @@ public class TitleBarUtil {
         titleBar.setDividerColor(App.getInstance().getResources().getColor(R.color.title_divider_color));
         titleBar.setTitleColor(App.getInstance().getResources().getColor(R.color.lib_resource_title_color));
         titleBar.setDividerHeight(0);
+        StatusBarUtil.setMargin(App.getInstance(), titleBar);
     }
 
 }

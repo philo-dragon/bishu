@@ -25,9 +25,7 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_LOGIN = "/module_user/activity_login";
     public static final String MODULE_USER_ACTIVITY_REGIST = "/module_user/activity_retist";
     public static final String MODULE_USER_ACTIVITY_SETTING = "/module_user/activity_setting";
-    public static final String MODULE_USER_ACTIVITY_ACCOUNT_INFO = "/module_user/activity_account_info";
     public static final String MODULE_USER_ACTIVITY_MY_WALLET = "/module_user/activity_my_wallet";
-    public static final String MODULE_USER_ACTIVITY_H5 = "/module_user/activity_h5";
     public static final String MODULE_USER_ACTIVITY_INITIAL_VALUE  = "/module_user/activity_initial_value";
     public static final String MODULE_USER_ACTIVITY_INPUT_NICK_NAME  = "/module_user/activity_input_nick_name";
     public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD  = "/module_user/activity_upload_identity_card";
@@ -45,7 +43,6 @@ public class RouteUtils {
     public static final String MODULE_USER_FRAGMENT_MINE_TRIP = "/module_user/fragment_mine_trip";
     public static final String MODULE_USER_FRAGMENT_HOME = "/module_user/fragment_home";
     public static final String MODULE_USER_FRAGMENT_FIND = "/module_user/fragment_find";
-    public static final String MODULE_USER_SCALE_RECYCLER_VIEW_FRAGMENT = "/module_user/fragment_scale_recycler_view";
 
     public static final String MODULE_USER_LISTENER_USER_INFO = "/module_user/listener_user_info";
 

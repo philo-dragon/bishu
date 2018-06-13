@@ -65,6 +65,8 @@ ext {
 
             lottie                : "2.5.4",
 
+            statusbarutil         : "1.5.1",
+
     ]
 
     deps = [
@@ -130,6 +132,9 @@ ext {
             bottomdialog          : "me.shaohui:bottomdialog:${depsVersion.bottomdialog}",//底部弹出窗
 
             lottie                : "com.airbnb.android:lottie:${depsVersion.lottie}",//底部弹出窗
+
+            statusbarutil         : "com.jaeger.statusbarutil:library:${depsVersion.statusbarutil}",//状态栏颜色修改
+
 
     ]
 

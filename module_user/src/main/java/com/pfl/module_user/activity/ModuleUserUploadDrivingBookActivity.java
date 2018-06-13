@@ -48,7 +48,6 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
                 }
