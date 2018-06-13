@@ -15,6 +15,7 @@ public class DialogManager {
     private static AlertDialog dialog;
 
     public static void showSingleBtnDialog(Activity activity, String message) {
+        dismiss();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("提示");
         builder.setMessage(message);
@@ -30,6 +31,7 @@ public class DialogManager {
     }
 
     public static void showTwoBtnDialog(Activity activity, String message) {
+        dismiss();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("提示");
         builder.setMessage(message);

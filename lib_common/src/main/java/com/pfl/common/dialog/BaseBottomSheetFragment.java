@@ -14,9 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-/**
- * Created by 李可乐 on 2016/9/8 0008.
- */
 public abstract class BaseBottomSheetFragment extends BottomSheetDialogFragment {
 
     protected Context mContext;

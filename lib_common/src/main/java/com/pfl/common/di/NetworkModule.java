@@ -1,16 +1,12 @@
 package com.pfl.common.di;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.pfl.common.converter.StringConverter;
-import com.pfl.common.http.ProxyHandler;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.converter.GsonConverterFactory;
 import com.pfl.common.utils.BaseUrlManager;
 import com.pfl.common.utils.LoggerInterceptor;
 
 import java.io.IOException;
-import java.lang.reflect.Proxy;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
