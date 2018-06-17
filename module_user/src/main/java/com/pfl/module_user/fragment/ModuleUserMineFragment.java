@@ -58,7 +58,7 @@ public class ModuleUserMineFragment extends BaseFragment<ModuleUserFragmentMineB
         } else if (i == R.id.module_user_rl_driver_auth) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE);
         } else if (i == R.id.module_user_rl_car_auth) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_CAR);
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK);
         } else if (i == R.id.module_user_rl_setting) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_SETTING);
         } else if (i == R.id.module_user_rl_header_view) {

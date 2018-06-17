@@ -27,47 +27,56 @@ import java.util.TreeSet;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    /** Debug Log tag*/
+    /**
+     * Debug Log tag
+     */
     public static final String TAG = "CrashHandler";
-    /** 是否开启日志输出,在Debug状态下开启,
+    /**
+     * 是否开启日志输出,在Debug状态下开启,
      * 在Release状态下关闭以提示程序性能
-     * */
+     */
     public static final boolean DEBUG = true;
-    /** 系统默认的UncaughtException处理类 */
+    /**
+     * 系统默认的UncaughtException处理类
+     */
     private Thread.UncaughtExceptionHandler mDefaultHandler;
-    /** CrashHandler实例 */
+    /**
+     * CrashHandler实例
+     */
     private static CrashHandler INSTANCE;
-    /** 程序的Context对象 */
+    /**
+     * 程序的Context对象
+     */
     private Context mContext;
-    /** 使用Properties来保存设备的信息和错误堆栈信息*/
+    /**
+     * 使用Properties来保存设备的信息和错误堆栈信息
+     */
     private Properties mDeviceCrashInfo = new Properties();
     private static final String VERSION_NAME = "versionName";
     private static final String VERSION_CODE = "versionCode";
     private static final String STACK_TRACE = "STACK_TRACE";
-    /** 错误报告文件的扩展名 */
+    /**
+     * 错误报告文件的扩展名
+     */
     private static final String CRASH_REPORTER_EXTENSION = ".cr";
 
-    private static  Object syncRoot = new Object();
+    private static Object syncRoot = new Object();
 
-    /** 保证只有一个CrashHandler实例 */
-    private CrashHandler() {}
+    /**
+     * 保证只有一个CrashHandler实例
+     */
+    private CrashHandler() {
+    }
 
-    /** 获取CrashHandler实例 ,单例模式*/
+    /**
+     * 获取CrashHandler实例 ,单例模式
+     */
     public static CrashHandler getInstance() {
-       /* if (INSTANCE == null) {
-            INSTANCE = new CrashHandler();
-        }
-        return INSTANCE;*/
         // 防止多线程访问安全，这里使用了双重锁
-        if (INSTANCE == null)
-        {
-
-            synchronized (syncRoot)
-            {
-
-                if (INSTANCE == null)
-                {
-                    INSTANCE =  new CrashHandler();
+        if (INSTANCE == null) {
+            synchronized (syncRoot) {
+                if (INSTANCE == null) {
+                    INSTANCE = new CrashHandler();
                 }
             }
         }
@@ -78,6 +87,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 初始化,注册Context对象,
      * 获取系统默认的UncaughtException处理器,
      * 设置该CrashHandler为程序的默认处理器
+     *
      * @param ctx
      */
     public void init(Context ctx) {
@@ -110,6 +120,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 自定义错误处理,收集错误信息
      * 发送错误报告等操作均在此完成.
      * 开发者可以根据自己的情况来自定义异常处理逻辑
+     *
      * @param ex
      * @return true:如果处理了该异常信息;否则返回false
      */
@@ -119,7 +130,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             return true;
         }
         final String msg = ex.getLocalizedMessage();
-        if(msg == null) {
+        if (msg == null) {
             return false;
         }
         //使用Toast来显示异常信息
@@ -128,8 +139,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             public void run() {
                 Looper.prepare();
 
-                if(DEBUG){
-                    Log.d(TAG, "异常信息->"+msg);
+                if (DEBUG) {
+                    Log.d(TAG, "异常信息->" + msg);
                     Toast toast = Toast.makeText(mContext, "程序出错，即将退出:\r\n" + msg,
                             Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -157,8 +168,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public void sendPreviousReportsToServer() {
         sendCrashReportsToServer(mContext);
     }
+
     /**
      * 把错误报告发送给服务器,包含新产生的和以前没发送的.
+     *
      * @param ctx
      */
     private void sendCrashReportsToServer(Context ctx) {
@@ -173,12 +186,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             }
         }
     }
+
     private void postReport(File file) {
         // TODO 发送错误报告到服务器
     }
 
     /**
      * 获取错误报告文件名
+     *
      * @param ctx
      * @return
      */
@@ -194,6 +209,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 保存错误信息到文件中
+     *
      * @param ex
      * @return
      */
@@ -242,7 +258,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             if (pi != null) {
                 mDeviceCrashInfo.put(VERSION_NAME,
                         pi.versionName == null ? "not set" : pi.versionName);
-                mDeviceCrashInfo.put(VERSION_CODE, ""+pi.versionCode);
+                mDeviceCrashInfo.put(VERSION_CODE, "" + pi.versionCode);
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Error while collect package info", e);
@@ -254,7 +270,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         for (Field field : fields) {
             try {
                 field.setAccessible(true);
-                mDeviceCrashInfo.put(field.getName(), ""+field.get(null));
+                mDeviceCrashInfo.put(field.getName(), "" + field.get(null));
                 if (DEBUG) {
                     Log.d(TAG, field.getName() + " : " + field.get(null));
                 }

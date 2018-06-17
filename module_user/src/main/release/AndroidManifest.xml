@@ -11,28 +11,23 @@
         <activity
             android:name=".activity.ModuleUserRegistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_regist"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_regist" />
         <activity
             android:name=".activity.ModuleUserSettingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_setting"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_setting" />
         <activity
             android:name=".activity.ModuleUserMyWalletActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_my_wallet"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_my_wallet" />
         <activity
             android:name=".activity.ModuleUserInitialValueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_initial_value"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_initial_value" />
         <activity
             android:name=".activity.ModuleUserInputNickNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_input_nick_name"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_input_nick_name" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -47,47 +42,41 @@
         <activity
             android:name=".activity.ModuleUserUploadIdentityCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_upload_identity_card" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingLicenceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_licence"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_upload_driving_licence" />
         <activity
             android:name=".activity.ModuleUserAddCarActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_add_car"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_add_car" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingBookActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_book"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_upload_driving_book" />
         <activity
             android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card_result"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_upload_identity_card_result" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserLoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserFeedBackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_help_feedback"
-            android:theme="@style/SwipeBackAppTheme" />
+            android:label="@string/module_user_str_help_feedback" />
         <activity
             android:name=".activity.ModuleUserAbouUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_about_us"
-            android:theme="@style/SwipeBackAppTheme" />
-        <activity android:name=".activity.ModuleUserFindDevicesActivity"></activity>
+            android:label="@string/module_user_str_about_us" />
+        <activity
+            android:name=".activity.ModuleUserFindDevicesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_find_device" />
     </application>
 
 </manifest>

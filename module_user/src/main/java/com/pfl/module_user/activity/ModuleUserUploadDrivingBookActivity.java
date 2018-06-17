@@ -11,6 +11,7 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingBookBinding;
 import com.pfl.module_user.utils.SelectPictureHelper;
@@ -48,12 +49,13 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
-                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
                 }
             }
         });
+
+        RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
     }
 
     @Override
@@ -80,6 +82,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
             public void onCamera() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromCamera(fileName, id);
             }
 
@@ -87,6 +90,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
             public void onPhotoAlbum() {
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromAlbm(fileName, id);
             }
 

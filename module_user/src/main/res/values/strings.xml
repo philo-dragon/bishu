@@ -34,6 +34,7 @@
     <string name="module_user_upload_identity_card_result">上传身份证</string>
     <string name="module_user_str_about_us">关于我们</string>
     <string name="module_user_str_help_feedback">帮助反馈</string>
+    <string name="module_user_str_find_device">查找设备</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
