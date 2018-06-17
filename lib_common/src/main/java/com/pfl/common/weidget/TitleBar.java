@@ -101,6 +101,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mSubTitleText.setEllipsize(TextUtils.TruncateAt.END);
 
         mRightLayout.setPadding(mOutPadding, 0, mOutPadding, 0);
+        mRightLayout.setGravity(Gravity.CENTER_VERTICAL);
 
         addView(mLeftText, layoutParams);
         addView(mCenterLayout);

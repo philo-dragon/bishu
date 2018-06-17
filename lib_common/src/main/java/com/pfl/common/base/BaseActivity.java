@@ -34,7 +34,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
         SwipeBackHelper.getCurrentPage(this)
                 .setSwipeBackEnable(isSwipeBackEnable());
         setContentView();
-        drakMode();
+        drakMode();//设置状态栏文字图标颜色
         ARouter.getInstance().inject(this);
         componentInject(App.getInstance(BaseApplication.class).getAppComponent());
         initView();

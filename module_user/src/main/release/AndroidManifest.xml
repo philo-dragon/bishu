@@ -87,6 +87,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_about_us"
             android:theme="@style/SwipeBackAppTheme" />
+        <activity android:name=".activity.ModuleUserFindDevicesActivity"></activity>
     </application>
 
 </manifest>
