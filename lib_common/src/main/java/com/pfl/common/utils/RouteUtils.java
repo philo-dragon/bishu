@@ -39,6 +39,8 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_FEED_BACK = "/module_user/activity_user_feed_back";
     public static final String MODULE_USER_ACTIVITY_ABOU_US = "/module_user/activity_user_abou_us";
     public static final String MODULE_USER_ACTIVITY_FIND_DEVICES = "/module_user/activity_user_find_devices";
+    public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_MANAGER = "/module_user/activity_intelligent_hardware_manager";
+    public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST = "/module_user/activity_intelligent_hardware_list";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";

@@ -35,6 +35,8 @@
     <string name="module_user_str_about_us">关于我们</string>
     <string name="module_user_str_help_feedback">帮助反馈</string>
     <string name="module_user_str_find_device">查找设备</string>
+    <string name="module_user_str_intelligent_hardware_manager">智能硬件管理</string>
+    <string name="module_user_str_intelligent_hardware_list">智能硬件</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

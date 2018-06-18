@@ -77,6 +77,14 @@
             android:name=".activity.ModuleUserFindDevicesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_find_device" />
+        <activity android:name=".activity.ModuleUserIntelligentHardwareManagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_intelligent_hardware_manager"
+            />
+        <activity android:name=".activity.ModuleUserIntelligentHardwareListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_intelligent_hardware_list"
+            />
     </application>
 
 </manifest>

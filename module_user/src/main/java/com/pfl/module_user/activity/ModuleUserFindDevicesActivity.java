@@ -8,6 +8,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.dialog.ResultDialogFragment;
+import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.TitleBar;
@@ -30,6 +32,8 @@ public class ModuleUserFindDevicesActivity extends BaseActivity<ModuleUserActivi
     @Override
     public void initView() {
 
+        AnimationManager.rotateAnim(mBinding.moduleUserImgProgress, 3000);
+
     }
 
     @Override
@@ -40,10 +44,12 @@ public class ModuleUserFindDevicesActivity extends BaseActivity<ModuleUserActivi
             @Override
             public void performAction(View view) {
                 Toast.makeText(App.getInstance(), "点击了说明", Toast.LENGTH_SHORT).show();
+                ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance();
+                dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
             }
         });
-        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(30);
-        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(30);
+        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(38);
+        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(38);
 
     }
 

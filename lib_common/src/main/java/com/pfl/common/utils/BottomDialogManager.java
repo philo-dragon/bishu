@@ -17,38 +17,116 @@ public class BottomDialogManager {
 
     public static BaseBottomDialog uploadDialog(FragmentManager fragmentManager, final OnUploadDialogListener listener) {
 
-        BaseBottomDialog show = BottomDialog.create(fragmentManager)
-                .setViewListener(new BottomDialog.ViewListener() {
+        final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
+
+        BottomDialog.ViewListener viewListener = new BottomDialog.ViewListener() {
+
+            @Override
+            public void bindView(View v) {
+                v.findViewById(R.id.lib_common_tv_camera).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void bindView(View v) {
-
-                        v.findViewById(R.id.lib_common_tv_camera).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                listener.onCamera();
-                            }
-                        });
-                        v.findViewById(R.id.lib_common_tv_photo_album).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                listener.onPhotoAlbum();
-                            }
-                        });
-                        v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                listener.onCancel();
-                            }
-                        });
-
+                    public void onClick(View v) {
+                        listener.onCamera();
                     }
-                })
-                .setLayoutRes(R.layout.lib_common_upload_file_dialog_layout)  // dialog layout
-                .show();
+                });
+                v.findViewById(R.id.lib_common_tv_photo_album).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onPhotoAlbum();
+                    }
+                });
+                v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                    }
+                });
+            }
+        };
 
-        return show;
+        setBottomDialog(bottomDialog, viewListener, R.layout.lib_common_upload_file_dialog_layout);
+
+        return bottomDialog;
+    }
+
+    public static BaseBottomDialog unBindDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
+
+        final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
+
+        BottomDialog.ViewListener viewListener = new BottomDialog.ViewListener() {
+
+            @Override
+            public void bindView(View v) {
+                v.findViewById(R.id.lib_common_tv_unbind).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                    }
+                });
+            }
+        };
+
+        setBottomDialog(bottomDialog, viewListener, R.layout.lib_common_unbind_dialog_layout);
+
+        return bottomDialog;
 
     }
+
+    public static BaseBottomDialog soundSettingDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
+
+        final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
+
+        BottomDialog.ViewListener viewListener = new BottomDialog.ViewListener() {
+
+            @Override
+            public void bindView(View v) {
+                v.findViewById(R.id.lib_common_tv_male_voice).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_female_voice).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                    }
+                });
+            }
+        };
+
+        setBottomDialog(bottomDialog, viewListener, R.layout.lib_common_sound_setting_dialog_layout);
+
+        return bottomDialog;
+
+    }
+
+
+    private static void setBottomDialog(BottomDialog bottomDialog, BottomDialog.ViewListener viewListener, int layoutId) {
+        bottomDialog.setViewListener(viewListener)
+                .setLayoutRes(layoutId)
+                .show();
+        bottomDialog.setDimAmount(0.6f);
+    }
+
 
     public static void dismiss(BaseBottomDialog show) {
         if (null != show) {
