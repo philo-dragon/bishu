@@ -119,7 +119,7 @@ ext {
 
             circleimageview       : "de.hdodenhof:circleimageview:${depsVersion.circleimageview}",//圆形图片
 
-            BottomNavigationViewEx: "com.github.ittianyu:BottomNavigationViewEx:${depsVersion.BottomNavigationViewEx}",//圆形图片
+            BottomNavigationViewEx: "com.github.ittianyu:BottomNavigationViewEx:${depsVersion.BottomNavigationViewEx}",
 
             eventBus              : "org.greenrobot:eventbus:${depsVersion.eventBus}",//事件总线程
 
