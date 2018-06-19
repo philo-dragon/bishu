@@ -33,7 +33,6 @@ public class ModuleUserInitialValueActivity extends BaseActivity<ModuleUserActiv
     @Override
     public void setToolBar() {
         setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
-        mBinding.inToolbarLayout.titleBar.setHeight(96 * 3);
     }
 
     @Override

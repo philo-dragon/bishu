@@ -1,5 +1,6 @@
 package com.pfl.common.utils;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.Postcard;
@@ -26,17 +27,20 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_REGIST = "/module_user/activity_retist";
     public static final String MODULE_USER_ACTIVITY_SETTING = "/module_user/activity_setting";
     public static final String MODULE_USER_ACTIVITY_MY_WALLET = "/module_user/activity_my_wallet";
-    public static final String MODULE_USER_ACTIVITY_INITIAL_VALUE  = "/module_user/activity_initial_value";
-    public static final String MODULE_USER_ACTIVITY_INPUT_NICK_NAME  = "/module_user/activity_input_nick_name";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD  = "/module_user/activity_upload_identity_card";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT  = "/module_user/activity_upload_identity_card_result";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE  = "/module_user/activity_upload_driving_licence";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT  = "/module_user/activity_upload_driving_licence_result";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK  = "/module_user/activity_upload_driving_driving_book";
-    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT  = "/module_user/activity_upload_driving_book_result";
-    public static final String MODULE_USER_ACTIVITY_ADD_CAR  = "/module_user/activity_user_add_car";
-    public static final String MODULE_USER_ACTIVITY_FEED_BACK  = "/module_user/activity_user_feed_back";
-    public static final String MODULE_USER_ACTIVITY_ABOU_US  = "/module_user/activity_user_abou_us";
+    public static final String MODULE_USER_ACTIVITY_INITIAL_VALUE = "/module_user/activity_initial_value";
+    public static final String MODULE_USER_ACTIVITY_INPUT_NICK_NAME = "/module_user/activity_input_nick_name";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD = "/module_user/activity_upload_identity_card";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT = "/module_user/activity_upload_identity_card_result";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE = "/module_user/activity_upload_driving_licence";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT = "/module_user/activity_upload_driving_licence_result";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK = "/module_user/activity_upload_driving_driving_book";
+    public static final String MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT = "/module_user/activity_upload_driving_book_result";
+    public static final String MODULE_USER_ACTIVITY_ADD_CAR = "/module_user/activity_user_add_car";
+    public static final String MODULE_USER_ACTIVITY_FEED_BACK = "/module_user/activity_user_feed_back";
+    public static final String MODULE_USER_ACTIVITY_ABOU_US = "/module_user/activity_user_abou_us";
+    public static final String MODULE_USER_ACTIVITY_FIND_DEVICES = "/module_user/activity_user_find_devices";
+    public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_MANAGER = "/module_user/activity_intelligent_hardware_manager";
+    public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST = "/module_user/activity_intelligent_hardware_list";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";
@@ -87,8 +91,8 @@ public class RouteUtils {
      *
      * @param path
      */
-    public static void actionStart(String path, int enterId, int exitId) {
-        actionStart(path, new HashMap<String, String>(), enterId, exitId);
+    public static void actionStart(Context context, String path, int enterId, int exitId) {
+        actionStart(context, path, new HashMap<String, String>(), enterId, exitId);
     }
 
     /**
@@ -99,14 +103,14 @@ public class RouteUtils {
      *
      * @param path
      */
-    public static void actionStart(String path, Map<String, String> parameters, int enterId, int exitId) {
+    public static void actionStart(Context context, String path, Map<String, String> parameters, int enterId, int exitId) {
         Postcard build = ARouter.getInstance().build(path);
 
         for (Map.Entry<String, String> stringStringEntry : parameters.entrySet()) {
             build.withString(stringStringEntry.getKey(), stringStringEntry.getValue());
         }
         build.withTransition(enterId, exitId);
-        build.navigation();
+        build.navigation(context);
     }
 
 

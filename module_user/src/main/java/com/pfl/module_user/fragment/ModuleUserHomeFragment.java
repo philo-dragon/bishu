@@ -67,8 +67,8 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
                 Toast.makeText(App.getInstance(), "点击了消息", Toast.LENGTH_SHORT).show();
             }
         });
-        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(30);
-        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(40);
+        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(38);
+        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(48);
     }
 
     @Override

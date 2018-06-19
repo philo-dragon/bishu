@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.pfl.module_user.activity.ModuleUserFindDevicesActivity">
+
+        <include
+            android:id="@+id/in_toolbar_layout"
+            layout="@layout/common_databinding_toolbar_layout" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/in_toolbar_layout">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/module_user_cv_progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/module_user_ic_circle_bg" />
+
+                    <ImageView
+                        android:id="@+id/module_user_img_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/module_user_ic_circle_progress" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="14dp"
+                        android:text="跳过"
+                        android:textColor="#6A7E9A"
+                        android:textSize="13dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="添加硬件"
+                            android:textColor="#333333"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="10dp"
+                            android:text="硬件扫描中..."
+                            android:textColor="#6A7E9A"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/module_user_tv_find_new_device"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="发现新设备"
+                    android:textColor="#ff6a7e9a"
+                    android:textSize="13dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/module_user_cv_progress" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/module_user_cv_conn_hardware"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@color/withe"
+                    app:cardCornerRadius="3dp"
+                    app:layout_constraintTop_toBottomOf="@+id/module_user_tv_find_new_device">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="74dp"
+                        android:text="智能后视镜"
+                        android:textColor="#ff6a7e9a"
+                        android:textSize="16sp" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="79dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="19dp"
+                        app:cardBackgroundColor="#3DC9C0"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="绑定"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16dp" />
+
+                    </android.support.v7.widget.CardView>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:paddingBottom="35dp"
+                    android:text="支持设备 ADAS智能硬件 和 智能后视"
+                    android:textColor="#ff6a7e9a"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/module_user_cv_conn_hardware" />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
