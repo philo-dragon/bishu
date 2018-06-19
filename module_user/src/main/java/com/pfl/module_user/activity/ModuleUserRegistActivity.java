@@ -3,6 +3,7 @@ package com.pfl.module_user.activity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
@@ -27,6 +28,9 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     @Inject
     ImageLoader imageLoader;
+
+    @Autowired
+    String mobile;
 
     @Override
     protected int getBackgroundColorRes() {
@@ -59,8 +63,14 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
                 build());*/
 
 
+        mBinding.inRegistView1.moduleUserTvRegistedHint.setText(String.format(getString(R.string.module_user_str_get_check_code), mobile));
+        mBinding.inRegistView2.moduleUserTvRegistedHint.setText(String.format(getString(R.string.module_user_str_setting_pwd), mobile));
+
         RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserCvNext, this);
+        RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserBtnForgetPassword, this);
         RxClickUtil.RxClick(mBinding.inRegistView2.moduleUserCvRegist, this);
+
+
     }
 
     @Override
@@ -82,6 +92,14 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
             mBinding.modulerUserVfFlipper.showNext();
         } else if (id == R.id.module_user_cv_regist) {
 
+        } else if (id == R.id.module_user_btn_forget_password) {
+            mBinding.inRegistView1.moduleUserBtnForgetPassword.onStart();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mBinding.inRegistView1.moduleUserBtnForgetPassword.onStop();
+        super.onDestroy();
     }
 }

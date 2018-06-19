@@ -41,6 +41,7 @@
             android:layout_marginLeft="14dp"
             android:background="@android:color/transparent"
             android:hint="请输入手机号登录／注册"
+            android:inputType="phone|number"
             android:minWidth="200dp"
             android:textColor="#6A7E9A"
             android:textSize="15dp"
@@ -59,15 +60,20 @@
             app:layout_constraintTop_toBottomOf="@+id/module_user_et_mobile_no" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/module_user_tv_check_hint"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
+            android:layout_marginLeft="87dp"
+            android:layout_marginRight="52dp"
             android:layout_marginTop="12dp"
+            android:text="请输入正确的手机号码"
             android:textColor="#FF9800"
             android:textSize="15dp"
-            app:layout_constraintLeft_toRightOf="@+id/module_user_tv_phone_prefix"
+            android:visibility="gone"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line"
-            tools:text="请输入正确的手机号码" />
+            app:layout_goneMarginTop="12dp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/module_user_cv_next"

@@ -37,6 +37,9 @@
     <string name="module_user_str_find_device">查找设备</string>
     <string name="module_user_str_intelligent_hardware_manager">智能硬件管理</string>
     <string name="module_user_str_intelligent_hardware_list">智能硬件</string>
+    <string name="module_user_str_registed_hint">%1$s 已注册\n您可以输入密码直接登录</string>
+    <string name="module_user_str_get_check_code">%1$s 未注册，请获取验证码以便注册</string>
+    <string name="module_user_str_setting_pwd">%1$s 未注册，设置密码完成注册</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -47,8 +50,5 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="module_user_str_registed_hint">13800138000已注册\n您可以输入密码直接登录</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 </resources>

@@ -40,6 +40,7 @@
             android:layout_marginTop="60dp"
             android:background="@android:color/transparent"
             android:hint="请输入登录密码"
+            android:inputType="textPassword"
             android:minWidth="200dp"
             android:textColor="#6A7E9A"
             android:textSize="15dp"
@@ -63,11 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="42dp"
             android:layout_marginTop="12dp"
+            android:text="密码错误，请重新输入"
             android:textColor="#FF9800"
             android:textSize="15dp"
+            android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line"
-            tools:text="密码错误，请重新输入" />
+            app:layout_constraintTop_toBottomOf="@+id/line" />
 
         <TextView
             android:id="@+id/module_user_tv_forget_password"

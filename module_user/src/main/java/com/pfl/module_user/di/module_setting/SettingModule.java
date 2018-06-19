@@ -37,7 +37,7 @@ public class SettingModule {
     }
 
     @Provides
-    SettingViewModel provideRegistViewModel(LifecycleProvider lifecycle, RetrofitService service, SettingView view) {
+    SettingViewModel provideSettingViewModel(LifecycleProvider lifecycle, RetrofitService service, SettingView view) {
 
         return new SettingViewModel(lifecycle, service, view);
     }

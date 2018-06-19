@@ -26,7 +26,7 @@
             android:layout_marginLeft="42dp"
             android:layout_marginTop="30dp"
             android:lineSpacingExtra="4dp"
-            android:text="13800138000未注册，设置密码完成注册"
+            android:text="@string/module_user_str_setting_pwd"
             android:textColor="#ff6a7e9a"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -9,6 +9,8 @@ import com.pfl.module_user.view.LoginView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import javax.inject.Inject;
+
 /**
  * Created by rocky on 2018/4/9.
  */
@@ -34,7 +36,7 @@ public class LoginViewModel {
                 .subscribe(new BaseObserver<AccessToken>() {
                     @Override
                     public void onNext(AccessToken accessToken) {
-                        view.onSuccess(accessToken.getAccess_token());
+                        view.loginSuccess();
                     }
                 });
     }

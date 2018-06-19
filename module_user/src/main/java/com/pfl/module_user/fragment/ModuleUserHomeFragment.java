@@ -89,14 +89,15 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
         super.onResume();
         if (!isInit) {
             isInit = true;
-            AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
             AnimationManager.setAnimText(mBinding.moduleUserTvIntegral, 10000000);
+            AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
         }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
+       //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
     }
 }

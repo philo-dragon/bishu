@@ -6,6 +6,16 @@ package com.pfl.module_user.view;
 
 public interface LoginView {
 
-    void onSuccess(String token);
+    /**
+     * 验证手机号是否注册
+     *
+     * @param isRegist
+     */
+    void verifyMobule(boolean isRegist);
 
+    void loginSuccess();
+
+    void loginFailed();
+
+    void onFail(int errorCode);
 }

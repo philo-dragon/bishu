@@ -9,19 +9,15 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.App;
-import com.pfl.common.utils.BaseUrlManager;
 import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
-import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.databinding.ModuleUserActivitySettingBinding;
 import com.pfl.module_user.di.module_setting.DaggerSettingComponent;
 import com.pfl.module_user.di.module_setting.SettingModule;
 import com.pfl.module_user.view.SettingView;
 import com.pfl.module_user.viewmodel.SettingViewModel;
-
-import java.util.HashMap;
 
 import javax.inject.Inject;
 

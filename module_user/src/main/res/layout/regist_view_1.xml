@@ -26,7 +26,7 @@
             android:layout_marginLeft="42dp"
             android:layout_marginTop="30dp"
             android:lineSpacingExtra="4dp"
-            android:text="13800138000未注册，请获取验证码以便注册"
+            android:text="@string/module_user_str_get_check_code"
             android:textColor="#ff6a7e9a"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -39,21 +39,22 @@
             android:layout_marginLeft="42dp"
             android:layout_marginTop="60dp"
             android:background="@android:color/transparent"
-            android:hint="请输入登录密码"
+            android:hint="请输入验证码"
             android:minWidth="200dp"
             android:textColor="#6A7E9A"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/module_user_tv_registed_hint" />
 
-        <TextView
-            android:id="@+id/module_user_tv_forget_password"
+        <com.knifestone.hyena.view.button.CountDownButton
+            android:id="@+id/module_user_btn_forget_password"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_marginRight="42dp"
+            android:background="@android:color/transparent"
             android:gravity="center"
             android:text="获取验证码"
-            android:textColor="#ff00b0ff"
+            android:textColor="@color/module_user_btn_check_code_color_selector"
             android:textSize="13dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/module_user_et_mobile_no"
             app:layout_constraintRight_toRightOf="parent" />
