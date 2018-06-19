@@ -10,9 +10,15 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <!-- 需要滑动返回Activity的主题 -->
-    <style name="MainTheme" parent="AppTheme">
+    <!-- 不需要滑动返回Activity的主题 -->
+    <style name="AppTheme.MainTheme" parent="AppTheme">
         <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="AppTheme.FullScreen" parent="@style/AppTheme.MainTheme">
+        <item name="android:windowBackground">@color/withe</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

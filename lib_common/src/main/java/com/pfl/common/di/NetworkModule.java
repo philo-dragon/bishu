@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.converter.GsonConverterFactory;
 import com.pfl.common.utils.BaseUrlManager;
+import com.pfl.common.utils.CommonParamsInterceptor;
 import com.pfl.common.utils.LoggerInterceptor;
 
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class NetworkModule {
     OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, Interceptor netIntercepter) {
 
         OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new CommonParamsInterceptor())
                 .addInterceptor(httpLoggingInterceptor)
                 .addNetworkInterceptor(netIntercepter)
                 .addNetworkInterceptor(new LoggerInterceptor())
