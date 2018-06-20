@@ -6,13 +6,22 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentFindBinding;
+import com.pfl.module_user.di.module_find.DaggerFindComponent;
+import com.pfl.module_user.di.module_find.FindModule;
+import com.pfl.module_user.view.FindView;
+import com.pfl.module_user.viewmodel.FindViewModel;
+
+import javax.inject.Inject;
 
 /**
  * 发现
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_FIND)
-public class ModuleUserFindFragment extends BaseFragment<ModuleUserFragmentFindBinding> {
+public class ModuleUserFindFragment extends BaseFragment<ModuleUserFragmentFindBinding> implements FindView {
 
+
+    @Inject
+    FindViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -21,7 +30,12 @@ public class ModuleUserFindFragment extends BaseFragment<ModuleUserFragmentFindB
 
     @Override
     public void componentInject(AppComponent appComponent) {
-
+        DaggerFindComponent
+                .builder()
+                .appComponent(appComponent)
+                .findModule(new FindModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -36,6 +50,11 @@ public class ModuleUserFindFragment extends BaseFragment<ModuleUserFragmentFindB
 
     @Override
     public void initData() {
+        //viewModel.requestData();
+    }
+
+    @Override
+    public void onSuccess() {
 
     }
 }

@@ -18,6 +18,9 @@ import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.BR;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
+import com.pfl.module_user.di.module_my_trip.DaggerMyTtipComponent;
+import com.pfl.module_user.di.module_my_trip.MyTripModule;
+import com.pfl.module_user.view.MyTripView;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -31,7 +34,7 @@ import static android.widget.LinearLayout.VERTICAL;
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
-public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentMineTripBinding> implements View.OnClickListener {
+public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
 
     private MultiTypeAdapter multiTypeAdapter;
     private CommonHeader commonHeader;
@@ -44,6 +47,12 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     @Override
     public void componentInject(AppComponent appComponent) {
 
+        DaggerMyTtipComponent
+                .builder()
+                .appComponent(appComponent)
+                .myTripModule(new MyTripModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -126,6 +135,11 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
         }
 
         return tripBeans;
+    }
+
+    @Override
+    public void onSuccess() {
+
     }
 
     public static class MineTripBean implements MultiTypeAdapter.IItem {

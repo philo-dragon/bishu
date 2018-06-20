@@ -12,14 +12,23 @@ import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityMyWalletBinding;
+import com.pfl.module_user.di.module_wallet.DaggerWalletComponent;
+import com.pfl.module_user.di.module_wallet.WalletModule;
+import com.pfl.module_user.view.WalletView;
+import com.pfl.module_user.viewmodel.WalletViewModel;
+
+import javax.inject.Inject;
 
 /**
  * 我的钱包
  */
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET)
-public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityMyWalletBinding> implements View.OnClickListener {
+public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityMyWalletBinding> implements WalletView, View.OnClickListener {
 
-    private ImageLoader imageLoader;
+    @Inject
+    ImageLoader imageLoader;
+    @Inject
+    WalletViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -28,7 +37,13 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
 
     @Override
     public void componentInject(AppComponent appComponent) {
-        imageLoader = appComponent.getImageLoader();
+
+        DaggerWalletComponent
+                .builder()
+                .appComponent(appComponent)
+                .walletModule(new WalletModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -50,7 +65,7 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
 
     @Override
     public void initData() {
-
+        viewModel.requestData();
     }
 
     @Override
@@ -58,4 +73,8 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
 
     }
 
+    @Override
+    public void onSuccess() {
+
+    }
 }
