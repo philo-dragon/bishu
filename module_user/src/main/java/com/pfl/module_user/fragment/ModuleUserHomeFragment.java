@@ -1,21 +1,12 @@
 package com.pfl.module_user.fragment;
 
 
-import android.content.Context;
-import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.AnimationManager;
@@ -25,19 +16,15 @@ import com.pfl.common.utils.RxClickUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentHomeBinding;
-import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.pfl.module_user.di.module_home.DaggerHomeComponent;
+import com.pfl.module_user.di.module_home.HomeModule;
+import com.pfl.module_user.view.HomeView;
 
 /**
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_HOME)
-public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements View.OnClickListener {
+public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements HomeView, View.OnClickListener {
 
     private boolean isInit;
 
@@ -49,6 +36,12 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void componentInject(AppComponent appComponent) {
 
+        DaggerHomeComponent
+                .builder()
+                .appComponent(appComponent)
+                .homeModule(new HomeModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -67,8 +60,8 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
                 Toast.makeText(App.getInstance(), "点击了消息", Toast.LENGTH_SHORT).show();
             }
         });
-        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(38);
-        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(48);
+        tvMesage.getLayoutParams().width = ConvertUtils.dp2px(33);
+        tvMesage.getLayoutParams().height = ConvertUtils.dp2px(30);
     }
 
     @Override
@@ -98,6 +91,11 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void onPause() {
         super.onPause();
-       //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
+        //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
+    }
+
+    @Override
+    public void onSuccess() {
+
     }
 }

@@ -17,12 +17,13 @@ import com.pfl.common.listener.IActivity;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.TitleBarUtil;
 import com.pfl.common.weidget.TitleBar;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * Created by rocky on 2018/4/12.
  */
 
-public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment implements IActivity {
+public abstract class BaseFragment<T extends ViewDataBinding> extends RxFragment implements IActivity {
 
     protected T mBinding;
     protected Context mContext;
@@ -59,11 +60,11 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment i
     }
 
     protected void setToolBarHasBack(TitleBar titleBar, String title) {
-        TitleBarUtil.setToolBarHasBack(titleBar,title);
+        TitleBarUtil.setToolBarHasBack(titleBar, title);
 
     }
 
     protected void setToolBarNoBack(TitleBar titleBar, String title) {
-        TitleBarUtil.setToolBarNoBack(titleBar,title);
+        TitleBarUtil.setToolBarNoBack(titleBar, title);
     }
 }

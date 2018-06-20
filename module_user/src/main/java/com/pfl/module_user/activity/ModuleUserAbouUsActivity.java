@@ -1,6 +1,7 @@
 package com.pfl.module_user.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.AppUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.RouteUtils;
@@ -22,6 +23,8 @@ public class ModuleUserAbouUsActivity extends BaseActivity<ModuleUserActivityAbo
 
     @Override
     public void initView() {
+
+        mBinding.moduleUserTvVersion.setText("v" + AppUtils.getAppVersionName());
 
     }
 
