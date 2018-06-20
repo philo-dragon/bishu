@@ -21,12 +21,15 @@ import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
 import com.pfl.module_user.di.module_my_trip.DaggerMyTtipComponent;
 import com.pfl.module_user.di.module_my_trip.MyTripModule;
 import com.pfl.module_user.view.MyTripView;
+import com.pfl.module_user.viewmodel.MyTripViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static android.widget.LinearLayout.VERTICAL;
 
@@ -38,6 +41,9 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     private MultiTypeAdapter multiTypeAdapter;
     private CommonHeader commonHeader;
+
+    @Inject
+    MyTripViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -111,8 +117,7 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     @Override
     public void initData() {
-        multiTypeAdapter.setItems(getData());
-        multiTypeAdapter.notifyDataSetChanged();
+        viewModel.requestData();
     }
 
     @Override
@@ -121,25 +126,10 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
     }
 
 
-    public List<MultiTypeAdapter.IItem> getData() {
-
-        List<MultiTypeAdapter.IItem> tripBeans = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            MineTripBean tripBean = new MineTripBean();
-            tripBean.setStartTime("2018-05-25 16:12");
-            tripBean.setEndTime("2018-05-26 13:54");
-            tripBean.setMoney(i % 2 == 0 ? "+5" : "0");
-            tripBean.setName(i % 2 == 0 ? "已售行程" : "待售行程");
-            tripBean.setType(i % 2 == 0 ? 1 : 0);
-            tripBeans.add(tripBean);
-        }
-
-        return tripBeans;
-    }
-
     @Override
-    public void onSuccess() {
-
+    public void onSuccess(List<MultiTypeAdapter.IItem> items) {
+        multiTypeAdapter.setItems(items);
+        multiTypeAdapter.notifyDataSetChanged();
     }
 
     public static class MineTripBean implements MultiTypeAdapter.IItem {

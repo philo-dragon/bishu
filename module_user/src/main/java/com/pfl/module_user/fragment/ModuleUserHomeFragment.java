@@ -19,6 +19,9 @@ import com.pfl.module_user.databinding.ModuleUserFragmentHomeBinding;
 import com.pfl.module_user.di.module_home.DaggerHomeComponent;
 import com.pfl.module_user.di.module_home.HomeModule;
 import com.pfl.module_user.view.HomeView;
+import com.pfl.module_user.viewmodel.HomeViewModel;
+
+import javax.inject.Inject;
 
 /**
  * 我的行程
@@ -27,6 +30,9 @@ import com.pfl.module_user.view.HomeView;
 public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements HomeView, View.OnClickListener {
 
     private boolean isInit;
+
+    @Inject
+    HomeViewModel viewModel;
 
     @Override
     public int getContentView() {
