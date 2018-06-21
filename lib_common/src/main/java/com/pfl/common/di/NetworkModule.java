@@ -25,7 +25,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 @Module
 public class NetworkModule {
 
-    private static final long TIMEOUT = 15;
+    private static final long TIMEOUT = 5;
     private static final long MAX_TRY_COUNT = 3;
 
     @Provides

@@ -27,7 +27,6 @@ public class ModuleUserInputNickNameActivity extends BaseActivity<ModuleUserActi
 
     @Override
     public void initView() {
-        setToolBar();
     }
 
     @Override

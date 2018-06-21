@@ -43,8 +43,7 @@ public class ModuleUserFindDevicesActivity extends BaseActivity<ModuleUserActivi
         ImageView tvMesage = (ImageView) mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.ImageAction(R.drawable.module_user_ic_explain) {
             @Override
             public void performAction(View view) {
-                Toast.makeText(App.getInstance(), "点击了说明", Toast.LENGTH_SHORT).show();
-                ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance();
+                ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_SUCCESS, "链接成功", "成功连接设备");
                 dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
             }
         });

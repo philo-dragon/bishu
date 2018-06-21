@@ -15,6 +15,13 @@ import me.shaohui.bottomdialog.BottomDialog;
 public class BottomDialogManager {
 
 
+    /**
+     * 上传文件dialog
+     *
+     * @param fragmentManager
+     * @param listener
+     * @return
+     */
     public static BaseBottomDialog uploadDialog(FragmentManager fragmentManager, final OnUploadDialogListener listener) {
 
         final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
@@ -49,6 +56,13 @@ public class BottomDialogManager {
         return bottomDialog;
     }
 
+    /**
+     * 解除绑定dialog
+     *
+     * @param fragmentManager
+     * @param listener
+     * @return
+     */
     public static BaseBottomDialog unBindDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
 
         final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
@@ -80,6 +94,13 @@ public class BottomDialogManager {
 
     }
 
+    /**
+     * 设置声音dialog （男/女 声）
+     *
+     * @param fragmentManager
+     * @param listener
+     * @return
+     */
     public static BaseBottomDialog soundSettingDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
 
         final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
@@ -119,6 +140,44 @@ public class BottomDialogManager {
 
     }
 
+    public static BaseBottomDialog showGenderDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
+
+        final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
+
+        BottomDialog.ViewListener viewListener = new BottomDialog.ViewListener() {
+
+            @Override
+            public void bindView(View v) {
+                v.findViewById(R.id.lib_common_tv_male).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_female).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                    }
+                });
+            }
+        };
+
+        setBottomDialog(bottomDialog, viewListener, R.layout.lib_common_gender_setting_dialog_layout);
+
+        return bottomDialog;
+
+    }
 
     private static void setBottomDialog(BottomDialog bottomDialog, BottomDialog.ViewListener viewListener, int layoutId) {
         bottomDialog.setViewListener(viewListener)
