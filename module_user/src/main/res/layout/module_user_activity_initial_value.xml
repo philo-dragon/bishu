@@ -23,7 +23,8 @@
             <RelativeLayout
                 android:id="@+id/module_user_rl_nick_name"
                 android:layout_width="match_parent"
-                android:layout_height="55dp">
+                android:layout_height="55dp"
+                android:foreground="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -52,12 +53,14 @@
                 android:id="@+id/line_wallet"
                 layout="@layout/common_line"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:layout_marginLeft="18dp" />
 
             <RelativeLayout
+                android:id="@+id/module_user_rl_gender"
                 android:layout_width="match_parent"
-                android:layout_height="55dp">
+                android:layout_height="55dp"
+                android:foreground="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,6 +72,7 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/module_user_tv_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -92,6 +96,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="127dp"
             android:layout_marginTop="301dp"
+            android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="#3DC9C0"
             app:cardCornerRadius="21dp"
             app:cardElevation="3dp">

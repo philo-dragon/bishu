@@ -30,6 +30,11 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
     private String mobile;
 
     @Override
+    protected int getBackgroundColorRes() {
+        return R.color.white;
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.module_user_activity_login;
     }
