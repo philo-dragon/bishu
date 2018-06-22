@@ -9,8 +9,11 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseFragment;
+import com.pfl.common.base.BaseLazyFragment;
 import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.CommonHeader;
@@ -28,8 +31,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 import static android.widget.LinearLayout.VERTICAL;
 
@@ -37,7 +44,7 @@ import static android.widget.LinearLayout.VERTICAL;
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
-public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
+public class ModuleUserMineTripFragment extends BaseLazyFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
 
     private MultiTypeAdapter multiTypeAdapter;
     private CommonHeader commonHeader;
@@ -96,14 +103,18 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        commonHeader.getCompleteView().setVisibility(View.VISIBLE);
-                        refreshlayout.finishRefresh(500);
+                Observable.just(1)
+                        .delay(500, TimeUnit.MILLISECONDS)
+                        .compose(RxSchedulers.<Integer>noCheckNetworkCompose())
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                commonHeader.getCompleteView().setVisibility(View.VISIBLE);
+                                refreshlayout.finishRefresh(200);
+                                viewModel.requestData();
+                            }
+                        });
 
-                    }
-                }, 2000);
 
             }
         });
@@ -117,14 +128,17 @@ public class ModuleUserMineTripFragment extends BaseFragment<ModuleUserFragmentM
 
     @Override
     public void initData() {
-        viewModel.requestData();
+    }
+
+    @Override
+    public void onFirstUserVisible() {
+        mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);
     }
 
     @Override
     public void onClick(View v) {
 
     }
-
 
     @Override
     public void onSuccess(List<MultiTypeAdapter.IItem> items) {

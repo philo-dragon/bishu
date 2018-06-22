@@ -16,8 +16,8 @@ public class RxSchedulers {
     public static <T> ObservableTransformer<T, T> compose() {
         return new ObservableTransformer<T, T>() {
             @Override
-            public ObservableSource<T> apply(Observable<T> observable) {
-                return observable
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream
                         .subscribeOn(Schedulers.io())
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
@@ -30,6 +30,19 @@ public class RxSchedulers {
                         })
                         .observeOn(AndroidSchedulers.mainThread());
             }
+
+        };
+    }
+
+    public static <T> ObservableTransformer<T, T> noCheckNetworkCompose() {
+        return new ObservableTransformer<T, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+
         };
     }
 
