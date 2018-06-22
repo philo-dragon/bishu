@@ -1,9 +1,5 @@
 package com.pfl.common.entity.module_user;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
-import com.pfl.common.BR;
 import com.pfl.common.entity.base.BaseEntyty;
 
 

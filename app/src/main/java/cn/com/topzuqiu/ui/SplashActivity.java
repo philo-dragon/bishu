@@ -1,4 +1,4 @@
-package cn.com.topzuqiu;
+package cn.com.topzuqiu.ui;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.pfl.common.utils.RouteUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.com.topzuqiu.R;
 import me.weyye.hipermission.PermissionItem;
 
 public class SplashActivity extends AppCompatActivity {

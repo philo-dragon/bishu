@@ -51,7 +51,7 @@ public class BaseApplication extends Application {
     }
 
     protected void initBaseUrl() {
-        BaseUrlManager.init("http://apitest.topzuqiu.cn/", "http://apitest.topzuqiu.cn/", false);//动态切换BaseUrl
+        BaseUrlManager.init("http://apitest.topzuqiu.cn", "http://apitest.topzuqiu.cn", false);//动态切换BaseUrl
     }
 
     protected void initAppComponent() {

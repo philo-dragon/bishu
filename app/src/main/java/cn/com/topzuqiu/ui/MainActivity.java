@@ -1,4 +1,4 @@
-package cn.com.topzuqiu;
+package cn.com.topzuqiu.ui;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -21,6 +21,7 @@ import com.pfl.common.utils.RouteUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.com.topzuqiu.R;
 import cn.com.topzuqiu.adapter.AppMainNavigationViewPagerAdapter;
 import cn.com.topzuqiu.databinding.ActivityMainBinding;
 
