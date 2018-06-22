@@ -1,17 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.base.MultiTypeAdapter;
-import com.pfl.common.entity.base.AccessToken;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
-import com.pfl.common.http.RxSchedulers;
-import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.fragment.ModuleUserMineTripFragment;
+import com.pfl.module_user.entity.MineTripBean;
 import com.pfl.module_user.view.MyTripView;
-import com.pfl.module_user.view.WalletView;
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +46,7 @@ public class MyTripViewModel {
 
         List<MultiTypeAdapter.IItem> tripBeans = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            ModuleUserMineTripFragment.MineTripBean tripBean = new ModuleUserMineTripFragment.MineTripBean();
+            MineTripBean tripBean = new MineTripBean();
             tripBean.setStartTime("2018-05-25 16:12");
             tripBean.setEndTime("2018-05-26 13:54");
             tripBean.setMoney(i % 2 == 0 ? "+5" : "0");

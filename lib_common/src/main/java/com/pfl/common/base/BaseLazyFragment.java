@@ -101,4 +101,9 @@ public abstract class BaseLazyFragment<T extends ViewDataBinding> extends BaseFr
         Log.e("BaseLazyFragment ---> ","onUserInvisible");
     }
 
+
+    @Override
+    public void initData() {
+
+    }
 }
