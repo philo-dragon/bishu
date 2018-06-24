@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.RouteUtils;
@@ -58,6 +59,8 @@ public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityF
 
     @Override
     public void feedbackSuccess() {
+
+        ToastUtils.showShort("提交成功!");
 
     }
 

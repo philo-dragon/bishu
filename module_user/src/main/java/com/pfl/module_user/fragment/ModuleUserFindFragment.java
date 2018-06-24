@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseFragment;
 import com.pfl.common.base.BaseLazyFragment;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentFindBinding;
@@ -55,7 +56,7 @@ public class ModuleUserFindFragment extends BaseLazyFragment<ModuleUserFragmentF
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(FindBean findBean) {
 
     }
 }

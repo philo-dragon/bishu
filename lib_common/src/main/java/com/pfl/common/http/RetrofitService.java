@@ -2,6 +2,8 @@ package com.pfl.common.http;
 
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.module_user.Device;
+import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.entity.module_user.MineTripBean;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.ScoreLog;
@@ -130,6 +132,34 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/feedback")
     Observable<Object> feedback(@Field("content") String content);
+
+
+    /**
+     * 获取用户智能硬件
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/devices")
+    Observable<List<Device>> getDevices(@Field("uid") String uid);
+
+    /**
+     * 添加户智能硬件
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/device")
+    Observable<Object> addDevice(@Field("imei") String imei, @Field("type") String type);
+
+    /**
+     * 发现
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/discovery")
+    Observable<FindBean> find();
 
 
 }

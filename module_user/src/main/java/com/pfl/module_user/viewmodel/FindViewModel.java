@@ -1,6 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
@@ -30,13 +31,13 @@ public class FindViewModel {
     public void requestData() {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .find()
+                .compose(RxSchedulers.<FindBean>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<FindBean>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
-                        view.onSuccess();
+                    public void onNext(FindBean findBean) {
+                        view.onSuccess(findBean);
                     }
                 });
     }
