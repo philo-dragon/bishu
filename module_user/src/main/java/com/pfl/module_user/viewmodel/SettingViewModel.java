@@ -38,4 +38,20 @@ public class SettingViewModel {
                     }
                 });
     }
+
+    public void logOut(String uid) {
+        RetrofitFactory.getInstance()
+                .getProxy(RetrofitService.class, service, service)
+                .loginOut(uid)
+                .compose(RxSchedulers.<Object>compose())
+                .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(new BaseObserver<Object>() {
+                    @Override
+                    public void onNext(Object accessToken) {
+
+
+
+                    }
+                });
+    }
 }

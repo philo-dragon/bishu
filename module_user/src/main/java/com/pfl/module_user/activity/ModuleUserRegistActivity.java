@@ -5,8 +5,10 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.StringUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
@@ -28,9 +30,13 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     @Inject
     ImageLoader imageLoader;
+    @Inject
+    RegistViewModel viewModel;
 
     @Autowired
     String mobile;
+    private String checkCode;
+
 
     @Override
     protected int getBackgroundColorRes() {
@@ -57,17 +63,12 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     @Override
     public void initView() {
-        /*imageLoader.loadImage(this, ImageConfigImpl.
-                builder().url("http://g.hiphotos.baidu.com/image/pic/item/c8ea15ce36d3d539f09733493187e950342ab095.jpg").
-                imageView(mBinding.imgUser).
-                build());*/
-
 
         mBinding.inRegistView1.moduleUserTvRegistedHint.setText(String.format(getString(R.string.module_user_str_get_check_code), mobile));
         mBinding.inRegistView2.moduleUserTvRegistedHint.setText(String.format(getString(R.string.module_user_str_setting_pwd), mobile));
 
         RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserCvNext, this);
-        RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserBtnForgetPassword, this);
+        RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserBtnGetCheckCode, this);
         RxClickUtil.RxClick(mBinding.inRegistView2.moduleUserCvRegist, this);
 
 
@@ -82,24 +83,33 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
     }
 
     @Override
-    public void onSuccess(String token) {
+    public void onSuccess(User user) {
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.module_user_cv_next) {
-            mBinding.modulerUserVfFlipper.showNext();
+            checkCode = mBinding.inRegistView1.moduleUserEtCheckCode.getText().toString().trim();
+            if (!StringUtils.isEmpty(checkCode)) {
+                mBinding.modulerUserVfFlipper.showNext();
+            }
         } else if (id == R.id.module_user_cv_regist) {
-
-        } else if (id == R.id.module_user_btn_forget_password) {
-            mBinding.inRegistView1.moduleUserBtnForgetPassword.onStart();
+            String password = mBinding.inRegistView2.moduleUserEtPasword.getText().toString().trim();//密码
+            String invatinCode = mBinding.inRegistView2.moduleUserInvationCode.getText().toString().trim();//邀请码
+            if (!StringUtils.isEmpty(password)
+                    && password.length() >= 6
+                    && password.length() <= 20) {
+                viewModel.requestData(mobile, password, invatinCode, checkCode);
+            }
+        } else if (id == R.id.module_user_btn_get_check_code) {
+            mBinding.inRegistView1.moduleUserBtnGetCheckCode.onStart();
         }
     }
 
     @Override
     protected void onDestroy() {
-        mBinding.inRegistView1.moduleUserBtnForgetPassword.onStop();
+        mBinding.inRegistView1.moduleUserBtnGetCheckCode.onStop();
         super.onDestroy();
     }
 }

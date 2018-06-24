@@ -27,10 +27,10 @@ public class LoginViewModel {
         this.view = view;
     }
 
-    public void requestData() {
+    public void requestData(String mobile, String pwd) {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
+                .doLogin(mobile, pwd)
                 .compose(RxSchedulers.<AccessToken>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<AccessToken>() {

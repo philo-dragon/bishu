@@ -9,50 +9,40 @@ import com.pfl.common.entity.base.BaseEntyty;
 
 public class User extends BaseEntyty {
 
-    private String name;
-    private String nickName;
-    private String type;
-    private String photo;
+    private String uid;
+    private String token;
+    private long expired_time;
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUid() {
+        return uid;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getToken() {
+        return token;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getName() {
-        return name;
+    public long getExpired_time() {
+        return expired_time;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getPhoto() {
-        return photo;
+    public void setExpired_time(long expired_time) {
+        this.expired_time = expired_time;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", type='" + type + '\'' +
-                ", photo='" + photo + '\'' +
+                "uid='" + uid + '\'' +
+                ", token='" + token + '\'' +
+                ", expired_time=" + expired_time +
                 '}';
     }
 }

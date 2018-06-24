@@ -26,15 +26,15 @@ public class FeedbackViewModel {
         this.view = view;
     }
 
-    public void requestData() {
+    public void feedback(String content) {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .feedback(content)
+                .compose(RxSchedulers.<Object>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<Object>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
+                    public void onNext(Object accessToken) {
                         view.feedbackSuccess();
                     }
                 });

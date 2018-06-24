@@ -28,7 +28,7 @@ import javax.inject.Inject;
 public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySettingBinding> implements SettingView, View.OnClickListener {
 
     @Inject
-    SettingViewModel settingViewModel;
+    SettingViewModel viewModel;
 
 
     @Override
@@ -61,7 +61,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void initData() {
-        settingViewModel.requestData();
+        viewModel.requestData();
     }
 
     @Override
@@ -81,9 +81,19 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
         } else if (i == R.id.module_user_cv_about_us) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ABOU_US);
         } else if (i == R.id.module_user_cv_clear_money) {
-            DialogManager.showTwoBtnDialog(mContext, "确定要清空缓存吗？");
+            DialogManager.showTwoBtnDialog(mContext, "确定要清空缓存吗？", new DialogManager.SimpleDialogClickListener() {
+                @Override
+                public void onPositive() {
+
+                }
+            });
         } else if (i == R.id.module_user_cv_exit_login) {
-            DialogManager.showTwoBtnDialog(mContext, "确定要退出登录吗？");
+            DialogManager.showTwoBtnDialog(mContext, "确定要退出登录吗？", new DialogManager.SimpleDialogClickListener() {
+                @Override
+                public void onPositive() {
+                    viewModel.logOut("");
+                }
+            });
         }
 
     }

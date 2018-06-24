@@ -1,10 +1,15 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.base.MultiTypeAdapter;
+import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
+import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.entity.MineTripBean;
 import com.pfl.module_user.view.MyTripView;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +24,9 @@ public class MyTripViewModel {
     private RetrofitService service;
     private MyTripView view;
 
+    private int page = 1;
+    private int pageSize = 20;
+
     public MyTripViewModel(LifecycleProvider lifecycle, RetrofitService service, MyTripView view) {
         this.lifecycle = lifecycle;
         this.service = service;
@@ -29,17 +37,17 @@ public class MyTripViewModel {
 
         view.onSuccess(getData());
 
-      /*  RetrofitFactory.getInstance()
+        RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .myTrip(String.valueOf(page), String.valueOf(pageSize))
+                .compose(RxSchedulers.<List<com.pfl.common.entity.module_user.MineTripBean>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<List<com.pfl.common.entity.module_user.MineTripBean>>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
-                        view.onSuccess(getData());
+                    public void onNext(List<com.pfl.common.entity.module_user.MineTripBean> accessToken) {
+                        //view.onSuccess(getData());
                     }
-                });*/
+                });
     }
 
     public List<MultiTypeAdapter.IItem> getData() {

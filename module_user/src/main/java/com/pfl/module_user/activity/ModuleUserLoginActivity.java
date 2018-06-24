@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.knifestone.hyena.currency.TextWatcherAdapter;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
@@ -25,7 +26,7 @@ import javax.inject.Inject;
 public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLoginBinding> implements LoginView, View.OnClickListener {
 
     @Inject
-    LoginViewModel loginViewModel;
+    LoginViewModel viewModel;
 
     private String mobile;
 
@@ -92,10 +93,15 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
         int id = v.getId();
         if (id == R.id.module_user_cv_next) {
             if (checkMobile()) {
-                loginViewModel.requestData();
+                verifyMobule(true);
             }
         } else if (id == R.id.module_user_cv_login) {
-
+            String password = mBinding.inLoginView2.moduleUserEtPassword.getText().toString().trim();//密码
+            if (!StringUtils.isEmpty(password)
+                    && password.length() >= 6
+                    && password.length() <= 20) {
+                viewModel.requestData(mobile, password);
+            }
         }
 
     }

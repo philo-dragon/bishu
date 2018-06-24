@@ -1,9 +1,13 @@
 package com.pfl.module_user.activity;
 
+import android.view.View;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.StringUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityFeedBackBinding;
 import com.pfl.module_user.di.module_feedback.DaggerFeedbackComponent;
@@ -14,7 +18,7 @@ import com.pfl.module_user.viewmodel.FeedbackViewModel;
 import javax.inject.Inject;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_FEED_BACK)
-public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityFeedBackBinding> implements FeedbackView {
+public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityFeedBackBinding> implements FeedbackView, View.OnClickListener {
 
     @Inject
     FeedbackViewModel viewModel;
@@ -38,6 +42,9 @@ public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityF
     @Override
     public void initView() {
 
+        RxClickUtil.RxClick(mBinding.moduleUserCvOk, this);
+
+
     }
 
     @Override
@@ -47,11 +54,22 @@ public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityF
 
     @Override
     public void initData() {
-        viewModel.requestData();
     }
 
     @Override
     public void feedbackSuccess() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.module_user_cv_ok) {
+
+            String content = mBinding.moduleUserEtContent.getText().toString().trim();
+            if (!StringUtils.isEmpty(content)) {
+                viewModel.feedback(content);
+            }
+        }
     }
 }

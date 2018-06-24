@@ -30,7 +30,7 @@ public class DialogManager {
         dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(activity.getResources().getColor(android.R.color.holo_blue_dark));
     }
 
-    public static void showTwoBtnDialog(Activity activity, String message) {
+    public static void showTwoBtnDialog(Activity activity, String message, final OnDialogClickListener clickListener) {
         dismiss();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("提示");
@@ -38,13 +38,17 @@ public class DialogManager {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                if (clickListener != null) {
+                    clickListener.onNegative();
+                }
             }
         });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                if (clickListener != null) {
+                    clickListener.onPositive();
+                }
             }
         });
 
@@ -63,4 +67,23 @@ public class DialogManager {
         }
     }
 
+    public interface OnDialogClickListener {
+        void onNegative();//取消
+
+        void onPositive();//确定
+    }
+
+
+    public static class SimpleDialogClickListener implements OnDialogClickListener {
+
+        @Override
+        public void onNegative() {
+
+        }
+
+        @Override
+        public void onPositive() {
+
+        }
+    }
 }

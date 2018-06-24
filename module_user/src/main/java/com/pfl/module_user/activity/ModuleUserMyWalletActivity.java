@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
@@ -16,6 +17,8 @@ import com.pfl.module_user.di.module_wallet.DaggerWalletComponent;
 import com.pfl.module_user.di.module_wallet.WalletModule;
 import com.pfl.module_user.view.WalletView;
 import com.pfl.module_user.viewmodel.WalletViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -74,7 +77,7 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(List<ScoreLog> scoreLogs) {
 
     }
 }
