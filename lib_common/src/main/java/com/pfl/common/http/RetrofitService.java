@@ -2,13 +2,16 @@ package com.pfl.common.http;
 
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.Device;
 import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.entity.module_user.MineTripBean;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.entity.module_user.User;
+import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.entity.module_user.UserInfo;
+import com.pfl.common.entity.module_user.UserLicence;
 
 import java.util.List;
 
@@ -160,6 +163,33 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/discovery")
     Observable<FindBean> find();
+
+    /**
+     * 获取身份证信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/identity")
+    Observable<UserIndentity> getIdentity(@Field("uid") String uid);
+
+    /**
+     * 获取驾照信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/driver_licence")
+    Observable<UserLicence> getLicence(@Field("uid") String uid);
+
+    /**
+     * 获取行驶证信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/car_licence")
+    Observable<CarLicence> getCarLicence(@Field("uid") String uid);
 
 
 }

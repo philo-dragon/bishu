@@ -7,6 +7,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -14,10 +15,16 @@ import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardResultBinding;
+import com.pfl.module_user.di.module_upload_identity_result.DaggerUploadIndentityResultComponent;
+import com.pfl.module_user.di.module_upload_identity_result.UploadIndentityResultModule;
+import com.pfl.module_user.view.UploadIndentityResultView;
+import com.pfl.module_user.viewmodel.UploadIndentityResultViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -27,10 +34,13 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT)
-public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardResultBinding> implements View.OnClickListener {
+public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardResultBinding> implements UploadIndentityResultView, View.OnClickListener {
 
 
     private BaseBottomDialog uploadDialog;
+
+    @Inject
+    UploadIndentityResultViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -39,6 +49,13 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void componentInject(AppComponent appComponent) {
+
+        DaggerUploadIndentityResultComponent
+                .builder()
+                .appComponent(appComponent)
+                .uploadIndentityResultModule(new UploadIndentityResultModule(this, this))
+                .build()
+                .inject(this);
 
     }
 
@@ -106,5 +123,10 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
                 });
             }
         });
+    }
+
+    @Override
+    public void onSuccess(UserIndentity indentity) {
+
     }
 }

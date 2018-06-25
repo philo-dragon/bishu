@@ -9,6 +9,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.UserLicence;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -16,11 +17,18 @@ import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceBinding;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingLicenceResultBinding;
+import com.pfl.module_user.di.module_upload_identity_result.DaggerUploadIndentityResultComponent;
+import com.pfl.module_user.di.module_upload_licence_result.DaggerUploadLicenceResultComponent;
+import com.pfl.module_user.di.module_upload_licence_result.UploadLicenceResultModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.UploadLicenceResultView;
+import com.pfl.module_user.viewmodel.UploadLicenceResultViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -30,10 +38,13 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT)
-public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceResultBinding> implements View.OnClickListener {
+public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceResultBinding> implements UploadLicenceResultView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
+
+    @Inject
+    UploadLicenceResultViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -43,6 +54,12 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
     @Override
     public void componentInject(AppComponent appComponent) {
 
+        DaggerUploadLicenceResultComponent
+                .builder()
+                .appComponent(appComponent)
+                .uploadLicenceResultModule(new UploadLicenceResultModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -125,7 +142,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
-        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback(){
+        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback() {
 
             @Override
             public void onFinish() {
@@ -142,5 +159,10 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         pictureHelper.onActivityResult(requestCode, resultCode, intent);
+    }
+
+    @Override
+    public void onSuccess(UserLicence licence) {
+
     }
 }
