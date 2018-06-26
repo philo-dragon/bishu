@@ -59,7 +59,7 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    Observable<AccessToken> doLogin(@Field("mobile") String mobile, @Field("pwd") String pwd);
+    Observable<User> doLogin(@Field("mobile") String mobile, @Field("pwd") String pwd);
 
     /**
      * 登录

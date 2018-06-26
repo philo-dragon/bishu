@@ -13,6 +13,7 @@ import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
+import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.databinding.ModuleUserActivityRegistBinding;
 import com.pfl.module_user.di.module_regist.DaggerRegistComponent;
 import com.pfl.module_user.di.module_regist.RegistModule;
@@ -84,6 +85,7 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     @Override
     public void onSuccess(User user) {
+        UserInfoManager.getInstance().setUser(user);
     }
 
     @Override

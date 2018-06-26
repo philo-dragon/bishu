@@ -1,5 +1,7 @@
 package com.pfl.module_user.view;
 
+import com.pfl.common.entity.module_user.User;
+
 /**
  * Created by rocky on 2018/1/2.
  */
@@ -13,7 +15,7 @@ public interface LoginView {
      */
     void verifyMobule(boolean isRegist);
 
-    void loginSuccess();
+    void loginSuccess(User user);
 
     void loginFailed();
 

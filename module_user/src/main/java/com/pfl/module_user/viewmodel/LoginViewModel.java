@@ -1,6 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
@@ -31,12 +32,12 @@ public class LoginViewModel {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
                 .doLogin(mobile, pwd)
-                .compose(RxSchedulers.<AccessToken>compose())
+                .compose(RxSchedulers.<User>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<User>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
-                        view.loginSuccess();
+                    public void onNext(User user) {
+                        view.loginSuccess(user);
                     }
                 });
     }

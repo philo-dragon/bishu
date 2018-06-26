@@ -9,9 +9,11 @@ import com.blankj.utilcode.util.StringUtils;
 import com.knifestone.hyena.currency.TextWatcherAdapter;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
+import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.databinding.ModuleUserActivityLoginBinding;
 import com.pfl.module_user.di.module_login.DaggerLoginComponent;
 import com.pfl.module_user.di.module_login.LoginModule;
@@ -131,8 +133,9 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
     }
 
     @Override
-    public void loginSuccess() {
+    public void loginSuccess(User user) {
         mBinding.inLoginView2.moduleUserTvPasswordErrorHint.setVisibility(View.INVISIBLE);
+        UserInfoManager.getInstance().setUser(user);
     }
 
     @Override

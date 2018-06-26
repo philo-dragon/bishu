@@ -116,6 +116,9 @@ dependencies {
     //修改状态栏颜色
     api rootProject.ext.deps.statusbarutil
 
+    //阿里云OSS 服务
+    api rootProject.ext.deps.oss_android_sdk
+
     // lottie 动画库
     api(rootProject.ext.deps.lottie) {
         exclude group: 'com.android.support'
