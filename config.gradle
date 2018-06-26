@@ -135,6 +135,7 @@ ext {
 
             statusbarutil         : "com.jaeger.statusbarutil:library:${depsVersion.statusbarutil}",//状态栏颜色修改
 
+            oss_android_sdk       : "com.aliyun.dpa:oss-android-sdk:${depsVersion.oss_android_sdk}",//阿里云OSS 服务
 
     ]
 

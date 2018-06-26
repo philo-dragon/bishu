@@ -191,5 +191,14 @@ public interface RetrofitService {
     @POST("/user/car_licence")
     Observable<CarLicence> getCarLicence(@Field("uid") String uid);
 
+    /**
+     * 获取oss配置及token
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/storage_token")
+    Observable<CarLicence> storageToken(@Field("resource") String resource, @Field("seq") String seq);
+
 
 }

@@ -18,13 +18,18 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
+import com.pfl.module_user.di.module_upload_identity.DaggerUploadIndentityComponent;
+import com.pfl.module_user.di.module_upload_identity.UploadIndentityModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.UploadIndentityView;
+import com.pfl.module_user.viewmodel.UploadIndentityViewModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,6 +37,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -41,10 +48,13 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
-public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements View.OnClickListener {
+public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements UploadIndentityView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
+
+    @Inject
+    UploadIndentityViewModel viewModel;
 
     @Override
     public int getContentView() {
@@ -53,6 +63,13 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
     @Override
     public void componentInject(AppComponent appComponent) {
+
+        DaggerUploadIndentityComponent
+                .builder()
+                .appComponent(appComponent)
+                .uploadIndentityModule(new UploadIndentityModule(this, this))
+                .build()
+                .inject(this);
 
     }
 
@@ -137,7 +154,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
-        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback(){
+        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback() {
 
             @Override
             public void onFinish() {
@@ -158,4 +175,8 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
     }
 
 
+    @Override
+    public void onSuccess(UserIndentity indentity) {
+
+    }
 }
