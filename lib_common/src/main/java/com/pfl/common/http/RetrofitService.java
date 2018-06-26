@@ -8,6 +8,7 @@ import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.entity.module_user.MineTripBean;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.ScoreLog;
+import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.entity.module_user.UserInfo;
@@ -198,7 +199,7 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("/storage_token")
-    Observable<CarLicence> storageToken(@Field("resource") String resource, @Field("seq") String seq);
+    Observable<StorageToken> getStorageToken(@Field("resource") String resource, @Field("seq") String seq);
 
 
 }

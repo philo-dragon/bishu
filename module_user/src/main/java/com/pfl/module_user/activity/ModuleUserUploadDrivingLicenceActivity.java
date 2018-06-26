@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.CarLicence;
+import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserLicence;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
@@ -21,8 +22,10 @@ import com.pfl.module_user.di.module_upload_car_licence.DaggerUploadCarLicenceCo
 import com.pfl.module_user.di.module_upload_licence.DaggerUploadLicenceComponent;
 import com.pfl.module_user.di.module_upload_licence.UploadLicenceModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.StorageTokenView;
 import com.pfl.module_user.view.UploadCarLicenceView;
 import com.pfl.module_user.view.UploadLicenceView;
+import com.pfl.module_user.viewmodel.StorageTokenViewModel;
 import com.pfl.module_user.viewmodel.UploadLicenceViewModel;
 
 import java.util.ArrayList;
@@ -39,13 +42,16 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE)
-public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceBinding> implements UploadLicenceView, View.OnClickListener {
+public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleUserActivityUploadDrivingLicenceBinding> implements UploadLicenceView, StorageTokenView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
 
     @Inject
     UploadLicenceViewModel viewModel;
+
+    @Inject
+    StorageTokenViewModel tokenViewModel;
 
     @Override
     public int getContentView() {
@@ -58,7 +64,7 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
         DaggerUploadLicenceComponent
                 .builder()
                 .appComponent(appComponent)
-                .uploadLicenceModule(new UploadLicenceModule(this, this))
+                .uploadLicenceModule(new UploadLicenceModule(this, this, this))
                 .build()
                 .inject(this);
 
@@ -166,6 +172,11 @@ public class ModuleUserUploadDrivingLicenceActivity extends BaseActivity<ModuleU
 
     @Override
     public void onSuccess(UserLicence licence) {
+
+    }
+
+    @Override
+    public void onStorageToken(StorageToken storageToken) {
 
     }
 }

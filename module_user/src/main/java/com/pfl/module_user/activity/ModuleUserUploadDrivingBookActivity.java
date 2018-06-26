@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.CarLicence;
+import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -19,7 +20,9 @@ import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingBookBindin
 import com.pfl.module_user.di.module_upload_car_licence.DaggerUploadCarLicenceComponent;
 import com.pfl.module_user.di.module_upload_car_licence.UploadCarLicenceModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.StorageTokenView;
 import com.pfl.module_user.view.UploadCarLicenceView;
+import com.pfl.module_user.viewmodel.StorageTokenViewModel;
 import com.pfl.module_user.viewmodel.UploadCarLicenceViewModel;
 
 import java.util.ArrayList;
@@ -36,13 +39,16 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK)
-public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUserActivityUploadDrivingBookBinding> implements UploadCarLicenceView, View.OnClickListener {
+public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUserActivityUploadDrivingBookBinding> implements UploadCarLicenceView, StorageTokenView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
 
     @Inject
     UploadCarLicenceViewModel viewModel;
+
+    @Inject
+    StorageTokenViewModel tokenViewModel;
 
     @Override
     public int getContentView() {
@@ -55,7 +61,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         DaggerUploadCarLicenceComponent
                 .builder()
                 .appComponent(appComponent)
-                .uploadCarLicenceModule(new UploadCarLicenceModule(this, this))
+                .uploadCarLicenceModule(new UploadCarLicenceModule(this, this, this))
                 .build()
                 .inject(this);
 
@@ -147,6 +153,11 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
 
     @Override
     public void onSuccess(CarLicence licence) {
+
+    }
+
+    @Override
+    public void onStorageToken(StorageToken storageToken) {
 
     }
 }

@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
@@ -28,7 +29,9 @@ import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBindi
 import com.pfl.module_user.di.module_upload_identity.DaggerUploadIndentityComponent;
 import com.pfl.module_user.di.module_upload_identity.UploadIndentityModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.StorageTokenView;
 import com.pfl.module_user.view.UploadIndentityView;
+import com.pfl.module_user.viewmodel.StorageTokenViewModel;
 import com.pfl.module_user.viewmodel.UploadIndentityViewModel;
 
 import java.io.File;
@@ -48,13 +51,15 @@ import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
-public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements UploadIndentityView, View.OnClickListener {
+public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements UploadIndentityView, StorageTokenView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
 
     @Inject
     UploadIndentityViewModel viewModel;
+    @Inject
+    StorageTokenViewModel tokenViewModel;
 
     @Override
     public int getContentView() {
@@ -67,7 +72,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
         DaggerUploadIndentityComponent
                 .builder()
                 .appComponent(appComponent)
-                .uploadIndentityModule(new UploadIndentityModule(this, this))
+                .uploadIndentityModule(new UploadIndentityModule(this, this, this))
                 .build()
                 .inject(this);
 
@@ -177,6 +182,11 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
     @Override
     public void onSuccess(UserIndentity indentity) {
+
+    }
+
+    @Override
+    public void onStorageToken(StorageToken storageToken) {
 
     }
 }

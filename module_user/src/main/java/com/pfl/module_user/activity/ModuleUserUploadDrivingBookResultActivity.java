@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.CarLicence;
+import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -17,7 +18,9 @@ import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingBookResult
 import com.pfl.module_user.di.module_upload_car_licence_resule.DaggerUploadCarLicenceResultComponent;
 import com.pfl.module_user.di.module_upload_car_licence_resule.UploadCarLicenceResultModule;
 import com.pfl.module_user.utils.SelectPictureHelper;
+import com.pfl.module_user.view.StorageTokenView;
 import com.pfl.module_user.view.UploadCarLicenceResultView;
+import com.pfl.module_user.viewmodel.StorageTokenViewModel;
 import com.pfl.module_user.viewmodel.UploadCarLicenceResultViewModel;
 
 import java.util.ArrayList;
@@ -32,13 +35,15 @@ import me.shaohui.bottomdialog.BaseBottomDialog;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT)
-public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<ModuleUserActivityUploadDrivingBookResultBinding> implements UploadCarLicenceResultView, View.OnClickListener {
+public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<ModuleUserActivityUploadDrivingBookResultBinding> implements UploadCarLicenceResultView, StorageTokenView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
 
     @Inject
     UploadCarLicenceResultViewModel viewModel;
+    @Inject
+    StorageTokenViewModel tokenViewModel;
 
     @Override
     public int getContentView() {
@@ -51,7 +56,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
         DaggerUploadCarLicenceResultComponent
                 .builder()
                 .appComponent(appComponent)
-                .uploadCarLicenceResultModule(new UploadCarLicenceResultModule(this,this))
+                .uploadCarLicenceResultModule(new UploadCarLicenceResultModule(this, this, this))
                 .build()
                 .inject(this);
 
@@ -119,7 +124,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
         permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
 
-        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback(){
+        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback() {
 
             @Override
             public void onFinish() {
@@ -142,6 +147,11 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     @Override
     public void onSuccess(CarLicence licence) {
+
+    }
+
+    @Override
+    public void onStorageToken(StorageToken storageToken) {
 
     }
 }
