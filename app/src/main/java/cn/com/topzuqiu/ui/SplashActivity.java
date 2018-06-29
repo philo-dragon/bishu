@@ -1,10 +1,14 @@
 package cn.com.topzuqiu.ui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.pfl.common.utils.App;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 
@@ -22,11 +26,13 @@ public class SplashActivity extends AppCompatActivity {
 
         List<PermissionItem> permissionItems = new ArrayList<>();
         permissionItems.add(new PermissionItem(Manifest.permission.READ_PHONE_STATE, "电话权限", R.drawable.permission_ic_phone));
+        permissionItems.add(new PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION, "位置权限", R.drawable.permission_ic_location));
 
         PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback() {
 
             @Override
             public void onFinish() {
+                cn.com.topzuqiu.constant.LocationManager.getInstance().setLocation(getLocation());
                 RouteUtils.actionStart(RouteUtils.APP_MAIN_ACTIVITY);
             }
 
@@ -38,6 +44,22 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    private Location getLocation() {
+        LocationManager locationManager = (LocationManager) App.getInstance().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            @SuppressLint("MissingPermission")
+            Location location = locationManager.getLastKnownLocation(provider);
+            if (location == null) {
+                continue;
+            }
+            if (bestLocation == null || location.getAccuracy() < bestLocation.getAccuracy()) {
+                bestLocation = location;
+            }
+        }
+        return bestLocation;
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

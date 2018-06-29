@@ -2,6 +2,7 @@ package com.pfl.common.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 
@@ -11,6 +12,7 @@ import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.pfl.common.service.ModuleAppLocationRouteService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,9 +92,10 @@ public class CommonParamsInterceptor extends BaseCommonParamsInterceptor {
         commomParamsMap.put("minfo", minfoBuilder.toString());
 
         StringBuilder geoBuilder = new StringBuilder();
+        Location location = ModuleAppLocationRouteService.getLocation();
         minfoBuilder.append("{");
-        minfoBuilder.append("x").append(":").append("12.203872").append(",");
-        minfoBuilder.append("y").append(":").append("-12.231245");
+        minfoBuilder.append("x").append(":").append(location == null ? "" : location.getLatitude()).append(",");
+        minfoBuilder.append("y").append(":").append(location == null ? "" : location.getLongitude());
         minfoBuilder.append("}");
         commomParamsMap.put("geo", geoBuilder.toString());
         return commomParamsMap;
