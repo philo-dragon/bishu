@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.pfl.common.base.BaseFragment;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
@@ -72,11 +73,11 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
 
     @Override
     public void initData() {
+        viewModel.requestData();
     }
 
     @Override
     public void onClick(View v) {
-
         if (v.getId() == R.id.module_user_tv_my_wallet) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET);
         }
@@ -88,7 +89,7 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
         super.onResume();
         if (!isInit) {
             isInit = true;
-            AnimationManager.setAnimText(mBinding.moduleUserTvIntegral, 10000000);
+            //AnimationManager.setAnimText(mBinding.moduleUserTvIntegral, 10000000);
             AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
         }
 
@@ -101,7 +102,9 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(Score score) {
+
+        mBinding.setScore(score);
 
     }
 }

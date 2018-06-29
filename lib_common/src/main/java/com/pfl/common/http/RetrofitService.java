@@ -62,7 +62,7 @@ public interface RetrofitService {
     Observable<User> doLogin(@Field("mobile") String mobile, @Field("pwd") String pwd);
 
     /**
-     * 登录
+     * 退出
      *
      * @param uid 用户id
      * @return
@@ -87,13 +87,11 @@ public interface RetrofitService {
     /**
      * 我的积分
      *
-     * @param mobile 手机号码
-     * @param pwd    密码
      * @return
      */
     @FormUrlEncoded
     @POST("/user/score")
-    Observable<Score> score(@Field("mobile") String mobile, @Field("pwd") String pwd);
+    Observable<Score> score();
 
 
     /**

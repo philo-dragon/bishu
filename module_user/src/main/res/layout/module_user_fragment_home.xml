@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="score"
+            type="com.pfl.common.entity.module_user.Score"/>
+
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="156dp"
-                android:text="10000000"
+                android:text="@{score.score}"
                 android:textColor="#3DC9C0"
                 android:textSize="40dp" />
 
@@ -46,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="219dp"
-                android:text="昨日获得：1000 积分"
+                android:text='@{"昨日获得: " + score.score_add_yesterday + " 积分"}'
                 android:textColor="#6A7E9A"
                 android:textSize="14dp" />
 

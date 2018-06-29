@@ -12,6 +12,8 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
+import java.util.ArrayList;
+
 /**
  * Created by rocky on 2018/4/9.
  */
@@ -29,7 +31,40 @@ public class FindViewModel {
     }
 
     public void requestData() {
-        RetrofitFactory.getInstance()
+
+        FindBean findBean = new FindBean();
+
+        FindBean.Weather weather = new FindBean.Weather();
+        weather.setDesc("晴天");
+        weather.setTemperature("40");
+        findBean.setWeather(weather);
+
+        FindBean.Location location = new FindBean.Location();
+        location.setCity("北京");
+        location.setDetail("西直门");
+        location.setDistrict("海淀区");
+        findBean.setLocation(location);
+
+        FindBean.Traffic_restrict restrict = new FindBean.Traffic_restrict();
+        ArrayList<String> list = new ArrayList<>(2);
+        list.add("3");
+        list.add("7");
+        restrict.setRestrict_number(list);
+        findBean.setTraffic_restrict(restrict);
+
+        FindBean.Car car = new FindBean.Car();
+        car.setPlate_number("京A213765");
+        FindBean.Violation violation = new FindBean.Violation();
+        violation.setMoney_cost("1000");
+        violation.setScore_cost("12");
+        violation.setUnsolved_num("6");
+        car.setViolation(violation);
+        findBean.setCar(car);
+
+        view.onSuccess(findBean);
+
+
+      /*  RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
                 .find()
                 .compose(RxSchedulers.<FindBean>compose())
@@ -39,6 +74,6 @@ public class FindViewModel {
                     public void onNext(FindBean findBean) {
                         view.onSuccess(findBean);
                     }
-                });
+                });*/
     }
 }

@@ -57,6 +57,6 @@ public class ModuleUserFindFragment extends BaseLazyFragment<ModuleUserFragmentF
 
     @Override
     public void onSuccess(FindBean findBean) {
-
+        mBinding.setFindBean(findBean);
     }
 }

@@ -1,6 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
@@ -28,16 +29,20 @@ public class HomeViewModel {
     }
 
     public void requestData() {
-        RetrofitFactory.getInstance()
+        Score score = new Score();
+        score.setScore("11110000");
+        score.setScore_add_yesterday("5000");
+        view.onSuccess(score);
+       /* RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .score()
+                .compose(RxSchedulers.<Score>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<Score>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
-                        view.onSuccess();
+                    public void onNext(Score score) {
+                        view.onSuccess(score);
                     }
-                });
+                });*/
     }
 }
