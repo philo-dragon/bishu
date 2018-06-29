@@ -55,7 +55,7 @@ public class FindViewModel {
         FindBean.Car car = new FindBean.Car();
         car.setPlate_number("京A213765");
         FindBean.Violation violation = new FindBean.Violation();
-        violation.setMoney_cost("1000");
+        violation.setMoney_cost("100");
         violation.setScore_cost("12");
         violation.setUnsolved_num("6");
         car.setViolation(violation);
