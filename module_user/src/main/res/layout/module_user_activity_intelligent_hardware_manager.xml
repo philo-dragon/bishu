@@ -86,7 +86,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="16dp" />
+                    android:layout_marginRight="16dp"
+                    android:checked="true"
+                    android:clickable="false"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:thumb="@drawable/thumb"
+                    android:track="@drawable/track" />
 
             </RelativeLayout>
 

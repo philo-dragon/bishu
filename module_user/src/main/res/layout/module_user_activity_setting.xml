@@ -43,6 +43,10 @@
                 android:layout_height="34dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="16dp"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumb="@drawable/thumb"
+                android:track="@drawable/track"
                 android:checked="true"
                 android:clickable="false" />
 
