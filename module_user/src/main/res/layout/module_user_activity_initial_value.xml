@@ -12,6 +12,13 @@
             android:id="@+id/in_toolbar_layout"
             layout="@layout/common_databinding_toolbar_layout" />
 
+        <include
+            android:id="@+id/line"
+            layout="@layout/lib_common_gradient_line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/in_toolbar_layout" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
