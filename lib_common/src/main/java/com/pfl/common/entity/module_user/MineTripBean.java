@@ -2,7 +2,7 @@ package com.pfl.common.entity.module_user;
 
 import com.pfl.common.base.MultiTypeAdapter;
 
-public class MineTripBean implements MultiTypeAdapter.IItem {
+public class MineTripBean extends MultiTypeAdapter.IItem {
     private String name;
     private String startTime;
     private String endTime;
@@ -47,15 +47,5 @@ public class MineTripBean implements MultiTypeAdapter.IItem {
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    @Override
-    public int getLayout() {
-        return 1;
-    }
-
-    @Override
-    public int getVariableId() {
-        return 2;
     }
 }

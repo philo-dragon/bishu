@@ -13,7 +13,6 @@ import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
-import com.pfl.common.utils.RxClickUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentHomeBinding;
@@ -28,10 +27,9 @@ import javax.inject.Inject;
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_HOME)
-public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements HomeView, View.OnClickListener {
+public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements HomeView {
 
     private boolean isInit;
-
     @Inject
     HomeViewModel viewModel;
 
@@ -42,7 +40,6 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
 
     @Override
     public void componentInject(AppComponent appComponent) {
-
         DaggerHomeComponent
                 .builder()
                 .appComponent(appComponent)
@@ -54,8 +51,7 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     @Override
     public void initView() {
         setToolBar();
-
-        RxClickUtil.RxClick(mBinding.moduleUserTvMyWallet, this);
+        mBinding.setViewModule(viewModel);
     }
 
     @Override
@@ -77,14 +73,6 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.module_user_tv_my_wallet) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET);
-        }
-    }
-
-
-    @Override
     public void onResume() {
         super.onResume();
         if (!isInit) {
@@ -103,8 +91,6 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
 
     @Override
     public void onSuccess(Score score) {
-
         mBinding.setScore(score);
-
     }
 }

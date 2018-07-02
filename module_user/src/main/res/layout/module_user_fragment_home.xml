@@ -8,6 +8,10 @@
             name="score"
             type="com.pfl.common.entity.module_user.Score" />
 
+        <variable
+            name="viewModule"
+            type="com.pfl.module_user.viewmodel.HomeViewModel" />
+
     </data>
 
     <LinearLayout
@@ -73,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="78dp"
+                android:onClick="@{()->viewModule.goWallet(score.score)}"
                 android:text="我的钱包>"
                 android:textColor="#6A7E9A"
                 android:textSize="13dp" />

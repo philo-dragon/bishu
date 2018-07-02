@@ -1,5 +1,6 @@
 package com.pfl.module_user.view;
 
+import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.entity.module_user.ScoreLog;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
 
 public interface WalletView {
 
-    void onSuccess(List<ScoreLog> logList);
+    void onSuccess(List<MultiTypeAdapter.IItem> logList);
 
 }

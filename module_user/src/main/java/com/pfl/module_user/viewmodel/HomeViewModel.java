@@ -6,11 +6,15 @@ import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
+import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.view.FeedbackView;
 import com.pfl.module_user.view.HomeView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by rocky on 2018/4/9.
@@ -44,5 +48,11 @@ public class HomeViewModel {
                         view.onSuccess(score);
                     }
                 });*/
+    }
+
+    public void goWallet(String score) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("score", score);
+        RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET, parameters);
     }
 }

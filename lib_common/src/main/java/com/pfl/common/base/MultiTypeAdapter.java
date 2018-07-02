@@ -16,12 +16,28 @@ import java.util.List;
 
 public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeAdapter.ItemViewHolder> {
 
-    public interface IItem {
+    public static class IItem {
+
+        private int layout;
+        private int variableId;
+
         // get the xml layout this type item used in
-        int getLayout();
+        int getLayout() {
+            return layout;
+        }
 
         // get the variable name in the xml
-        int getVariableId();
+        int getVariableId() {
+            return variableId;
+        }
+
+        public void setLayout(int layout) {
+            this.layout = layout;
+        }
+
+        public void setVariableId(int variableId) {
+            this.variableId = variableId;
+        }
     }
 
     private List<IItem> items = new ArrayList<>();

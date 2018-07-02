@@ -6,6 +6,8 @@ import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
+import com.pfl.module_user.BR;
+import com.pfl.module_user.R;
 import com.pfl.module_user.entity.MineTripBean;
 import com.pfl.module_user.view.MyTripView;
 import com.trello.rxlifecycle2.LifecycleProvider;
@@ -60,6 +62,8 @@ public class MyTripViewModel {
             tripBean.setMoney(i % 2 == 0 ? "+5" : "0");
             tripBean.setName(i % 2 == 0 ? "已售行程" : "待售行程");
             tripBean.setType(i % 2 == 0 ? 1 : 0);
+            tripBean.setLayout(R.layout.module_user_item_my_trip);
+            tripBean.setVariableId(BR.item);
             tripBeans.add(tripBean);
         }
 

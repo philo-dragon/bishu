@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="score"
+            type="java.lang.String" />
+
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="42dp"
-                    android:text="1000000"
+                    android:text="@{score}"
                     android:textColor="#ff3dc9c0"
                     android:textSize="35sp" />
 
@@ -73,7 +81,7 @@
 
         </RelativeLayout>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/in_toolbar_layout"
@@ -81,11 +89,15 @@
             android:background="@color/withe"
             android:fillViewport="true">
 
+            <include
+                android:id="@+id/module_refresh_layout"
+                layout="@layout/common_refresh_layout" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -298,7 +310,7 @@
                 <include layout="@layout/common_line" />
 
             </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
     </RelativeLayout>
 
 </layout>
