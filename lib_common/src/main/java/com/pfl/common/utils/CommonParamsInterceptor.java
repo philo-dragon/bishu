@@ -12,7 +12,9 @@ import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.service.ModuleAppLocationRouteService;
+import com.pfl.common.service.ModuleUserRouteService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +70,8 @@ public class CommonParamsInterceptor extends BaseCommonParamsInterceptor {
         //添加公共参数
         Map<String, String> commomParamsMap = new HashMap<>();
         String request_id = EncryptUtils.encryptMD5ToString(getIMEI() + "-" + DeviceUtils.getMacAddress() + "-0" + System.currentTimeMillis());
-        commomParamsMap.put("uid", "");
+        User user = ModuleUserRouteService.getUserInfo();
+        commomParamsMap.put("uid", user == null ? "" : user.getUid());
         commomParamsMap.put("sign", "");
         commomParamsMap.put("request_id", request_id);//每个请求唯一,可用imei-mac-timestamp生成的md5作为request_id
         commomParamsMap.put("req_from", "Android");
@@ -93,10 +96,10 @@ public class CommonParamsInterceptor extends BaseCommonParamsInterceptor {
 
         StringBuilder geoBuilder = new StringBuilder();
         Location location = ModuleAppLocationRouteService.getLocation();
-        minfoBuilder.append("{");
-        minfoBuilder.append("x").append(":").append(location == null ? "" : location.getLatitude()).append(",");
-        minfoBuilder.append("y").append(":").append(location == null ? "" : location.getLongitude());
-        minfoBuilder.append("}");
+        geoBuilder.append("{");
+        geoBuilder.append("x").append(":").append(location == null ? "" : location.getLatitude()).append(",");
+        geoBuilder.append("y").append(":").append(location == null ? "" : location.getLongitude());
+        geoBuilder.append("}");
         commomParamsMap.put("geo", geoBuilder.toString());
         return commomParamsMap;
     }

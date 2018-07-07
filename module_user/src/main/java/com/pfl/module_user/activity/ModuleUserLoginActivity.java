@@ -94,9 +94,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
 
         int id = v.getId();
         if (id == R.id.module_user_cv_next) {
-            if (checkMobile()) {
-                verifyMobule(true);
-            }
+            checkMobile();
         } else if (id == R.id.module_user_cv_login) {
             String password = mBinding.inLoginView2.moduleUserEtPassword.getText().toString().trim();//密码
             if (!StringUtils.isEmpty(password)
@@ -113,6 +111,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
         mobile = mBinding.inLoginView1.moduleUserEtMobileNo.getText().toString().trim();
         if (RegexUtils.isMobileExact(mobile)) {
             mBinding.inLoginView1.moduleUserTvCheckHint.setVisibility(View.GONE);
+            viewModel.findUser(mobile);
             return true;
         }
         mBinding.inLoginView1.moduleUserTvCheckHint.setVisibility(View.VISIBLE);

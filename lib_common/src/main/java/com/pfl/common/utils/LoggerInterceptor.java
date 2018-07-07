@@ -17,6 +17,8 @@ import okhttp3.Response;
 
 public class LoggerInterceptor implements Interceptor {
 
+    private final static String TAG = LoggerInterceptor.class.getSimpleName();
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
@@ -38,10 +40,10 @@ public class LoggerInterceptor implements Interceptor {
                 }
                 sb.delete(sb.length() - 1, sb.length());
             }
-            LogUtils.d(sb.toString());
+            LogUtils.dTag(TAG, sb.toString());
         }
 
-        LogUtils.d(content);
+        LogUtils.dTag(TAG, content);
 
         return response.newBuilder()
                 .body(okhttp3.ResponseBody.create(mediaType, content))

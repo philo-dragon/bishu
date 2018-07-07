@@ -8,8 +8,10 @@ import java.util.List;
 
 public class AppConfiguration {
 
+
     private int force_update;
     private Version top_version;
+    private Oss oss;
 
     public int getForce_update() {
         return force_update;
@@ -25,6 +27,14 @@ public class AppConfiguration {
 
     public void setTop_version(Version top_version) {
         this.top_version = top_version;
+    }
+
+    public Oss getOss() {
+        return oss;
+    }
+
+    public void setOss(Oss oss) {
+        this.oss = oss;
     }
 
     public static class Version {
@@ -48,5 +58,36 @@ public class AppConfiguration {
         }
     }
 
+
+    public static class Oss {
+
+        private String endPoint;
+        private String bucketName;
+        private String callbackUrl;
+
+        public String getEndPoint() {
+            return endPoint;
+        }
+
+        public void setEndPoint(String endPoint) {
+            this.endPoint = endPoint;
+        }
+
+        public String getBucketName() {
+            return bucketName;
+        }
+
+        public void setBucketName(String bucketName) {
+            this.bucketName = bucketName;
+        }
+
+        public String getCallbackUrl() {
+            return callbackUrl;
+        }
+
+        public void setCallbackUrl(String callbackUrl) {
+            this.callbackUrl = callbackUrl;
+        }
+    }
 
 }

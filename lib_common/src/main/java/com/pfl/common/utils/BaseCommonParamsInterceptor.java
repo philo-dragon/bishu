@@ -22,6 +22,7 @@ public abstract class BaseCommonParamsInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request originRequest = chain.request();
         Request.Builder newRequest = originRequest.newBuilder();
+        //newRequest.removeHeader("Accept-Encoding");
 
         // Header
         Headers.Builder newHeaderBuilder = originRequest.headers().newBuilder();
@@ -79,7 +80,7 @@ public abstract class BaseCommonParamsInterceptor implements Interceptor {
             }
         }
         HttpUrl url = newRequest.build().url();
-        Log.e("url",url.toString());
+        Log.e("url", url.toString());
         return chain.proceed(newRequest.build());
     }
 

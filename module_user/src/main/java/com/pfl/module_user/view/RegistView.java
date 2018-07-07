@@ -10,4 +10,6 @@ public interface RegistView {
 
     void onSuccess(User user);
 
+    void smsVerifyResult(boolean result);
+
 }

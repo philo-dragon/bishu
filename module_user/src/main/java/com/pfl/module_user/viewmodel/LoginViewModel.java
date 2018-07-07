@@ -28,6 +28,24 @@ public class LoginViewModel {
         this.view = view;
     }
 
+    public void findUser(String mobile) {
+        RetrofitFactory.getInstance()
+                .getProxy(RetrofitService.class, service, service)
+                .findUser(mobile)
+                .compose(RxSchedulers.<User>compose())
+                .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(new BaseObserver<User>() {
+                    @Override
+                    public void onNext(User user) {
+                        if (user == null || user.getUid() == null || user.getUid().equals("")) {
+                            view.verifyMobule(false);
+                        } else {
+                            view.verifyMobule(true);
+                        }
+                    }
+                });
+    }
+
     public void requestData(String mobile, String pwd) {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)

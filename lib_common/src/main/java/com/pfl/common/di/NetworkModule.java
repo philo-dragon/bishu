@@ -26,7 +26,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 public class NetworkModule {
 
     private static final long TIMEOUT = 5;
-    private static final long MAX_TRY_COUNT = 3;
+    private static final int MAX_TRY_COUNT = 3;
 
     @Provides
     @Singleton
@@ -38,31 +38,12 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Interceptor provideInterceptor() {
-
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Response response = chain.proceed(request);
-                int tryCount = 0;
-                while (!response.isSuccessful() && tryCount < MAX_TRY_COUNT) {
-                    tryCount++;
-                    response = chain.proceed(request);
-                }
-                return response;
-            }
-        };
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, Interceptor netIntercepter) {
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new CommonParamsInterceptor())
                 .addInterceptor(httpLoggingInterceptor)
-                .addNetworkInterceptor(netIntercepter)
+                //.addNetworkInterceptor(new RetryIntercepter(MAX_TRY_COUNT))
                 .addNetworkInterceptor(new LoggerInterceptor())
                 .retryOnConnectionFailure(true)
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -93,19 +74,30 @@ public class NetworkModule {
         return retrofit.create(RetrofitService.class);
     }
 
-    //网络拦截器：失败重连 3 次
-    private Interceptor retryWhenIntercepter = new Interceptor() {
+    /**
+     * 重试拦截器
+     */
+    public class RetryIntercepter implements Interceptor {
+
+        public int maxRetry;//最大重试次数
+        private int retryNum = 0;//假如设置为3次重试的话，则最大可能请求4次（默认1次+3次重试）
+
+        public RetryIntercepter(int maxRetry) {
+            this.maxRetry = maxRetry;
+        }
+
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
+            System.out.println("retryNum=" + retryNum);
             Response response = chain.proceed(request);
-            int tryCount = 0;
-            while (!response.isSuccessful() && tryCount < MAX_TRY_COUNT) {
-                tryCount++;
+            while (!response.isSuccessful() && retryNum < maxRetry) {
+                retryNum++;
+                System.out.println("retryNum=" + retryNum);
                 response = chain.proceed(request);
             }
             return response;
         }
-    };
+    }
 
 }

@@ -28,7 +28,7 @@ public class AppVersionViewModel {
     public void requestData() {
         RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .configuration("", "")
+                .configuration("get")
                 .compose(RxSchedulers.<AppConfiguration>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<AppConfiguration>() {

@@ -61,7 +61,6 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
 
     }
 
-
     @Override
     public void initView() {
 
@@ -71,8 +70,6 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
         RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserCvNext, this);
         RxClickUtil.RxClick(mBinding.inRegistView1.moduleUserBtnGetCheckCode, this);
         RxClickUtil.RxClick(mBinding.inRegistView2.moduleUserCvRegist, this);
-
-
     }
 
     @Override
@@ -89,12 +86,22 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
     }
 
     @Override
+    public void smsVerifyResult(boolean result) {
+        if (result) {
+            mBinding.modulerUserVfFlipper.showNext();
+            mBinding.inRegistView1.moduleUserTvCheckcodeErrorHint.setVisibility(View.GONE);
+        } else {
+            mBinding.inRegistView1.moduleUserTvCheckcodeErrorHint.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.module_user_cv_next) {
             checkCode = mBinding.inRegistView1.moduleUserEtCheckCode.getText().toString().trim();
             if (!StringUtils.isEmpty(checkCode)) {
-                mBinding.modulerUserVfFlipper.showNext();
+                viewModel.verifySMS(mobile, checkCode);
             }
         } else if (id == R.id.module_user_cv_regist) {
             String password = mBinding.inRegistView2.moduleUserEtPasword.getText().toString().trim();//密码
@@ -106,6 +113,7 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
             }
         } else if (id == R.id.module_user_btn_get_check_code) {
             mBinding.inRegistView1.moduleUserBtnGetCheckCode.onStart();
+            viewModel.sendSMS(mobile);
         }
     }
 

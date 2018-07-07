@@ -1,5 +1,7 @@
 package com.pfl.common.http;
 
+import android.service.carrier.CarrierMessagingService;
+
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.base.AccessToken;
 import com.pfl.common.entity.module_user.CarLicence;
@@ -13,6 +15,7 @@ import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.UserIndentity;
 import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.entity.module_user.UserLicence;
+import com.pfl.common.entity.module_user.VerifySMSResult;
 
 import java.util.List;
 
@@ -71,17 +74,43 @@ public interface RetrofitService {
     @POST("/user/login")
     Observable<Object> loginOut(@Field("uid") String uid);
 
-
     /**
-     * 版本更新
+     * 用户查找
      *
      * @param mobile 手机号码
-     * @param pwd    密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user")
+    Observable<User> findUser(@Field("mobile") String mobile);
+
+
+    /**
+     * 获取app的一些配置信息
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("/configuration")
-    Observable<AppConfiguration> configuration(@Field("mobile") String mobile, @Field("pwd") String pwd);
+    Observable<AppConfiguration> configuration(@Field("action") String action);
+
+    /**
+     * 发送手机验证码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/sms_code")
+    Observable<Object> sendSMSCode(@Field("mobile") String mobile);
+
+    /**
+     * 发送手机验证码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/sms_code")
+    Observable<VerifySMSResult> checkSMSCode(@Field("mobile") String mobile, @Field("verify_code") String verify_code);
 
 
     /**
