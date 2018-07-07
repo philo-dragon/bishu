@@ -1,4 +1,4 @@
-package cn.com.topzuqiu.ui;
+package com.kaiyi.app.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.kaiyi.app.R;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -15,7 +16,6 @@ import com.pfl.common.utils.RouteUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.topzuqiu.R;
 import me.weyye.hipermission.PermissionItem;
 
 public class SplashActivity extends AppCompatActivity {
@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                cn.com.topzuqiu.constant.LocationManager.getInstance().setLocation(getLocation());
+                com.kaiyi.app.constant.LocationManager.getInstance().setLocation(getLocation());
                 RouteUtils.actionStart(RouteUtils.APP_MAIN_ACTIVITY);
             }
 

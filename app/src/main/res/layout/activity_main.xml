@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="cn.com.topzuqiu.ui.MainActivity">
+        tools:context=".ui.MainActivity">
 
         <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
             android:id="@+id/bottom_navigation_view_ex"

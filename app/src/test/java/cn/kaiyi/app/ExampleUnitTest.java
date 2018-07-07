@@ -1,4 +1,4 @@
-package cn.com.topzuqiu;
+package cn.kaiyi.app;
 
 import org.junit.Test;
 

@@ -1,5 +1,6 @@
-package cn.com.topzuqiu.viewmodel;
+package com.kaiyi.app.viewmodel;
 
+import com.kaiyi.app.view.AppVersionView;
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
@@ -7,8 +8,6 @@ import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
-
-import cn.com.topzuqiu.view.AppVersionView;
 
 /**
  * Created by Administrator on 2018\6\22 0022.

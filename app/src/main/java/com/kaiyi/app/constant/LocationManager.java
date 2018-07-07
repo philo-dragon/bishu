@@ -1,4 +1,4 @@
-package cn.com.topzuqiu.constant;
+package com.kaiyi.app.constant;
 
 import android.location.Location;
 

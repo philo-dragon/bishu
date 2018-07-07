@@ -44,14 +44,17 @@ public class BaseApplication extends Application {
         super.onCreate();
         CrashHandler.getInstance().init(this);
         initRouter();//初始化Router
-        initBaseUrl();
+        initBaseUrl(BaseUrlManager.DEV_URL, BaseUrlManager.RELEASE_URL, BaseUrlManager.API_VERSION, BaseUrlManager.isDebug);
         registerLifecycleCallbacks();//注册Activity生命周期监听
         initAppComponent();//Dagger2 初始化全局参数
         Utils.init(App.getInstance());
     }
 
-    protected void initBaseUrl() {
-        BaseUrlManager.init("http://apitest.topzuqiu.cn", "http://apitest.topzuqiu.cn", false);//动态切换BaseUrl
+    protected void initBaseUrl(String dev_url, String release_url, String api_sersion, boolean isDebug) {
+        BaseUrlManager.init(dev_url
+                , release_url
+                , api_sersion,
+                isDebug);//动态切换BaseUrl
     }
 
     protected void initAppComponent() {

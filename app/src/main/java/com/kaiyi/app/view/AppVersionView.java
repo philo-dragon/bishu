@@ -1,4 +1,4 @@
-package cn.com.topzuqiu.view;
+package com.kaiyi.app.view;
 
 import com.pfl.common.entity.module_app.AppConfiguration;
 

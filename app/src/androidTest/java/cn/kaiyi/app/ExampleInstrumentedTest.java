@@ -1,4 +1,4 @@
-package cn.com.topzuqiu;
+package cn.kaiyi.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,10 +1,9 @@
-package cn.com.topzuqiu.di.app_version;
+package com.kaiyi.app.di.app_version;
 
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.di.scope.ActivityScope;
-import com.pfl.module_user.fragment.ModuleUserFindFragment;
 
-import cn.com.topzuqiu.ui.MainActivity;
+import com.kaiyi.app.ui.MainActivity;
 import dagger.Component;
 
 /**

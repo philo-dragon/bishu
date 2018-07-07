@@ -1,4 +1,4 @@
-package cn.com.topzuqiu.ui;
+package com.kaiyi.app.ui;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.kaiyi.app.R;
+import com.kaiyi.app.adapter.AppMainNavigationViewPagerAdapter;
+import com.kaiyi.app.databinding.ActivityMainBinding;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.AppManager;
@@ -21,9 +24,6 @@ import com.pfl.common.utils.RouteUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.topzuqiu.R;
-import cn.com.topzuqiu.adapter.AppMainNavigationViewPagerAdapter;
-import cn.com.topzuqiu.databinding.ActivityMainBinding;
 
 @Route(path = RouteUtils.APP_MAIN_ACTIVITY)
 public class MainActivity extends BaseActivity<ActivityMainBinding> {

@@ -1,12 +1,10 @@
-package cn.com.topzuqiu.di.app_version;
+package com.kaiyi.app.di.app_version;
 
+import com.kaiyi.app.view.AppVersionView;
+import com.kaiyi.app.viewmodel.AppVersionViewModel;
 import com.pfl.common.http.RetrofitService;
-import com.pfl.module_user.view.FindView;
-import com.pfl.module_user.viewmodel.FindViewModel;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
-import cn.com.topzuqiu.view.AppVersionView;
-import cn.com.topzuqiu.viewmodel.AppVersionViewModel;
 import dagger.Module;
 import dagger.Provides;
 
