@@ -50,7 +50,7 @@ public class LoginViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<User>>() {
                     @Override
-                    public void onNext(HttpResponse<User> response) {
+                    public void onSuccess(HttpResponse<User> response) {
                         view.loginSuccess(response.getData());
                     }
                 });

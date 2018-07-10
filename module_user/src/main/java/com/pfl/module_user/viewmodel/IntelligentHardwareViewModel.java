@@ -47,7 +47,7 @@ public class IntelligentHardwareViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(HttpResponse<Object> deviceList) {
+                    public void onSuccess(HttpResponse<Object> deviceList) {
                         view.onAddSuccess();
                     }
                 });

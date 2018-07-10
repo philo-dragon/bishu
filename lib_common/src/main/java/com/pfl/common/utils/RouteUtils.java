@@ -20,8 +20,8 @@ public class RouteUtils {
      */
     public static final String APP_MAIN_ACTIVITY = "/app/main";
 
-
     public static final String APP_LISTENER_LOCATION = "/app/app_listener_location";
+    public static final String APP_LISTENER_CONFIGURATION = "/app/app_listener_Configuration";
 
     /**
      * module_user 模块

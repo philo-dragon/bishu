@@ -85,7 +85,7 @@ public class WalletViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<List<ScoreLog>>() {
                     @Override
-                    public void onNext(List<ScoreLog> scoreLogs) {
+                    public void onSuccess(List<ScoreLog> scoreLogs) {
                         view.onSuccess(scoreLogs);
                     }
                 });*/

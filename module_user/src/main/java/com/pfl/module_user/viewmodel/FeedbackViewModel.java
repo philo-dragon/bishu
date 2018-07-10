@@ -32,7 +32,7 @@ public class FeedbackViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(HttpResponse<Object> accessToken) {
+                    public void onSuccess(HttpResponse<Object> accessToken) {
                         view.feedbackSuccess();
                     }
                 });

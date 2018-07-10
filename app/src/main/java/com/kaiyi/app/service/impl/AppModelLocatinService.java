@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.kaiyi.app.constant.LocationManager;
 import com.pfl.common.service.IAppModelLocationService;
 import com.pfl.common.utils.RouteUtils;
 
@@ -16,7 +17,7 @@ public class AppModelLocatinService implements IAppModelLocationService {
 
     @Override
     public Location getLocation() {
-        return null;
+        return LocationManager.getInstance().getLocation();
     }
 
     @Override

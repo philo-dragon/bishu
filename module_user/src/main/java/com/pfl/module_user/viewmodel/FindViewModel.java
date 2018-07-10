@@ -64,7 +64,7 @@ public class FindViewModel {
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<FindBean>() {
                     @Override
-                    public void onNext(FindBean findBean) {
+                    public void onSuccess(FindBean findBean) {
                         view.onSuccess(findBean);
                     }
                 });*/

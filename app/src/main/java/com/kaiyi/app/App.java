@@ -35,7 +35,7 @@ public class App extends BaseApplication {
                 .compose(RxSchedulers.<HttpResponse<AppConfiguration>>compose())
                 .subscribe(new BaseObserver<HttpResponse<AppConfiguration>>() {
                     @Override
-                    public void onNext(HttpResponse<AppConfiguration> response) {
+                    public void onSuccess(HttpResponse<AppConfiguration> response) {
                     }
                 });
 

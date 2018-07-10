@@ -32,7 +32,7 @@ public class InitialValueViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
                     @Override
-                    public void onNext(HttpResponse<AccessToken> accessToken) {
+                    public void onSuccess(HttpResponse<AccessToken> accessToken) {
                         view.onSuccess();
                     }
                 });

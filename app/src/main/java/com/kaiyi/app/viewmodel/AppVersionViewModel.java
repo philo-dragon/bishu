@@ -32,7 +32,7 @@ public class AppVersionViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<AppConfiguration>>() {
                     @Override
-                    public void onNext(HttpResponse<AppConfiguration> response) {
+                    public void onSuccess(HttpResponse<AppConfiguration> response) {
                         view.onSuccess(response.getData());
                     }
                 });

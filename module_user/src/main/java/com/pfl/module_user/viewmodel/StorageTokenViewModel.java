@@ -55,7 +55,7 @@ public class StorageTokenViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<StorageToken>>() {
                     @Override
-                    public void onNext(HttpResponse<StorageToken> response) {
+                    public void onSuccess(HttpResponse<StorageToken> response) {
                         view.onStorageToken(response.getData());
                     }
                 });

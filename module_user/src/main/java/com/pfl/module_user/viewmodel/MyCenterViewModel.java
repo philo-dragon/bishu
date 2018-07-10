@@ -33,7 +33,7 @@ public class MyCenterViewModel {
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<UserInfo>>() {
                     @Override
-                    public void onNext(HttpResponse<UserInfo> response) {
+                    public void onSuccess(HttpResponse<UserInfo> response) {
                         view.onSuccess(response.getData());
                     }
                 });

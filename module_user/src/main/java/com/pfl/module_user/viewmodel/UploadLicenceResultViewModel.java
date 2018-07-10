@@ -32,7 +32,7 @@ public class UploadLicenceResultViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<UserLicence>>() {
                     @Override
-                    public void onNext(HttpResponse<UserLicence> response) {
+                    public void onSuccess(HttpResponse<UserLicence> response) {
                         view.onSuccess(response.getData());
                     }
                 });

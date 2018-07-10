@@ -37,7 +37,7 @@ public class HomeViewModel {
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<Score>() {
                     @Override
-                    public void onNext(Score score) {
+                    public void onSuccess(Score score) {
                         view.onSuccess(score);
                     }
                 });*/

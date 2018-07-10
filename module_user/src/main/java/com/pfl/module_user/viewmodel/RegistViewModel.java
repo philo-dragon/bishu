@@ -33,7 +33,7 @@ public class RegistViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(HttpResponse<Object> user) {
+                    public void onSuccess(HttpResponse<Object> user) {
 
                     }
                 });
@@ -46,7 +46,7 @@ public class RegistViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<VerifySMSResult>>() {
                     @Override
-                    public void onNext(HttpResponse<VerifySMSResult> result) {
+                    public void onSuccess(HttpResponse<VerifySMSResult> result) {
 
 
                     }
@@ -60,7 +60,7 @@ public class RegistViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<User>>() {
                     @Override
-                    public void onNext(HttpResponse<User> response) {
+                    public void onSuccess(HttpResponse<User> response) {
                         view.onSuccess(response.getData());
                     }
                 });

@@ -33,7 +33,7 @@ public class SettingViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
                     @Override
-                    public void onNext(HttpResponse<AccessToken> response) {
+                    public void onSuccess(HttpResponse<AccessToken> response) {
                         view.onSuccess(response.getData().getAccess_token());
                     }
                 });
@@ -46,7 +46,7 @@ public class SettingViewModel {
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(HttpResponse<Object> response) {
+                    public void onSuccess(HttpResponse<Object> response) {
 
 
                     }
