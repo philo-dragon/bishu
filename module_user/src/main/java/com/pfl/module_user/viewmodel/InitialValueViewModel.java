@@ -1,11 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.AccessToken;
-import com.pfl.common.http.RetrofitFactory;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.view.FeedbackView;
 import com.pfl.module_user.view.InitialValueView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -27,14 +26,13 @@ public class InitialValueViewModel {
     }
 
     public void requestData() {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .compose(RxSchedulers.<HttpResponse<AccessToken>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
+                    public void onNext(HttpResponse<AccessToken> accessToken) {
                         view.onSuccess();
                     }
                 });

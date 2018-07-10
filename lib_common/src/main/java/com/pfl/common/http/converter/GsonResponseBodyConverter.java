@@ -19,7 +19,6 @@ package com.pfl.common.http.converter;
 import com.google.gson.TypeAdapter;
 import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.exception.ApiException;
-import com.pfl.common.exception.ErrorCode;
 import com.pfl.common.exception.TokenInvalidException;
 
 import java.io.IOException;
@@ -39,15 +38,13 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, Obje
     public Object convert(ResponseBody value) throws IOException {
         try {
             HttpResponse apiModel = (HttpResponse) adapter.fromJson(value.charStream());
-            if (apiModel.getCode() == ErrorCode.TOKEN_NOT_EXIST || apiModel.getCode() == ErrorCode.TOKEN_INVALID) {
-                throw new TokenInvalidException();
-            } else if (!apiModel.isOk()) {
+            if (!apiModel.isOk()) {
                 // 特定 API 的错误，在相应的 Subscriber 的 onError 的方法中进行处理
-                throw new ApiException(Integer.valueOf(apiModel.getCode()), apiModel.getMsg());
+                throw new ApiException(apiModel.getCode(), apiModel.getMsg());
             } else if (apiModel.isOk()) {
                 return apiModel.getData();
             }
-        } catch (Exception e) {
+        } catch (ApiException e) {
             e.printStackTrace();
         } finally {
             value.close();

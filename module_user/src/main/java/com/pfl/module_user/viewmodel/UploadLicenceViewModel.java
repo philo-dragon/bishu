@@ -1,11 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.UserLicence;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.view.UploadLicenceResultView;
 import com.pfl.module_user.view.UploadLicenceView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -27,15 +26,14 @@ public class UploadLicenceViewModel {
     }
 
     public void getIdentity(String uid) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getLicence(uid)
-                .compose(RxSchedulers.<UserLicence>compose())
+                .compose(RxSchedulers.<HttpResponse<UserLicence>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<UserLicence>() {
+                .subscribe(new BaseObserver<HttpResponse<UserLicence>>() {
                     @Override
-                    public void onNext(UserLicence licence) {
-                        view.onSuccess(licence);
+                    public void onNext(HttpResponse<UserLicence> response) {
+                        view.onSuccess(response.getData());
                     }
                 });
     }

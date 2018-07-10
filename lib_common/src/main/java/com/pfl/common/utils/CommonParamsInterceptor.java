@@ -1,10 +1,7 @@
 package com.pfl.common.utils;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.location.Location;
 import android.support.annotation.NonNull;
-import android.telephony.TelephonyManager;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
@@ -51,13 +48,13 @@ public class CommonParamsInterceptor extends BaseCommonParamsInterceptor {
      */
     @Override
     public Map<String, String> getHeaderMap() {
-        return null;
+        return new HashMap<>();
     }
 
     @Override
     public Map<String, String> getQueryParamMap() {
 
-        return getCommonParams();
+        return new HashMap<>();
     }
 
     @Override

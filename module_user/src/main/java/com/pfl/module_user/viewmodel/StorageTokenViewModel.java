@@ -17,8 +17,8 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.blankj.utilcode.util.ToastUtils;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.StorageToken;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.App;
@@ -49,15 +49,14 @@ public class StorageTokenViewModel {
 
 
     public void getStorageToken(String resource, String req) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getStorageToken(resource, req)
-                .compose(RxSchedulers.<StorageToken>compose())
+                .compose(RxSchedulers.<HttpResponse<StorageToken>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<StorageToken>() {
+                .subscribe(new BaseObserver<HttpResponse<StorageToken>>() {
                     @Override
-                    public void onNext(StorageToken licence) {
-                        view.onStorageToken(licence);
+                    public void onNext(HttpResponse<StorageToken> response) {
+                        view.onStorageToken(response.getData());
                     }
                 });
     }

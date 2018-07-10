@@ -35,7 +35,7 @@ public class HttpResponse<T> {
     }
 
     public boolean isOk() {
-        return 0 == code;
+        return 200 == code;
     }
 
 }

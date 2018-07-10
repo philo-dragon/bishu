@@ -1,8 +1,8 @@
 package com.kaiyi.app.viewmodel;
 
 import com.kaiyi.app.view.AppVersionView;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_app.AppConfiguration;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
@@ -26,15 +26,14 @@ public class AppVersionViewModel {
     }
 
     public void requestData() {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .configuration("get")
-                .compose(RxSchedulers.<AppConfiguration>compose())
+                .compose(RxSchedulers.<HttpResponse<AppConfiguration>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<AppConfiguration>() {
+                .subscribe(new BaseObserver<HttpResponse<AppConfiguration>>() {
                     @Override
-                    public void onNext(AppConfiguration configuration) {
-                        view.onSuccess(configuration);
+                    public void onNext(HttpResponse<AppConfiguration> response) {
+                        view.onSuccess(response.getData());
                     }
                 });
     }

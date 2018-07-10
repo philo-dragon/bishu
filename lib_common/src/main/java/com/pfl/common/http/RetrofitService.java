@@ -1,9 +1,8 @@
 package com.pfl.common.http;
 
-import android.service.carrier.CarrierMessagingService;
-
-import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.base.HttpResponse;
+import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.Device;
 import com.pfl.common.entity.module_user.FindBean;
@@ -22,6 +21,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 
 public interface RetrofitService {
@@ -35,10 +35,10 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/token")
-    Observable<AccessToken> getToken(@Field("grant_type") String grant_type,
-                                     @Field("client_id") String client_id,
-                                     @Field("client_secret") String client_secret
+    @POST("app/api/v1/user/token")
+    Observable<HttpResponse<AccessToken>> getToken(@Field("grant_type") String grant_type,
+                                                   @Field("client_id") String client_id,
+                                                   @Field("client_secret") String client_secret
     );
 
     /**
@@ -47,8 +47,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user")
-    Observable<User> doRegist(@Field("mobile") String mobile,
+    @POST("app/api/v1/user")
+    Observable<HttpResponse<User>> doRegist(@Field("mobile") String mobile,
                               @Field("pwd") String pwd,
                               @Field("invatinCode") String invatinCode,
                               @Field("verify_code") String verify_code);
@@ -61,8 +61,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/login")
-    Observable<User> doLogin(@Field("mobile") String mobile, @Field("pwd") String pwd);
+    @POST("app/api/v1/user/login")
+    Observable<HttpResponse<User>> doLogin(@Field("mobile") String mobile, @Field("pwd") String pwd);
 
     /**
      * 退出
@@ -71,8 +71,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/login")
-    Observable<Object> loginOut(@Field("uid") String uid);
+    @POST("app/api/v1/user/login")
+    Observable<HttpResponse<Object>> loginOut(@Field("uid") String uid);
 
     /**
      * 用户查找
@@ -81,8 +81,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user")
-    Observable<User> findUser(@Field("mobile") String mobile);
+    @POST("app/api/v1/user")
+    Observable<HttpResponse<User>> findUser(@Field("mobile") String mobile);
 
 
     /**
@@ -91,8 +91,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/configuration")
-    Observable<AppConfiguration> configuration(@Field("action") String action);
+    @POST("app/api/v1/configuration")
+    Observable<HttpResponse<AppConfiguration>> configuration(@Field("action") String action);
 
     /**
      * 发送手机验证码
@@ -100,8 +100,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/sms_code")
-    Observable<Object> sendSMSCode(@Field("mobile") String mobile);
+    @POST("app/api/v1/sms_code")
+    Observable<HttpResponse<Object>> sendSMSCode(@Field("mobile") String mobile);
 
     /**
      * 发送手机验证码
@@ -109,8 +109,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/sms_code")
-    Observable<VerifySMSResult> checkSMSCode(@Field("mobile") String mobile, @Field("verify_code") String verify_code);
+    @POST("app/api/v1/sms_code")
+    Observable<HttpResponse<VerifySMSResult>> checkSMSCode(@Field("mobile") String mobile, @Field("verify_code") String verify_code);
 
 
     /**
@@ -119,7 +119,7 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/score")
+    @POST("app/api/v1/user/score")
     Observable<Score> score();
 
 
@@ -131,7 +131,7 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/score_log")
+    @POST("app/api/v1/user/score_log")
     Observable<List<ScoreLog>> score_log(@Field("mobile") String mobile, @Field("pwd") String pwd);
 
 
@@ -143,8 +143,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/routes")
-    Observable<List<MineTripBean>> myTrip(@Field("page") String page, @Field("page_size") String page_size);
+    @POST("app/api/v1/user/routes")
+    Observable<HttpResponse<List<MineTripBean>>> myTrip(@Field("page") String page, @Field("page_size") String page_size);
 
     /**
      * 获取用户信息(个人中心)
@@ -152,8 +152,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/info")
-    Observable<UserInfo> userInfo();
+    @POST("app/api/v1/user/info")
+    Observable<HttpResponse<UserInfo>> userInfo(@Field("uid") String uid);
 
     /**
      * 用户反馈
@@ -161,8 +161,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/feedback")
-    Observable<Object> feedback(@Field("content") String content);
+    @POST("app/api/v1/user/feedback")
+    Observable<HttpResponse<Object>> feedback(@Field("content") String content);
 
 
     /**
@@ -171,8 +171,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/devices")
-    Observable<List<Device>> getDevices(@Field("uid") String uid);
+    @POST("app/api/v1/user/devices")
+    Observable<HttpResponse<List<Device>>> getDevices(@Field("uid") String uid);
 
     /**
      * 添加户智能硬件
@@ -180,8 +180,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/device")
-    Observable<Object> addDevice(@Field("imei") String imei, @Field("type") String type);
+    @POST("app/api/v1/user/device")
+    Observable<HttpResponse<Object>> addDevice(@Field("imei") String imei, @Field("type") String type);
 
     /**
      * 发现
@@ -189,7 +189,7 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/discovery")
+    @POST("app/api/v1/user/discovery")
     Observable<FindBean> find();
 
     /**
@@ -198,8 +198,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/identity")
-    Observable<UserIndentity> getIdentity(@Field("uid") String uid);
+    @POST("app/api/v1/user/identity")
+    Observable<HttpResponse<UserIndentity>> getIdentity(@Field("uid") String uid);
 
     /**
      * 获取驾照信息
@@ -207,8 +207,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/driver_licence")
-    Observable<UserLicence> getLicence(@Field("uid") String uid);
+    @POST("app/api/v1/user/driver_licence")
+    Observable<HttpResponse<UserLicence>> getLicence(@Field("uid") String uid);
 
     /**
      * 获取行驶证信息
@@ -216,8 +216,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/user/car_licence")
-    Observable<CarLicence> getCarLicence(@Field("uid") String uid);
+    @POST("app/api/v1/user/car_licence")
+    Observable<HttpResponse<CarLicence>> getCarLicence(@Field("uid") String uid);
 
     /**
      * 获取oss配置及token
@@ -225,8 +225,8 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/storage_token")
-    Observable<StorageToken> getStorageToken(@Field("resource") String resource, @Field("seq") String seq);
+    @POST("app/api/v1/storage_token")
+    Observable<HttpResponse<StorageToken>> getStorageToken(@Field("resource") String resource, @Field("seq") String seq);
 
 
 }

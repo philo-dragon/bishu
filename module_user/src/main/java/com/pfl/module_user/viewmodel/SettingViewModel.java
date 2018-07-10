@@ -1,7 +1,8 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.AccessToken;
-import com.pfl.common.http.RetrofitFactory;
+import com.pfl.common.entity.base.HttpResponse;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
@@ -26,29 +27,26 @@ public class SettingViewModel {
     }
 
     public void requestData() {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<AccessToken>compose())
+                .compose(RxSchedulers.<HttpResponse<AccessToken>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<AccessToken>() {
+                .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
                     @Override
-                    public void onNext(AccessToken accessToken) {
-                        view.onSuccess(accessToken.getAccess_token());
+                    public void onNext(HttpResponse<AccessToken> response) {
+                        view.onSuccess(response.getData().getAccess_token());
                     }
                 });
     }
 
     public void logOut(String uid) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .loginOut(uid)
-                .compose(RxSchedulers.<Object>compose())
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<Object>() {
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(Object accessToken) {
-
+                    public void onNext(HttpResponse<Object> response) {
 
 
                     }

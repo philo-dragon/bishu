@@ -1,12 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.Device;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.view.InitialValueView;
 import com.pfl.module_user.view.IntelligentHardwareView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -30,29 +28,27 @@ public class IntelligentHardwareViewModel {
     }
 
     public void getDevices(String uid) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getDevices(uid)
-                .compose(RxSchedulers.<List<Device>>compose())
+                .compose(RxSchedulers.<HttpResponse<List<Device>>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<List<Device>>() {
+                .subscribe(new BaseObserver<HttpResponse<List<Device>>>() {
                     @Override
-                    public void onNext(List<Device> deviceList) {
-                        view.onSuccess(deviceList);
+                    public void onNext(HttpResponse<List<Device>> deviceList) {
+                        view.onSuccess(deviceList.getData());
                     }
                 });
     }
 
-    public void addDevice(String uid) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
-                .getDevices(uid)
-                .compose(RxSchedulers.<List<Device>>compose())
+    public void addDevice(String imei, String type) {
+        service
+                .addDevice(imei, type)
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<List<Device>>() {
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(List<Device> deviceList) {
-                        view.onSuccess(deviceList);
+                    public void onNext(HttpResponse<Object> deviceList) {
+                        view.onAddSuccess();
                     }
                 });
     }

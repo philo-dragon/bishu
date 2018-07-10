@@ -1,14 +1,14 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.entity.base.AccessToken;
-import com.pfl.common.http.RetrofitFactory;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.view.FeedbackView;
-import com.pfl.module_user.view.LoginView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import io.reactivex.functions.Predicate;
 
 /**
  * Created by rocky on 2018/4/9.
@@ -27,14 +27,12 @@ public class FeedbackViewModel {
     }
 
     public void feedback(String content) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
-                .feedback(content)
-                .compose(RxSchedulers.<Object>compose())
+        service.feedback(content)
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<Object>() {
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(Object accessToken) {
+                    public void onNext(HttpResponse<Object> accessToken) {
                         view.feedbackSuccess();
                     }
                 });

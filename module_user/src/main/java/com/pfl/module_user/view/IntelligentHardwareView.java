@@ -12,4 +12,6 @@ public interface IntelligentHardwareView {
 
     void onSuccess(List<Device> deviceList);
 
+    void onAddSuccess();
+
 }

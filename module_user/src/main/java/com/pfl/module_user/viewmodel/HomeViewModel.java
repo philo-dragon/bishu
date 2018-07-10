@@ -1,17 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.entity.base.AccessToken;
 import com.pfl.common.entity.module_user.Score;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
-import com.pfl.common.http.RxSchedulers;
-import com.pfl.common.utils.BaseObserver;
 import com.pfl.common.utils.RouteUtils;
-import com.pfl.module_user.view.FeedbackView;
 import com.pfl.module_user.view.HomeView;
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.HashMap;
 import java.util.Map;

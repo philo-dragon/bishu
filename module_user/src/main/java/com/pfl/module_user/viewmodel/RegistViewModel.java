@@ -1,9 +1,8 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.VerifySMSResult;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
@@ -28,29 +27,26 @@ public class RegistViewModel {
     }
 
     public void sendSMS(String mobile) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .sendSMSCode(mobile)
-                .compose(RxSchedulers.<Object>compose())
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<Object>() {
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onNext(Object user) {
+                    public void onNext(HttpResponse<Object> user) {
 
                     }
                 });
     }
 
     public void verifySMS(String mobile, String verify_code) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .checkSMSCode(mobile, verify_code)
-                .compose(RxSchedulers.<VerifySMSResult>compose())
+                .compose(RxSchedulers.<HttpResponse<VerifySMSResult>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<VerifySMSResult>() {
+                .subscribe(new BaseObserver<HttpResponse<VerifySMSResult>>() {
                     @Override
-                    public void onNext(VerifySMSResult result) {
-
+                    public void onNext(HttpResponse<VerifySMSResult> result) {
 
 
                     }
@@ -58,15 +54,14 @@ public class RegistViewModel {
     }
 
     public void requestData(String mobile, String password, String invatinCode, String verify_code) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .doRegist(mobile, password, invatinCode, verify_code)
-                .compose(RxSchedulers.<User>compose())
+                .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<User>() {
+                .subscribe(new BaseObserver<HttpResponse<User>>() {
                     @Override
-                    public void onNext(User user) {
-                        view.onSuccess(user);
+                    public void onNext(HttpResponse<User> response) {
+                        view.onSuccess(response.getData());
                     }
                 });
     }

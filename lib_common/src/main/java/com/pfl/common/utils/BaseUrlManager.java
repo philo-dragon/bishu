@@ -6,11 +6,10 @@ package com.pfl.common.utils;
 
 public class BaseUrlManager {
 
-    public static String DEV_URL = "";
-    public static String RELEASE_URL = "";
-    public static String API_VERSION = "";
+    public static String DEV_URL;
+    public static String RELEASE_URL;
+    public static String API_VERSION;
     public static boolean isDebug;
-    private static String postfix = "/";
 
     public static void init(String dev_url, String release_url, String apiVersion, boolean is_debug) {
         DEV_URL = dev_url;
@@ -20,6 +19,6 @@ public class BaseUrlManager {
     }
 
     public static String getBaseUrl() {
-        return isDebug ? DEV_URL + API_VERSION + postfix : RELEASE_URL + API_VERSION + postfix;
+        return isDebug ? DEV_URL : RELEASE_URL;
     }
 }

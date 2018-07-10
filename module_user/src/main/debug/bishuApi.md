@@ -3,6 +3,9 @@
 
 | Modified By | Date | Change |
 |----|----|:-----|
+| shiqingshuai   | 20180710  | 1、更新了/user/devices、/user/device接口请求参数。2、新增解绑用户设备接口  |
+| shiqingshuai  | 20180708   | 1、新增/user/car_licences 获取车辆列表接口。2、更新了/storage_callback 接口  |
+|shiqingshuai   | 20180707  | 1、/user/identity /user/driver_licence更新了字段  |
 |shiqingshuai | 20180707  | 1、更新了全局返回的状态码.2、更新了全局参数sign的生成规则 3、更新了请求host，port||
 |shiqingshuai | 20180705  | 1、/configuration 接口返回endPoint、bucketName、callbackUrl。2、/storage_token 接口不返回endPoint、bucketName、callbackUrl。3、/storage_token 请求参数删除resource、seq。4、/storage_callback 请求参数增加resource、seq。|
 |shiqingshuai | 20180703  |  1、更新了修改用户信息接口的参数说明 |
@@ -461,7 +464,6 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
       {
         'id':'xxxx',
         'name':'xxx',
-        'type':'xxxx',
         'imei':'xxxx',
       },
       ...
@@ -480,7 +482,7 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 {
   'action':'post',
   'imei':'xxxx',
-  'type':'xxxxx',
+  'name':'xxxxx',
   '全局参数'
 }
 返回
@@ -489,7 +491,33 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
   'msg':'success',
 }
 ```
+>请求参数说明
 
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| imei | string | no |设备的唯一标识 |
+| name  | string  | no  | 设备名  |
+
+### 解绑用户智能硬件
+```
+/user/device
+参数
+{
+  'action':'delete',
+  'id': 'xxxx',
+  '全局参数'
+}
+返回
+{
+  'code':200,
+  'msg':'success',
+}
+```
+>请求参数说明
+
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| id | string | no | user_device_id用户设备ID， 设备列表中返回的用户设备id|
 ---
 
 ### 发现
@@ -517,19 +545,30 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
     'traffic_restrict':{
       'restrict_number':['5','9']
     }
-    'car':{
-      'plate_number':'京A123456',
-      'violation':{
-        'unsolved_num':2,
-        'score_cost':12,
-        'money_cost':1000,
-      }
-    }
+    'cars':[
+        {
+          'plate_number':'京A123456',
+          'violation':{
+            'unsolved_num':2,
+            'score_cost':12,
+            'money_cost':1000,
+          }
+        }
+    ]
     ,
   }
 }
 ```
+>返回参数说明
 
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| restrict_number | list |  | 限行尾号|
+| plate_number  | string  |   | 车牌号  |
+| unsolved_num  | int  |   | 违章次数  |
+| score_cost  | int  |   | 扣分  |
+| money_cost | int  |   | 罚款 |
+| violation  | dict  |   | 空字典时表示未查询成功查询  |
 ---
 
 ### 获取oss配置及token
@@ -568,9 +607,7 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 | AccessKeyId | string | no  | 表示Android/iOS应用初始化OSSClient获取的 AccessKeyId |
 | AccessKeySecret | string | no  | 表示Android/iOS应用初始化OSSClient获取AccessKeySecret |
 | SecurityToken | string | no  |  表示Android/iOS应用初始化的Token |
-|  |  |  | 注意:android及ios客户端构造oss CallBack参数时，callbackBodyType值需设为application/json，具体可参考'https://help.aliyun.com/document_detail/31989.html' <br/>
-|  |  |  |注意:客户端存储图片时, 需将图片存储到以用户uid命名的目录下, 即图片存储位置为'<bucket_name>/<uid>/<图片名，例如id,driver_licence等>_<unix时间戳>.png' |
-
+| Expiration  | float  | no  |   |
 ---
 
 ### oss回调
@@ -579,12 +616,43 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 /storage_callback
 参数
 {
-  'resource':'identity',
-  'seq':0,
-  '全局参数'
+  'bucket':'',
+  'object':'',
+  'etag':'',
+  'size':123,
+  'mimeType':'',
+  'imageInfo':{
+    'height':'',
+    'width':'',
+    'format':'',
+  },
+  'x:action': 'post',
+  'x:resource':'xxxx',
+  'x:id': 'xxxxxxx',
+  'x:seq':0,
+  'x:全局参数'
+}
+返回参数
+{
+  'code':200
 }
 ```
+>请求参数说明
 
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| bucket  | string  |   |   |
+| object  | string  |   |   |
+| etag   |  string |   |   |
+| size  | float  |   |   |
+| mimeType   | string  |   |   |
+| imageInfo   | dict  |   | 以上参数为系统参数，请参照OSS文档  |
+| resource  | string  | no  | 文件类型，取值['id_card', 'driver_licence', 'car_licence']  |
+| id   | string  | yes  | 用户证书id,当resource='car_licence'时并且用户修改车辆行驶证的时候需要上传此参数,不上传此参数或此参数为空字符串表示新建证书|
+| seq   | int  | no  | 表示文件的正反面，0表示正面，1表示反面，默认为0  |
+|   |   |   | 为了和OSS系统参数做区分，其他参数名必须加前缀'x:'  |
+|   |   |   | 注意:android及ios客户端构造oss CallBack参数时，callbackBodyType值需设为application/json，具体可参考'https://help.aliyun.com/document_detail/31989.html'|
+|   |   |   |  注意:客户端存储图片时, 需将图片存储到以用户uid命名的目录下, 即图片存储位置为<bucket>下的<object>, object命名规则 '<uid>/<resource>_<unix时间戳>.png'|
 ---
 
 ### 获取身份证信息
@@ -601,17 +669,30 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
   'msg':'success'
   'data':{
     'verified_status':2,
+    'verified_msg': 'xxxxxxx',
     'name':'2321'
     'id_number':'2321',
     'issuing_authority':'北京市公安局',
-    'start_day':'2018-05-01',
-    'end_day':'2018-05-02',
+    'start_ts':123456,
+    'end_ts':123456,
     'back_img':'http://xx',
     'front_img':'http://xxx'
   }
 }
 ```
+>返回参数说明
 
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| verified_status | int | no | 认证状态 {0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
+| verified_msg   | string  | no  | 认证提示信息，认证不成功时，该字段不为空  |
+| name  | string  |   | 姓名  |
+| id_number  | string  |   | 身份证号  |
+| issuing_authority  | string  |   |   |
+| start_ts | float  |   | unix时间戳 开始时间  |
+| end_ts   | float |   | unix时间戳 截止时间  |
+| back_img   | string  |   | 反面  |
+| front_img   | string  |   | 正面  |
 ---
 
 ### 获取驾照信息
@@ -629,19 +710,63 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
   'msg':'success'
   'data':{
     'verified_status':2,
+    'verified_msg': 'xxxxxxx',
     'name':'2321'
     'id_number':'2321',
-    'issuing_authority':'北京市公安局',
-    'start_day':'2018-05-01',
-    'end_day':'2018-09-01',
+    'start_ts':1232435,
+    'end_ts:21423543,
     'class':'c1'
     'back_img':'http://xx',
     'front_img':'http://xxx'
   }
 }
 ```
+>返回参数说明
+
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| verified_status | int | no | 认证状态{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证} |
+| verified_msg   | string  | no  | 认证提示信息，认证不成功时，该字段不为空  |
+| name  | string  |   | 姓名  |
+| id_number  | string  |   | 驾驶证号  |
+| start_ts | float  |   | unix时间戳 开始时间  |
+| end_ts   | float |   | unix时间戳 截止时间  |
+| class   | string  |   | 驾驶证类型  |
+| back_img   | string  |   | 反面  |
+| front_img   | string  |   | 正面  |
 
 ---
+###获取车辆行驶证列表
+```
+/user/car_licences
+参数
+{
+  'action': 'get',
+  '全局参数'
+}
+返回
+{
+  'code': 200,
+  'msg': 'success',
+  'data':{
+    'list':[
+      {
+          "plate_number": "沪E1527",
+          "id": "99ea8ba181c811e8831c4a0006c56981",
+          "verified_status": 2
+      }
+    ]
+  }
+}
+```
+>返回参数说明
+
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| verified_status | int | no | 认证状态{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证} |
+| plate_number  | string  |   | 车牌号  |
+| id   | string  |   | 车辆行驶证id  |
+
 
 ### 获取行驶证信息
 ```
@@ -649,14 +774,16 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 参数
 {
   'action':'get',
+  'id': 'xxxxx',
   '全局参数'
 }
 返回
 {
   'code':200,
-  'msg':'success'
+  'msg':'success',
   'data':{
     'verified_status':2,
+    'verified_msg': 'xxxxxxx',
     'plate_number':'2321'
     'owner':'王大白'
     'id_number':'2321',
@@ -668,7 +795,25 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
   }
 }
 ```
+>请求参数说明
 
+| field | type | null | desc |
+|----|:-----|:-------|:------|
+| id   | string  | no  | 车辆行驶证id  |
+>返回参数说明
+
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| verified_status | int | no | 认证状态{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证} |
+| verified_msg   | string  | no  | 认证提示信息，认证不成功时，该字段不为空  |
+| plate_number  | string  |   | 车牌号  |
+| owner   | string  |   | 车主姓名  |
+| id_number  | string  |   | 车辆识别码   |
+| engine_no   | string  |   | 发动机号码  |
+| vehicle_type   | string  |   | 车类型  |
+| vehicle_model   | string  |   | 车辆型号  |
+| back_img   | string  |   | 反面  |
+| front_img   | string  |   | 正面  |
 ---
 
 ### 发送手机验证码

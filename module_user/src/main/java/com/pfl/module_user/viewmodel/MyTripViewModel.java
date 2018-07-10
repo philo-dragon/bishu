@@ -1,8 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.base.MultiTypeAdapter;
-import com.pfl.common.entity.base.AccessToken;
-import com.pfl.common.http.RetrofitFactory;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
@@ -39,14 +38,13 @@ public class MyTripViewModel {
 
         view.onSuccess(getData());
 
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .myTrip(String.valueOf(page), String.valueOf(pageSize))
-                .compose(RxSchedulers.<List<com.pfl.common.entity.module_user.MineTripBean>>compose())
+                .compose(RxSchedulers.<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<List<com.pfl.common.entity.module_user.MineTripBean>>() {
+                .subscribe(new BaseObserver<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>() {
                     @Override
-                    public void onNext(List<com.pfl.common.entity.module_user.MineTripBean> accessToken) {
+                    public void onNext(HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>> accessToken) {
                         //view.onSuccess(getData());
                     }
                 });

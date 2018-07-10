@@ -14,6 +14,7 @@ import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
+import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineBinding;
 import com.pfl.module_user.di.module_my_center.DaggerMyCenterComponent;
 import com.pfl.module_user.di.module_my_center.MyCenterModule;
@@ -87,7 +88,9 @@ public class ModuleUserMineFragment extends BaseLazyFragment<ModuleUserFragmentM
 
     @Override
     public void onUserVisible() {
-        viewModel.requestData();
+        if (UserInfoManager.getInstance().getUser() != null) {
+            viewModel.requestData(UserInfoManager.getInstance().getUser().getUid());
+        }
     }
 
     @Override

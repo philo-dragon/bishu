@@ -1,11 +1,10 @@
 package com.pfl.module_user.viewmodel;
 
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.UserIndentity;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.view.UploadIndentityResultView;
 import com.pfl.module_user.view.UploadIndentityView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -27,15 +26,14 @@ public class UploadIndentityViewModel {
     }
 
     public void getIdentity(String uid) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .getIdentity(uid)
-                .compose(RxSchedulers.<UserIndentity>compose())
+                .compose(RxSchedulers.<HttpResponse<UserIndentity>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<UserIndentity>() {
+                .subscribe(new BaseObserver<HttpResponse<UserIndentity>>() {
                     @Override
-                    public void onNext(UserIndentity indentity) {
-                        view.onSuccess(indentity);
+                    public void onNext(HttpResponse<UserIndentity> response) {
+                        view.onSuccess(response.getData());
                     }
                 });
     }

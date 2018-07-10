@@ -4,7 +4,7 @@ package com.pfl.common.exception;
  * Created by Administrator on 2017/12/18 0018.
  */
 
-public class ApiException extends Exception {
+public class ApiException extends RuntimeException {
     private int code;//错误码
     private String msg;//错误信息
 

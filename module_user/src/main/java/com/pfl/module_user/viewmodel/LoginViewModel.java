@@ -1,16 +1,13 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.entity.base.AccessToken;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.User;
-import com.pfl.common.http.RetrofitFactory;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.view.LoginView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
-
-import javax.inject.Inject;
 
 /**
  * Created by rocky on 2018/4/9.
@@ -29,14 +26,14 @@ public class LoginViewModel {
     }
 
     public void findUser(String mobile) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .findUser(mobile)
-                .compose(RxSchedulers.<User>compose())
+                .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<User>() {
+                .subscribe(new BaseObserver<HttpResponse<User>>() {
                     @Override
-                    public void onNext(User user) {
+                    public void onNext(HttpResponse<User> response) {
+                        User user = response.getData();
                         if (user == null || user.getUid() == null || user.getUid().equals("")) {
                             view.verifyMobule(false);
                         } else {
@@ -47,15 +44,14 @@ public class LoginViewModel {
     }
 
     public void requestData(String mobile, String pwd) {
-        RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .doLogin(mobile, pwd)
-                .compose(RxSchedulers.<User>compose())
+                .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<User>() {
+                .subscribe(new BaseObserver<HttpResponse<User>>() {
                     @Override
-                    public void onNext(User user) {
-                        view.loginSuccess(user);
+                    public void onNext(HttpResponse<User> response) {
+                        view.loginSuccess(response.getData());
                     }
                 });
     }
