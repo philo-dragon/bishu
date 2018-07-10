@@ -1,6 +1,7 @@
 package com.pfl.common.utils;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -56,8 +58,17 @@ public class PostParamsInterceptor implements Interceptor {
                 root.put(formBody.name(i), formBody.value(i));
             }
 
+            HttpUrl url = newRequest.build().url();
+
+            String sign = "";
+
+            if (ModuleUserRouteService.getUserInfo() != null) {
+                sign = EncryptUtils.encryptMD5ToString(ModuleUserRouteService.getUserInfo().getToken() + "_" +
+                        url.toString().replace(BaseUrlManager.getBaseUrl() + "app/api/" + BaseUrlManager.API_VERSION, "")).toLowerCase();
+            }
+
             root.put("uid", user == null ? "" : user.getUid());
-            root.put("sign", "");
+            root.put("sign", sign);//sign=md5("token_/configuraion")
             root.put("request_id", request_id);//每个请求唯一,可用imei-mac-timestamp生成的md5作为request_id
             root.put("req_from", "Android");
             root.put("req_ver", "1");
@@ -68,7 +79,7 @@ public class PostParamsInterceptor implements Interceptor {
             minfoData.put("dist", "umeng");
             minfoData.put("imei", PhoneUtils.getIMEI());
             minfoData.put("mac_addr", DeviceUtils.getMacAddress());
-            minfoData.put("network", NetworkUtils.getNetworkType());
+            minfoData.put("network", getNetWork());
             minfoData.put("screen_width", ScreenUtils.getScreenWidth());
             minfoData.put("screen_height", ScreenUtils.getScreenHeight());
             minfoData.put("device_brand", getDeviceBrand());
@@ -93,5 +104,31 @@ public class PostParamsInterceptor implements Interceptor {
      */
     public static String getDeviceBrand() {
         return android.os.Build.BRAND;
+    }
+
+    /**
+     * 取值{-1,0,2,3,4} 分别表示{无法取到网络状态，wifi,2G,3G,4G} |
+     * <p>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_WIFI   } </li>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_4G     } </li>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_3G     } </li>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_2G     } </li>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_UNKNOWN} </li>
+     * <li>{@link NetworkUtils.NetworkType#NETWORK_NO     } </li>
+     *
+     * @return
+     */
+    private String getNetWork() {
+        if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_WIFI) {
+            return "4";
+        } else if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_4G) {
+            return "3";
+        } else if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_3G) {
+            return "2";
+        } else if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_2G) {
+            return "0";
+        } else {
+            return "-1";
+        }
     }
 }
