@@ -8,7 +8,6 @@ import java.util.List;
 
 public class AppConfiguration {
 
-
     private int force_update;
     private Version top_version;
     private Oss oss;

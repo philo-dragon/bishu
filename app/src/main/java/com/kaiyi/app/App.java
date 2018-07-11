@@ -1,10 +1,12 @@
 package com.kaiyi.app;
 
+import com.kaiyi.app.constant.ConfigurationManager;
 import com.pfl.common.base.BaseApplication;
 import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.service.ModuleAppConfigurationRouteService;
 import com.pfl.common.utils.BaseObserver;
 
 /**
@@ -36,6 +38,7 @@ public class App extends BaseApplication {
                 .subscribe(new BaseObserver<HttpResponse<AppConfiguration>>() {
                     @Override
                     public void onSuccess(HttpResponse<AppConfiguration> response) {
+                        ConfigurationManager.getInstance().setAppConfiguration(response.getData());
                     }
                 });
 
