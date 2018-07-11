@@ -29,7 +29,7 @@ public class IntelligentHardwareViewModel {
 
     public void getDevices(String uid) {
         service
-                .getDevices(uid)
+                .getDevices("get", uid)
                 .compose(RxSchedulers.<HttpResponse<List<Device>>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<List<Device>>>() {
@@ -42,7 +42,7 @@ public class IntelligentHardwareViewModel {
 
     public void addDevice(String imei, String type) {
         service
-                .addDevice(imei, type)
+                .addDevice("post", imei, type)
                 .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {

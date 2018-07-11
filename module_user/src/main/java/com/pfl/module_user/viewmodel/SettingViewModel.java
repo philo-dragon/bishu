@@ -28,7 +28,7 @@ public class SettingViewModel {
 
     public void requestData() {
         service
-                .getToken("client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
+                .getToken("post", "client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
                 .compose(RxSchedulers.<HttpResponse<AccessToken>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
@@ -41,7 +41,7 @@ public class SettingViewModel {
 
     public void logOut(String uid) {
         service
-                .loginOut(uid)
+                .loginOut("delete", uid)
                 .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {

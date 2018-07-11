@@ -59,7 +59,7 @@ public class FindViewModel {
 
       /*  RetrofitFactory.getInstance()
                 .getProxy(RetrofitService.class, service, service)
-                .find()
+                .find("get")
                 .compose(RxSchedulers.<FindBean>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<FindBean>() {

@@ -27,7 +27,7 @@ public class UploadCarLicenceResultViewModel {
 
     public void getIdentity(String uid) {
         service
-                .getCarLicence(uid)
+                .getCarLicence("get",uid)
                 .compose(RxSchedulers.<HttpResponse<CarLicence>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<CarLicence>>() {

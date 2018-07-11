@@ -14,37 +14,10 @@ public class StorageToken {
      'Security':'CAES+wMIARKAxxxxxx',
      'Expiration':234134,*/
 
-    private String endPoint;
-    private String bucketName;
-    private String callbackUrl;
     private String AccessKeyId;
     private String AccessKeySecret;
     private String Security;
     private int Expiration;
-
-    public String getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(String endPoint) {
-        this.endPoint = endPoint;
-    }
-
-    public String getBucketName() {
-        return bucketName;
-    }
-
-    public void setBucketName(String bucketName) {
-        this.bucketName = bucketName;
-    }
-
-    public String getCallbackUrl() {
-        return callbackUrl;
-    }
-
-    public void setCallbackUrl(String callbackUrl) {
-        this.callbackUrl = callbackUrl;
-    }
 
     public String getAccessKeyId() {
         return AccessKeyId;

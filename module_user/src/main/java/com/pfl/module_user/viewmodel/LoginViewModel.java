@@ -27,7 +27,7 @@ public class LoginViewModel {
 
     public void findUser(String mobile) {
         service
-                .findUser(mobile)
+                .findUser("get",mobile)
                 .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<User>>() {
@@ -45,7 +45,7 @@ public class LoginViewModel {
 
     public void requestData(String mobile, String pwd) {
         service
-                .doLogin(mobile, pwd)
+                .doLogin("post",mobile, pwd)
                 .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<User>>() {

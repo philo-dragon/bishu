@@ -27,7 +27,7 @@ public class UploadIndentityViewModel {
 
     public void getIdentity(String uid) {
         service
-                .getIdentity(uid)
+                .getIdentity("get",uid)
                 .compose(RxSchedulers.<HttpResponse<UserIndentity>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<UserIndentity>>() {

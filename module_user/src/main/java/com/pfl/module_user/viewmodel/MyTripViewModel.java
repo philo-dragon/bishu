@@ -39,7 +39,7 @@ public class MyTripViewModel {
         view.onSuccess(getData());
 
         service
-                .myTrip(String.valueOf(page), String.valueOf(pageSize))
+                .myTrip("get", String.valueOf(page), String.valueOf(pageSize))
                 .compose(RxSchedulers.<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>() {

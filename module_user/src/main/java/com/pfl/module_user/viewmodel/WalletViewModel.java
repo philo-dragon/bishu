@@ -1,14 +1,19 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.base.MultiTypeAdapter;
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.http.RetrofitService;
+import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.BR;
 import com.pfl.module_user.R;
 import com.pfl.module_user.view.WalletView;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rocky on 2018/4/9.
@@ -78,15 +83,15 @@ public class WalletViewModel {
 
         view.onSuccess(scoreLogs);
 
-       /* RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
-                .score_log("282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<List<ScoreLog>>compose())
+        /*service
+                .score_log("get")
+                .compose(RxSchedulers.<HttpResponse<List<ScoreLog>>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<List<ScoreLog>>() {
+                .subscribe(new BaseObserver<HttpResponse<List<ScoreLog>>>() {
                     @Override
-                    public void onSuccess(List<ScoreLog> scoreLogs) {
-                        view.onSuccess(scoreLogs);
+                    public void onSuccess(HttpResponse<List<ScoreLog>> scoreLogs) {
+                        List<ScoreLog> data = scoreLogs.getData();
+                        view.onSuccess(data);
                     }
                 });*/
     }

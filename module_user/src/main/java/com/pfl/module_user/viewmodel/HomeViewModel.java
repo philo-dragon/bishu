@@ -1,10 +1,14 @@
 package com.pfl.module_user.viewmodel;
 
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.http.RetrofitService;
+import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.utils.BaseObserver;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.view.HomeView;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,21 +30,20 @@ public class HomeViewModel {
     }
 
     public void requestData() {
-        Score score = new Score();
+      /*  Score score = new Score();
         score.setScore("11110000");
         score.setScore_add_yesterday("5000");
-        view.onSuccess(score);
-       /* RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
-                .score()
-                .compose(RxSchedulers.<Score>compose())
+        view.onSuccess(score);*/
+        service
+                .score("get")
+                .compose(RxSchedulers.<HttpResponse<Score>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<Score>() {
+                .subscribe(new BaseObserver<HttpResponse<Score>>() {
                     @Override
-                    public void onSuccess(Score score) {
-                        view.onSuccess(score);
+                    public void onSuccess(HttpResponse<Score> response) {
+                        view.onSuccess(response.getData());
                     }
-                });*/
+                });
     }
 
     public void goWallet(String score) {

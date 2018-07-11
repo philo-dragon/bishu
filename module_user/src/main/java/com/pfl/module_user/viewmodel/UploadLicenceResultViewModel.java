@@ -27,7 +27,7 @@ public class UploadLicenceResultViewModel {
 
     public void getIdentity(String uid) {
         service
-                .getLicence(uid)
+                .getLicence("get",uid)
                 .compose(RxSchedulers.<HttpResponse<UserLicence>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<UserLicence>>() {

@@ -28,12 +28,12 @@ public class RegistViewModel {
 
     public void sendSMS(String mobile) {
         service
-                .sendSMSCode(mobile)
+                .sendSMSCode("post", mobile)
                 .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onSuccess(HttpResponse<Object> user) {
+                    public void onSuccess(HttpResponse<Object> response) {
 
                     }
                 });
@@ -41,21 +41,26 @@ public class RegistViewModel {
 
     public void verifySMS(String mobile, String verify_code) {
         service
-                .checkSMSCode(mobile, verify_code)
+                .checkSMSCode("get", mobile, verify_code)
                 .compose(RxSchedulers.<HttpResponse<VerifySMSResult>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<VerifySMSResult>>() {
                     @Override
                     public void onSuccess(HttpResponse<VerifySMSResult> result) {
+                        view.smsVerifyResult(true);
+                    }
 
-
+                    @Override
+                    public void onFail(HttpResponse<VerifySMSResult> response) {
+                        super.onFail(response);
+                        view.smsVerifyResult(false);
                     }
                 });
     }
 
     public void requestData(String mobile, String password, String invatinCode, String verify_code) {
         service
-                .doRegist(mobile, password, invatinCode, verify_code)
+                .doRegist("post", mobile, password, invatinCode, verify_code)
                 .compose(RxSchedulers.<HttpResponse<User>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<User>>() {

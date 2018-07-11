@@ -28,7 +28,7 @@ public class MyCenterViewModel {
 
     public void requestData(String uid) {
         service
-                .userInfo(uid)
+                .userInfo("put", uid)
                 .compose(RxSchedulers.<HttpResponse<UserInfo>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<UserInfo>>() {

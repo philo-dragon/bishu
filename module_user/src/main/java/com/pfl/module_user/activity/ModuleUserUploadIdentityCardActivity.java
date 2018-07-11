@@ -50,11 +50,15 @@ import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
+/**
+ * 上传身份证
+ */
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD)
 public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardBinding> implements UploadIndentityView, StorageTokenView, View.OnClickListener {
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
+    private StorageToken mStorageToken;
 
     @Inject
     UploadIndentityViewModel viewModel;
@@ -87,8 +91,10 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "id_card", ModuleUserUploadIdentityCardActivity.class.getClass().getSimpleName(), path);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
                     mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "id_card", ModuleUserUploadIdentityCardActivity.class.getClass().getSimpleName(), path);
                 }
             }
         });
@@ -103,7 +109,7 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
     @Override
     public void initData() {
-
+        tokenViewModel.getStorageToken();
     }
 
     @Override
@@ -187,6 +193,6 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
     @Override
     public void onStorageToken(StorageToken storageToken) {
-
+        this.mStorageToken = storageToken;
     }
 }

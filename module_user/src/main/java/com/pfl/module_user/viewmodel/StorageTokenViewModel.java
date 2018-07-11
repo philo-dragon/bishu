@@ -21,6 +21,8 @@ import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.service.ModuleAppConfigurationRouteService;
+import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.constant.UserInfoManager;
@@ -48,9 +50,9 @@ public class StorageTokenViewModel {
     }
 
 
-    public void getStorageToken(String resource, String req) {
+    public void getStorageToken() {
         service
-                .getStorageToken(resource, req)
+                .getStorageToken("get")
                 .compose(RxSchedulers.<HttpResponse<StorageToken>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<StorageToken>>() {
@@ -61,7 +63,32 @@ public class StorageTokenViewModel {
                 });
     }
 
-    public void asyncPutObjectFromLocalFile(StorageToken storageToken, String objectKey, String uploadFilePath) {
+    /* {
+             'bucket':'',
+             'object':'',
+             'etag':'',
+             'size':123,
+             'mimeType':'',
+             'imageInfo':{
+         'height':'',
+                 'width':'',
+                 'format':'',
+     },
+         'x:action': 'post',
+             'x:resource':'xxxx',
+             'x:id': 'xxxxxxx',
+             'x:seq':0,
+             'x:全局参数'
+     }*/
+
+    /**
+     * @param storageToken
+     * @param seq            表示文件的正反面，0表示正面，1表示反面，默认为0
+     * @param resource       文件类型，取值['id_card', 'driver_licence', 'car_licence']  |
+     * @param objectKey
+     * @param uploadFilePath 上传文件path
+     */
+    public void asyncPutObjectFromLocalFile(StorageToken storageToken, String seq, String resource, String objectKey, String uploadFilePath) {
 
         if (null == objectKey || objectKey.equals("")) {
             ToastUtils.showShort("objectKey is not null or empty");
@@ -76,7 +103,8 @@ public class StorageTokenViewModel {
         //获取OSSClient
         OSS oss = createOSS(storageToken);
         //<bucket_name>/<uid>/<图片名，例如id,driver_licence等>_<unix时间戳>.png
-        String uploadToOSSPath = storageToken.getBucketName()
+
+        String uploadToOSSPath = ModuleAppConfigurationRouteService.getConfiguration().getOss().getBucketName()
                 + File.separator
                 + UserInfoManager.getInstance().getUser().getUid()
                 + File.separator
@@ -88,7 +116,7 @@ public class StorageTokenViewModel {
         int[] widthAndHeight = getImageWidthAndHeightByPath(uploadFilePath);
         // 传入对应的上传回调参数
         HashMap<String, String> callbackParam = new HashMap<>();
-        callbackParam.put("callbackUrl", storageToken.getCallbackUrl());
+        callbackParam.put("callbackUrl", ModuleAppConfigurationRouteService.getConfiguration().getOss().getCallbackUrl());
         //callbackBody可以自定义传入的信息
         //"callbackBody":"bucket=${bucket}&object=${object}&etag=${etag}&size=${size}&mimeType=${mimeType}&imageInfo.height=${imageInfo.height}&imageInfo.width=${imageInfo.width}&imageInfo.format=${imageInfo.format}&my_var=${x:my_var}"
         callbackParam.put("callbackBody", "filename=${" + uploadToOSSPath + "}" +
@@ -101,11 +129,14 @@ public class StorageTokenViewModel {
         callbackParam.put("callbackBodyType", "application/json");
         put.setCallbackParam(callbackParam);
 
-       /* // 传入自定义参数 用户自定义参数的Key一定要以x:开头
+        // 传入自定义参数 用户自定义参数的Key一定要以x:开头
         HashMap<String, String> callbackVars = new HashMap<>();
-        callbackVars.put("x:uid", "uid");
-        callbackVars.put("x:imageName", objectKey + "_" + System.currentTimeMillis() + ".jpg");
-        put.setCallbackVars(callbackVars);*/
+        callbackVars.put("x:action", "post");
+        callbackVars.put("x:id", ModuleUserRouteService.getUserInfo().getUid());
+        callbackVars.put("x:seq", seq);
+        callbackVars.put("x:resource", resource);
+        put.setCallbackVars(callbackVars);
+
 
         // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
@@ -150,7 +181,7 @@ public class StorageTokenViewModel {
         conf.setSocketTimeout(15 * 1000); // socket超时，默认15秒
         conf.setMaxConcurrentRequest(5); // 最大并发请求书，默认5个
         conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
-        return new OSSClient(App.getInstance(), storageToken.getEndPoint(), credentialProvider, conf);
+        return new OSSClient(App.getInstance(), ModuleAppConfigurationRouteService.getConfiguration().getOss().getEndPoint(), credentialProvider, conf);
     }
 
 

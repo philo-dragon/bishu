@@ -27,7 +27,7 @@ public class FeedbackViewModel {
     }
 
     public void feedback(String content) {
-        service.feedback(content)
+        service.feedback("post", content)
                 .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
