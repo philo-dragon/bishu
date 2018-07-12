@@ -67,7 +67,7 @@ public class CommonParamsInterceptor extends BaseCommonParamsInterceptor {
         //添加公共参数
         Map<String, String> commomParamsMap = new HashMap<>();
         String request_id = EncryptUtils.encryptMD5ToString(getIMEI() + "-" + DeviceUtils.getMacAddress() + "-0" + System.currentTimeMillis());
-        User user = ModuleUserRouteService.getUserInfo();
+        User user = ModuleUserRouteService.getUser();
         commomParamsMap.put("uid", user == null ? "" : user.getUid());
         commomParamsMap.put("sign", "");
         commomParamsMap.put("request_id", request_id);//每个请求唯一,可用imei-mac-timestamp生成的md5作为request_id

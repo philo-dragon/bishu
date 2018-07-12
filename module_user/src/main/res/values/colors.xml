@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="module_user_wallet_add_score">#3DC9C0</color>
-    <color name="module_user_wallet_exchange_score">#FF9800</color>
+    <color name="module_user_wallet_add_score">#FF3DC9C0</color>
+    <color name="module_user_wallet_exchange_score">#FFFF9800</color>
+
+    <color name="module_user_mine_verified">#FFF5A623</color>
+    <color name="module_user_mine_unverified">#FF1DBDAA</color>
 
 </resources>

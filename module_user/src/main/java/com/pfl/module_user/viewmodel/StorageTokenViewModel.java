@@ -70,7 +70,7 @@ public class StorageTokenViewModel {
              'size':123,
              'mimeType':'',
              'imageInfo':{
-         'height':'',
+                 'height':'',
                  'width':'',
                  'format':'',
      },
@@ -85,46 +85,44 @@ public class StorageTokenViewModel {
      * @param storageToken
      * @param seq            表示文件的正反面，0表示正面，1表示反面，默认为0
      * @param resource       文件类型，取值['id_card', 'driver_licence', 'car_licence']  |
-     * @param objectKey
      * @param uploadFilePath 上传文件path
      */
-    public void asyncPutObjectFromLocalFile(StorageToken storageToken, String seq, String resource, String objectKey, String uploadFilePath) {
+    public void asyncPutObjectFromLocalFile(StorageToken storageToken, String seq, String resource, String uploadFilePath) {
 
-        if (null == objectKey || objectKey.equals("")) {
-            ToastUtils.showShort("objectKey is not null or empty");
-            return;
-        }
 
         File file = new File(uploadFilePath);
         if (!file.exists()) {
             ToastUtils.showShort("图片不存在");
             return;
         }
+        String bucketName = ModuleAppConfigurationRouteService.getConfiguration().getOss().getBucketName();
         //获取OSSClient
         OSS oss = createOSS(storageToken);
-        //<bucket_name>/<uid>/<图片名，例如id,driver_licence等>_<unix时间戳>.png
-
-        String uploadToOSSPath = ModuleAppConfigurationRouteService.getConfiguration().getOss().getBucketName()
+        //图片存储位置为<bucket>下的<object>, object命名规则 '<uid>/<resource>_<unix时间戳>.png'
+        String uploadToOSSPath = bucketName
                 + File.separator
                 + UserInfoManager.getInstance().getUser().getUid()
                 + File.separator
-                + objectKey
+                + resource
+                + "_"
                 + System.currentTimeMillis()
-                + "jpg";
+                + ".png";
         // 构造上传请求
-        PutObjectRequest put = new PutObjectRequest(uploadToOSSPath, objectKey, uploadFilePath);
+        PutObjectRequest put = new PutObjectRequest(bucketName, uploadToOSSPath, uploadFilePath);
         int[] widthAndHeight = getImageWidthAndHeightByPath(uploadFilePath);
         // 传入对应的上传回调参数
         HashMap<String, String> callbackParam = new HashMap<>();
         callbackParam.put("callbackUrl", ModuleAppConfigurationRouteService.getConfiguration().getOss().getCallbackUrl());
         //callbackBody可以自定义传入的信息
         //"callbackBody":"bucket=${bucket}&object=${object}&etag=${etag}&size=${size}&mimeType=${mimeType}&imageInfo.height=${imageInfo.height}&imageInfo.width=${imageInfo.width}&imageInfo.format=${imageInfo.format}&my_var=${x:my_var}"
-        callbackParam.put("callbackBody", "filename=${" + uploadToOSSPath + "}" +
-                "&size=${" + file.length() + "}" +
-                "&mimeType=${image/jpeg}" +
-                "&imageInfo.width=${" + widthAndHeight[0] + "}" +
-                "&imageInfo.height=${" + widthAndHeight[1] + "}" +
-                "&imageInfo.format=${jpg}"
+        callbackParam.put("callbackBody",
+                "filename=${" + uploadToOSSPath + "}" +
+                        "&bucket=${" + bucketName + "}" +
+                        "&size=${" + file.length() + "}" +
+                        "&mimeType=${image/png}" +
+                        "&imageInfo.width=${" + widthAndHeight[0] + "}" +
+                        "&imageInfo.height=${" + widthAndHeight[1] + "}" +
+                        "&imageInfo.format=${png}"
         );
         callbackParam.put("callbackBodyType", "application/json");
         put.setCallbackParam(callbackParam);
@@ -132,7 +130,7 @@ public class StorageTokenViewModel {
         // 传入自定义参数 用户自定义参数的Key一定要以x:开头
         HashMap<String, String> callbackVars = new HashMap<>();
         callbackVars.put("x:action", "post");
-        callbackVars.put("x:id", ModuleUserRouteService.getUserInfo().getUid());
+        callbackVars.put("x:id", ModuleUserRouteService.getUser().getUid());
         callbackVars.put("x:seq", seq);
         callbackVars.put("x:resource", resource);
         put.setCallbackVars(callbackVars);

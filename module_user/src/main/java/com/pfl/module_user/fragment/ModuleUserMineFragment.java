@@ -4,13 +4,11 @@ package com.pfl.module_user.fragment;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.pfl.common.base.BaseFragment;
 import com.pfl.common.base.BaseLazyFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.imageloader.glide.ImageConfigImpl;
-import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
@@ -95,7 +93,7 @@ public class ModuleUserMineFragment extends BaseLazyFragment<ModuleUserFragmentM
 
     @Override
     public void onSuccess(UserInfo userInfo) {
-
+        UserInfoManager.getInstance().setUserInfo(userInfo);
         imageLoader.loadImage(mContext, ImageConfigImpl
                 .builder().url(userInfo.getAvatar())
                 .imageView(mBinding.moduleUserImgPhoto)

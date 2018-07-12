@@ -88,7 +88,7 @@ public class SelectPictureHelper {
         this.tag = resid;
         File parentFile = getParentFile();
         //用于保存调用相机拍照后所生成的文件
-        tempFile = new File(parentFile, System.currentTimeMillis() + ".jpg");
+        tempFile = new File(parentFile, System.currentTimeMillis() + ".png");
         //跳转到调用系统相机
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //判断版本
@@ -151,7 +151,7 @@ public class SelectPictureHelper {
         intent.putExtra("outputY", outputY);
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
         File parentFile = getParentFile();
-        uritempFile = Uri.parse("file://" + "/" + parentFile.getAbsolutePath() + "/" + fileName + ".jpg");
+        uritempFile = Uri.parse("file://" + "/" + parentFile.getAbsolutePath() + "/" + fileName + ".png");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         mActivity.startActivityForResult(intent, CROP_REQUEST_CODE);
@@ -198,7 +198,7 @@ public class SelectPictureHelper {
 
     public String saveImage(String name, Bitmap bmp) {
         File parentFile = getParentFile();
-        String fileName = name + ".jpg";
+        String fileName = name + ".png";
         File file = new File(parentFile, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);

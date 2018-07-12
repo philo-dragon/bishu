@@ -2,6 +2,7 @@ package com.pfl.common.service;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.pfl.common.entity.module_user.User;
+import com.pfl.common.entity.module_user.UserInfo;
 
 /**
  * Created by Administrator on 2017/12/19 0019.
@@ -9,7 +10,17 @@ import com.pfl.common.entity.module_user.User;
 
 public class ModuleUserRouteService {
 
-    public static User getUserInfo() {
+    public static User getUser() {
+        IUserModeleService userModeleService = ARouter.getInstance().navigation(IUserModeleService.class);
+
+        if (null != userModeleService) {
+            return userModeleService.getUser();
+        }
+
+        return null;
+    }
+
+    public static UserInfo getUserInfo() {
         IUserModeleService userModeleService = ARouter.getInstance().navigation(IUserModeleService.class);
 
         if (null != userModeleService) {

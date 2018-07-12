@@ -25,14 +25,18 @@ public class InitialValueViewModel {
         this.view = view;
     }
 
-    public void requestData() {
+    /**
+     * @param nickname
+     * @param gender   取值范围[0, 1] 分别表示['女', '男']
+     */
+    public void requestData(String nickname, String gender) {
         service
-                .getToken("post", "client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<HttpResponse<AccessToken>>compose())
+                .updateUserNameAndGender("put", nickname, gender)
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onSuccess(HttpResponse<AccessToken> accessToken) {
+                    public void onSuccess(HttpResponse<Object> accessToken) {
                         view.onSuccess();
                     }
                 });

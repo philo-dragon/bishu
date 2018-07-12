@@ -43,6 +43,7 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/module_user_tv_real_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -50,8 +51,9 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text="未填写"
+                    android:hint="未填写"
                     android:textColor="#63727D"
+                    android:textColorHint="#63727D"
                     android:textSize="15dp" />
 
             </RelativeLayout>
@@ -87,8 +89,9 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text="未选择"
+                    android:hint="未选择"
                     android:textColor="#63727D"
+                    android:textColorHint="#63727D"
                     android:textSize="15dp" />
 
             </RelativeLayout>

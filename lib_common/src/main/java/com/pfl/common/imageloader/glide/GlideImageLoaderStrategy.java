@@ -51,7 +51,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     public void loadImage(Context ctx, final ImageConfigImpl config) {
         if (ctx == null) throw new NullPointerException("Context is required");
         if (config == null) throw new NullPointerException("ImageConfigImpl is required");
-        if (TextUtils.isEmpty(config.getUrl())) throw new NullPointerException("Url is required");
+        //if (TextUtils.isEmpty(config.getUrl())) throw new NullPointerException("Url is required");
         if (config.getImageView() == null && config.getLoadCallback() == null) throw new NullPointerException("Imageview or loadCallback is required not concurrence is null");
 
 

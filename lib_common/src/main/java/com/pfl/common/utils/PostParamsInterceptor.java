@@ -43,7 +43,7 @@ public class PostParamsInterceptor implements Interceptor {
 
         //添加公共参数
         String request_id = EncryptUtils.encryptMD5ToString(getIMEI() + "-" + DeviceUtils.getMacAddress() + "-" + System.currentTimeMillis());
-        User user = ModuleUserRouteService.getUserInfo();
+        User user = ModuleUserRouteService.getUser();
         Location location = ModuleAppLocationRouteService.getLocation();
 
         JSONObject root = new JSONObject();
@@ -62,8 +62,8 @@ public class PostParamsInterceptor implements Interceptor {
 
             String sign = "";
 
-            if (ModuleUserRouteService.getUserInfo() != null) {
-                sign = EncryptUtils.encryptMD5ToString(ModuleUserRouteService.getUserInfo().getToken() + "_" +
+            if (ModuleUserRouteService.getUser() != null) {
+                sign = EncryptUtils.encryptMD5ToString(ModuleUserRouteService.getUser().getToken() + "_" +
                         url.toString().replace(BaseUrlManager.getBaseUrl() + "app/api/" + BaseUrlManager.API_VERSION, "")).toLowerCase();
             }
 

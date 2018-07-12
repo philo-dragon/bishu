@@ -14,6 +14,7 @@
             layout="@layout/common_databinding_toolbar_layout" />
 
         <EditText
+            android:id="@+id/module_user_et_nick_name"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="20dp"

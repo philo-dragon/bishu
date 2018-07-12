@@ -5,6 +5,7 @@ import android.os.UserManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.entity.module_user.User;
+import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.service.IUserModeleService;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.constant.UserInfoManager;
@@ -21,8 +22,13 @@ import com.pfl.module_user.constant.UserInfoManager;
 public class UserModuleService implements IUserModeleService {
 
     @Override
-    public User getUserInfo() {
+    public User getUser() {
         return UserInfoManager.getInstance().getUser();
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+        return UserInfoManager.getInstance().getUserInfo();
     }
 
     @Override

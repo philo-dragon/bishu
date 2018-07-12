@@ -166,6 +166,17 @@ public interface RetrofitService {
                                                 @Field("uid") String uid);
 
     /**
+     * 获取用户信息(个人中心)
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/info")
+    Observable<HttpResponse<Object>> updateUserNameAndGender(@Field("action") String action,
+                                                             @Field("nickname") String nickname,
+                                                             @Field("gender") String gender);
+
+    /**
      * 用户反馈
      *
      * @return

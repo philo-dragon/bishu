@@ -1,8 +1,11 @@
 package com.pfl.module_user.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.StringUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.base.BaseEvent;
+import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityInitialValueBinding;
@@ -37,5 +40,17 @@ public class ModuleUserInputNickNameActivity extends BaseActivity<ModuleUserActi
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public void finish() {
+        String trim = mBinding.moduleUserEtNickName.getText().toString().trim();
+        if (!StringUtils.isEmpty(trim)) {
+            BaseEvent<String> event = new BaseEvent<>();
+            event.setFrom(ModuleUserInputNickNameActivity.class.getSimpleName());
+            event.setT(trim);
+            EventBusUtil.postMessage(event);
+        }
+        super.finish();
     }
 }

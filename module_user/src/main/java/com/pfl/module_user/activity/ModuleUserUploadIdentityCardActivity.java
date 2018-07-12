@@ -91,10 +91,10 @@ public class ModuleUserUploadIdentityCardActivity extends BaseActivity<ModuleUse
 
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
-                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "id_card", ModuleUserUploadIdentityCardActivity.class.getClass().getSimpleName(), path);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "id_card", path);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
                     mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
-                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "id_card", ModuleUserUploadIdentityCardActivity.class.getClass().getSimpleName(), path);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "id_card", path);
                 }
             }
         });
