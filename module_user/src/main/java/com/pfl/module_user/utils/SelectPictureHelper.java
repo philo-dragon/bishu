@@ -103,7 +103,7 @@ public class SelectPictureHelper {
     }
 
     @NonNull
-    private File getParentFile() {
+    public static File getParentFile() {
         File parentFile = new File(Environment.getExternalStorageDirectory().getPath() + "/bishu");
         if (!parentFile.exists()) {
             parentFile.mkdirs();

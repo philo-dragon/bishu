@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.pfl.common.base.BaseLazyFragment;
+import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.http.RxSchedulers;
@@ -39,7 +39,7 @@ import static android.widget.LinearLayout.VERTICAL;
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
-public class ModuleUserMineTripFragment extends BaseLazyFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
+public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
 
     private MultiTypeAdapter multiTypeAdapter;
     private CommonHeader commonHeader;
@@ -120,7 +120,8 @@ public class ModuleUserMineTripFragment extends BaseLazyFragment<ModuleUserFragm
     }
 
     @Override
-    public void onFirstUserVisible() {
+    public void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
         setRecyclerView();
         setRefreshView();
         mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);

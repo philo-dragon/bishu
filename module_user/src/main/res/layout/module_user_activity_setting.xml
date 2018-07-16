@@ -43,12 +43,12 @@
                 android:layout_height="34dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="16dp"
+                android:checked="true"
+                android:clickable="false"
                 android:textOff=" "
                 android:textOn=" "
                 android:thumb="@drawable/thumb"
-                android:track="@drawable/track"
-                android:checked="true"
-                android:clickable="false" />
+                android:track="@drawable/track" />
 
 
         </android.support.v7.widget.CardView>
@@ -140,12 +140,13 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/module_user_tv_cache_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="15dp"
-                android:text="100MB"
-                android:textColor="#6A7E9A" />
+                android:textColor="#6A7E9A"
+                tools:text="100MB" />
 
         </android.support.v7.widget.CardView>
 

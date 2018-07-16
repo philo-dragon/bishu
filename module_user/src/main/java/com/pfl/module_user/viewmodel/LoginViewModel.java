@@ -53,6 +53,15 @@ public class LoginViewModel {
                     public void onSuccess(HttpResponse<User> response) {
                         view.loginSuccess(response.getData());
                     }
+
+                    @Override
+                    public void onFail(HttpResponse<User> response) {
+                        switch (response.getCode()) {
+                            case 403:
+                                view.loginFailed();
+                                break;
+                        }
+                    }
                 });
     }
 }

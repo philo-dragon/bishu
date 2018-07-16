@@ -8,7 +8,9 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.App;
+import com.pfl.common.utils.DataCleanManager;
 import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
@@ -16,10 +18,21 @@ import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivitySettingBinding;
 import com.pfl.module_user.di.module_setting.DaggerSettingComponent;
 import com.pfl.module_user.di.module_setting.SettingModule;
+import com.pfl.module_user.utils.SelectPictureHelper;
 import com.pfl.module_user.view.SettingView;
 import com.pfl.module_user.viewmodel.SettingViewModel;
 
+import java.io.File;
+import java.sql.DatabaseMetaData;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * 设置界面
@@ -57,6 +70,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
     @Override
     public void setToolBar() {
         setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
+        getCacheSize();
     }
 
     @Override
@@ -66,7 +80,6 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
     @Override
     public void onSuccess(String token) {
-
         Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
@@ -84,7 +97,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
             DialogManager.showTwoBtnDialog(mContext, "确定要清空缓存吗？", new DialogManager.SimpleDialogClickListener() {
                 @Override
                 public void onPositive() {
-
+                    clearCache();
                 }
             });
         } else if (i == R.id.module_user_cv_exit_login) {
@@ -115,7 +128,49 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void getCacheSize() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+
+                long cacheSize = DataCleanManager.getFolderSize(getExternalFilesDir(null)) +
+                        DataCleanManager.getFolderSize(getExternalCacheDir()) +
+                        DataCleanManager.getFolderSize(SelectPictureHelper.getParentFile());
+                e.onNext(DataCleanManager.getFormatSize(cacheSize));
+
+            }
+        }).compose(RxSchedulers.<String>noCheckNetworkCompose())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String cacheSize) throws Exception {
+                        mBinding.moduleUserTvCacheSize.setText(cacheSize);
+                    }
+                });
+    }
+
+    public void clearCache() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+
+                DataCleanManager.cleanApplicationData(App.getInstance(), DataCleanManager.getCacheSize(getCacheDir()));
+
+                DataCleanManager.deleteFolderFile(getExternalFilesDir(null).getAbsolutePath(), true);
+                DataCleanManager.deleteFolderFile(getExternalCacheDir().getAbsolutePath(), true);
+                DataCleanManager.deleteFolderFile(SelectPictureHelper.getParentFile().getAbsolutePath(), true);
+
+                e.onNext("0.0KB");
+
+            }
+        }).compose(RxSchedulers.<String>noCheckNetworkCompose())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String cacheSize) throws Exception {
+                        mBinding.moduleUserTvCacheSize.setText(cacheSize);
+                    }
+                });
     }
 
 }

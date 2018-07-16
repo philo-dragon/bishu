@@ -45,6 +45,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
+    private StorageToken mStorageToken;
 
     @Inject
     UploadLicenceResultViewModel viewModel;
@@ -79,6 +80,10 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
                     mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
                     mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
+                }  if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "driver_licence", path);
+                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "driver_licence", path);
                 }
             }
         });
@@ -174,6 +179,6 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
 
     @Override
     public void onStorageToken(StorageToken storageToken) {
-
+        mStorageToken = storageToken;
     }
 }

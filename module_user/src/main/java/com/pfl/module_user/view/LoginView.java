@@ -19,5 +19,4 @@ public interface LoginView {
 
     void loginFailed();
 
-    void onFail(int errorCode);
 }

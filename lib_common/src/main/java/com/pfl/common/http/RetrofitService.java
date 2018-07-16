@@ -139,7 +139,7 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/score_log")
-    Observable<HttpResponse<List<ScoreLog>>> score_log(@Field("action") String action);
+    Observable<HttpResponse<ScoreLog>> score_log(@Field("action") String action);
 
 
     /**

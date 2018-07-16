@@ -36,8 +36,6 @@ public class MyTripViewModel {
 
     public void requestData() {
 
-        view.onSuccess(getData());
-
         service
                 .myTrip("get", String.valueOf(page), String.valueOf(pageSize))
                 .compose(RxSchedulers.<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>compose())
@@ -45,7 +43,7 @@ public class MyTripViewModel {
                 .subscribe(new BaseObserver<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>() {
                     @Override
                     public void onNext(HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>> accessToken) {
-                        //view.onSuccess(getData());
+                        view.onSuccess(getData());
                     }
                 });
     }

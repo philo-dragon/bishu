@@ -1,8 +1,7 @@
 package com.pfl.module_user.fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.pfl.common.base.BaseFragment;
-import com.pfl.common.base.BaseLazyFragment;
+import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.utils.RouteUtils;
@@ -19,7 +18,7 @@ import javax.inject.Inject;
  * 发现
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_FIND)
-public class ModuleUserFindFragment extends BaseLazyFragment<ModuleUserFragmentFindBinding> implements FindView {
+public class ModuleUserFindFragment extends LazyLoadBaseFragment<ModuleUserFragmentFindBinding> implements FindView {
 
 
     @Inject
@@ -51,7 +50,8 @@ public class ModuleUserFindFragment extends BaseLazyFragment<ModuleUserFragmentF
     }
 
     @Override
-    public void onFirstUserVisible() {
+    public void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
         viewModel.requestData();
     }
 

@@ -8,10 +8,14 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.pfl.common.base.BaseFragment;
+import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.base.BaseEvent;
 import com.pfl.common.entity.module_user.Score;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
+import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
@@ -21,13 +25,16 @@ import com.pfl.module_user.di.module_home.HomeModule;
 import com.pfl.module_user.view.HomeView;
 import com.pfl.module_user.viewmodel.HomeViewModel;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import javax.inject.Inject;
 
 /**
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_HOME)
-public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeBinding> implements HomeView {
+public class ModuleUserHomeFragment extends LazyLoadBaseFragment<ModuleUserFragmentHomeBinding> implements HomeView {
 
     private boolean isInit;
     @Inject
@@ -50,6 +57,7 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
 
     @Override
     public void initView() {
+        EventBusUtil.regist(this);
         setToolBar();
         mBinding.setViewModule(viewModel);
     }
@@ -68,25 +76,31 @@ public class ModuleUserHomeFragment extends BaseFragment<ModuleUserFragmentHomeB
     }
 
     @Override
-    public void initData() {
+    public void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
         viewModel.requestData();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onFragmentResume() {
+        super.onFragmentResume();
         if (!isInit) {
             isInit = true;
-            //AnimationManager.setAnimText(mBinding.moduleUserTvIntegral, 10000000);
             AnimationManager.rotateAnim(mBinding.moduleUserImgRotate, 10 * 1000);
         }
-
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        //AnimationManager.cancelAnim(mBinding.moduleUserImgRotate);
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBusUtil.unregist(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getEventBus(BaseEvent<User> event) {
+        if (event != null) {
+            viewModel.requestData();
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.base.BaseEvent;
+import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -51,6 +52,8 @@ public class ModuleUserInitialValueActivity extends BaseActivity<ModuleUserActiv
 
     @Override
     public void initView() {
+        mBinding.setUserInfo(ModuleUserRouteService.getUserInfo());
+
         RxClickUtil.RxClick(mBinding.moduleUserRlNickName, this);
         RxClickUtil.RxClick(mBinding.moduleUserRlGender, this);
         RxClickUtil.RxClick(mBinding.moduleUserCvCommit, this);

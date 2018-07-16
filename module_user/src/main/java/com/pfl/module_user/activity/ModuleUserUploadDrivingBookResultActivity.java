@@ -39,6 +39,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     private BaseBottomDialog uploadDialog;
     private SelectPictureHelper pictureHelper;
+    private StorageToken mStorageToken;
 
     @Inject
     UploadCarLicenceResultViewModel viewModel;
@@ -71,6 +72,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "car_licence", path);
                 }
             }
         });
@@ -152,6 +154,6 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     @Override
     public void onStorageToken(StorageToken storageToken) {
-
+        mStorageToken = storageToken;
     }
 }

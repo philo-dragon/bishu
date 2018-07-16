@@ -52,7 +52,9 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends RxFragment
         ARouter.getInstance().inject(this);
         componentInject(App.getInstance(BaseApplication.class).getAppComponent());
         initView();
-        initData();
+    }
+
+    public void initData() {
     }
 
     private boolean isSupportDataBinding() {

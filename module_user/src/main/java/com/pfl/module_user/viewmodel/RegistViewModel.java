@@ -58,7 +58,7 @@ public class RegistViewModel {
                 });
     }
 
-    public void requestData(String mobile, String password, String invatinCode, String verify_code) {
+    public void regist(String mobile, String password, String invatinCode, String verify_code) {
         service
                 .doRegist("post", mobile, password, invatinCode, verify_code)
                 .compose(RxSchedulers.<HttpResponse<User>>compose())

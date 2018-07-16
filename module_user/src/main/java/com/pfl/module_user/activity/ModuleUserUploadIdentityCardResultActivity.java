@@ -1,6 +1,7 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
+import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
@@ -18,6 +19,7 @@ import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBindi
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardResultBinding;
 import com.pfl.module_user.di.module_upload_identity_result.DaggerUploadIndentityResultComponent;
 import com.pfl.module_user.di.module_upload_identity_result.UploadIndentityResultModule;
+import com.pfl.module_user.utils.SelectPictureHelper;
 import com.pfl.module_user.view.StorageTokenView;
 import com.pfl.module_user.view.UploadIndentityResultView;
 import com.pfl.module_user.viewmodel.StorageTokenViewModel;
@@ -39,13 +41,15 @@ import me.weyye.hipermission.PermissionItem;
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT)
 public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<ModuleUserActivityUploadIdentityCardResultBinding> implements UploadIndentityResultView, StorageTokenView, View.OnClickListener {
 
-
+    private SelectPictureHelper pictureHelper;
+    private StorageToken mStorageToken;
     private BaseBottomDialog uploadDialog;
 
     @Inject
     UploadIndentityResultViewModel viewModel;
     @Inject
     StorageTokenViewModel tokenViewModel;
+
 
     @Override
     public int getContentView() {
@@ -66,6 +70,22 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void initView() {
+
+        pictureHelper = new SelectPictureHelper(this);
+        pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
+            @Override
+            public void onSelected(String path, Bitmap bitmap) {
+
+                if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
+                    //mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "id_card", path);
+                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    //mBinding.moduleUserImgUploadFileBackImg.setImageBitmap(bitmap);
+                    tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "id_card", path);
+                }
+            }
+        });
+
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
     }
@@ -138,6 +158,6 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void onStorageToken(StorageToken storageToken) {
-
+        mStorageToken = storageToken;
     }
 }

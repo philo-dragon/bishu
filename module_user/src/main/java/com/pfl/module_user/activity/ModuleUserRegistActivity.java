@@ -33,9 +33,9 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
     ImageLoader imageLoader;
     @Inject
     RegistViewModel viewModel;
-
     @Autowired
     String mobile;
+
     private String checkCode;
 
 
@@ -109,7 +109,7 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
             if (!StringUtils.isEmpty(password)
                     && password.length() >= 6
                     && password.length() <= 20) {
-                viewModel.requestData(mobile, password, invatinCode, checkCode);
+                viewModel.regist(mobile, password, invatinCode, checkCode);
             }
         } else if (id == R.id.module_user_btn_get_check_code) {
             mBinding.inRegistView1.moduleUserBtnGetCheckCode.onStart();

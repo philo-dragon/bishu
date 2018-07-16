@@ -15,6 +15,10 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+
 /**
  * Created by rocky on 2018/4/9.
  */
@@ -33,7 +37,7 @@ public class WalletViewModel {
 
     public void requestData() {
 
-        ArrayList<MultiTypeAdapter.IItem> scoreLogs = new ArrayList<>();
+       /* ArrayList<MultiTypeAdapter.IItem> scoreLogs = new ArrayList<>();
 
         ScoreLog scoreLog = new ScoreLog();
         scoreLog.setTitle("每日登录");
@@ -81,18 +85,36 @@ public class WalletViewModel {
         scoreLog.setVariableId(BR.item);
         scoreLogs.add(scoreLog);
 
-        view.onSuccess(scoreLogs);
+        view.onSuccess(scoreLogs);*/
 
-        /*service
+        service
                 .score_log("get")
-                .compose(RxSchedulers.<HttpResponse<List<ScoreLog>>>compose())
+                .compose(RxSchedulers.<HttpResponse<ScoreLog>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<List<ScoreLog>>>() {
+                .subscribe(new BaseObserver<HttpResponse<ScoreLog>>() {
                     @Override
-                    public void onSuccess(HttpResponse<List<ScoreLog>> scoreLogs) {
-                        List<ScoreLog> data = scoreLogs.getData();
-                        view.onSuccess(data);
+                    public void onSuccess(HttpResponse<ScoreLog> scoreLogs) {
+
+                        List<ScoreLog.Wallet> data = scoreLogs.getData().getList();
+
+                        Observable.fromIterable(data).map(new Function<ScoreLog.Wallet, MultiTypeAdapter.IItem>() {
+                            @Override
+                            public MultiTypeAdapter.IItem apply(ScoreLog.Wallet wallet) throws Exception {
+                                wallet.setType(wallet.getValue().startsWith("-") ? 1 : 0);
+                                wallet.setType(R.layout.module_user_item_my_wallet);
+                                wallet.setVariableId(BR.item);
+                                return wallet;
+                            }
+                        })
+                                .toList()
+                                .subscribe(new Consumer<List<MultiTypeAdapter.IItem>>() {
+                                    @Override
+                                    public void accept(List<MultiTypeAdapter.IItem> items) throws Exception {
+                                        view.onSuccess(items);
+                                    }
+                                });
+
                     }
-                });*/
+                });
     }
 }

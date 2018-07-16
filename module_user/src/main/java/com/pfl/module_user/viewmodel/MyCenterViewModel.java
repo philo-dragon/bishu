@@ -39,4 +39,12 @@ public class MyCenterViewModel {
                 });
     }
 
+    public static String replaceMiddlePhone(String mobile) {
+        if (mobile != null && mobile.length() == 11) {
+            String phoneNumber = mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+            return phoneNumber;
+        }
+        return "";
+    }
+
 }

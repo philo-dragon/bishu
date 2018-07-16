@@ -10,6 +10,7 @@ public class UserInfo {
 
     private String avatar;
     private String nickname;
+    private String mobile;
     private int gender;
     private int id_verified;
     private int car_verified;
@@ -29,6 +30,14 @@ public class UserInfo {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public int getGender() {
