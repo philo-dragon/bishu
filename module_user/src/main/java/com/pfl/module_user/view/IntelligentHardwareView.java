@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IntelligentHardwareView {
 
-    void onSuccess(List<Device> deviceList);
+    void onSuccess(List<Device.DeviceBean> deviceList);
 
     void onAddSuccess();
 

@@ -1,96 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="94dp"
+    android:background="@color/withe">
 
-    <data>
+    <TextView
+        android:id="@+id/module_user_tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:text="1111"
+        android:textColor="#ff1dbdaa"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <variable
-            name="item"
-            type="com.pfl.module_user.entity.MineTripBean" />
-    </data>
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="94dp"
-        android:background="@color/withe">
+    <ImageView
+        android:id="@+id/module_user_img_state"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/module_user_ic_sold_out"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/module_user_img_verticle_line"
+        android:layout_width="2dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/module_user_ic_find_dot_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/module_user_img_state" />
+
+
+    <TextView
+        android:id="@+id/module_user_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"
+        android:text="已售行程"
+        android:textColor="#ff1c2737"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/module_user_img_state"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/module_user_img_verticle_line"
+        app:layout_constraintLeft_toRightOf="@+id/module_user_img_state">
 
         <TextView
-            android:id="@+id/module_user_tv_money"
+            android:id="@+id/module_user_tv_time_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginTop="8dp"
-            android:text="@{item.money}"
-            android:textColor="#ff1dbdaa"
-            android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/module_user_img_state"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:src="@{item.type == 1 ? @drawable/module_user_ic_sold_out: @drawable/module_user_ic_for_sale}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/module_user_img_verticle_line"
-            android:layout_width="2dp"
-            android:layout_height="38dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/module_user_ic_find_dot_line"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/module_user_img_state" />
-
+            android:layout_below="@+id/module_user_tv_name"
+            android:text="1111"
+            android:textColor="#6A7E9A"
+            android:textSize="13dp" />
 
         <TextView
-            android:id="@+id/module_user_tv_name"
+            android:id="@+id/module_user_tv_time_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp"
-            android:text="@{item.name}"
-            android:textColor="#ff1c2737"
-            android:textSize="16dp"
-            app:layout_constraintLeft_toRightOf="@+id/module_user_img_state"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/module_user_img_verticle_line"
-            app:layout_constraintLeft_toRightOf="@+id/module_user_img_state">
-
-            <TextView
-                android:id="@+id/module_user_tv_time_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/module_user_tv_name"
-                android:text="@{item.startTime}"
-                android:textColor="#6A7E9A"
-                android:textSize="13dp" />
-
-            <TextView
-                android:id="@+id/module_user_tv_time_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/module_user_tv_name"
-                android:text="@{item.endTime}"
-                android:textColor="#6A7E9A"
-                android:textSize="13dp" />
-        </LinearLayout>
+            android:layout_below="@+id/module_user_tv_name"
+            android:text="1111"
+            android:textColor="#6A7E9A"
+            android:textSize="13dp" />
+    </LinearLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
-</layout>
+</android.support.constraint.ConstraintLayout>

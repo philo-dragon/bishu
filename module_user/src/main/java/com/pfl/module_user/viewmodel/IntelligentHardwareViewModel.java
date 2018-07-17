@@ -30,12 +30,12 @@ public class IntelligentHardwareViewModel {
     public void getDevices(String uid) {
         service
                 .getDevices("get", uid)
-                .compose(RxSchedulers.<HttpResponse<List<Device>>>compose())
+                .compose(RxSchedulers.<HttpResponse<Device>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<List<Device>>>() {
+                .subscribe(new BaseObserver<HttpResponse<Device>>() {
                     @Override
-                    public void onNext(HttpResponse<List<Device>> deviceList) {
-                        view.onSuccess(deviceList.getData());
+                    public void onNext(HttpResponse<Device> response) {
+                        view.onSuccess(response.getData().getList());
                     }
                 });
     }

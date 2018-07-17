@@ -1,9 +1,13 @@
 package com.pfl.module_user.viewmodel;
 
+import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.FindBean;
 import com.pfl.common.http.RetrofitService;
+import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.view.FindView;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
 
@@ -25,7 +29,7 @@ public class FindViewModel {
 
     public void requestData() {
 
-        FindBean findBean = new FindBean();
+       /* FindBean findBean = new FindBean();
 
         FindBean.Weather weather = new FindBean.Weather();
         weather.setDesc("晴天");
@@ -54,19 +58,18 @@ public class FindViewModel {
         car.setViolation(violation);
         findBean.setCar(car);
 
-        view.onSuccess(findBean);
+        view.onSuccess(findBean);*/
 
 
-      /*  RetrofitFactory.getInstance()
-                .getProxy(RetrofitService.class, service, service)
+        service
                 .find("get")
-                .compose(RxSchedulers.<FindBean>compose())
+                .compose(RxSchedulers.<HttpResponse<FindBean>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<FindBean>() {
+                .subscribe(new BaseObserver<HttpResponse<FindBean>>() {
                     @Override
-                    public void onSuccess(FindBean findBean) {
-                        view.onSuccess(findBean);
+                    public void onSuccess(HttpResponse<FindBean> response) {
+                        view.onSuccess(response.getData());
                     }
-                });*/
+                });
     }
 }

@@ -82,6 +82,8 @@ dependencies {
     api rootProject.ext.deps.glide
     annotationProcessor rootProject.ext.deps.glide_processor
 
+    api rootProject.ext.deps.adapter_helper
+
     //鬣狗快速开发库
     api rootProject.ext.deps.hyena
     api rootProject.ext.deps.UtilCode

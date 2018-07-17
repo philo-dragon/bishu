@@ -74,7 +74,7 @@ public class ModuleUserIntelligentHardwareListActivity extends BaseActivity<Modu
     }
 
     @Override
-    public void onSuccess(List<Device> deviceList) {
+    public void onSuccess(List<Device.DeviceBean> deviceList) {
 
     }
 

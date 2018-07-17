@@ -220,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12px"
-                        android:text='@{@string/module_user_str_jifen + findBean.car.violation.score_cost + @string/module_user_str_fen}'
+                        android:text='@{@string/module_user_str_jifen + findBean.car.violation.score_cost==null?"":"" + @string/module_user_str_fen}'
                         android:textColor="#ff63727d"
                         android:textSize="14sp" />
 
@@ -228,7 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12px"
-                        android:text='@{@string/module_user_str_fakuan + findBean.car.violation.money_cost + @string/module_user_str_yuan}'
+                        android:text='@{@string/module_user_str_fakuan + findBean.car.violation.money_cost==null?"":"" + @string/module_user_str_yuan}'
                         android:textColor="#ff63727d"
                         android:textSize="14sp" />
 

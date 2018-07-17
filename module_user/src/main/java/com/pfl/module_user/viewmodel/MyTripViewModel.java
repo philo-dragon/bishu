@@ -1,18 +1,14 @@
 package com.pfl.module_user.viewmodel;
 
-import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.entity.base.HttpResponse;
+import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
-import com.pfl.module_user.BR;
-import com.pfl.module_user.R;
-import com.pfl.module_user.entity.MineTripBean;
 import com.pfl.module_user.view.MyTripView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +21,7 @@ public class MyTripViewModel {
     private RetrofitService service;
     private MyTripView view;
 
-    private int page = 1;
+    private int page = 0;
     private int pageSize = 20;
 
     public MyTripViewModel(LifecycleProvider lifecycle, RetrofitService service, MyTripView view) {
@@ -34,35 +30,35 @@ public class MyTripViewModel {
         this.view = view;
     }
 
+    public void refreshData() {
+        page = 0;
+        requestData();
+    }
+
+    public void loadmoreData() {
+        page++;
+        requestData();
+    }
+
     public void requestData() {
 
         service
                 .myTrip("get", String.valueOf(page), String.valueOf(pageSize))
-                .compose(RxSchedulers.<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>compose())
+                .compose(RxSchedulers.<HttpResponse<MineTrip>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>>>() {
+                .subscribe(new BaseObserver<HttpResponse<MineTrip>>() {
                     @Override
-                    public void onNext(HttpResponse<List<com.pfl.common.entity.module_user.MineTripBean>> accessToken) {
-                        view.onSuccess(getData());
+                    public void onNext(HttpResponse<MineTrip> response) {
+                        List<MineTrip.MineTripBean> data = response.getData().getList();
+                        view.onSuccess(page == 0, data);
+                        if (page == 0) {
+                            view.onRefreshComplete(response.getData().getHas_next() != 0);
+                        } else {
+                            view.onLoadmoreComplete(response.getData().getHas_next() != 0);
+                        }
                     }
                 });
     }
 
-    public List<MultiTypeAdapter.IItem> getData() {
 
-        List<MultiTypeAdapter.IItem> tripBeans = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            MineTripBean tripBean = new MineTripBean();
-            tripBean.setStartTime("2018-05-25 16:12");
-            tripBean.setEndTime("2018-05-26 13:54");
-            tripBean.setMoney(i % 2 == 0 ? "+5" : "0");
-            tripBean.setName(i % 2 == 0 ? "已售行程" : "待售行程");
-            tripBean.setType(i % 2 == 0 ? 1 : 0);
-            tripBean.setLayout(R.layout.module_user_item_my_trip);
-            tripBean.setVariableId(BR.item);
-            tripBeans.add(tripBean);
-        }
-
-        return tripBeans;
-    }
 }

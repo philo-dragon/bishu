@@ -10,17 +10,20 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.CommonHeader;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
+import com.pfl.module_user.adapter.MyTripAdapter;
 import com.pfl.module_user.databinding.ModuleUserFragmentMineTripBinding;
 import com.pfl.module_user.di.module_my_trip.DaggerMyTtipComponent;
 import com.pfl.module_user.di.module_my_trip.MyTripModule;
 import com.pfl.module_user.view.MyTripView;
 import com.pfl.module_user.viewmodel.MyTripViewModel;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -41,11 +44,12 @@ import static android.widget.LinearLayout.VERTICAL;
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
 public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
 
-    private MultiTypeAdapter multiTypeAdapter;
     private CommonHeader commonHeader;
 
     @Inject
     MyTripViewModel viewModel;
+    @Inject
+    MyTripAdapter multiTypeAdapter;
 
     @Override
     public int getContentView() {
@@ -87,7 +91,6 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
         mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, VERTICAL));
-        multiTypeAdapter = new MultiTypeAdapter();
         mBinding.moduleRefreshLayout.commonRecyclerView.setAdapter(multiTypeAdapter);
     }
 
@@ -129,13 +132,29 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
 
     @Override
     public void onClick(View v) {
-
     }
 
     @Override
-    public void onSuccess(List<MultiTypeAdapter.IItem> items) {
-        multiTypeAdapter.setItems(items);
-        multiTypeAdapter.notifyDataSetChanged();
+    public void onRefreshComplete(boolean isEnabledLoadmore) {
+        mBinding.moduleRefreshLayout.commonRefreshLayout.finishRefresh();
+        mBinding.moduleRefreshLayout.commonRefreshLayout.setEnableLoadmore(isEnabledLoadmore);
+    }
+
+    @Override
+    public void onLoadmoreComplete(boolean isEnabledLoadmore) {
+        mBinding.moduleRefreshLayout.commonRefreshLayout.finishLoadmore();
+        mBinding.moduleRefreshLayout.commonRefreshLayout.setEnableLoadmore(isEnabledLoadmore);
+    }
+
+    @Override
+    public void onSuccess(boolean isRefresh, List<MineTrip.MineTripBean> items) {
+        if (isRefresh) {
+            multiTypeAdapter.setNewData(items);
+        } else {
+            if (items.isEmpty()) {
+                multiTypeAdapter.addData(items);
+            }
+        }
     }
 
 }

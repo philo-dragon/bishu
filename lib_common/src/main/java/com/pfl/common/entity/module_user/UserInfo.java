@@ -13,6 +13,7 @@ public class UserInfo {
     private String mobile;
     private int gender;
     private int id_verified;
+    private int driver_verified;
     private int car_verified;
     private List<Device> devices;
 
@@ -70,6 +71,14 @@ public class UserInfo {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    public int getDriver_verified() {
+        return driver_verified;
+    }
+
+    public void setDriver_verified(int driver_verified) {
+        this.driver_verified = driver_verified;
     }
 
     public static class Device {

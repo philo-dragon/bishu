@@ -6,6 +6,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.imageloader.glide.ImageConfigImpl;
@@ -73,24 +74,45 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
 
     @Override
     public void onClick(View v) {
+        if (checkUserLogined()) return;
         int i = v.getId();
         if (i == R.id.module_user_rl_header_view) {
-            if (ModuleUserRouteService.getUser() == null) {
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
-            } else {
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INITIAL_VALUE);
-            }
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INITIAL_VALUE);
         } else if (i == R.id.module_user_rl_real_name_auth) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD);
+            UserInfo userInfo = ModuleUserRouteService.getUserInfo();
+            if (userInfo.getId_verified() == 0) {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD);
+            } else {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT);
+            }
         } else if (i == R.id.module_user_rl_driver_auth) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE);
+            UserInfo userInfo = ModuleUserRouteService.getUserInfo();
+            if (userInfo.getDriver_verified() == 0) {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE);
+            } else {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT);
+            }
         } else if (i == R.id.module_user_rl_car_auth) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK);
+            UserInfo userInfo = ModuleUserRouteService.getUserInfo();
+            if (userInfo.getCar_verified() == 0) {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK);
+            } else {
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT);
+            }
         } else if (i == R.id.module_user_rl_setting) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_SETTING);
         } else if (i == R.id.module_user_rl_intelligent_hardware) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FIND_DEVICES);
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST);
         }
+    }
+
+    private boolean checkUserLogined() {
+        User user = ModuleUserRouteService.getUser();
+        if (user == null) {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
+            return true;
+        }
+        return false;
     }
 
     @Override

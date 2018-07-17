@@ -6,7 +6,7 @@ import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.Device;
 import com.pfl.common.entity.module_user.FindBean;
-import com.pfl.common.entity.module_user.MineTripBean;
+import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.entity.module_user.StorageToken;
@@ -151,9 +151,9 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/routes")
-    Observable<HttpResponse<List<MineTripBean>>> myTrip(@Field("action") String action,
-                                                        @Field("page") String page,
-                                                        @Field("page_size") String page_size);
+    Observable<HttpResponse<MineTrip>> myTrip(@Field("action") String action,
+                                              @Field("page") String page,
+                                              @Field("page_size") String page_size);
 
     /**
      * 获取用户信息(个人中心)
@@ -194,7 +194,7 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/devices")
-    Observable<HttpResponse<List<Device>>> getDevices(@Field("action") String action,
+    Observable<HttpResponse<Device>> getDevices(@Field("action") String action,
                                                       @Field("uid") String uid);
 
     /**
@@ -215,7 +215,7 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/discovery")
-    Observable<FindBean> find(@Field("action") String action);
+    Observable<HttpResponse<FindBean>> find(@Field("action") String action);
 
     /**
      * 获取身份证信息

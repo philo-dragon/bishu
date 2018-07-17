@@ -1,6 +1,7 @@
 package com.pfl.module_user.di.module_my_trip;
 
 import com.pfl.common.http.RetrofitService;
+import com.pfl.module_user.adapter.MyTripAdapter;
 import com.pfl.module_user.po.ModuleUserPoUser;
 import com.pfl.module_user.view.MyTripView;
 import com.pfl.module_user.view.RegistView;
@@ -40,6 +41,12 @@ public class MyTripModule {
     MyTripViewModel provideMyTripViewModel(LifecycleProvider lifecycle, RetrofitService service, MyTripView view) {
 
         return new MyTripViewModel(lifecycle, service, view);
+    }
+
+    @Provides
+    MyTripAdapter provideMyTripAdapter() {
+
+        return new MyTripAdapter();
     }
 
 }

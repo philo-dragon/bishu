@@ -1,6 +1,7 @@
 package com.pfl.module_user.view;
 
 import com.pfl.common.base.MultiTypeAdapter;
+import com.pfl.common.entity.module_user.MineTrip;
 
 import java.util.List;
 
@@ -10,6 +11,10 @@ import java.util.List;
 
 public interface MyTripView {
 
-    void onSuccess(List<MultiTypeAdapter.IItem> list);
+    void onRefreshComplete(boolean isEnabledLoadmore);
+
+    void onLoadmoreComplete(boolean isEnabledLoadmore);
+
+    void onSuccess(boolean isRefresh, List<MineTrip.MineTripBean> list);
 
 }

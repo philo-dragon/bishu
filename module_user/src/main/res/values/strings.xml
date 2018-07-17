@@ -43,6 +43,9 @@
     <string name="module_user_str_fakuan">罚款:&#160;</string>
     <string name="module_user_str_yuan">&#160;元</string>
 
+    <string name="module_user_str_unverified">未认证</string>
+    <string name="module_user_str_verified">已认证</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
