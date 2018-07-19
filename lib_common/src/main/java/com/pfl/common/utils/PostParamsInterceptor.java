@@ -118,7 +118,7 @@ public class PostParamsInterceptor implements Interceptor {
      *
      * @return
      */
-    private String getNetWork() {
+    public static String getNetWork() {
         if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_WIFI) {
             return "4";
         } else if (NetworkUtils.getNetworkType() == NetworkUtils.NetworkType.NETWORK_4G) {

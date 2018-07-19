@@ -10,4 +10,10 @@ public interface StorageTokenView {
 
     void onStorageToken(StorageToken storageToken);
 
+    void uploadProgress(int progress);
+
+    void uploadSuccess();
+
+    void uploadFail();
+
 }

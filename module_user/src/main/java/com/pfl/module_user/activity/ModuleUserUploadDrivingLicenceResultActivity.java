@@ -1,6 +1,7 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
@@ -12,6 +13,7 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserLicence;
 import com.pfl.common.utils.BottomDialogManager;
+import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
@@ -52,6 +54,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
 
     @Inject
     StorageTokenViewModel tokenViewModel;
+    private ProgressDialog progressDialog;
 
     @Override
     public int getContentView() {
@@ -75,14 +78,15 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-
+                if(mStorageToken == null){
+                    return;
+                }
+                showUploadDialog();
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
-                } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
-                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
-                }  if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "driver_licence", path);
                 } else if (pictureHelper.getTag() == R.id.module_user_img_upload_file_back) {
+                    mBinding.moduleUserImgUploadFileBack.setImageBitmap(bitmap);
                     tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "1", "driver_licence", path);
                 }
             }
@@ -98,7 +102,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
 
     @Override
     public void initData() {
-
+        tokenViewModel.getStorageToken();
     }
 
     @Override
@@ -123,7 +127,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
-
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromCamera(fileName, id);
             }
 
@@ -137,6 +141,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
                 } else if (id == R.id.module_user_img_upload_file_back) {
                     fileName = "file_back";
                 }
+                pictureHelper.setImageStyle(85, 54, 855, 510);
                 pictureHelper.getPicFromAlbm(fileName, id);
             }
 
@@ -180,5 +185,40 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
     @Override
     public void onStorageToken(StorageToken storageToken) {
         mStorageToken = storageToken;
+    }
+
+    @Override
+    public void uploadProgress(int progress) {
+        if (progressDialog != null) {
+            progressDialog.incrementProgressBy(progress);
+        }
+    }
+
+    @Override
+    public void uploadSuccess() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void uploadFail() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
+    private void showUploadDialog() {
+        progressDialog = DialogManager.uploadFileProgressDialog(this);
+        progressDialog.show();
     }
 }

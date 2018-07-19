@@ -1,6 +1,7 @@
 package com.pfl.module_user.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
@@ -12,6 +13,7 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.utils.BottomDialogManager;
+import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
@@ -50,6 +52,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
 
     @Inject
     StorageTokenViewModel tokenViewModel;
+    private ProgressDialog progressDialog;
 
     @Override
     public int getContentView() {
@@ -74,6 +77,10 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
+                if(mStorageToken == null){
+                    return;
+                }
+                showUploadDialog();
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
                     mBinding.moduleUserImgUploadFileFrontImg.setImageBitmap(bitmap);
                     tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "car_licence", path);
@@ -91,7 +98,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
 
     @Override
     public void initData() {
-
+        tokenViewModel.getStorageToken();
     }
 
     @Override
@@ -161,5 +168,40 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
     @Override
     public void onStorageToken(StorageToken storageToken) {
         this.mStorageToken = storageToken;
+    }
+
+    @Override
+    public void uploadProgress(int progress) {
+        if (progressDialog != null) {
+            progressDialog.incrementProgressBy(progress);
+        }
+    }
+
+    @Override
+    public void uploadSuccess() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void uploadFail() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
+    private void showUploadDialog() {
+        progressDialog = DialogManager.uploadFileProgressDialog(this);
+        progressDialog.show();
     }
 }

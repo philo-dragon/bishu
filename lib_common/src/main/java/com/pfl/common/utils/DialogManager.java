@@ -1,6 +1,8 @@
 package com.pfl.common.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
@@ -13,6 +15,17 @@ import com.pfl.common.R;
 public class DialogManager {
 
     private static AlertDialog dialog;
+
+    public static ProgressDialog uploadFileProgressDialog(Context context) {
+        ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);// 设置水平进度条
+        dialog.setCancelable(true);// 设置是否可以通过点击Back键取消
+        dialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条
+        dialog.setTitle("提示");
+        dialog.setMessage("正在上传文件");
+        dialog.setMax(100);
+        return dialog;
+    }
 
     public static void showSingleBtnDialog(Activity activity, String message) {
         dismiss();

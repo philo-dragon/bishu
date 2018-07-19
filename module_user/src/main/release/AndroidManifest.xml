@@ -44,21 +44,29 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_upload_identity_card" />
         <activity
+            android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_upload_identity_card_result" />
+        <activity
             android:name=".activity.ModuleUserUploadDrivingLicenceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_upload_driving_licence" />
         <activity
-            android:name=".activity.ModuleUserAddCarActivity"
+            android:name=".activity.ModuleUserUploadDrivingLicenceResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_add_car" />
+            android:label="@string/module_user_upload_driving_licence" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingBookActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_upload_driving_book" />
         <activity
-            android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
+            android:name=".activity.ModuleUserUploadDrivingBookResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card_result" />
+            android:label="@string/module_user_upload_driving_book" />
+        <activity
+            android:name=".activity.ModuleUserAddCarActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_add_car" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />

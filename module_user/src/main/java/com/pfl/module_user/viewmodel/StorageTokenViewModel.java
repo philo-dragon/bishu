@@ -1,6 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -16,22 +17,35 @@ import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.DeviceUtils;
+import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.PhoneUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.service.ModuleAppConfigurationRouteService;
+import com.pfl.common.service.ModuleAppLocationRouteService;
 import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.BaseObserver;
+import com.pfl.common.utils.BaseUrlManager;
+import com.pfl.common.utils.PostParamsInterceptor;
 import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.view.StorageTokenView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.HashMap;
+
+import static com.blankj.utilcode.util.PhoneUtils.getIMEI;
 
 /**
  * ALi OSS 上传图片服务器接口调用
@@ -99,9 +113,7 @@ public class StorageTokenViewModel {
         //获取OSSClient
         OSS oss = createOSS(storageToken);
         //图片存储位置为<bucket>下的<object>, object命名规则 '<uid>/<resource>_<unix时间戳>.png'
-        String uploadToOSSPath = bucketName
-                + File.separator
-                + UserInfoManager.getInstance().getUser().getUid()
+        String uploadToOSSPath = UserInfoManager.getInstance().getUser().getUid()
                 + File.separator
                 + resource
                 + "_"
@@ -114,46 +126,89 @@ public class StorageTokenViewModel {
         HashMap<String, String> callbackParam = new HashMap<>();
         callbackParam.put("callbackUrl", ModuleAppConfigurationRouteService.getConfiguration().getOss().getCallbackUrl());
         //callbackBody可以自定义传入的信息
-        //"callbackBody":"bucket=${bucket}&object=${object}&etag=${etag}&size=${size}&mimeType=${mimeType}&imageInfo.height=${imageInfo.height}&imageInfo.width=${imageInfo.width}&imageInfo.format=${imageInfo.format}&my_var=${x:my_var}"
-        callbackParam.put("callbackBody",
-                "filename=${" + uploadToOSSPath + "}" +
-                        "&bucket=${" + bucketName + "}" +
-                        "&size=${" + file.length() + "}" +
-                        "&mimeType=${image/png}" +
-                        "&imageInfo.width=${" + widthAndHeight[0] + "}" +
-                        "&imageInfo.height=${" + widthAndHeight[1] + "}" +
-                        "&imageInfo.format=${png}"
-        );
+        JSONObject root = new JSONObject();
+        JSONObject imageInfo = new JSONObject();
+        JSONObject minfoData = new JSONObject();
+        JSONObject geoData = new JSONObject();
+        try {
+
+            // ----------------------  全局请求参数  -------------------------- //
+            String sign = "";
+            if (ModuleUserRouteService.getUser() != null) {
+                sign = EncryptUtils.encryptMD5ToString(ModuleUserRouteService.getUser().getToken() + "_" + "/storage_callback").toLowerCase();
+            }
+            String request_id = EncryptUtils.encryptMD5ToString(getIMEI() + "-" + DeviceUtils.getMacAddress() + "-" + System.currentTimeMillis());
+
+            root.put("x:uid", UserInfoManager.getInstance().getUser().getUid() == null ? "" : UserInfoManager.getInstance().getUser().getUid());
+            root.put("x:sign", sign);//sign=md5("token_/configuraion")
+            root.put("x:request_id", request_id);//每个请求唯一,可用imei-mac-timestamp生成的md5作为request_id
+            root.put("x:req_from", "Android");
+            root.put("x:req_ver", "1");
+
+            minfoData.put("os", "android");
+            minfoData.put("os_ver", android.os.Build.VERSION.RELEASE);
+            minfoData.put("app_ver", AppUtils.getAppVersionName());
+            minfoData.put("dist", "umeng");
+            minfoData.put("imei", PhoneUtils.getIMEI());
+            minfoData.put("mac_addr", DeviceUtils.getMacAddress());
+            minfoData.put("network", PostParamsInterceptor.getNetWork());
+            minfoData.put("screen_width", ScreenUtils.getScreenWidth());
+            minfoData.put("screen_height", ScreenUtils.getScreenHeight());
+            minfoData.put("device_brand", PostParamsInterceptor.getDeviceBrand());
+            minfoData.put("device_model", DeviceUtils.getModel());
+            root.put("x:minfo", minfoData);
+
+            Location location = ModuleAppLocationRouteService.getLocation();
+            geoData.put("x", location == null ? "" : location.getLatitude());
+            geoData.put("y", location == null ? "" : location.getLongitude());
+            root.put("x:geo", geoData);
+
+
+            // ----------------------  OSS请求参数  -------------------------- //
+            root.put("object", uploadToOSSPath);
+            root.put("bucket", bucketName);
+            root.put("size", file.length());
+            root.put("mimeType", "image/png");
+
+            root.put("x:action", "post");
+            root.put("x:id", ModuleUserRouteService.getUser().getUid());
+            root.put("x:seq", Integer.valueOf(seq));
+            root.put("x:resource", resource);
+
+            imageInfo.put("width", widthAndHeight[0]);
+            imageInfo.put("height", widthAndHeight[1]);
+            imageInfo.put("format", "png");
+            root.put("imageInfo", imageInfo);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        callbackParam.put("callbackBody", root.toString());
         callbackParam.put("callbackBodyType", "application/json");
         put.setCallbackParam(callbackParam);
-
-        // 传入自定义参数 用户自定义参数的Key一定要以x:开头
-        HashMap<String, String> callbackVars = new HashMap<>();
-        callbackVars.put("x:action", "post");
-        callbackVars.put("x:id", ModuleUserRouteService.getUser().getUid());
-        callbackVars.put("x:seq", seq);
-        callbackVars.put("x:resource", resource);
-        put.setCallbackVars(callbackVars);
-
 
         // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override
             public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
                 int progress = (int) (100 * currentSize / totalSize);
+                view.uploadProgress(progress);
             }
         });
 
-        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+        oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.d("PutObject", "UploadSuccess");
                 Log.d("ETag", result.getETag());
                 Log.d("RequestId", result.getRequestId());
+                view.uploadSuccess();
             }
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                view.uploadFail();
                 // 请求异常
                 if (clientExcepion != null) {
                     // 本地异常如网络异常等
