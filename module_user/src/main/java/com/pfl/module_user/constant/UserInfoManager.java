@@ -1,6 +1,9 @@
 package com.pfl.module_user.constant;
 
 
+import com.blankj.utilcode.util.SPUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.UserInfo;
 
@@ -31,11 +34,24 @@ public class UserInfoManager {
     }
 
     public void setUser(User user) {
-        this.user = user;
+        Gson gson = new Gson();
+        SPUtils.getInstance("bishu").put("user", gson.toJson(user));
+        UserInfoManager.user = user;
     }
 
     public User getUser() {
-        return user;
+
+        if (UserInfoManager.user == null) {
+            String strUser = SPUtils.getInstance("bishu").getString("user", "");
+            if (!strUser.equals("")) {
+                Gson gson = new Gson();
+                User jsonUser = gson.fromJson(strUser, new TypeToken<User>() {
+                }.getType());
+                UserInfoManager.user = jsonUser;
+            }
+        }
+
+        return UserInfoManager.user;
     }
 
     public UserInfo getUserInfo() {

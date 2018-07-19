@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="userLicence"
+            type="com.pfl.common.entity.module_user.UserLicence" />
+
+        <variable
+            name="viewModel"
+            type="com.pfl.module_user.viewmodel.UploadLicenceResultViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,10 +55,12 @@
                     app:cardElevation="3dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/module_user_ic_driving_licence_card_front_img"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/module_user_ic_identity_card_front" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/module_user_ic_driving_licence_card_front" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -83,10 +96,12 @@
                     app:cardElevation="3dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/module_user_ic_driving_licence_card_back_img"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/module_user_ic_identity_card_back" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/module_user_ic_driving_licence_card_back" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -139,10 +154,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="王大白"
+                            android:text="@{userLicence.name}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -157,10 +173,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="110120198807051234"
+                            android:text="@{userLicence.id_number}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -175,10 +192,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="c1"
+                            android:text="@{userLicence.issuing_authority}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -193,7 +211,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2018.05 - 2018.09"
+                            android:text='@{viewModel.dateFormat(userLicence.start_ts)+"-"+viewModel.dateFormat(userLicence.end_ts)}'
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
@@ -201,12 +219,12 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.CardView
-                    android:layout_marginTop="30dp"
                     android:id="@+id/module_user_cv_commit"
                     android:layout_width="250dp"
                     android:layout_height="42dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
                     app:cardBackgroundColor="#3DC9C0"
                     app:cardCornerRadius="21dp"
                     app:cardElevation="3dp">

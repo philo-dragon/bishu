@@ -38,10 +38,9 @@
     <string name="module_user_str_registed_hint">%1$s 已注册\n您可以输入密码直接登录</string>
     <string name="module_user_str_get_check_code">%1$s 未注册，请获取验证码以便注册</string>
     <string name="module_user_str_setting_pwd">%1$s 未注册，设置密码完成注册</string>
-    <string name="module_user_str_jifen">积分:&#160;</string>
-    <string name="module_user_str_fen">&#160;分</string>
-    <string name="module_user_str_fakuan">罚款:&#160;</string>
-    <string name="module_user_str_yuan">&#160;元</string>
+    <string name="module_user_str_jifen">扣分:&#160;&#160;%1$s分</string>
+    <string name="module_user_str_fakuan">罚款:&#160;&#160;%1$s元</string>
+    <string name="module_user_str_t">%1$s°C</string>
 
     <string name="module_user_str_unverified">未认证</string>
     <string name="module_user_str_verified">已认证</string>

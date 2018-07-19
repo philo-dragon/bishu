@@ -48,6 +48,7 @@ public class FindBean {
     public static class Weather {
         private String temperature;
         private String desc;
+        private String icon_url;
 
         public String getTemperature() {
             return temperature;
@@ -63,6 +64,14 @@ public class FindBean {
 
         public void setDesc(String desc) {
             this.desc = desc;
+        }
+
+        public String getIcon_url() {
+            return icon_url;
+        }
+
+        public void setIcon_url(String icon_url) {
+            this.icon_url = icon_url;
         }
     }
 

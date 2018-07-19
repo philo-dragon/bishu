@@ -11,6 +11,7 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.base.BaseEvent;
 import com.pfl.common.entity.module_user.User;
+import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.AppManager;
 import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
@@ -34,6 +35,11 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
     LoginViewModel viewModel;
 
     private String mobile;
+
+    @Override
+    protected boolean isSwipeBackEnable() {
+        return ModuleUserRouteService.getUser() != null;
+    }
 
     @Override
     protected int getBackgroundColorRes() {
@@ -151,4 +157,8 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
 
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

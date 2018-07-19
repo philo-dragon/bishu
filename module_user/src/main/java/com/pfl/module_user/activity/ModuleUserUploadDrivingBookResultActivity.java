@@ -9,12 +9,16 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.dialog.ResultDialogFragment;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.StorageToken;
+import com.pfl.common.imageloader.ImageLoader;
+import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
+import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadDrivingBookResultBinding;
 import com.pfl.module_user.di.module_upload_car_licence_resule.DaggerUploadCarLicenceResultComponent;
@@ -44,6 +48,8 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
     private StorageToken mStorageToken;
 
     @Inject
+    ImageLoader imageLoader;
+    @Inject
     UploadCarLicenceResultViewModel viewModel;
     @Inject
     StorageTokenViewModel tokenViewModel;
@@ -68,20 +74,23 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     @Override
     public void initView() {
+        mBinding.setViewModel(viewModel);
         pictureHelper = new SelectPictureHelper(this);
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-                if(mStorageToken == null){
+                if (mStorageToken == null) {
                     return;
                 }
                 showUploadDialog();
                 if (pictureHelper.getTag() == R.id.module_user_img_upload_file_front) {
-                    mBinding.moduleUserImgUploadFileFront.setImageBitmap(bitmap);
+                    mBinding.moduleUserImgDrivingBook.setImageBitmap(bitmap);
                     tokenViewModel.asyncPutObjectFromLocalFile(mStorageToken, "0", "car_licence", path);
                 }
             }
         });
+
+        RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
     }
 
     @Override
@@ -91,6 +100,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     @Override
     public void initData() {
+        viewModel.getIdentity();
         tokenViewModel.getStorageToken();
     }
 
@@ -157,6 +167,19 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
 
     @Override
     public void onSuccess(CarLicence licence) {
+        imageLoader.loadImage(mContext, ImageConfigImpl
+                .builder().url(licence.getFront_img())
+                .imageView(mBinding.moduleUserImgDrivingBook)
+                .build());
+
+        //{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
+        if (licence.getVerified_status() == 3) {
+            ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_FAIL, "认证失败", licence.getVerified_msg());
+            dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
+        } else if (licence.getVerified_status() == 2) {
+            ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_SUCCESS, "认证成功", licence.getVerified_msg());
+            dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
+        }
 
     }
 

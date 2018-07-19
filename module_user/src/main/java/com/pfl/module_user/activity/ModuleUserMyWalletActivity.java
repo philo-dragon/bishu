@@ -10,7 +10,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
-import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.utils.App;

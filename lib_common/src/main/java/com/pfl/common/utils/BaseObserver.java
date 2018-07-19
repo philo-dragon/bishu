@@ -97,7 +97,7 @@ public class BaseObserver<T extends HttpResponse> implements Observer<T> {
         ToastUtils.showShort(message);
         switch (response.getCode()) {
             case 401://表示未登录
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
+                //RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
                 break;
         }
     }

@@ -18,15 +18,15 @@ public class DataCleanManager {
      * * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * * 16      * @param context
      */
     public static void cleanInternalCache(Context context) {
-        deleteFilesByDirectory(context.getCacheDir());
+        deleteFolderFile(context.getCacheDir().getAbsolutePath(), true);
     }
 
     /**
      * * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * * 25      * @param context
      */
     public static void cleanDatabases(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/databases"));
+        deleteFolderFile("/data/data/"
+                + context.getPackageName() + "/databases", true);
     }
 
     /**
@@ -35,8 +35,7 @@ public class DataCleanManager {
      * @param context
      */
     public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/shared_prefs"));
+        deleteFolderFile("/data/data/" + context.getPackageName() + "/shared_prefs", true);
     }
 
     /**
@@ -52,7 +51,7 @@ public class DataCleanManager {
      * * 清除/data/data/com.xxx.xxx/files下的内容 * * 55      * @param context
      */
     public static void cleanFiles(Context context) {
-        deleteFilesByDirectory(context.getFilesDir());
+        deleteFolderFile(context.getFilesDir().getAbsolutePath(), true);
     }
 
     /**
@@ -61,7 +60,7 @@ public class DataCleanManager {
     public static void cleanExternalCache(Context context) {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
-            deleteFilesByDirectory(context.getExternalCacheDir());
+            deleteFolderFile(context.getExternalCacheDir().getAbsolutePath(), true);
         }
     }
 
@@ -69,7 +68,7 @@ public class DataCleanManager {
      * * 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 * * 75      * @param filePath
      */
     public static void cleanCustomCache(String filePath) {
-        deleteFilesByDirectory(new File(filePath));
+        deleteFolderFile(filePath, true);
     }
 
     /**
@@ -88,18 +87,6 @@ public class DataCleanManager {
         }
         for (String filePath : filepath) {
             cleanCustomCache(filePath);
-        }
-    }
-
-    /**
-     * * 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 * *104      * @param directory
-     */
-    private static void deleteFilesByDirectory(File directory) {
-        if (directory != null && directory.exists() && directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
-                item.delete();
-            }
-            directory.delete();
         }
     }
 
@@ -166,7 +153,7 @@ public class DataCleanManager {
     public static String getFormatSize(double size) {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
-            return size + "Byte";
+            return size + "B";
         }
 
         double megaByte = kiloByte / 1024;

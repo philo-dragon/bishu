@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="userIndentity"
+            type="com.pfl.common.entity.module_user.UserIndentity" />
+
+        <variable
+            name="viewModel"
+            type="com.pfl.module_user.viewmodel.UploadIndentityResultViewModel" />
+
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,8 +57,8 @@
 
                     <ImageView
                         android:id="@+id/module_user_img_upload_file_front_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
                         android:src="@drawable/module_user_ic_identity_card_front" />
 
@@ -85,8 +97,8 @@
 
                     <ImageView
                         android:id="@+id/module_user_img_upload_file_back_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
                         android:src="@drawable/module_user_ic_identity_card_back" />
 
@@ -139,12 +151,14 @@
                             android:textColor="#6A7E9A" />
 
                         <TextView
+                            android:id="@+id/module_user_tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="王大白"
+                            android:text="@{userIndentity.name}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -157,12 +171,14 @@
                             android:textColor="#6A7E9A" />
 
                         <TextView
+                            android:id="@+id/module_user_tv_card_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="110120198807051234"
+                            android:text="@{userIndentity.id_number}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -175,12 +191,14 @@
                             android:textColor="#6A7E9A" />
 
                         <TextView
+                            android:id="@+id/module_user_tv_office"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="北京市朝阳分局"
+                            android:text="@{userIndentity.issuing_authority}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -193,9 +211,10 @@
                             android:textColor="#6A7E9A" />
 
                         <TextView
+                            android:id="@+id/module_user_tv_indate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2018.05 - 2018.09"
+                            android:text='@{viewModel.dateFormat(userIndentity.start_ts)+"-"+viewModel.dateFormat(userIndentity.end_ts)}'
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
@@ -203,12 +222,12 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.CardView
-                    android:layout_marginTop="30dp"
                     android:id="@+id/module_user_cv_commit"
                     android:layout_width="250dp"
                     android:layout_height="42dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
                     app:cardBackgroundColor="#3DC9C0"
                     app:cardCornerRadius="21dp"
                     app:cardElevation="3dp">

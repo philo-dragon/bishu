@@ -30,10 +30,6 @@ public class HomeViewModel {
     }
 
     public void requestData() {
-      /*  Score score = new Score();
-        score.setScore("11110000");
-        score.setScore_add_yesterday("5000");
-        view.onSuccess(score);*/
         service
                 .score("get")
                 .compose(RxSchedulers.<HttpResponse<Score>>compose())

@@ -45,8 +45,8 @@
 
                     <ImageView
                         android:id="@+id/module_user_img_upload_file_front_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
                         android:src="@drawable/module_user_ic_identity_card_front" />
 
@@ -85,8 +85,8 @@
 
                     <ImageView
                         android:id="@+id/module_user_img_upload_file_back_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="285dp"
+                        android:layout_height="170dp"
                         android:layout_gravity="center"
                         android:src="@drawable/module_user_ic_identity_card_back" />
 

@@ -54,6 +54,9 @@ public class ModuleUserInitialValueActivity extends BaseActivity<ModuleUserActiv
     public void initView() {
         mBinding.setUserInfo(ModuleUserRouteService.getUserInfo());
 
+        mBinding.moduleUserTvGender.setText(ModuleUserRouteService.getUserInfo().getGender() == -1 ? "" :
+                ModuleUserRouteService.getUserInfo().getGender() == 0 ? "女" : "男");
+
         RxClickUtil.RxClick(mBinding.moduleUserRlNickName, this);
         RxClickUtil.RxClick(mBinding.moduleUserRlGender, this);
         RxClickUtil.RxClick(mBinding.moduleUserCvCommit, this);

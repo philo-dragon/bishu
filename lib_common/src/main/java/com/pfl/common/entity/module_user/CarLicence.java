@@ -17,6 +17,7 @@ public class CarLicence {
      'front_img':'http://xxx'*/
 
     private int verified_status;
+    private String verified_msg;
     private String plate_number;
     private String owner;
     private String id_number;
@@ -25,6 +26,14 @@ public class CarLicence {
     private String vehicle_model;
     private String back_img;
     private String front_img;
+
+    public String getVerified_msg() {
+        return verified_msg;
+    }
+
+    public void setVerified_msg(String verified_msg) {
+        this.verified_msg = verified_msg;
+    }
 
     public int getVerified_status() {
         return verified_status;

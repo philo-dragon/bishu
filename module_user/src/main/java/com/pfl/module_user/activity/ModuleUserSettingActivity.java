@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.SPUtils;
+import com.bumptech.glide.Glide;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.http.RxSchedulers;
@@ -135,7 +137,9 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
             public void subscribe(ObservableEmitter<String> e) throws Exception {
 
                 long cacheSize = DataCleanManager.getFolderSize(getExternalFilesDir(null)) +
+                        DataCleanManager.getFolderSize(new File("/data/data/" + getPackageName() + "/shared_prefs")) +
                         DataCleanManager.getFolderSize(getExternalCacheDir()) +
+                        DataCleanManager.getFolderSize(Glide.getPhotoCacheDir(mContext)) +
                         DataCleanManager.getFolderSize(SelectPictureHelper.getParentFile());
                 e.onNext(DataCleanManager.getFormatSize(cacheSize));
 
@@ -156,11 +160,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
                 DataCleanManager.cleanApplicationData(App.getInstance(), DataCleanManager.getCacheSize(getCacheDir()));
 
-                DataCleanManager.deleteFolderFile(getExternalFilesDir(null).getAbsolutePath(), true);
-                DataCleanManager.deleteFolderFile(getExternalCacheDir().getAbsolutePath(), true);
-                DataCleanManager.deleteFolderFile(SelectPictureHelper.getParentFile().getAbsolutePath(), true);
-
-                e.onNext("0.0KB");
+                e.onNext("0.0B");
 
             }
         }).compose(RxSchedulers.<String>noCheckNetworkCompose())

@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="138****8888"
+                        android:text="@{viewModel.replaceMiddlePhone(userInfo.mobile)}"
                         android:textColor="#1C2737"
                         android:textSize="15dp" />
 

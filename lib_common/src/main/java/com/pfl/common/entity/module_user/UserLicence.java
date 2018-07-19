@@ -9,16 +9,24 @@ import com.google.gson.annotations.SerializedName;
 public class UserLicence {
 
     private int verified_status;
+    private String verified_msg;
     private String name;
     private String id_number;
     private String issuing_authority;
-    private String start_day;
-    private String end_day;
+    private String start_ts;
+    private String end_ts;
     private String back_img;
     private String front_img;
     @SerializedName("class")
     private String clazz;
 
+    public String getVerified_msg() {
+        return verified_msg;
+    }
+
+    public void setVerified_msg(String verified_msg) {
+        this.verified_msg = verified_msg;
+    }
 
     public int getVerified_status() {
         return verified_status;
@@ -52,20 +60,20 @@ public class UserLicence {
         this.issuing_authority = issuing_authority;
     }
 
-    public String getStart_day() {
-        return start_day;
+    public String getStart_ts() {
+        return start_ts;
     }
 
-    public void setStart_day(String start_day) {
-        this.start_day = start_day;
+    public void setStart_ts(String start_ts) {
+        this.start_ts = start_ts;
     }
 
-    public String getEnd_day() {
-        return end_day;
+    public String getEnd_ts() {
+        return end_ts;
     }
 
-    public void setEnd_day(String end_day) {
-        this.end_day = end_day;
+    public void setEnd_ts(String end_ts) {
+        this.end_ts = end_ts;
     }
 
     public String getBack_img() {

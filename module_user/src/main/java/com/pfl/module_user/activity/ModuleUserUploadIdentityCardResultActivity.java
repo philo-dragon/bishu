@@ -4,21 +4,22 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.dialog.ResultDialogFragment;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserIndentity;
+import com.pfl.common.imageloader.ImageLoader;
+import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.DialogManager;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
-import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardBinding;
 import com.pfl.module_user.databinding.ModuleUserActivityUploadIdentityCardResultBinding;
 import com.pfl.module_user.di.module_upload_identity_result.DaggerUploadIndentityResultComponent;
 import com.pfl.module_user.di.module_upload_identity_result.UploadIndentityResultModule;
@@ -37,8 +38,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import me.shaohui.bottomdialog.BaseBottomDialog;
-import me.weyye.hipermission.HiPermission;
-import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_IDENTITY_CARD_RESULT)
@@ -47,12 +46,14 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
     private SelectPictureHelper pictureHelper;
     private StorageToken mStorageToken;
     private BaseBottomDialog uploadDialog;
+    private ProgressDialog progressDialog;
 
+    @Inject
+    ImageLoader imageLoader;
     @Inject
     UploadIndentityResultViewModel viewModel;
     @Inject
     StorageTokenViewModel tokenViewModel;
-    private ProgressDialog progressDialog;
 
 
     @Override
@@ -75,11 +76,12 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
     @Override
     public void initView() {
 
+        mBinding.setViewModel(viewModel);
         pictureHelper = new SelectPictureHelper(this);
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-                if(mStorageToken == null){
+                if (mStorageToken == null) {
                     return;
                 }
                 showUploadDialog();
@@ -104,6 +106,7 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void initData() {
+        viewModel.getIdentity();
         tokenViewModel.getStorageToken();
     }
 
@@ -183,7 +186,24 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void onSuccess(UserIndentity indentity) {
+        imageLoader.loadImage(mContext, ImageConfigImpl
+                .builder().url(indentity.getFront_img())
+                .imageView(mBinding.moduleUserImgUploadFileFrontImg)
+                .build());
 
+        imageLoader.loadImage(mContext, ImageConfigImpl
+                .builder().url(indentity.getFront_img())
+                .imageView(mBinding.moduleUserImgUploadFileBackImg)
+                .build());
+
+        //{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
+        if (indentity.getVerified_status() == 3) {
+            ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_FAIL, "认证失败", indentity.getVerified_msg());
+            dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
+        } else if (indentity.getVerified_status() == 2) {
+            ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_SUCCESS, "认证成功", indentity.getVerified_msg());
+            dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
+        }
     }
 
     @Override
