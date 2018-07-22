@@ -43,11 +43,8 @@ public class UploadIndentityResultViewModel {
                 });
     }
 
-    public String dateFormat(String ss) {
-        if (ss == null || ss.equals("")) {
-            return "";
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+    public String dateFormat(long ss) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM");
         String time = dateFormat.format(new Date(ss));
         return time;
     }

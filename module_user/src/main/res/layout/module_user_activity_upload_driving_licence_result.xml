@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="请拍摄并上传你的身份证照片"
+                    android:text="请确认您的驾驶证信息"
                     android:textColor="#ff1c2737"
                     android:textSize="16dp" />
 

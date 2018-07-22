@@ -18,11 +18,6 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
-import static com.pfl.common.utils.BaseObserver.ExceptionReason.CONNECT_ERROR;
-import static com.pfl.common.utils.BaseObserver.ExceptionReason.CONNECT_TIMEOUT;
-import static com.pfl.common.utils.BaseObserver.ExceptionReason.PARSE_ERROR;
-import static com.pfl.common.utils.BaseObserver.ExceptionReason.UNKNOWN_ERROR;
-
 /**
  * Created by rocky on 2018/1/2.
  */
@@ -56,18 +51,18 @@ public class BaseObserver<T extends HttpResponse> implements Observer<T> {
         if (e instanceof HttpException) {     //   HTTP错误
             onException(ExceptionReason.BAD_NETWORK);
         } else if (e instanceof NoNetworkException) {
-
+            onException(ExceptionReason.NOT_NETWORK);
         } else if (e instanceof ConnectException
                 || e instanceof UnknownHostException) {   //   连接错误
-            onException(CONNECT_ERROR);
+            onException(ExceptionReason.CONNECT_ERROR);
         } else if (e instanceof InterruptedIOException) {   //  连接超时
-            onException(CONNECT_TIMEOUT);
+            onException(ExceptionReason.CONNECT_TIMEOUT);
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {   //  解析错误
-            onException(PARSE_ERROR);
+            onException(ExceptionReason.PARSE_ERROR);
         } else {
-            onException(UNKNOWN_ERROR);
+            onException(ExceptionReason.UNKNOWN_ERROR);
         }
     }
 
@@ -110,23 +105,17 @@ public class BaseObserver<T extends HttpResponse> implements Observer<T> {
     public void onException(ExceptionReason reason) {
         switch (reason) {
             case CONNECT_ERROR:
-                //ToastUtils.show(R.string.connect_error, Toast.LENGTH_SHORT);
                 break;
             case NOT_NETWORK:
-                //ToastUtils.show(R.string.connect_error, Toast.LENGTH_SHORT);
                 break;
             case CONNECT_TIMEOUT:
-                // ToastUtils.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
                 break;
             case BAD_NETWORK:
-                // ToastUtils.show(R.string.bad_network, Toast.LENGTH_SHORT);
                 break;
             case PARSE_ERROR:
-                //  ToastUtils.show(R.string.parse_error, Toast.LENGTH_SHORT);
                 break;
             case UNKNOWN_ERROR:
             default:
-                // ToastUtils.show(R.string.unknown_error, Toast.LENGTH_SHORT);
                 break;
         }
     }
@@ -155,6 +144,10 @@ public class BaseObserver<T extends HttpResponse> implements Observer<T> {
          * 连接超时
          */
         CONNECT_TIMEOUT,
+        /**
+         * 空数据
+         */
+        EMPTY_DATA,
         /**
          * 未知错误
          */

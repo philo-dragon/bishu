@@ -120,7 +120,10 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
         mBinding.setUserInfo(userInfo);
         UserInfoManager.getInstance().setUserInfo(userInfo);
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(userInfo.getAvatar())
+                .builder()
+                .placeholder(R.drawable.module_user_ic_default_photo)
+                .errorPic(R.drawable.module_user_ic_default_photo)
+                .url(userInfo.getAvatar())
                 .imageView(mBinding.moduleUserImgPhoto)
                 .build());
 

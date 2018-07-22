@@ -69,7 +69,8 @@
             android:label="@string/module_user_add_car" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.ModuleUserLoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
@@ -85,14 +86,22 @@
             android:name=".activity.ModuleUserFindDevicesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_find_device" />
-        <activity android:name=".activity.ModuleUserIntelligentHardwareManagerActivity"
+        <activity
+            android:name=".activity.ModuleUserIntelligentHardwareManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_intelligent_hardware_manager"
-            />
-        <activity android:name=".activity.ModuleUserIntelligentHardwareListActivity"
+            android:label="@string/module_user_str_intelligent_hardware_manager" />
+        <activity
+            android:name=".activity.ModuleUserIntelligentHardwareListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_intelligent_hardware_list"
-            />
+            android:label="@string/module_user_str_intelligent_hardware_list" />
+        <activity
+            android:name=".activity.ModuleUserInviteFirendsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_invite_frineds" />
+        <activity
+            android:name=".activity.ModuleUserMessageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_message" />
     </application>
 
 </manifest>

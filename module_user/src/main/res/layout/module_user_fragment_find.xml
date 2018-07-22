@@ -38,7 +38,7 @@
 
             <ImageView
                 android:id="@+id/module_user_img_weather"
-                android:layout_width="65dp"
+                android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/module_user_ic_find_weather_cloud" />
 

@@ -90,6 +90,7 @@ dependencies {
 
     //下拉刷新库
     api rootProject.ext.deps.SmartRefreshLayout
+    api rootProject.ext.deps.SmartRefreshHeader
 
     // 滑动返回库
     api rootProject.ext.deps.swipebackhelper

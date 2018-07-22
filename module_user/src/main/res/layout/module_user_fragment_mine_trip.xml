@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -13,9 +14,19 @@
 
         <include
             android:id="@+id/module_refresh_layout"
-            layout="@layout/common_refresh_layout" />
+            layout="@layout/common_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/in_toolbar_layout" />
 
-    </LinearLayout>
+        <include
+            android:id="@+id/line"
+            layout="@layout/lib_common_gradient_line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/in_toolbar_layout" />
+
+    </RelativeLayout>
 
 </layout>
 

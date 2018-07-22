@@ -37,7 +37,7 @@
                 android:background="@drawable/module_user_ic_mine_header_bg"
                 android:orientation="horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/module_user_img_photo"
                     android:layout_width="68dp"
                     android:layout_height="68dp"

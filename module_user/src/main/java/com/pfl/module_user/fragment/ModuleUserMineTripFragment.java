@@ -1,20 +1,17 @@
 package com.pfl.module_user.fragment;
 
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.LazyLoadBaseFragment;
-import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.MineTrip;
-import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.App;
+import com.pfl.common.utils.BaseObserver;
 import com.pfl.common.utils.RouteUtils;
-import com.pfl.common.weidget.CommonHeader;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.adapter.MyTripAdapter;
@@ -23,28 +20,19 @@ import com.pfl.module_user.di.module_my_trip.DaggerMyTtipComponent;
 import com.pfl.module_user.di.module_my_trip.MyTripModule;
 import com.pfl.module_user.view.MyTripView;
 import com.pfl.module_user.viewmodel.MyTripViewModel;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-
-import static android.widget.LinearLayout.VERTICAL;
 
 /**
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
 public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
-
-    private CommonHeader commonHeader;
 
     @Inject
     MyTripViewModel viewModel;
@@ -86,38 +74,22 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
 
     private void setRecyclerView() {
 
-        commonHeader = new CommonHeader(mContext);
-        mBinding.moduleRefreshLayout.commonRefreshLayout.setRefreshHeader(commonHeader);
+        multiTypeAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
-        mBinding.moduleRefreshLayout.commonRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, VERTICAL));
-        mBinding.moduleRefreshLayout.commonRecyclerView.setAdapter(multiTypeAdapter);
     }
 
     private void setRefreshView() {
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-
-                Observable.just(1)
-                        .delay(500, TimeUnit.MILLISECONDS)
-                        .compose(RxSchedulers.<Integer>noCheckNetworkCompose())
-                        .subscribe(new Consumer<Integer>() {
-                            @Override
-                            public void accept(Integer integer) throws Exception {
-                                commonHeader.getCompleteView().setVisibility(View.VISIBLE);
-                                refreshlayout.finishRefresh(200);
-                                viewModel.requestData();
-                            }
-                        });
-
-
+                viewModel.refreshData();
             }
         });
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000);
+                viewModel.loadmoreData();
             }
         });
     }
@@ -145,6 +117,18 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
         mBinding.moduleRefreshLayout.commonRefreshLayout.finishLoadmore();
         mBinding.moduleRefreshLayout.commonRefreshLayout.setEnableLoadmore(isEnabledLoadmore);
     }
+
+    @Override
+    public void onFail(BaseObserver.ExceptionReason exceptionReason) {
+
+        switch (exceptionReason) {
+            case EMPTY_DATA:
+                multiTypeAdapter.setEmptyView(R.layout.lib_common_empty_layout);
+                break;
+        }
+
+    }
+
 
     @Override
     public void onSuccess(boolean isRefresh, List<MineTrip.MineTripBean> items) {

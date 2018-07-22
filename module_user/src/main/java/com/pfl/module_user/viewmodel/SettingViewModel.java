@@ -5,6 +5,7 @@ import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.module_user.view.SettingView;
 import com.trello.rxlifecycle2.LifecycleProvider;
@@ -26,19 +27,6 @@ public class SettingViewModel {
         this.view = view;
     }
 
-    public void requestData() {
-        service
-                .getToken("post", "client_credentials", "282307895618", "b9c6c8f954dbbf7274910585a95efce1")
-                .compose(RxSchedulers.<HttpResponse<AccessToken>>compose())
-                .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<AccessToken>>() {
-                    @Override
-                    public void onSuccess(HttpResponse<AccessToken> response) {
-                        view.onSuccess(response.getData().getAccess_token());
-                    }
-                });
-    }
-
     public void logOut(String uid) {
         service
                 .loginOut("delete", uid)
@@ -47,8 +35,7 @@ public class SettingViewModel {
                 .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
                     public void onSuccess(HttpResponse<Object> response) {
-
-
+                        view.onSuccess();
                     }
                 });
     }

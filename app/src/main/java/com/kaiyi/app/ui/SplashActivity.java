@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.kaiyi.app.R;
+import com.kaiyi.app.ui.service.InitConfigurationService;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.App;
@@ -34,11 +36,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                InitConfigurationService.actionStart(SplashActivity.this);
                 com.kaiyi.app.constant.LocationManager.getInstance().setLocation(getLocation());
-                RouteUtils.actionStart(RouteUtils.APP_MAIN_ACTIVITY);
                 User user = ModuleUserRouteService.getUser();
                 if (user == null) {
                     RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
+                } else {
+                    RouteUtils.actionStart(RouteUtils.APP_MAIN_ACTIVITY);
                 }
             }
 

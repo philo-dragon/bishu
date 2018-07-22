@@ -87,7 +87,7 @@ public class ScoreLog {
     public static class Wallet extends MultiTypeAdapter.IItem {
         private String title;
         private String value;
-        private String time;
+        private long time;
         private int type;
 
         public String getTitle() {
@@ -106,11 +106,11 @@ public class ScoreLog {
             this.value = value;
         }
 
-        public String getTime() {
+        public long getTime() {
             return time;
         }
 
-        public void setTime(String time) {
+        public void setTime(long time) {
             this.time = time;
         }
 

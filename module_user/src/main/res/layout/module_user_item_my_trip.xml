@@ -5,6 +5,13 @@
     android:layout_height="94dp"
     android:background="@color/withe">
 
+
+    <View
+        android:id="@+id/module_user_view_my_trip_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#FFBEC7D3" />
+
     <TextView
         android:id="@+id/module_user_tv_money"
         android:layout_width="wrap_content"
@@ -18,7 +25,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/module_user_img_state"
@@ -39,7 +45,6 @@
         android:src="@drawable/module_user_ic_find_dot_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/module_user_img_state" />
-
 
     <TextView
         android:id="@+id/module_user_tv_name"
@@ -80,6 +85,5 @@
             android:textColor="#6A7E9A"
             android:textSize="13dp" />
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

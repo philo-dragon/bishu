@@ -31,6 +31,7 @@ public class MyTripAdapter extends BaseQuickAdapter<MineTrip.MineTripBean, BaseV
                 .setText(R.id.module_user_tv_name, item.getSale_status() == 0 ? "代售行程" : "已售行程")
                 .setText(R.id.module_user_tv_time_start, dateFormat.format(new Date(item.getStart_ts())))
                 .setText(R.id.module_user_tv_time_end, dateFormat.format(new Date(item.getStart_ts())))
+                .setVisible(R.id.module_user_view_my_trip_line, mData.indexOf(item) != 0)
                 .setImageResource(R.id.module_user_img_state, item.getSale_status() == 0 ? R.drawable.module_user_ic_for_sale : R.drawable.module_user_ic_sold_out);
 
     }

@@ -127,7 +127,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
                 BottomDialogManager.dismiss(uploadDialog);
                 String fileName = "file_front";
                 pictureHelper.setImageStyle(85, 54, 855, 510);
-                pictureHelper.getPicFromCamera(fileName, id);
+                pictureHelper.getPicFromAlbm(fileName, id);
             }
 
             @Override

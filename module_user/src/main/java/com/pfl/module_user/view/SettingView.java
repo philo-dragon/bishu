@@ -6,6 +6,6 @@ package com.pfl.module_user.view;
 
 public interface SettingView {
 
-    void onSuccess(String token);
+    void onSuccess();
 
 }

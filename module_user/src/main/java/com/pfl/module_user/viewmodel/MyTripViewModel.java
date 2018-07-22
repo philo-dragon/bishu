@@ -40,10 +40,10 @@ public class MyTripViewModel {
         requestData();
     }
 
-    public void requestData() {
+    private void requestData() {
 
         service
-                .myTrip("get", String.valueOf(page), String.valueOf(pageSize))
+                .myTrip("get", page, pageSize)
                 .compose(RxSchedulers.<HttpResponse<MineTrip>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<MineTrip>>() {
@@ -53,6 +53,9 @@ public class MyTripViewModel {
                         view.onSuccess(page == 0, data);
                         if (page == 0) {
                             view.onRefreshComplete(response.getData().getHas_next() != 0);
+                            if (data.isEmpty()) {
+                                view.onFail(ExceptionReason.EMPTY_DATA);
+                            }
                         } else {
                             view.onLoadmoreComplete(response.getData().getHas_next() != 0);
                         }

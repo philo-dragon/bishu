@@ -13,8 +13,8 @@ public class UserLicence {
     private String name;
     private String id_number;
     private String issuing_authority;
-    private String start_ts;
-    private String end_ts;
+    private long start_ts;
+    private long end_ts;
     private String back_img;
     private String front_img;
     @SerializedName("class")
@@ -60,19 +60,19 @@ public class UserLicence {
         this.issuing_authority = issuing_authority;
     }
 
-    public String getStart_ts() {
+    public long getStart_ts() {
         return start_ts;
     }
 
-    public void setStart_ts(String start_ts) {
+    public void setStart_ts(long start_ts) {
         this.start_ts = start_ts;
     }
 
-    public String getEnd_ts() {
+    public long getEnd_ts() {
         return end_ts;
     }
 
-    public void setEnd_ts(String end_ts) {
+    public void setEnd_ts(long end_ts) {
         this.end_ts = end_ts;
     }
 

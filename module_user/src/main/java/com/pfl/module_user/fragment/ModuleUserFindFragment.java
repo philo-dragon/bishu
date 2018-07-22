@@ -4,6 +4,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.FindBean;
+import com.pfl.common.imageloader.ImageLoader;
+import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserFragmentFindBinding;
@@ -20,9 +22,10 @@ import javax.inject.Inject;
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_FIND)
 public class ModuleUserFindFragment extends LazyLoadBaseFragment<ModuleUserFragmentFindBinding> implements FindView {
 
-
     @Inject
     FindViewModel viewModel;
+    @Inject
+    ImageLoader imageLoader;
 
     @Override
     public int getContentView() {
@@ -57,6 +60,14 @@ public class ModuleUserFindFragment extends LazyLoadBaseFragment<ModuleUserFragm
 
     @Override
     public void onSuccess(FindBean findBean) {
+
+        imageLoader.loadImage(mContext, ImageConfigImpl
+                .builder()
+                .cacheStrategy(2)
+                .url(findBean.getWeather().getIcon_url())
+                .imageView(mBinding.moduleUserImgWeather)
+                .build());
+
         mBinding.setFindBean(findBean);
     }
 }

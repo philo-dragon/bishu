@@ -83,6 +83,7 @@ public class ModuleUserRegistActivity extends BaseActivity<ModuleUserActivityReg
     @Override
     public void onSuccess(User user) {
         UserInfoManager.getInstance().setUser(user);
+        finish();
     }
 
     @Override

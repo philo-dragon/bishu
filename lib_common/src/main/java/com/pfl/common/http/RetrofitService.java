@@ -152,8 +152,8 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("app/api/v1/user/routes")
     Observable<HttpResponse<MineTrip>> myTrip(@Field("action") String action,
-                                              @Field("page") String page,
-                                              @Field("page_size") String page_size);
+                                              @Field("page") int page,
+                                              @Field("page_size") int page_size);
 
     /**
      * 获取用户信息(个人中心)
@@ -195,7 +195,7 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("app/api/v1/user/devices")
     Observable<HttpResponse<Device>> getDevices(@Field("action") String action,
-                                                      @Field("uid") String uid);
+                                                @Field("uid") String uid);
 
     /**
      * 添加户智能硬件

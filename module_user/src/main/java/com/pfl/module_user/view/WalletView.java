@@ -1,7 +1,9 @@
 package com.pfl.module_user.view;
 
 import com.pfl.common.base.MultiTypeAdapter;
+import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.entity.module_user.ScoreLog;
+import com.pfl.common.utils.BaseObserver;
 
 import java.util.List;
 
@@ -11,6 +13,13 @@ import java.util.List;
 
 public interface WalletView {
 
-    void onSuccess(List<MultiTypeAdapter.IItem> logList);
+    void onRefreshComplete(boolean isEnabledLoadmore);
+
+    void onLoadmoreComplete(boolean isEnabledLoadmore);
+
+
+    void onFail(BaseObserver.ExceptionReason exceptionReason);
+
+    void onSuccess(boolean isRefresh,List<ScoreLog.Wallet> logList);
 
 }

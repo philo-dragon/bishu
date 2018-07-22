@@ -23,6 +23,8 @@ public class RouteUtils {
     public static final String APP_LISTENER_LOCATION = "/app/app_listener_location";
     public static final String APP_LISTENER_CONFIGURATION = "/app/app_listener_Configuration";
 
+    public static final String APP_SERVICE_INIT_CONFIGURATION = "/app/init_configuration_service";
+
     /**
      * module_user 模块
      */
@@ -44,6 +46,7 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_FIND_DEVICES = "/module_user/activity_user_find_devices";
     public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_MANAGER = "/module_user/activity_intelligent_hardware_manager";
     public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST = "/module_user/activity_intelligent_hardware_list";
+    public static final String MODULE_USER_ACTIVITY_INVITE_FIRENDS = "/module_user/activity_invite_firends";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";

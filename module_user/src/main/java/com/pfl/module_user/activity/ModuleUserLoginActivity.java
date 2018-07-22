@@ -34,6 +34,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
     @Inject
     LoginViewModel viewModel;
 
+    private int curentPosition = 0;
     private String mobile;
 
     @Override
@@ -133,6 +134,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
         if (isExist) {
             mBinding.inLoginView2.moduleUserTvRegistedHint.setText(String.format(getString(R.string.module_user_str_registed_hint), mobile));
             mBinding.moduleUserVfFlipper.showNext();
+            curentPosition++;
         } else {
             HashMap<String, String> parameters = new HashMap<>();
             parameters.put("mobile", mobile);
@@ -144,21 +146,23 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
     public void loginSuccess(User user) {
         mBinding.inLoginView2.moduleUserTvPasswordErrorHint.setVisibility(View.INVISIBLE);
         UserInfoManager.getInstance().setUser(user);
-        BaseEvent<User> event = new BaseEvent<>();
-        event.setFrom(ModuleUserLoginActivity.class.getSimpleName());
-        event.setT(user);
-        EventBusUtil.postMessage(event);
-        AppManager.getAppManager().finishActivity();
+        RouteUtils.actionStart(RouteUtils.APP_MAIN_ACTIVITY);
     }
 
     @Override
     public void loginFailed() {
         mBinding.inLoginView2.moduleUserTvPasswordErrorHint.setVisibility(View.VISIBLE);
-
     }
 
     @Override
     public void onBackPressed() {
+
+        if (curentPosition > 0) {
+            curentPosition--;
+            mBinding.moduleUserVfFlipper.showPrevious();
+            return;
+        }
+        AppManager.getAppManager().exit(this);
         return;
     }
 }

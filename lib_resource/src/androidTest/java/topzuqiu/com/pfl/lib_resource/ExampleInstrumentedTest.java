@@ -1,4 +1,4 @@
-package topzuqiu.com.cn.lib_resource;
+package topzuqiu.com.pfl.lib_resource;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

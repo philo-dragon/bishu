@@ -55,7 +55,14 @@ public class PostParamsInterceptor implements Interceptor {
             FormBody formBody = (FormBody) originRequest.body();
             int bodySize = formBody.size();
             for (int i = 0; i < bodySize; i++) {
-                root.put(formBody.name(i), formBody.value(i));
+
+                if (formBody.name(i).equals("page")) {
+                    root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
+                } else if (formBody.name(i).equals("page_size")) {
+                    root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
+                } else {
+                    root.put(formBody.name(i), formBody.value(i));
+                }
             }
 
             HttpUrl url = newRequest.build().url();

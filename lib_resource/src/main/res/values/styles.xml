@@ -21,4 +21,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="@style/AppTheme.MainTheme">
+        <item name="android:windowBackground">@drawable/lib_resource_start_background</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
