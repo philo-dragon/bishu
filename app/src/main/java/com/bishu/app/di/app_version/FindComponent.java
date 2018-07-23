@@ -1,9 +1,9 @@
-package com.kaiyi.app.di.app_version;
+package com.bishu.app.di.app_version;
 
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.di.scope.ActivityScope;
 
-import com.kaiyi.app.ui.MainActivity;
+import com.bishu.app.ui.MainActivity;
 import dagger.Component;
 
 /**

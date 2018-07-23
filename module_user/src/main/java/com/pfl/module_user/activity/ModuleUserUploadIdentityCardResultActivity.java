@@ -12,6 +12,7 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.dialog.ResultDialogFragment;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserIndentity;
+import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.BottomDialogManager;
@@ -185,17 +186,30 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
 
     @Override
-    public void onSuccess(UserIndentity indentity) {
+    public void onSuccess(final UserIndentity indentity) {
         imageLoader.loadImage(mContext, ImageConfigImpl
                 .builder().url(indentity.getFront_img())
                 .imageView(mBinding.moduleUserImgUploadFileFrontImg)
                 .build());
 
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(indentity.getFront_img())
+                .builder().url(indentity.getBack_img())
                 .imageView(mBinding.moduleUserImgUploadFileBackImg)
                 .build());
 
+        Observable.just("1")
+                .delay(250, TimeUnit.MILLISECONDS)
+                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        showAuthResultDialog(indentity);
+                    }
+                });
+
+    }
+
+    private void showAuthResultDialog(UserIndentity indentity) {
         //{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
         if (indentity.getVerified_status() == 3) {
             ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_FAIL, "认证失败", indentity.getVerified_msg());

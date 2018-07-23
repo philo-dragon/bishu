@@ -1,4 +1,4 @@
-package com.kaiyi.app.view;
+package com.bishu.app.view;
 
 import com.pfl.common.entity.module_app.AppConfiguration;
 

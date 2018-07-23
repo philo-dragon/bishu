@@ -1,7 +1,7 @@
-package com.kaiyi.app.di.app_version;
+package com.bishu.app.di.app_version;
 
-import com.kaiyi.app.view.AppVersionView;
-import com.kaiyi.app.viewmodel.AppVersionViewModel;
+import com.bishu.app.view.AppVersionView;
+import com.bishu.app.viewmodel.AppVersionViewModel;
 import com.pfl.common.http.RetrofitService;
 import com.trello.rxlifecycle2.LifecycleProvider;
 

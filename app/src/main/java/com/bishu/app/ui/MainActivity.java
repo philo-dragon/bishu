@@ -1,4 +1,4 @@
-package com.kaiyi.app.ui;
+package com.bishu.app.ui;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -13,13 +13,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.kaiyi.app.R;
-import com.kaiyi.app.adapter.AppMainNavigationViewPagerAdapter;
-import com.kaiyi.app.databinding.ActivityMainBinding;
+import com.bishu.app.R;
+import com.bishu.app.adapter.AppMainNavigationViewPagerAdapter;
+import com.bishu.app.databinding.ActivityMainBinding;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
-import com.pfl.common.entity.module_user.User;
-import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.AppManager;
 import com.pfl.common.utils.RouteUtils;
 

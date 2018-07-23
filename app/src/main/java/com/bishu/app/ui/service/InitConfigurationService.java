@@ -1,4 +1,4 @@
-package com.kaiyi.app.ui.service;
+package com.bishu.app.ui.service;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.kaiyi.app.BiShuApp;
-import com.kaiyi.app.constant.ConfigurationManager;
+import com.bishu.app.BiShuApp;
+import com.bishu.app.constant.ConfigurationManager;
 import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.http.RetrofitService;

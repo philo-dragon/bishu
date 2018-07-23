@@ -1,4 +1,4 @@
-package com.kaiyi.app.constant;
+package com.bishu.app.constant;
 
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.module_user.constant.UserInfoManager;

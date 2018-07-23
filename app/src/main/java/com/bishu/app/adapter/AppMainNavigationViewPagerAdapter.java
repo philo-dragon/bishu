@@ -1,4 +1,4 @@
-package com.kaiyi.app.adapter;
+package com.bishu.app.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

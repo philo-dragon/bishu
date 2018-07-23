@@ -3,7 +3,7 @@ ext {
     android = [
             compileSdkVersion: 27,
             buildToolsVersion: "27",
-            applicationId    : "com.kaiyi.app",
+            applicationId    : "com.bishu.app",
             minSdkVersion    : 16,
             targetSdkVersion : 27,
             versionCode      : 1,

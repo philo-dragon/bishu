@@ -1,4 +1,4 @@
-package com.kaiyi.app.constant;
+package com.bishu.app.constant;
 
 import android.location.Location;
 

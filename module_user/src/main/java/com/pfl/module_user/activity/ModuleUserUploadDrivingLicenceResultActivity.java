@@ -12,6 +12,7 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.dialog.ResultDialogFragment;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.entity.module_user.UserLicence;
+import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.BottomDialogManager;
@@ -179,7 +180,7 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
     }
 
     @Override
-    public void onSuccess(UserLicence licence) {
+    public void onSuccess(final UserLicence licence) {
 
         mBinding.setUserLicence(licence);
 
@@ -189,10 +190,24 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
                 .build());
 
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(licence.getFront_img())
+                .builder().url(licence.getBack_img())
                 .imageView(mBinding.moduleUserIcDrivingLicenceCardBackImg)
                 .build());
 
+        Observable.just("1")
+                .delay(250, TimeUnit.MILLISECONDS)
+                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        showAuthResultDialog(licence);
+                    }
+                });
+
+
+    }
+
+    private void showAuthResultDialog(UserLicence licence) {
         //{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
         if (licence.getVerified_status() == 3) {
             ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_FAIL, "认证失败", licence.getVerified_msg());

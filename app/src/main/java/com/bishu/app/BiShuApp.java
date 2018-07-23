@@ -1,4 +1,4 @@
-package com.kaiyi.app;
+package com.bishu.app;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

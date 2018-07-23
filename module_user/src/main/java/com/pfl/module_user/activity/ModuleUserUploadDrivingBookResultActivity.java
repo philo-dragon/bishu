@@ -12,6 +12,7 @@ import com.pfl.common.di.AppComponent;
 import com.pfl.common.dialog.ResultDialogFragment;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.StorageToken;
+import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.imageloader.ImageLoader;
 import com.pfl.common.imageloader.glide.ImageConfigImpl;
 import com.pfl.common.utils.BottomDialogManager;
@@ -166,12 +167,27 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
     }
 
     @Override
-    public void onSuccess(CarLicence licence) {
+    public void onSuccess(final CarLicence licence) {
         imageLoader.loadImage(mContext, ImageConfigImpl
                 .builder().url(licence.getFront_img())
                 .imageView(mBinding.moduleUserImgDrivingBook)
                 .build());
 
+        mBinding.setCarLicence(licence);
+
+        Observable.just("1")
+                .delay(250, TimeUnit.MILLISECONDS)
+                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        showAuthResultDialog(licence);
+                    }
+                });
+
+    }
+
+    private void showAuthResultDialog(CarLicence licence) {
         //{0, 1, 2, 3, 4},分别表示{未认证, 认证中，认证成功，认证失败, 重复认证}|
         if (licence.getVerified_status() == 3) {
             ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_FAIL, "认证失败", licence.getVerified_msg());
@@ -180,7 +196,6 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
             ResultDialogFragment dialogFragment = ResultDialogFragment.newInstance(ResultDialogFragment.RESULT_SUCCESS, "认证成功", licence.getVerified_msg());
             dialogFragment.show(getSupportFragmentManager(), ResultDialogFragment.class.getSimpleName());
         }
-
     }
 
     @Override

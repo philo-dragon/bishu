@@ -1,10 +1,10 @@
-package com.kaiyi.app.service.impl;
+package com.bishu.app.service.impl;
 
 import android.content.Context;
 import android.location.Location;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.kaiyi.app.constant.LocationManager;
+import com.bishu.app.constant.LocationManager;
 import com.pfl.common.service.IAppModelLocationService;
 import com.pfl.common.utils.RouteUtils;
 

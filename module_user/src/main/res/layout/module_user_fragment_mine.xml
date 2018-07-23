@@ -43,7 +43,7 @@
                     android:layout_height="68dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@drawable/module_user_ic_default_photo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -103,8 +103,8 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text='@{userInfo.id_verified==0?@string/module_user_str_unverified:@string/module_user_str_verified}'
-                    android:textColor='@{userInfo.id_verified==0?@color/module_user_mine_unverified:@color/module_user_mine_verified}'
+                    android:text="@{viewModel.getAuthResult(userInfo.id_verified)}"
+                    android:textColor='@{viewModel.getTextColor(userInfo.id_verified)}'
                     android:textSize="15dp"
                     tools:text="未认证" />
 
@@ -144,8 +144,8 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text='@{userInfo.driver_verified==0?@string/module_user_str_unverified:@string/module_user_str_verified}'
-                    android:textColor='@{userInfo.driver_verified==0?@color/module_user_mine_unverified:@color/module_user_mine_verified}'
+                    android:text="@{viewModel.getAuthResult(userInfo.driver_verified)}"
+                    android:textColor='@{viewModel.getTextColor(userInfo.driver_verified)}'
                     android:textSize="15dp" />
 
             </RelativeLayout>
@@ -180,8 +180,8 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text='@{userInfo.car_verified==0?@string/module_user_str_unverified:@string/module_user_str_verified}'
-                    android:textColor='@{userInfo.car_verified==0?@color/module_user_mine_unverified:@color/module_user_mine_verified}'
+                    android:text="@{viewModel.getAuthResult(userInfo.car_verified)}"
+                    android:textColor='@{viewModel.getTextColor(userInfo.car_verified)}'
                     android:textSize="15dp" />
 
             </RelativeLayout>

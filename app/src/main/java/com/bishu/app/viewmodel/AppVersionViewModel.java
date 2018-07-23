@@ -1,6 +1,6 @@
-package com.kaiyi.app.viewmodel;
+package com.bishu.app.viewmodel;
 
-import com.kaiyi.app.view.AppVersionView;
+import com.bishu.app.view.AppVersionView;
 import com.pfl.common.entity.base.HttpResponse;
 import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.http.RetrofitService;
