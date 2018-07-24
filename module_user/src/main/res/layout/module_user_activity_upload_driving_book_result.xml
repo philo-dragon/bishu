@@ -7,7 +7,7 @@
 
         <variable
             name="carLicence"
-            type="com.pfl.common.entity.module_user.CarLicence" />
+            type="com.pfl.common.entity.module_user.CarLicence.CarLicenceBean" />
 
         <variable
             name="viewModel"

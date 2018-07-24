@@ -93,12 +93,7 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
                 RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_LICENCE_RESULT);
             }
         } else if (i == R.id.module_user_rl_car_auth) {
-            UserInfo userInfo = ModuleUserRouteService.getUserInfo();
-            if (userInfo.getCar_verified() == 0) {
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK);
-            } else {
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_UPLOAD_DRIVING_BOOK_RESULT);
-            }
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_CAR);
         } else if (i == R.id.module_user_rl_setting) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_SETTING);
         } else if (i == R.id.module_user_rl_intelligent_hardware) {

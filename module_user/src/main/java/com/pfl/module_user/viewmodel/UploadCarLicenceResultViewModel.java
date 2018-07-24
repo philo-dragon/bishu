@@ -29,14 +29,14 @@ public class UploadCarLicenceResultViewModel {
         this.view = view;
     }
 
-    public void getIdentity() {
+    public void getIdentity(String id) {
         service
-                .getCarLicence("get", ModuleUserRouteService.getUser().getUid())
-                .compose(RxSchedulers.<HttpResponse<CarLicence>>compose())
+                .getCarLicence("get", id)
+                .compose(RxSchedulers.<HttpResponse<CarLicence.CarLicenceBean>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new BaseObserver<HttpResponse<CarLicence>>() {
+                .subscribe(new BaseObserver<HttpResponse<CarLicence.CarLicenceBean>>() {
                     @Override
-                    public void onSuccess(HttpResponse<CarLicence> response) {
+                    public void onSuccess(HttpResponse<CarLicence.CarLicenceBean> response) {
                         view.onSuccess(response.getData());
                     }
                 });

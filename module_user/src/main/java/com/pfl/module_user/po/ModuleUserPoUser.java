@@ -1,5 +1,6 @@
 package com.pfl.module_user.po;
 
+import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.pfl.common.BR;
@@ -9,7 +10,7 @@ import com.pfl.common.entity.base.BaseEntyty;
  * Created by Administrator on 2018\4\8 0008.
  */
 
-public class ModuleUserPoUser extends BaseEntyty {
+public class ModuleUserPoUser extends BaseObservable {
 
     private String account = "";
     private String password = "";

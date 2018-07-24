@@ -10,10 +10,12 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.base.BaseEvent;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.StorageToken;
 import com.pfl.common.utils.BottomDialogManager;
 import com.pfl.common.utils.DialogManager;
+import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
@@ -77,7 +79,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         pictureHelper.setOnSelectPictureSuccess(new SelectPictureHelper.OnSelectPictureSuccess() {
             @Override
             public void onSelected(String path, Bitmap bitmap) {
-                if(mStorageToken == null){
+                if (mStorageToken == null) {
                     return;
                 }
                 showUploadDialog();
@@ -161,7 +163,7 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
     }
 
     @Override
-    public void onSuccess(CarLicence licence) {
+    public void onSuccess(CarLicence.CarLicenceBean licence) {
 
     }
 
@@ -182,6 +184,8 @@ public class ModuleUserUploadDrivingBookActivity extends BaseActivity<ModuleUser
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+        BaseEvent<CarLicence.CarLicenceBean> baseEvent = new BaseEvent();
+        EventBusUtil.postMessage(baseEvent);
     }
 
     @Override

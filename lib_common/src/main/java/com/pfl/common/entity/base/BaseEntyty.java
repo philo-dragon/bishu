@@ -1,14 +1,11 @@
 package com.pfl.common.entity.base;
 
-import android.databinding.BaseObservable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 /**
  * Created by rocky on 2018/4/8.
  */
-
-public abstract class BaseEntyty extends BaseObservable {
-
-    public static final int BASE_ITEM_TYPE = 0x4d;
+public abstract class BaseEntyty implements MultiItemEntity {
 
     private int itemType;
 

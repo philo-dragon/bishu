@@ -59,9 +59,8 @@ public class ModuleUserFeedBackActivity extends BaseActivity<ModuleUserActivityF
 
     @Override
     public void feedbackSuccess() {
-
         ToastUtils.showShort("提交成功!");
-
+        finish();
     }
 
     @Override

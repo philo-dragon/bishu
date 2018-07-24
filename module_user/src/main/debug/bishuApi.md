@@ -3,6 +3,8 @@
 
 | Modified By | Date | Change |
 |----|----|:-----|
+| shiqingshuai   | 20180714  | 1、返回参数code增加 406、410 |
+| shiqingshuai   | 20180711  | 1、增加/user/sign 签到接口  |
 | shiqingshuai   | 20180710  | 1、更新了/user/devices、/user/device接口请求参数。2、新增解绑用户设备接口  |
 | shiqingshuai  | 20180708   | 1、新增/user/car_licences 获取车辆列表接口。2、更新了/storage_callback 接口  |
 |shiqingshuai   | 20180707  | 1、/user/identity /user/driver_licence更新了字段  |
@@ -89,6 +91,9 @@
 |  | int | no | 402,用户不存在 |
 |  | int | no | 403,登录密码错误|
 |  | int | no | 404,注册使用的邀请码无效 |
+|  | int | no | 405,每日签到重复 |
+|  | int | no | 406, 验证码错误|
+|  | int | no | 410, 设备已经被绑定|
 |  | int | no | 430,表示注册的手机号在数据库中已存在 |
 |  | int | no | 433,表示无权限进行此操作 |
 | msg | string | no  | 接口提示信息 |
@@ -135,6 +140,25 @@
 
 ---
 
+### 每日签到
+
+```
+/user/sign
+参数:
+{
+  'action':'post',
+  '全局参数'
+}
+返回值
+{
+  'code':200
+}
+```
+
+---
+
+---
+
 ### 我的积分
 
 ```
@@ -164,6 +188,8 @@
 参数:
 {
   'action':'get',
+  'page': 0,
+  'page_size': 10,
   '全局参数'
 }
 返回值
@@ -171,6 +197,12 @@
   'code':200,
   'msg':'success',
   'data':{
+    "has_next":0,
+    "page_index":0,
+    "row_start":0,
+    "total_count":1,
+    "page_count":1,
+    "page_size": 10,
     'list':[
       {
         'title':'xxxx',
@@ -183,6 +215,16 @@
 }
 
 ```
+>返回参数说明
+
+| field | type | null |  desc |
+|----|:-----|:-------|:------|
+| has_next | int | no  |0表示没有下一页，1表示有下一页|
+| page_index | int | no  | 当前第几页|
+| row_start | int  | no  | 起始行|
+| total_count |  int  | no | 总行数  |
+| page_count  | int  | no  | 总行数 |
+| page_size   | int  | no  | 每页数量  |
 
 ---
 
@@ -202,14 +244,18 @@
   'code':200,
   'msg':'success',
   'data':{
-    'total':100,
-    'page':0,
-    'page_size':10,
+    "has_next":0,
+    "page_index":0,
+    "row_start":0,
+    "total_count":1,
+    "page_count":1,
+    "page_size": 10,
     'list':[
       {
-        'start_time':11234121,
-        'end_time':11234121,
-        'sale_status':0,
+        'id':'xxxxx',//行程ID
+        'start_ts':11234121,
+        'end_ts':11234121,
+        'sale_status':0,//0表示未售，1表示已售
         'score_add':5,
       },
       ...
@@ -234,6 +280,8 @@
   'msg':'success',
   'data':{
       'avatar':'http://xxxx',
+      'mobile': 'xxxxxx',
+      'referral_code': 'xxxxx',//用户的推荐码(邀请码)
       'nickname':'',
       'gender':1,
       'id_verified':0,
@@ -285,7 +333,7 @@
 /user
 参数
 {
-  'action':'post',
+  'action':'get',
   'mobile':'13888888888',
   '全局参数'
 }
@@ -535,7 +583,9 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
   'data':{
     'weather':{
         'temperature':'13',
-        'desc':'多云',
+        'icon_url': 'xxxxxxx',
+        'condition_id': '32',
+        'desc':'多云 东风',
     },
     'location':{
       'city':'北京',
@@ -582,7 +632,7 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 }
 返回
 {
-  'status':200,
+  'code':200,
   'msg':'success',
   'data':{
     'AccessKeyId':'STS.3pYjsdgdgagdasdg',
@@ -821,7 +871,7 @@ data.uid 为空字符串时表示用户未注册，不为空时用户已注册
 /sms_code
 参数
 {
-  'action':'post'
+  'action':'post',
   'mobile':'13800000000'
 }
 返回

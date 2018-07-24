@@ -7,7 +7,5 @@ import com.pfl.common.entity.module_user.CarLicence;
  */
 
 public interface UploadCarLicenceView {
-
-    void onSuccess(CarLicence licence);
-
+    void onSuccess(CarLicence.CarLicenceBean licence);
 }

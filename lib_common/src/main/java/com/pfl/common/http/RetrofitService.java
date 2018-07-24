@@ -244,8 +244,17 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/car_licence")
-    Observable<HttpResponse<CarLicence>> getCarLicence(@Field("action") String action,
-                                                       @Field("uid") String uid);
+    Observable<HttpResponse<CarLicence.CarLicenceBean>> getCarLicence(@Field("action") String action,
+                                                       @Field("id") String uid);
+
+    /**
+     * 获取车辆行驶证列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/car_licences")
+    Observable<HttpResponse<CarLicence>> getCarLicenceList(@Field("action") String action);
 
     /**
      * 获取oss配置及token

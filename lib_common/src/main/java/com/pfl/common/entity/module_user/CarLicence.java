@@ -1,10 +1,27 @@
 package com.pfl.common.entity.module_user;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.pfl.common.entity.base.BaseEntyty;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2018\6\25 0025.
  */
 
 public class CarLicence {
+
+    private List<CarLicenceBean> list;
+
+    public List<CarLicenceBean> getList() {
+        return list;
+    }
+
+    public void setList(List<CarLicenceBean> list) {
+        this.list = list;
+    }
+
+    public static class CarLicenceBean extends BaseEntyty {
 
     /* 'verified_status':2,
      'plate_number':'2321'
@@ -16,94 +33,104 @@ public class CarLicence {
      'back_img':'http://xx',
      'front_img':'http://xxx'*/
 
-    private int verified_status;
-    private String verified_msg;
-    private String plate_number;
-    private String owner;
-    private String id_number;
-    private String engine_no;
-    private String vehicle_type;
-    private String vehicle_model;
-    private String back_img;
-    private String front_img;
+        private int verified_status;
+        private String id;
+        private String verified_msg;
+        private String owner;
+        private String id_number;
+        private String plate_number;
+        private String engine_no;
+        private String vehicle_type;
+        private String vehicle_model;
+        private String back_img;
+        private String front_img;
 
-    public String getVerified_msg() {
-        return verified_msg;
-    }
+        public String getId() {
+            return id;
+        }
 
-    public void setVerified_msg(String verified_msg) {
-        this.verified_msg = verified_msg;
-    }
+        public void setId(String id) {
+            this.id = id;
+        }
 
-    public int getVerified_status() {
-        return verified_status;
-    }
+        public String getVerified_msg() {
+            return verified_msg;
+        }
 
-    public void setVerified_status(int verified_status) {
-        this.verified_status = verified_status;
-    }
+        public void setVerified_msg(String verified_msg) {
+            this.verified_msg = verified_msg;
+        }
 
-    public String getPlate_number() {
-        return plate_number;
-    }
+        public int getVerified_status() {
+            return verified_status;
+        }
 
-    public void setPlate_number(String plate_number) {
-        this.plate_number = plate_number;
-    }
+        public void setVerified_status(int verified_status) {
+            this.verified_status = verified_status;
+        }
 
-    public String getOwner() {
-        return owner;
-    }
+        public String getPlate_number() {
+            return plate_number;
+        }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+        public void setPlate_number(String plate_number) {
+            this.plate_number = plate_number;
+        }
 
-    public String getId_number() {
-        return id_number;
-    }
+        public String getOwner() {
+            return owner;
+        }
 
-    public void setId_number(String id_number) {
-        this.id_number = id_number;
-    }
+        public void setOwner(String owner) {
+            this.owner = owner;
+        }
 
-    public String getEngine_no() {
-        return engine_no;
-    }
+        public String getId_number() {
+            return id_number;
+        }
 
-    public void setEngine_no(String engine_no) {
-        this.engine_no = engine_no;
-    }
+        public void setId_number(String id_number) {
+            this.id_number = id_number;
+        }
 
-    public String getVehicle_type() {
-        return vehicle_type;
-    }
+        public String getEngine_no() {
+            return engine_no;
+        }
 
-    public void setVehicle_type(String vehicle_type) {
-        this.vehicle_type = vehicle_type;
-    }
+        public void setEngine_no(String engine_no) {
+            this.engine_no = engine_no;
+        }
 
-    public String getVehicle_model() {
-        return vehicle_model;
-    }
+        public String getVehicle_type() {
+            return vehicle_type;
+        }
 
-    public void setVehicle_model(String vehicle_model) {
-        this.vehicle_model = vehicle_model;
-    }
+        public void setVehicle_type(String vehicle_type) {
+            this.vehicle_type = vehicle_type;
+        }
 
-    public String getBack_img() {
-        return back_img;
-    }
+        public String getVehicle_model() {
+            return vehicle_model;
+        }
 
-    public void setBack_img(String back_img) {
-        this.back_img = back_img;
-    }
+        public void setVehicle_model(String vehicle_model) {
+            this.vehicle_model = vehicle_model;
+        }
 
-    public String getFront_img() {
-        return front_img;
-    }
+        public String getBack_img() {
+            return back_img;
+        }
 
-    public void setFront_img(String front_img) {
-        this.front_img = front_img;
+        public void setBack_img(String back_img) {
+            this.back_img = back_img;
+        }
+
+        public String getFront_img() {
+            return front_img;
+        }
+
+        public void setFront_img(String front_img) {
+            this.front_img = front_img;
+        }
     }
 }

@@ -8,6 +8,6 @@ import com.pfl.common.entity.module_user.CarLicence;
 
 public interface UploadCarLicenceResultView {
 
-    void onSuccess(CarLicence licence);
+    void onSuccess(CarLicence.CarLicenceBean licence);
 
 }
