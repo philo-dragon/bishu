@@ -12,6 +12,7 @@ import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * Created by Administrator on 2018\7\7 0007.
@@ -44,6 +45,18 @@ public class BiShuApp extends BaseApplication {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        /**
+         注意: 即使您已经在AndroidManifest.xml中配置过appkey和channel值，
+         也需要在App代码中调用初始化接口（如需要使用AndroidManifest.xml中配置好的appkey和channel值，
+         UMConfigure.init调用中appkey和channel参数请置为null）。
+         */
+        UMConfigure.init(this, "5b574a098f4a9d39370000a8", "BiShu", UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.pfl.common.utils.StatusBarUtil;
 import com.pfl.common.utils.TitleBarUtil;
 import com.pfl.common.weidget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by rocky on 2018/4/2.
@@ -56,6 +57,18 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected void onDestroy() {
         super.onDestroy();
         SwipeBackHelper.onDestroy(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void setContentView() {

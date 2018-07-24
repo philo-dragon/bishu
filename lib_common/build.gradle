@@ -127,4 +127,8 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    // uemng统计
+    api 'com.umeng.sdk:common:1.5.0'
+    api 'com.umeng.sdk:analytics:7.5.0'
+
 }
