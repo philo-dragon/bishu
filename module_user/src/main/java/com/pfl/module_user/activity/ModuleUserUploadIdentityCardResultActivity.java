@@ -188,12 +188,16 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
     @Override
     public void onSuccess(final UserIndentity indentity) {
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(indentity.getFront_img())
+                .builder()
+                .url(indentity.getFront_img())
+                .placeholder(R.drawable.module_user_ic_identity_card_front)
                 .imageView(mBinding.moduleUserImgUploadFileFrontImg)
                 .build());
 
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(indentity.getBack_img())
+                .builder()
+                .url(indentity.getBack_img())
+                .placeholder(R.drawable.module_user_ic_identity_card_back)
                 .imageView(mBinding.moduleUserImgUploadFileBackImg)
                 .build());
 

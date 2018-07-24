@@ -184,7 +184,9 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
     @Override
     public void onSuccess(final CarLicence.CarLicenceBean licence) {
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(licence.getFront_img())
+                .builder()
+                .url(licence.getFront_img())
+                .placeholder(R.drawable.module_user_ic_driving_book)
                 .imageView(mBinding.moduleUserImgDrivingBook)
                 .build());
 

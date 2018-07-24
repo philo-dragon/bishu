@@ -11,12 +11,17 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
+        multiDexEnabled true
         // ARouter 配置
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
             }
         }
+
+        manifestPlaceholders = [
+                qq_id: "XXXXXX"//需要更换为自己的qqId
+        ]
 
     }
     dataBinding {
@@ -38,6 +43,8 @@ dependencies {
     } else {
         implementation project(':module_user')
     }
+
+    /*implementation 'me.shaohui.shareutil:shareutil:1.3.8'*///分享组件
     // ARouter 配置 3
     annotationProcessor rootProject.ext.deps.arouter_compiler
     annotationProcessor rootProject.ext.deps.dagger_compiler

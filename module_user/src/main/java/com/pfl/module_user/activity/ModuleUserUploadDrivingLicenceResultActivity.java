@@ -185,12 +185,16 @@ public class ModuleUserUploadDrivingLicenceResultActivity extends BaseActivity<M
         mBinding.setUserLicence(licence);
 
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(licence.getFront_img())
+                .builder()
+                .url(licence.getFront_img())
+                .placeholder(R.drawable.module_user_ic_driving_licence_card_front)
                 .imageView(mBinding.moduleUserIcDrivingLicenceCardFrontImg)
                 .build());
 
         imageLoader.loadImage(mContext, ImageConfigImpl
-                .builder().url(licence.getBack_img())
+                .builder()
+                .url(licence.getBack_img())
+                .placeholder(R.drawable.module_user_ic_driving_licence_card_back)
                 .imageView(mBinding.moduleUserIcDrivingLicenceCardBackImg)
                 .build());
 
