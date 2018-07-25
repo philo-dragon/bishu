@@ -102,6 +102,10 @@
             android:name=".activity.ModuleUserMessageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_message" />
+        <activity
+            android:name=".activity.ModuleUserForgetPasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_forget_password"/>
     </application>
 
 </manifest>

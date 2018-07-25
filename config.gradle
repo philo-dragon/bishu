@@ -13,7 +13,7 @@ ext {
     depsVersion = [
 
             support               : "27.0.2",
-            constraint            : "1.0.2",
+            constraint            : "1.1.2",
             retrofit              : "2.10",
             arouter               : "1.2.4",
             arouter_compiler      : "1.1.4",

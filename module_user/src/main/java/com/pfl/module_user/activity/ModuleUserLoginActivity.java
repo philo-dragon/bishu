@@ -25,6 +25,7 @@ import com.pfl.module_user.view.LoginView;
 import com.pfl.module_user.viewmodel.LoginViewModel;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -68,6 +69,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
 
         RxClickUtil.RxClick(mBinding.inLoginView1.moduleUserCvNext, this);
         RxClickUtil.RxClick(mBinding.inLoginView2.moduleUserCvLogin, this);
+        RxClickUtil.RxClick(mBinding.inLoginView2.moduleUserTvForgetPassword, this);
 
 
         mBinding.inLoginView1.moduleUserEtMobileNo.addTextChangedListener(new TextWatcherAdapter() {
@@ -112,8 +114,11 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
                     && password.length() <= 20) {
                 viewModel.requestData(mobile, password);
             }
+        } else if (id == R.id.module_user_tv_forget_password) {
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("mobile", mobile);
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FORGET_PASSWORD, paramMap);
         }
-
     }
 
     public boolean checkMobile() {

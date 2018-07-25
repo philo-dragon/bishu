@@ -67,6 +67,17 @@ public class WalletViewModel {
                         }
 
                     }
+
+                    @Override
+                    public void onException(ExceptionReason reason) {
+                        super.onException(reason);
+                        if (page == 0) {
+                            view.onRefreshComplete(false);
+                            view.onFail(ExceptionReason.EMPTY_DATA);
+                        } else {
+                            view.onLoadmoreComplete(false);
+                        }
+                    }
                 });
     }
 }

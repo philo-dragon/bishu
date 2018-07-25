@@ -103,21 +103,6 @@ public class BaseObserver<T extends HttpResponse> implements Observer<T> {
      * @param reason
      */
     public void onException(ExceptionReason reason) {
-        switch (reason) {
-            case CONNECT_ERROR:
-                break;
-            case NOT_NETWORK:
-                break;
-            case CONNECT_TIMEOUT:
-                break;
-            case BAD_NETWORK:
-                break;
-            case PARSE_ERROR:
-                break;
-            case UNKNOWN_ERROR:
-            default:
-                break;
-        }
     }
 
     /**

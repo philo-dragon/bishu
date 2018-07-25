@@ -1,6 +1,5 @@
 package com.pfl.module_user.view;
 
-import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.utils.BaseObserver;
 

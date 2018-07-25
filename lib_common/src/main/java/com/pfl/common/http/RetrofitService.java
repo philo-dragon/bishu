@@ -245,7 +245,7 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("app/api/v1/user/car_licence")
     Observable<HttpResponse<CarLicence.CarLicenceBean>> getCarLicence(@Field("action") String action,
-                                                       @Field("id") String uid);
+                                                                      @Field("id") String uid);
 
     /**
      * 获取车辆行驶证列表
@@ -264,6 +264,17 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("app/api/v1/storage_token")
     Observable<HttpResponse<StorageToken>> getStorageToken(@Field("action") String action);
+
+    /**
+     * 忘记密码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/pwd")
+    Observable<HttpResponse<Object>> forgetPassword(@Field("action") String action,
+                                                    @Field("mobile") String mobile,
+                                                    @Field("pwd") String pwd);
 
 
 }

@@ -82,7 +82,12 @@ public class ModuleUserAddCarActivity extends BaseActivity<ModuleUserActivityAdd
 
     @Override
     public void initData() {
-        viewModel.getCarLicenceList();
+        mBinding.moduleRefreshLayout.commonRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);
+            }
+        });
     }
 
     @Override

@@ -67,14 +67,13 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
     @Override
     public void initView() {
         mBinding.setScore(score);
+        setRecyclerView();
+        setRefreshView();
     }
 
     @Override
     public void setToolBar() {
         setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
-        setRecyclerView();
-        setRefreshView();
-
         mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分商城") {
             @Override
             public void performAction(View view) {

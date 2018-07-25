@@ -47,6 +47,7 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_MANAGER = "/module_user/activity_intelligent_hardware_manager";
     public static final String MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST = "/module_user/activity_intelligent_hardware_list";
     public static final String MODULE_USER_ACTIVITY_INVITE_FIRENDS = "/module_user/activity_invite_firends";
+    public static final String MODULE_USER_ACTIVITY_FORGET_PASSWORD = "/module_user/activity_forget_password";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";
