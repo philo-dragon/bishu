@@ -69,7 +69,7 @@ public class ModuleUserIntelligentHardwareListActivity extends BaseActivity<Modu
         } else if (id == R.id.module_user_cv_jing_info) {
             BottomDialogManager.unBindDialog(getSupportFragmentManager(), this);
         } else if (id == R.id.module_user_cv_add_device) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FIND_DEVICES);
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_HARDWARE);
         }
     }
 

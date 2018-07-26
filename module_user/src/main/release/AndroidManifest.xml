@@ -105,7 +105,10 @@
         <activity
             android:name=".activity.ModuleUserForgetPasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_forget_password"/>
+            android:label="@string/module_user_str_forget_password" />
+        <activity
+            android:name=".activity.ModuleUserAddHardwareActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>
