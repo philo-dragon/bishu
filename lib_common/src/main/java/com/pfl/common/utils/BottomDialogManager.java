@@ -179,6 +179,66 @@ public class BottomDialogManager {
 
     }
 
+    public static BaseBottomDialog showShareDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
+
+        final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
+
+        BottomDialog.ViewListener viewListener = new BottomDialog.ViewListener() {
+
+            @Override
+            public void bindView(View v) {
+                v.findViewById(R.id.lib_common_tv_wechat).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_moment).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+
+                v.findViewById(R.id.lib_common_tv_qq).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+                v.findViewById(R.id.lib_common_tv_qzone).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+                v.findViewById(R.id.lib_common_tv_sina).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                        listener.onClick(v);
+                    }
+                });
+                v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomDialog.dismiss();
+                    }
+                });
+            }
+        };
+
+        setBottomDialog(bottomDialog, viewListener, R.layout.lib_common_share_dialog_layout);
+
+        return bottomDialog;
+
+    }
+
     private static void setBottomDialog(BottomDialog bottomDialog, BottomDialog.ViewListener viewListener, int layoutId) {
         bottomDialog.setViewListener(viewListener)
                 .setLayoutRes(layoutId)

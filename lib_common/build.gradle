@@ -129,6 +129,11 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    // QQ、微信、微博登陆和分享
+    api(rootProject.ext.deps.SocialHelper) {
+        exclude group: 'com.android.support'
+    }
+
     // uemng统计
     api 'com.umeng.sdk:common:1.5.0'
     api 'com.umeng.sdk:analytics:7.5.0'

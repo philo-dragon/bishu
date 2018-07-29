@@ -40,7 +40,7 @@ public class ModuleUserLoginActivity extends BaseActivity<ModuleUserActivityLogi
 
     @Override
     protected boolean isSwipeBackEnable() {
-        return ModuleUserRouteService.getUser() != null;
+        return false;
     }
 
     @Override

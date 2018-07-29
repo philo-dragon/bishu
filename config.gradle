@@ -72,6 +72,8 @@ ext {
 
             oss_android_sdk       : "2.8.3",
 
+            SocialHelper          : "v1.0.9",
+
     ]
 
     deps = [
@@ -144,6 +146,8 @@ ext {
             statusbarutil         : "com.jaeger.statusbarutil:library:${depsVersion.statusbarutil}",//状态栏颜色修改
 
             oss_android_sdk       : "com.aliyun.dpa:oss-android-sdk:${depsVersion.oss_android_sdk}",//阿里云OSS 服务
+
+            SocialHelper          : "com.github.arvinljw:SocialHelper:${depsVersion.SocialHelper}",//QQ、微信、微博登陆和分享
 
     ]
 

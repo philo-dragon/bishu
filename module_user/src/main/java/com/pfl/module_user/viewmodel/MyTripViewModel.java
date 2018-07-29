@@ -5,6 +5,7 @@ import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
 import com.pfl.common.utils.BaseObserver;
+import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.view.MyTripView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.FragmentEvent;
@@ -47,8 +48,10 @@ public class MyTripViewModel {
                 .compose(RxSchedulers.<HttpResponse<MineTrip>>compose())
                 .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<MineTrip>>() {
+
                     @Override
-                    public void onNext(HttpResponse<MineTrip> response) {
+                    public void onSuccess(HttpResponse<MineTrip> response) {
+                        super.onSuccess(response);
                         List<MineTrip.MineTripBean> data = response.getData().getList();
                         view.onSuccess(page == 0, data);
                         if (page == 0) {
@@ -58,6 +61,17 @@ public class MyTripViewModel {
                             }
                         } else {
                             view.onLoadmoreComplete(response.getData().getHas_next() != 0);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(HttpResponse<MineTrip> response) {
+                        super.onFail(response);
+                        view.onFail(ExceptionReason.EMPTY_DATA);
+                        switch (response.getCode()) {
+                            case 401://表示未登录
+                                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
+                                break;
                         }
                     }
 

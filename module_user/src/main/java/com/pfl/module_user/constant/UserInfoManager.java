@@ -61,10 +61,23 @@ public class UserInfoManager {
     }
 
     public UserInfo getUserInfo() {
+
+        if (UserInfoManager.userInfo == null) {
+            String strUser = SPUtils.getInstance("bishu").getString("userInfo", "");
+            if (!strUser.equals("")) {
+                Gson gson = new Gson();
+                UserInfo jsonUser = gson.fromJson(strUser, new TypeToken<UserInfo>() {
+                }.getType());
+                UserInfoManager.userInfo = jsonUser;
+            }
+        }
+
         return userInfo;
     }
 
     public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+        Gson gson = new Gson();
+        SPUtils.getInstance("bishu").put("userInfo", gson.toJson(userInfo));
+        UserInfoManager.userInfo = userInfo;
     }
 }

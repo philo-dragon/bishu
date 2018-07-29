@@ -1,9 +1,13 @@
 package com.pfl.module_user.viewmodel;
 
 import com.pfl.common.entity.base.HttpResponse;
+import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.entity.module_user.Score;
+import com.pfl.common.entity.module_user.User;
+import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.service.ModuleUserRouteService;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.view.HomeView;
@@ -46,5 +50,42 @@ public class HomeViewModel {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("score", score);
         RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET, parameters);
+    }
+
+    public void showDatePicker() {
+        view.showDatePicker();
+    }
+
+    public void requestData(String uid) {
+        service
+                .userInfo("get", uid)
+                .compose(RxSchedulers.<HttpResponse<UserInfo>>compose())
+                .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribe(new BaseObserver<HttpResponse<UserInfo>>() {
+                    @Override
+                    public void onSuccess(HttpResponse<UserInfo> response) {
+                        view.onFindUserInfo(response.getData());
+                        RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INVITE_FIRENDS);
+                    }
+
+                    @Override
+                    public void onFail(HttpResponse<UserInfo> response) {
+                        super.onFail(response);
+                        switch (response.getCode()) {
+                            case 401://表示未登录
+                                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
+                                break;
+                        }
+                    }
+                });
+    }
+
+    public void inviteFriend() {
+        if (ModuleUserRouteService.getUserInfo() == null) {
+            User user = ModuleUserRouteService.getUser();
+            requestData(user.getUid());
+        } else {
+            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INVITE_FIRENDS);
+        }
     }
 }

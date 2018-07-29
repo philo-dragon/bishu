@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="18dp"
-                    android:text="实名认证"
+                    android:text="昵称"
                     android:textColor="#63727D"
                     android:textSize="16dp" />
 

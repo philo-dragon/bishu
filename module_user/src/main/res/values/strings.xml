@@ -38,6 +38,8 @@
     <string name="module_user_str_invite_frineds">邀请好友</string>
     <string name="module_user_str_message">消息</string>
 
+    <string name="module_user_str_forget_password_code">%1$s 已注册，请获取验证码以便找回</string>
+    <string name="module_user_str_forget_password_password">%1$s 已注册，请输入新密码更改</string>
 
     <string name="module_user_str_registed_hint">%1$s 已注册\n您可以输入密码直接登录</string>
     <string name="module_user_str_get_check_code">%1$s 未注册，请获取验证码以便注册</string>

@@ -8,4 +8,6 @@ public interface ForgetPasswordView {
 
     void onSuccess();
 
+    void smsVerifyResult(boolean result);
+
 }

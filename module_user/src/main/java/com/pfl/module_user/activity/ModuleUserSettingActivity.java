@@ -163,7 +163,11 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
 
-                DataCleanManager.cleanApplicationData(App.getInstance(), DataCleanManager.getCacheSize(getCacheDir()));
+                DataCleanManager.cleanCustomCache("/data/data/" + getPackageName() + "/shared_prefs");
+                DataCleanManager.cleanCustomCache(getExternalFilesDir(null).getAbsolutePath());
+                DataCleanManager.cleanCustomCache(getExternalCacheDir().getAbsolutePath());
+                DataCleanManager.cleanCustomCache(Glide.getPhotoCacheDir(mContext).getAbsolutePath());
+                DataCleanManager.cleanCustomCache(SelectPictureHelper.getParentFile().getAbsolutePath());
 
                 e.onNext("0.0B");
 

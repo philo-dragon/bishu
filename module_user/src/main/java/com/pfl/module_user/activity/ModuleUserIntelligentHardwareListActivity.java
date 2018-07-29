@@ -1,5 +1,6 @@
 package com.pfl.module_user.activity;
 
+import android.Manifest;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -7,6 +8,7 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.Device;
 import com.pfl.common.utils.BottomDialogManager;
+import com.pfl.common.utils.PermissionUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.utils.RxClickUtil;
 import com.pfl.module_user.R;
@@ -17,9 +19,15 @@ import com.pfl.module_user.di.module_intelligent_hardware.IntelligentHardwareMod
 import com.pfl.module_user.view.IntelligentHardwareView;
 import com.pfl.module_user.viewmodel.IntelligentHardwareViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import me.weyye.hipermission.PermissionItem;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_INTELLIGENT_HARDWARE_LIST)
 public class ModuleUserIntelligentHardwareListActivity extends BaseActivity<ModuleUserActivityIntelligentHardwareListBinding> implements IntelligentHardwareView, View.OnClickListener {
@@ -69,7 +77,7 @@ public class ModuleUserIntelligentHardwareListActivity extends BaseActivity<Modu
         } else if (id == R.id.module_user_cv_jing_info) {
             BottomDialogManager.unBindDialog(getSupportFragmentManager(), this);
         } else if (id == R.id.module_user_cv_add_device) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_HARDWARE);
+            requestPermission();
         }
     }
 
@@ -81,5 +89,25 @@ public class ModuleUserIntelligentHardwareListActivity extends BaseActivity<Modu
     @Override
     public void onAddSuccess() {
 
+    }
+
+    private void requestPermission() {
+
+        List<PermissionItem> permissionItems = new ArrayList<>();
+        permissionItems.add(new PermissionItem(Manifest.permission.CAMERA, "拍照权限", R.drawable.permission_ic_camera));
+        permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储权限", R.drawable.permission_ic_storage));
+
+        PermissionUtil.requestPermission(permissionItems, new PermissionUtil.SimplePermissionCallback() {
+
+            @Override
+            public void onFinish() {
+                Observable.just(1).delay(100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_ADD_HARDWARE);
+                    }
+                });
+            }
+        });
     }
 }

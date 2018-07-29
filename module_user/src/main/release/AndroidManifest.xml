@@ -95,7 +95,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_intelligent_hardware_list" />
         <activity
-            android:name=".activity.ModuleUserInviteFirendsActivity"
+            android:name=".activity.ModuleUserInviteFriendsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/module_user_str_invite_frineds" />
         <activity

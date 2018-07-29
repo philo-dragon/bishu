@@ -1,24 +1,27 @@
 package com.pfl.module_user.fragment;
 
 
+import android.app.DatePickerDialog;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.pfl.common.base.BaseFragment;
 import com.pfl.common.base.LazyLoadBaseFragment;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.base.BaseEvent;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.User;
+import com.pfl.common.entity.module_user.UserInfo;
 import com.pfl.common.utils.AnimationManager;
 import com.pfl.common.utils.App;
 import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
+import com.pfl.module_user.constant.UserInfoManager;
 import com.pfl.module_user.databinding.ModuleUserFragmentHomeBinding;
 import com.pfl.module_user.di.module_home.DaggerHomeComponent;
 import com.pfl.module_user.di.module_home.HomeModule;
@@ -27,6 +30,8 @@ import com.pfl.module_user.viewmodel.HomeViewModel;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -106,5 +111,30 @@ public class ModuleUserHomeFragment extends LazyLoadBaseFragment<ModuleUserFragm
     @Override
     public void onSuccess(Score score) {
         mBinding.setScore(score);
+    }
+
+    @Override
+    public void onFindUserInfo(UserInfo userInfo) {
+        UserInfoManager.getInstance().setUserInfo(userInfo);
+    }
+
+    @Override
+    public void showDatePicker() {
+        Date date = new Date(System.currentTimeMillis());
+        //日历控件
+        DatePickerDialog dp = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int iyear, int monthOfYear, int dayOfMonth) {
+                long maxDate = datePicker.getMaxDate();//日历最大能设置的时间的毫秒值
+                int year = datePicker.getYear();//年
+                int month = datePicker.getMonth();//月-1
+                int dayOfMonth1 = datePicker.getDayOfMonth();//日*
+                //iyear:年，monthOfYear:月-1，dayOfMonth:日
+            }
+        }, date.getYear(), date.getMonth(), date.getDay());//2013:初始年份，2：初始月份-1 ，1：初始日期
+        dp.show();
+
+
+
     }
 }

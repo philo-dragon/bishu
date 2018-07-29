@@ -1,10 +1,13 @@
 package com.pfl.common.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 
 import java.util.Iterator;
 import java.util.Stack;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * Activity管理类
@@ -88,6 +91,7 @@ public class AppManager {
      * 结束所有Activity
      */
     public void finishAllActivity() {
+
         for (int i = 0, size = activityStack.size(); i < size; i++) {
             if (null != activityStack.get(i)) {
                 activityStack.get(i).finish();

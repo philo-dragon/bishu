@@ -15,6 +15,7 @@ public class UserInfo {
     private int id_verified;
     private int driver_verified;
     private int car_verified;
+    private String referral_code;
     private List<Device> devices;
 
     public String getAvatar() {
@@ -79,6 +80,14 @@ public class UserInfo {
 
     public void setDriver_verified(int driver_verified) {
         this.driver_verified = driver_verified;
+    }
+
+    public String getReferral_code() {
+        return referral_code;
+    }
+
+    public void setReferral_code(String referral_code) {
+        this.referral_code = referral_code;
     }
 
     public static class Device {
