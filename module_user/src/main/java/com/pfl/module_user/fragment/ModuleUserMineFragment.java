@@ -75,6 +75,7 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
     @Override
     public void onClick(View v) {
         if (checkUserLogined()) return;
+        if (checkUserInfoIsNull()) return;
         int i = v.getId();
         if (i == R.id.module_user_rl_header_view) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INITIAL_VALUE);
@@ -108,6 +109,10 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
             return true;
         }
         return false;
+    }
+    private boolean checkUserInfoIsNull() {
+        UserInfo userInfo = ModuleUserRouteService.getUserInfo();
+        return userInfo == null;
     }
 
     @Override

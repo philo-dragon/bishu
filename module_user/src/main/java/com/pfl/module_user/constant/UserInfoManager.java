@@ -58,6 +58,7 @@ public class UserInfoManager {
         user = null;
         userInfo = null;
         SPUtils.getInstance("bishu").remove("user");
+        SPUtils.getInstance("bishu").remove("userInfo");
     }
 
     public UserInfo getUserInfo() {

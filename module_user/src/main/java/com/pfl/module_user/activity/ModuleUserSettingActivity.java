@@ -163,6 +163,7 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
 
+                SPUtils.getInstance("bishu").clear(true);
                 DataCleanManager.cleanCustomCache("/data/data/" + getPackageName() + "/shared_prefs");
                 DataCleanManager.cleanCustomCache(getExternalFilesDir(null).getAbsolutePath());
                 DataCleanManager.cleanCustomCache(getExternalCacheDir().getAbsolutePath());
