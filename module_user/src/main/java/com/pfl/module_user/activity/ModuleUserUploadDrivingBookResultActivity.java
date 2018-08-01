@@ -102,6 +102,7 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
         });
 
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvCommit, this);
     }
 
     @Override
@@ -120,6 +121,8 @@ public class ModuleUserUploadDrivingBookResultActivity extends BaseActivity<Modu
         int i = v.getId();
         if (i == R.id.module_user_img_upload_file_front) {
             requestPermission(i);
+        } else if (i == R.id.module_user_cv_commit) {
+            finish();
         }
     }
 

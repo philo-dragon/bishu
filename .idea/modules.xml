@@ -3,12 +3,19 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\app\app.iml" filepath="D:\androidstudio3\bishu\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bishu.iml" filepath="$PROJECT_DIR$/bishu.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\bishu.iml" filepath="D:\androidstudio3\bishu\bishu.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\lib_common\lib_common.iml" filepath="D:\androidstudio3\bishu\lib_common\lib_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_permission/lib_permission.iml" filepath="$PROJECT_DIR$/lib_permission/lib_permission.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\lib_permission\lib_permission.iml" filepath="D:\androidstudio3\bishu\lib_permission\lib_permission.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_resource/lib_resource.iml" filepath="$PROJECT_DIR$/lib_resource/lib_resource.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\lib_resource\lib_resource.iml" filepath="D:\androidstudio3\bishu\lib_resource\lib_resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_zxing/lib_zxing.iml" filepath="$PROJECT_DIR$/lib_zxing/lib_zxing.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\lib_zxing\lib_zxing.iml" filepath="D:\androidstudio3\bishu\lib_zxing\lib_zxing.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_user/module_user.iml" filepath="$PROJECT_DIR$/module_user/module_user.iml" />
+      <module fileurl="file://D:\androidstudio3\bishu\module_user\module_user.iml" filepath="D:\androidstudio3\bishu\module_user\module_user.iml" />
     </modules>
   </component>
 </project>

@@ -49,6 +49,8 @@ public class RouteUtils {
     public static final String MODULE_USER_ACTIVITY_INVITE_FIRENDS = "/module_user/activity_invite_firends";
     public static final String MODULE_USER_ACTIVITY_FORGET_PASSWORD = "/module_user/activity_forget_password";
     public static final String MODULE_USER_ACTIVITY_ADD_HARDWARE = "/module_user/activity_add_hardware";
+    public static final String MODULE_USER_ACTIVITY_H5 = "/module_user/activity_h5";
+    public static final String MODULE_USER_ACTIVITY_MESSAGE = "/module_user/activity_message";
 
 
     public static final String MODULE_USER_FRAGMENT_MINE = "/module_user/fragment_mine";

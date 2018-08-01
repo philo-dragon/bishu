@@ -73,7 +73,7 @@ public class ModuleUserHomeFragment extends LazyLoadBaseFragment<ModuleUserFragm
         ImageView tvMesage = (ImageView) mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.ImageAction(R.drawable.module_user_ic_home_message) {
             @Override
             public void performAction(View view) {
-                Toast.makeText(App.getInstance(), "点击了消息", Toast.LENGTH_SHORT).show();
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MESSAGE);
             }
         });
         tvMesage.getLayoutParams().width = ConvertUtils.dp2px(33);
@@ -133,7 +133,6 @@ public class ModuleUserHomeFragment extends LazyLoadBaseFragment<ModuleUserFragm
             }
         }, date.getYear(), date.getMonth(), date.getDay());//2013:初始年份，2：初始月份-1 ，1：初始日期
         dp.show();
-
 
 
     }

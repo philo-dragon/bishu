@@ -98,6 +98,7 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileFront, this);
         RxClickUtil.RxClick(mBinding.moduleUserImgUploadFileBack, this);
+        RxClickUtil.RxClick(mBinding.moduleUserCvCommit, this);
     }
 
     @Override
@@ -118,6 +119,8 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
             requestPermission(i);
         } else if (i == R.id.module_user_img_upload_file_back) {
             requestPermission(i);
+        }else if (i == R.id.module_user_cv_commit) {
+            finish();
         }
     }
 

@@ -3,9 +3,13 @@ package com.pfl.module_user.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.module_user.MessageBean;
 import com.pfl.common.http.RxSchedulers;
+import com.pfl.common.utils.BaseObserver;
+import com.pfl.common.utils.RouteUtils;
 import com.pfl.common.weidget.CommonHeader;
 import com.pfl.module_user.R;
 import com.pfl.module_user.adapter.MessageAdapter;
@@ -18,6 +22,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -25,14 +30,14 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
+@Route(path = RouteUtils.MODULE_USER_ACTIVITY_MESSAGE)
 public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMessageBinding> implements MessageView {
-
-    private CommonHeader commonHeader;
 
     @Inject
     MessageViewModel viewModel;
     @Inject
     MessageAdapter messageAdapter;
+    private MessageAdapter multiTypeAdapter;
 
     @Override
     public int getContentView() {
@@ -57,18 +62,22 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
 
     @Override
     public void setToolBar() {
-
+        setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
     }
 
     @Override
     public void initData() {
-        mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);
+        mBinding.moduleRefreshLayout.commonRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);
+            }
+        });
     }
 
     private void setRecyclerView() {
-        commonHeader = new CommonHeader(mContext);
-        mBinding.moduleRefreshLayout.commonRefreshLayout.setRefreshHeader(commonHeader);
-        messageAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
+        multiTypeAdapter = new MessageAdapter();
+        this.messageAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
     }
@@ -77,17 +86,6 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-                Observable.just(1)
-                        .delay(500, TimeUnit.MILLISECONDS)
-                        .compose(RxSchedulers.<Integer>noCheckNetworkCompose())
-                        .subscribe(new Consumer<Integer>() {
-                            @Override
-                            public void accept(Integer integer) throws Exception {
-                                commonHeader.getCompleteView().setVisibility(View.VISIBLE);
-                                refreshlayout.finishRefresh(200);
-                            }
-                        });
-
 
             }
         });
@@ -97,5 +95,37 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
                 refreshlayout.finishLoadmore(2000);
             }
         });
+    }
+
+    @Override
+    public void onRefreshComplete(boolean isEnabledLoadmore) {
+        mBinding.moduleRefreshLayout.commonRefreshLayout.finishRefresh();
+        mBinding.moduleRefreshLayout.commonRefreshLayout.setEnableLoadmore(isEnabledLoadmore);
+    }
+
+    @Override
+    public void onLoadmoreComplete(boolean isEnabledLoadmore) {
+        mBinding.moduleRefreshLayout.commonRefreshLayout.finishLoadmore();
+        mBinding.moduleRefreshLayout.commonRefreshLayout.setEnableLoadmore(isEnabledLoadmore);
+    }
+
+    @Override
+    public void onFail(BaseObserver.ExceptionReason exceptionReason) {
+        switch (exceptionReason) {
+            case EMPTY_DATA:
+                multiTypeAdapter.setEmptyView(R.layout.lib_common_empty_layout);
+                break;
+        }
+    }
+
+    @Override
+    public void onSuccess(boolean isRefresh, List<MessageBean.Message> items) {
+        if (isRefresh) {
+            multiTypeAdapter.setNewData(items);
+        } else {
+            if (items.isEmpty()) {
+                multiTypeAdapter.addData(items);
+            }
+        }
     }
 }

@@ -27,7 +27,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -77,7 +79,10 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
         mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分商城") {
             @Override
             public void performAction(View view) {
-                Toast.makeText(App.getInstance(), "积分商城", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(App.getInstance(), "积分商城", Toast.LENGTH_SHORT).show();
+                Map<String,String> paramMap = new HashMap<>();
+                paramMap.put("mUrl","http://www.baidu.com");
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5,paramMap);
             }
         });
     }

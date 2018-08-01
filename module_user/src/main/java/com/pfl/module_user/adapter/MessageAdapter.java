@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.pfl.common.entity.module_user.MessageBean;
 import com.pfl.common.entity.module_user.MessageEntity;
 import com.pfl.module_user.R;
 
@@ -11,7 +12,7 @@ import com.pfl.module_user.R;
  * Created by Administrator on 2018\7\17 0017.
  */
 
-public class MessageAdapter extends BaseQuickAdapter<MessageEntity, BaseViewHolder> {
+public class MessageAdapter extends BaseQuickAdapter<MessageBean.Message, BaseViewHolder> {
 
     public MessageAdapter() {
         super(R.layout.module_user_item_message);
@@ -19,7 +20,7 @@ public class MessageAdapter extends BaseQuickAdapter<MessageEntity, BaseViewHold
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MessageEntity item) {
+    protected void convert(BaseViewHolder helper, MessageBean.Message item) {
         helper.setVisible(R.id.module_user_view_dot, item.isRead())
                 .setText(R.id.module_user_tv_title, item.getTitle())
                 .setText(R.id.module_user_tv_content, item.getMessage());

@@ -109,6 +109,10 @@
         <activity
             android:name=".activity.ModuleUserAddHardwareActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".activity.ModuleUserHtml5Activity"
+            android:label="@string/module_user_str_h5"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import com.pfl.common.entity.module_app.AppConfiguration;
 import com.pfl.common.entity.module_user.CarLicence;
 import com.pfl.common.entity.module_user.Device;
 import com.pfl.common.entity.module_user.FindBean;
+import com.pfl.common.entity.module_user.MessageBean;
 import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.ScoreLog;
@@ -275,6 +276,17 @@ public interface RetrofitService {
     Observable<HttpResponse<Object>> forgetPassword(@Field("action") String action,
                                                     @Field("mobile") String mobile,
                                                     @Field("pwd") String pwd);
+
+    /**
+     * 消息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/pwd")
+    Observable<HttpResponse<MessageBean>> getMessageList(@Field("action") String action,
+                                                               @Field("mobile") int mobile,
+                                                               @Field("pwd") int pwd);
 
 
 }

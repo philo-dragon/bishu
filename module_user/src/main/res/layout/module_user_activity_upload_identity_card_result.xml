@@ -222,6 +222,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.CardView
+                    android:clickable="true"
                     android:id="@+id/module_user_cv_commit"
                     android:layout_width="250dp"
                     android:layout_height="42dp"
