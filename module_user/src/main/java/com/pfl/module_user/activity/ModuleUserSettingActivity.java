@@ -93,7 +93,6 @@ public class ModuleUserSettingActivity extends BaseActivity<ModuleUserActivitySe
 
         int i = v.getId();
         if (i == R.id.module_user_cv_message) {
-            RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INVITE_FIRENDS);
             mBinding.moduleUserTextSwitch.setChecked(!mBinding.moduleUserTextSwitch.isChecked());
         } else if (i == R.id.module_user_cv_help_feedback) {
             RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_FEED_BACK);
