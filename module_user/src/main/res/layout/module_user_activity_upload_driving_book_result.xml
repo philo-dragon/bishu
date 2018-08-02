@@ -184,6 +184,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardBackgroundColor="#3DC9C0"
                     app:cardCornerRadius="21dp"
                     app:cardElevation="3dp">

@@ -224,6 +224,7 @@
                     android:layout_height="42dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_marginTop="30dp"
                     app:cardBackgroundColor="#3DC9C0"
                     app:cardCornerRadius="21dp"

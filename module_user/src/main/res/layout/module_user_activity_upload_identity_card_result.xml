@@ -226,6 +226,7 @@
                     android:id="@+id/module_user_cv_commit"
                     android:layout_width="250dp"
                     android:layout_height="42dp"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
