@@ -1,5 +1,7 @@
 package com.pfl.common.entity.module_user;
 
+import com.pfl.common.entity.base.BaseEntyty;
+
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public class Device {
         this.list = list;
     }
 
-    public static class DeviceBean {
+    public static class DeviceBean extends BaseEntyty {
         private String id;
         private String name;
         private String imei;

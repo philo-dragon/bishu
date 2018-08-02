@@ -2,6 +2,7 @@ package com.pfl.common.di;
 
 import android.app.Application;
 
+import com.google.gson.Gson;
 import com.pfl.common.http.RetrofitService;
 import com.pfl.common.imageloader.ImageLoader;
 
@@ -23,5 +24,6 @@ public interface AppComponent {
 
     ImageLoader getImageLoader();
 
+    Gson getGson();
 
 }

@@ -110,6 +110,7 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
         }
         return false;
     }
+
     private boolean checkUserInfoIsNull() {
         UserInfo userInfo = ModuleUserRouteService.getUserInfo();
         return userInfo == null;
@@ -118,6 +119,9 @@ public class ModuleUserMineFragment extends LazyLoadBaseFragment<ModuleUserFragm
     @Override
     public void onSuccess(UserInfo userInfo) {
         mBinding.setUserInfo(userInfo);
+        if (userInfo.getDevices() != null && !userInfo.getDevices().isEmpty()) {
+            mBinding.moduleUserTvConation.setText(userInfo.getDevices().get(0).getName() + " 已连接");
+        }
         UserInfoManager.getInstance().setUserInfo(userInfo);
         imageLoader.loadImage(mContext, ImageConfigImpl
                 .builder()

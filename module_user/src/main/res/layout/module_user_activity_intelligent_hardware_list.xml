@@ -3,7 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.pfl.module_user.activity.ModuleUserAddCarActivity">
+
+        <include
+            android:id="@+id/in_toolbar_layout"
+            layout="@layout/common_databinding_toolbar_layout" />
+
+        <include
+            android:id="@+id/module_refresh_layout"
+            layout="@layout/common_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/in_toolbar_layout" />
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/lib_common_gradient_line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/in_toolbar_layout" />
+
+    </RelativeLayout>
+
+   <!-- <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.pfl.module_user.activity.ModuleUserAddCarActivity">
@@ -143,5 +168,5 @@
 
         </android.support.v7.widget.CardView>
 
-    </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>-->
 </layout>

@@ -2,6 +2,7 @@ package com.pfl.common.utils;
 
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.pfl.common.R;
 
@@ -63,7 +64,7 @@ public class BottomDialogManager {
      * @param listener
      * @return
      */
-    public static BaseBottomDialog unBindDialog(FragmentManager fragmentManager, final View.OnClickListener listener) {
+    public static BaseBottomDialog unBindDialog(FragmentManager fragmentManager, final int position, final String name, final OnDeleteIntelligentHardwareListener listener) {
 
         final BottomDialog bottomDialog = BottomDialog.create(fragmentManager);
 
@@ -71,11 +72,15 @@ public class BottomDialogManager {
 
             @Override
             public void bindView(View v) {
+
+                TextView view = v.findViewById(R.id.module_user_dialog_title);
+                view.setText("是否解绑" + name + "？");
+
                 v.findViewById(R.id.lib_common_tv_unbind).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         bottomDialog.dismiss();
-                        listener.onClick(v);
+                        listener.onDeleteIntelligentHardware(position);
                     }
                 });
 
@@ -259,6 +264,10 @@ public class BottomDialogManager {
         void onPhotoAlbum();
 
         void onCancel();
+    }
+
+    public interface OnDeleteIntelligentHardwareListener {
+        void onDeleteIntelligentHardware(int position);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.pfl.module_user.viewmodel;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.pfl.common.entity.base.HttpResponse;
-import com.pfl.common.entity.module_user.MineTrip;
 import com.pfl.common.entity.module_user.Score;
 import com.pfl.common.entity.module_user.User;
 import com.pfl.common.entity.module_user.UserInfo;
@@ -67,15 +67,19 @@ public class HomeViewModel {
                         view.onFindUserInfo(response.getData());
                         RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INVITE_FIRENDS);
                     }
+                });
+    }
 
+    public void userSign() {
+        service
+                .userSign("post")
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
+                .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribe(new BaseObserver<HttpResponse<Object>>() {
                     @Override
-                    public void onFail(HttpResponse<UserInfo> response) {
-                        super.onFail(response);
-                        switch (response.getCode()) {
-                            case 401://表示未登录
-                                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
-                                break;
-                        }
+                    public void onSuccess(HttpResponse<Object> response) {
+                        super.onSuccess(response);
+                        ToastUtils.showShort("签到成功");
                     }
                 });
     }

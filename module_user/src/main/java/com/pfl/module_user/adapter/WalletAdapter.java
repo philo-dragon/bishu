@@ -26,9 +26,9 @@ public class WalletAdapter extends BaseQuickAdapter<ScoreLog.Wallet, BaseViewHol
 
     @Override
     protected void convert(BaseViewHolder helper, ScoreLog.Wallet item) {
-        helper.setText(R.id.module_user_tv_money, item.getValue())
-                .setTextColor(R.id.module_user_tv_money, item.getType() == 0 ? mContext.getResources().getColor(R.color.module_user_wallet_add_score) : mContext.getResources().getColor(R.color.module_user_wallet_exchange_score))
+        helper.setText(R.id.module_user_tv_price, item.getValue())
+                .setTextColor(R.id.module_user_tv_price, item.getType() == 0 ? mContext.getResources().getColor(R.color.module_user_wallet_add_score) : mContext.getResources().getColor(R.color.module_user_wallet_exchange_score))
                 .setText(R.id.module_user_tv_name, item.getTitle())
-                .setText(R.id.module_user_tv_name, dateFormat.format(new Date(item.getTime())));
+                .setText(R.id.module_user_tv_time, dateFormat.format(new Date(item.getTime())));
     }
 }

@@ -207,7 +207,18 @@ public interface RetrofitService {
     @POST("app/api/v1/user/device")
     Observable<HttpResponse<Object>> addDevice(@Field("action") String action,
                                                @Field("imei") String imei,
-                                               @Field("type") String type);
+                                               @Field("name") String name);
+
+
+    /**
+     * 解绑用户智能硬件
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/device")
+    Observable<HttpResponse<Object>> deleteDevice(@Field("action") String action,
+                                                  @Field("id") String id);
 
     /**
      * 发现
@@ -285,8 +296,18 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("app/api/v1/user/pwd")
     Observable<HttpResponse<MessageBean>> getMessageList(@Field("action") String action,
-                                                               @Field("mobile") int mobile,
-                                                               @Field("pwd") int pwd);
+                                                         @Field("mobile") int mobile,
+                                                         @Field("pwd") int pwd);
+
+
+    /**
+     * 签到
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/sign")
+    Observable<HttpResponse<Object>> userSign(@Field("action") String action);
 
 
 }

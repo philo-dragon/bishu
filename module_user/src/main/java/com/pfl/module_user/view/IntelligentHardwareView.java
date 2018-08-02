@@ -1,5 +1,6 @@
 package com.pfl.module_user.view;
 
+import com.pfl.common.entity.base.BaseEntyty;
 import com.pfl.common.entity.module_user.Device;
 
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.List;
 
 public interface IntelligentHardwareView {
 
-    void onSuccess(List<Device.DeviceBean> deviceList);
+    void onSuccess(List<BaseEntyty> deviceList);
 
-    void onAddSuccess();
+    void onDeleteSuccess(int position);
+
+    void onRefreshCompelete();
 
 }

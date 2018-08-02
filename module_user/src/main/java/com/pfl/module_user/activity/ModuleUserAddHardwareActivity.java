@@ -8,18 +8,35 @@ import android.view.SurfaceView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.Result;
 import com.google.zxing.client.android.AutoScannerView;
 import com.google.zxing.client.android.BaseCaptureActivity;
 import com.pfl.common.base.BaseScanActivity;
 import com.pfl.common.di.AppComponent;
+import com.pfl.common.entity.base.BaseEvent;
+import com.pfl.common.entity.module_user.CarLicence;
+import com.pfl.common.entity.module_user.Device;
+import com.pfl.common.utils.EventBusUtil;
 import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.R;
 import com.pfl.module_user.databinding.ModuleUserActivityAddHardwareBinding;
+import com.pfl.module_user.di.module_user_add_hardware.AddHardwareModule;
+import com.pfl.module_user.di.module_user_add_hardware.DaggerAddHardwareComponent;
+import com.pfl.module_user.view.AddHardwareView;
+import com.pfl.module_user.viewmodel.AddHardwareViewModel;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
+import javax.inject.Inject;
+
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_ADD_HARDWARE)
-public class ModuleUserAddHardwareActivity extends BaseScanActivity<ModuleUserActivityAddHardwareBinding> {
+public class ModuleUserAddHardwareActivity extends BaseScanActivity<ModuleUserActivityAddHardwareBinding> implements AddHardwareView {
+
+    @Inject
+    Gson gson;
+    @Inject
+    AddHardwareViewModel viewModel;
 
     @Override
     protected boolean isDrakMode() {
@@ -33,7 +50,12 @@ public class ModuleUserAddHardwareActivity extends BaseScanActivity<ModuleUserAc
 
     @Override
     public void componentInject(AppComponent appComponent) {
-
+        DaggerAddHardwareComponent
+                .builder()
+                .appComponent(appComponent)
+                .addHardwareModule(new AddHardwareModule(this, this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -65,9 +87,28 @@ public class ModuleUserAddHardwareActivity extends BaseScanActivity<ModuleUserAc
     @Override
     public void dealDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
         playBeepSoundAndVibrate(true, false);
-        Toast.makeText(this, rawResult.getText(), Toast.LENGTH_LONG).show();
+        String result = rawResult.getText();
+        //{"name","行车记录仪","imei":"xxxxxx"}
         //        对此次扫描结果不满意可以调用
         //        reScan();
+        result = "{\n" +
+                "  \"name\": \"行车记录仪\",\n" +
+                "  \"imei\": \"xxxxxxxx\"\n" +
+                "}";
+        Device.DeviceBean deviceBean = gson.fromJson(result, new TypeToken<Device.DeviceBean>() {
+        }.getType());
+        viewModel.addDevice(deviceBean.getImei(), deviceBean.getName());
     }
 
+    @Override
+    public void onSuccess() {
+        BaseEvent<Device.DeviceBean> baseEvent = new BaseEvent();
+        EventBusUtil.postMessage(baseEvent);
+        finish();
+    }
+
+    @Override
+    public void onFail() {
+        reScan();
+    }
 }

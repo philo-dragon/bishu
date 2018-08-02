@@ -209,6 +209,7 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/module_user_tv_conation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -216,7 +217,7 @@
                     android:layout_marginRight="16dp"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/module_user_ic_mine_item_right_arror"
-                    android:text="ADAS 已连接"
+                    tools:text="ADAS 已连接"
                     android:textColor="#ff1dbdaa"
                     android:textSize="15dp" />
 
