@@ -11,28 +11,23 @@
         <activity
             android:name=".activity.ModuleUserRegistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_regist"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_regist" />
         <activity
             android:name=".activity.ModuleUserSettingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_setting"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_setting" />
         <activity
             android:name=".activity.ModuleUserMyWalletActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_my_wallet"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_my_wallet" />
         <activity
             android:name=".activity.ModuleUserInitialValueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_initial_value"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_initial_value" />
         <activity
             android:name=".activity.ModuleUserInputNickNameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_input_nick_name"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_input_nick_name" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -47,96 +42,77 @@
         <activity
             android:name=".activity.ModuleUserUploadIdentityCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_identity_card" />
         <activity
             android:name=".activity.ModuleUserUploadIdentityCardResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_identity_card_result"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_identity_card_result" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingLicenceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_licence"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_driving_licence" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingLicenceResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_licence"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_driving_licence" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingBookActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_book"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_driving_book" />
         <activity
             android:name=".activity.ModuleUserUploadDrivingBookResultActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_upload_driving_book"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_upload_driving_book" />
         <activity
             android:name=".activity.ModuleUserAddCarActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_add_car"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_add_car" />
         <activity
             android:name=".ModuleUserLoginRegistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.ModuleUserLoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserFeedBackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_help_feedback"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_help_feedback" />
         <activity
             android:name=".activity.ModuleUserAbouUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_about_us"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_about_us" />
         <activity
             android:name=".activity.ModuleUserFindDevicesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_find_device"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_find_device" />
         <activity
             android:name=".activity.ModuleUserIntelligentHardwareManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_intelligent_hardware_manager"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_intelligent_hardware_manager" />
         <activity
             android:name=".activity.ModuleUserIntelligentHardwareListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_intelligent_hardware_list"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_intelligent_hardware_list" />
         <activity
             android:name=".activity.ModuleUserInviteFriendsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_invite_frineds"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_invite_frineds" />
         <activity
             android:name=".activity.ModuleUserMessageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_message"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_message" />
         <activity
             android:name=".activity.ModuleUserForgetPasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_forget_password"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_forget_password" />
         <activity
             android:name=".activity.ModuleUserAddHardwareActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".activity.ModuleUserHtml5Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/module_user_str_h5"
-            android:screenOrientation="portrait" />
+            android:label="@string/module_user_str_h5" />
     </application>
 
 </manifest>
