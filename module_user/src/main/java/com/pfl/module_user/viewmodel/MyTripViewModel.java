@@ -12,6 +12,9 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+
 /**
  * Created by rocky on 2018/4/9.
  */
@@ -67,12 +70,20 @@ public class MyTripViewModel {
                     @Override
                     public void onFail(HttpResponse<MineTrip> response) {
                         super.onFail(response);
-                        view.onFail(ExceptionReason.EMPTY_DATA);
-                        switch (response.getCode()) {
-                            case 401://表示未登录
-                                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
-                                break;
-                        }
+                        Observable.just("")
+                                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                                .subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        if (page == 0) {
+                                            view.onRefreshComplete(false);
+                                            view.onFail(ExceptionReason.EMPTY_DATA);
+                                        } else {
+                                            page--;
+                                            view.onLoadmoreComplete(true);
+                                        }
+                                    }
+                                });
                     }
 
                     @Override

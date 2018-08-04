@@ -52,10 +52,6 @@ public class HomeViewModel {
         RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_MY_WALLET, parameters);
     }
 
-    public void showDatePicker() {
-        view.showDatePicker();
-    }
-
     public void requestData(String uid) {
         service
                 .userInfo("get", uid)
@@ -80,6 +76,7 @@ public class HomeViewModel {
                     public void onSuccess(HttpResponse<Object> response) {
                         super.onSuccess(response);
                         ToastUtils.showShort("签到成功");
+                        requestData();
                     }
                 });
     }

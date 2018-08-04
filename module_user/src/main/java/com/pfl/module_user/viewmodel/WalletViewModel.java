@@ -69,6 +69,25 @@ public class WalletViewModel {
                     }
 
                     @Override
+                    public void onFail(HttpResponse<ScoreLog> response) {
+                        super.onFail(response);
+                        Observable.just("")
+                                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                                .subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        if (page == 0) {
+                                            view.onRefreshComplete(false);
+                                            view.onFail(ExceptionReason.EMPTY_DATA);
+                                        } else {
+                                            page--;
+                                            view.onLoadmoreComplete(true);
+                                        }
+                                    }
+                                });
+                    }
+
+                    @Override
                     public void onException(ExceptionReason reason) {
                         super.onException(reason);
                         if (page == 0) {

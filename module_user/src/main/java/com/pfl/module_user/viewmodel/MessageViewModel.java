@@ -10,9 +10,13 @@ import com.pfl.common.utils.RouteUtils;
 import com.pfl.module_user.view.MessageView;
 import com.pfl.module_user.view.MyCenterView;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Administrator on 2018\7\22 0022.
@@ -48,7 +52,7 @@ public class MessageViewModel {
         service
                 .getMessageList("get", page, pageSize)
                 .compose(RxSchedulers.<HttpResponse<MessageBean>>compose())
-                .compose(lifecycle.bindUntilEvent(FragmentEvent.DESTROY))
+                .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<MessageBean>>() {
 
                     @Override
@@ -69,12 +73,20 @@ public class MessageViewModel {
                     @Override
                     public void onFail(HttpResponse<MessageBean> response) {
                         super.onFail(response);
-                        view.onFail(ExceptionReason.EMPTY_DATA);
-                        switch (response.getCode()) {
-                            case 401://表示未登录
-                                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_LOGIN);
-                                break;
-                        }
+                        Observable.just("")
+                                .compose(RxSchedulers.<String>noCheckNetworkCompose())
+                                .subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        if (page == 0) {
+                                            view.onRefreshComplete(false);
+                                            view.onFail(ExceptionReason.EMPTY_DATA);
+                                        } else {
+                                            page--;
+                                            view.onLoadmoreComplete(true);
+                                        }
+                                    }
+                                });
                     }
 
                     @Override

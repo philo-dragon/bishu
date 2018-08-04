@@ -118,22 +118,4 @@ public class ModuleUserHomeFragment extends LazyLoadBaseFragment<ModuleUserFragm
         UserInfoManager.getInstance().setUserInfo(userInfo);
     }
 
-    @Override
-    public void showDatePicker() {
-        Date date = new Date(System.currentTimeMillis());
-        //日历控件
-        DatePickerDialog dp = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int iyear, int monthOfYear, int dayOfMonth) {
-                long maxDate = datePicker.getMaxDate();//日历最大能设置的时间的毫秒值
-                int year = datePicker.getYear();//年
-                int month = datePicker.getMonth();//月-1
-                int dayOfMonth1 = datePicker.getDayOfMonth();//日*
-                //iyear:年，monthOfYear:月-1，dayOfMonth:日
-            }
-        }, date.getYear(), date.getMonth(), date.getDay());//2013:初始年份，2：初始月份-1 ，1：初始日期
-        dp.show();
-
-
-    }
 }

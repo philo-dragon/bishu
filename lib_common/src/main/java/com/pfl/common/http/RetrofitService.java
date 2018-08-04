@@ -294,10 +294,10 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("app/api/v1/user/pwd")
+    @POST("app/api/v1/user/messages")
     Observable<HttpResponse<MessageBean>> getMessageList(@Field("action") String action,
-                                                         @Field("mobile") int mobile,
-                                                         @Field("pwd") int pwd);
+                                                         @Field("page") int page,
+                                                         @Field("page_size") int page_size);
 
 
     /**

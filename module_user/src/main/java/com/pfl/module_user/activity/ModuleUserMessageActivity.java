@@ -37,7 +37,6 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
     MessageViewModel viewModel;
     @Inject
     MessageAdapter messageAdapter;
-    private MessageAdapter multiTypeAdapter;
 
     @Override
     public int getContentView() {
@@ -76,8 +75,8 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
     }
 
     private void setRecyclerView() {
-        multiTypeAdapter = new MessageAdapter();
-        this.messageAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
+        messageAdapter = new MessageAdapter();
+        messageAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
     }
@@ -86,13 +85,13 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-
+                viewModel.refreshData();
             }
         });
         mBinding.moduleRefreshLayout.commonRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000);
+                viewModel.loadmoreData();
             }
         });
     }
@@ -113,7 +112,7 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
     public void onFail(BaseObserver.ExceptionReason exceptionReason) {
         switch (exceptionReason) {
             case EMPTY_DATA:
-                multiTypeAdapter.setEmptyView(R.layout.lib_common_empty_layout);
+                messageAdapter.setEmptyView(R.layout.lib_common_empty_layout);
                 break;
         }
     }
@@ -121,10 +120,10 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
     @Override
     public void onSuccess(boolean isRefresh, List<MessageBean.Message> items) {
         if (isRefresh) {
-            multiTypeAdapter.setNewData(items);
+            messageAdapter.setNewData(items);
         } else {
             if (items.isEmpty()) {
-                multiTypeAdapter.addData(items);
+                messageAdapter.addData(items);
             }
         }
     }

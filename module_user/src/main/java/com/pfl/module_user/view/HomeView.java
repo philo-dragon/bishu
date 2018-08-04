@@ -14,6 +14,4 @@ public interface HomeView {
 
     void onFindUserInfo(UserInfo userInfo);
 
-    void showDatePicker();
-
 }
