@@ -63,8 +63,8 @@ public class MineTrip {
 
     public static class MineTripBean extends MultiTypeAdapter.IItem {
         private String id;
-        private String start_ts;
-        private String end_ts;
+        private long start_ts;
+        private long end_ts;
         private int sale_status;
         private int score_add;
 
@@ -76,19 +76,19 @@ public class MineTrip {
             this.id = id;
         }
 
-        public String getStart_ts() {
+        public long getStart_ts() {
             return start_ts;
         }
 
-        public void setStart_ts(String start_ts) {
+        public void setStart_ts(long start_ts) {
             this.start_ts = start_ts;
         }
 
-        public String getEnd_ts() {
+        public long getEnd_ts() {
             return end_ts;
         }
 
-        public void setEnd_ts(String end_ts) {
+        public void setEnd_ts(long end_ts) {
             this.end_ts = end_ts;
         }
 

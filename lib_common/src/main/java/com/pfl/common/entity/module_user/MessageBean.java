@@ -65,9 +65,19 @@ public class MessageBean {
 
     public static class Message {
 
+        private String id;
         private String title;
-        private String message;
+        private String content;
         private boolean isRead;
+        private long create_ts;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getTitle() {
             return title;
@@ -77,12 +87,12 @@ public class MessageBean {
             this.title = title;
         }
 
-        public String getMessage() {
-            return message;
+        public String getContent() {
+            return content;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public void setContent(String content) {
+            this.content = content;
         }
 
         public boolean isRead() {
@@ -91,6 +101,14 @@ public class MessageBean {
 
         public void setRead(boolean read) {
             isRead = read;
+        }
+
+        public long getCreate_ts() {
+            return create_ts;
+        }
+
+        public void setCreate_ts(long create_ts) {
+            this.create_ts = create_ts;
         }
     }
 }

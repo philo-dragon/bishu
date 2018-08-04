@@ -45,7 +45,7 @@ public class UploadIndentityResultViewModel {
 
     public String dateFormat(long ss) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM");
-        String time = dateFormat.format(new Date(ss));
+        String time = dateFormat.format(new Date(ss * 1000));
         return time;
     }
 }

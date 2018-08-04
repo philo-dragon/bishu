@@ -1,6 +1,5 @@
 package com.pfl.module_user.adapter;
 
-import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.pfl.common.entity.module_user.MineTrip;
