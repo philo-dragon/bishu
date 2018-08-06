@@ -31,7 +31,7 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 @Route(path = RouteUtils.MODULE_USER_ACTIVITY_MESSAGE)
-public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMessageBinding> implements MessageView {
+public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMessageBinding> implements MessageView, MessageAdapter.OnReadMessageListener {
 
     @Inject
     MessageViewModel viewModel;
@@ -75,7 +75,7 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
     }
 
     private void setRecyclerView() {
-        messageAdapter = new MessageAdapter();
+        messageAdapter.setOnReadMessageListener(this);
         messageAdapter.bindToRecyclerView(mBinding.moduleRefreshLayout.commonRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mBinding.moduleRefreshLayout.commonRecyclerView.setLayoutManager(layoutManager);
@@ -122,9 +122,21 @@ public class ModuleUserMessageActivity extends BaseActivity<ModuleUserActivityMe
         if (isRefresh) {
             messageAdapter.setNewData(items);
         } else {
-            if (items.isEmpty()) {
+            if (!items.isEmpty()) {
                 messageAdapter.addData(items);
             }
         }
+    }
+
+    @Override
+    public void updateReadStateSuccess(int position) {
+        messageAdapter.getData().get(position).setRead_status(1);
+        messageAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void onRead(int position) {
+        MessageBean.Message message = messageAdapter.getData().get(position);
+        viewModel.updateMessageState(position, message.getId());
     }
 }

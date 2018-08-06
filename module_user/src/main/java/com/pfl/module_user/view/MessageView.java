@@ -19,4 +19,6 @@ public interface MessageView {
     void onFail(BaseObserver.ExceptionReason exceptionReason);
 
     void onSuccess(boolean isRefresh, List<MessageBean.Message> list);
+
+    void updateReadStateSuccess(int position);
 }

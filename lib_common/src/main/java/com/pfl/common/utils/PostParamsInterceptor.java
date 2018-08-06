@@ -17,7 +17,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -55,14 +58,20 @@ public class PostParamsInterceptor implements Interceptor {
             FormBody formBody = (FormBody) originRequest.body();
             int bodySize = formBody.size();
             for (int i = 0; i < bodySize; i++) {
-
-                if (formBody.name(i).equals("page")) {
+                if (needConvertIntParam().contains(formBody.name(i))){
                     root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
-                } else if (formBody.name(i).equals("page_size")) {
-                    root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
-                } else {
+                }else{
                     root.put(formBody.name(i), formBody.value(i));
                 }
+                   /* if (formBody.name(i).equals("page")) {
+                        root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
+                    } else if (formBody.name(i).equals("page_size")) {
+                        root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
+                    } else if (formBody.name(i).equals("read_status")) {
+                        root.put(formBody.name(i), Integer.valueOf(formBody.value(i)));
+                    } else {
+                        root.put(formBody.name(i), formBody.value(i));
+                    }*/
             }
 
             HttpUrl url = newRequest.build().url();
@@ -137,5 +146,13 @@ public class PostParamsInterceptor implements Interceptor {
         } else {
             return "-1";
         }
+    }
+
+    private Set<String> needConvertIntParam() {
+        HashSet<String> params = new HashSet<>();
+        params.add("page");
+        params.add("page_size");
+        params.add("read_status");
+        return params;
     }
 }

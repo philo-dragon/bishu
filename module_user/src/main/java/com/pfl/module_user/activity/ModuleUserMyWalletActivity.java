@@ -152,7 +152,7 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
         if (isRefresh) {
             multiTypeAdapter.setNewData(items);
         } else {
-            if (items.isEmpty()) {
+            if (!items.isEmpty()) {
                 multiTypeAdapter.addData(items);
             }
         }

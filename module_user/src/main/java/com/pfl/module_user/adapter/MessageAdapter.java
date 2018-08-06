@@ -27,18 +27,23 @@ public class MessageAdapter extends BaseQuickAdapter<MessageBean.Message, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, MessageBean.Message item) {
-        helper.setVisible(R.id.module_user_view_dot, item.isRead())
+        helper.setVisible(R.id.module_user_view_dot, !item.isRead())
                 .setText(R.id.module_user_tv_time, getDay(item.getCreate_ts() * 1000))
                 .setText(R.id.module_user_tv_title, item.getTitle())
                 .setText(R.id.module_user_tv_content, item.getContent());
     }
 
-    public void setOnItemClickListener() {
+    private void setOnItemClickListener() {
         super.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                if(mOnReadMessageListener != null){
+                    MessageBean.Message message = mData.get(position);
+                    if(!message.isRead()){
+                        mOnReadMessageListener.onRead(position);
+                    }
+                }
             }
         });
     }
@@ -62,11 +67,39 @@ public class MessageAdapter extends BaseQuickAdapter<MessageBean.Message, BaseVi
         // -2:前天 -1：昨天 0：今天 1：明天 2：后天， out：显示日期
         if (xcts >= -2 && xcts <= 2) {
             DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-            return String.valueOf(xcts) + dateFormat.format(new Date(time));
+
+            String prefix = "今天";
+            switch (xcts) {
+                case -2:
+                    prefix = "前天";
+                    break;
+                case -1:
+                    prefix = "昨天";
+                    break;
+                case -0:
+                    prefix = "今天";
+                    break;
+                case 1:
+                    prefix = "明天";
+                    break;
+                case 2:
+                    prefix = "后天";
+                    break;
+            }
+
+            return prefix + " " + dateFormat.format(new Date(time));
         } else {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
             return dateFormat.format(new Date(time));
         }
+    }
+
+    private OnReadMessageListener mOnReadMessageListener;
+    public void setOnReadMessageListener(OnReadMessageListener listener){
+        this.mOnReadMessageListener = listener;
+    }
+    public interface OnReadMessageListener {
+        void onRead(int position);
     }
 
 }

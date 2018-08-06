@@ -309,5 +309,16 @@ public interface RetrofitService {
     @POST("app/api/v1/user/sign")
     Observable<HttpResponse<Object>> userSign(@Field("action") String action);
 
+    /**
+     * 签到
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("app/api/v1/user/sign")
+    Observable<HttpResponse<Object>> updateMessageState(@Field("action") String action,
+                                              @Field("id") String messageId,
+                                              @Field("read_status") int read_status);
+
 
 }

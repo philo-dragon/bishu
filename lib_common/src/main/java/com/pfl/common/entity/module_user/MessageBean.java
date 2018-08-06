@@ -70,6 +70,7 @@ public class MessageBean {
         private String content;
         private boolean isRead;
         private long create_ts;
+        private int read_status;
 
         public String getId() {
             return id;
@@ -96,7 +97,7 @@ public class MessageBean {
         }
 
         public boolean isRead() {
-            return isRead;
+            return read_status != 0;
         }
 
         public void setRead(boolean read) {
@@ -109,6 +110,14 @@ public class MessageBean {
 
         public void setCreate_ts(long create_ts) {
             this.create_ts = create_ts;
+        }
+
+        public int getRead_status() {
+            return read_status;
+        }
+
+        public void setRead_status(int read_status) {
+            this.read_status = read_status;
         }
     }
 }

@@ -139,7 +139,7 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
         if (isRefresh) {
             multiTypeAdapter.setNewData(items);
         } else {
-            if (items.isEmpty()) {
+            if (!items.isEmpty()) {
                 multiTypeAdapter.addData(items);
             }
         }

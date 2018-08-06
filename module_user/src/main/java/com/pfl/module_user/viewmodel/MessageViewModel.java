@@ -103,4 +103,18 @@ public class MessageViewModel {
 
     }
 
+    public void updateMessageState(final int position, String messageId) {
+        service
+                .updateMessageState("put", messageId, 1)
+                .compose(RxSchedulers.<HttpResponse<Object>>compose())
+                .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(new BaseObserver() {
+                    @Override
+                    public void onSuccess(HttpResponse response) {
+                        super.onSuccess(response);
+                        view.updateReadStateSuccess(position);
+                    }
+                });
+    }
+
 }
