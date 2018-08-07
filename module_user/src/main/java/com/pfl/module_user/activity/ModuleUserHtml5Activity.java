@@ -211,6 +211,6 @@ public class ModuleUserHtml5Activity extends BaseActivity<ModuleUserActivityWebB
     @Override
     public void finish() {
         super.finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
+        android.os.Process.killProcess(android.os.Process.myPid());//这里杀掉了h5进程，不会杀掉我们app的进程
     }
 }
