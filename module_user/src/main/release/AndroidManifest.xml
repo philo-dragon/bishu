@@ -112,6 +112,7 @@
         <activity
             android:name=".activity.ModuleUserHtml5Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:process=":html5"
             android:label="@string/module_user_str_h5" />
     </application>
 

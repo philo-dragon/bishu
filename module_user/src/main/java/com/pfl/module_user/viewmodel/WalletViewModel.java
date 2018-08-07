@@ -30,6 +30,7 @@ public class WalletViewModel {
     private RetrofitService service;
     private WalletView view;
     private int page = 0;
+    private int page_size = 20;
 
     public WalletViewModel(LifecycleProvider lifecycle, RetrofitService service, WalletView view) {
         this.lifecycle = lifecycle;
@@ -49,7 +50,7 @@ public class WalletViewModel {
 
     private void requestData() {
         service
-                .score_log("get")
+                .score_log("get", page, page_size)
                 .compose(RxSchedulers.<HttpResponse<ScoreLog>>compose())
                 .compose(lifecycle.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new BaseObserver<HttpResponse<ScoreLog>>() {

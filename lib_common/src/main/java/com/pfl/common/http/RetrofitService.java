@@ -140,7 +140,9 @@ public interface RetrofitService {
      */
     @FormUrlEncoded
     @POST("app/api/v1/user/score_log")
-    Observable<HttpResponse<ScoreLog>> score_log(@Field("action") String action);
+    Observable<HttpResponse<ScoreLog>> score_log(@Field("action") String action,
+                                                 @Field("page") int page,
+                                                 @Field("page_size") int page_size);
 
 
     /**
@@ -315,7 +317,7 @@ public interface RetrofitService {
      * @return
      */
     @FormUrlEncoded
-    @POST("app/api/v1/user/sign")
+    @POST("app/api/v1/user/message")
     Observable<HttpResponse<Object>> updateMessageState(@Field("action") String action,
                                               @Field("id") String messageId,
                                               @Field("read_status") int read_status);

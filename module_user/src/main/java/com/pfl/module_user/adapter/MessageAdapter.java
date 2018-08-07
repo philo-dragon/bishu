@@ -52,7 +52,7 @@ public class MessageAdapter extends BaseQuickAdapter<MessageBean.Message, BaseVi
 
         Calendar today = Calendar.getInstance();
         Calendar old = Calendar.getInstance();
-        today.setTimeInMillis(time);
+        old.setTimeInMillis(time);
 
         //此处好像是去除0
         today.set(Calendar.HOUR, 0);

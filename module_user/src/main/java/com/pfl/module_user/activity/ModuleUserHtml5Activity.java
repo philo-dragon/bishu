@@ -208,4 +208,9 @@ public class ModuleUserHtml5Activity extends BaseActivity<ModuleUserActivityWebB
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }
