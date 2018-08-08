@@ -84,20 +84,27 @@ public class ModuleUserAddHardwareActivity extends BaseScanActivity<ModuleUserAc
         return mBinding.previewView;
     }
 
+    /**
+     * //{"name","行车记录仪","imei":"xxxxxx"}
+     * //        对此次扫描结果不满意可以调用
+     * //        reScan();
+     *
+     * @param rawResult
+     * @param barcode
+     * @param scaleFactor
+     */
     @Override
     public void dealDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
-        playBeepSoundAndVibrate(true, false);
-        String result = rawResult.getText();
-        //{"name","行车记录仪","imei":"xxxxxx"}
-        //        对此次扫描结果不满意可以调用
-        //        reScan();
-        result = "{\n" +
-                "  \"name\": \"行车记录仪\",\n" +
-                "  \"imei\": \"xxxxxxxx\"\n" +
-                "}";
-        Device.DeviceBean deviceBean = gson.fromJson(result, new TypeToken<Device.DeviceBean>() {
-        }.getType());
-        viewModel.addDevice(deviceBean.getImei(), deviceBean.getName());
+        try {
+            playBeepSoundAndVibrate(true, false);
+            String result = rawResult.getText();
+            Device.DeviceBean deviceBean = gson.fromJson(result, new TypeToken<Device.DeviceBean>() {
+            }.getType());
+            viewModel.addDevice(deviceBean.getImei(), deviceBean.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            reScan();
+        }
     }
 
     @Override

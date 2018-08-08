@@ -119,7 +119,7 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
             requestPermission(i);
         } else if (i == R.id.module_user_img_upload_file_back) {
             requestPermission(i);
-        }else if (i == R.id.module_user_cv_commit) {
+        } else if (i == R.id.module_user_cv_commit) {
             finish();
         }
     }
@@ -190,6 +190,9 @@ public class ModuleUserUploadIdentityCardResultActivity extends BaseActivity<Mod
 
     @Override
     public void onSuccess(final UserIndentity indentity) {
+
+        mBinding.setUserIndentity(indentity);
+
         imageLoader.loadImage(mContext, ImageConfigImpl
                 .builder()
                 .url(indentity.getFront_img())
