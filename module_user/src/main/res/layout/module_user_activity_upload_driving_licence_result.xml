@@ -192,7 +192,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{userLicence.issuing_authority}"
+                            android:text="@{userLicence.clazz}"
                             android:textColor="#1C2737" />
 
                     </LinearLayout>
