@@ -20,6 +20,7 @@ import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.utils.AppManager;
 import com.pfl.common.utils.RouteUtils;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mBinding.bottomNavigationViewEx.enableShiftingMode(false);
         mBinding.bottomNavigationViewEx.enableItemShiftingMode(false);
 
-        mBinding.bottomNavigationViewEx.setItemHeight(144);
-        mBinding.bottomNavigationViewEx.setIconsMarginTop(16);
+        //mBinding.bottomNavigationViewEx.setItemHeight(144);
+        //mBinding.bottomNavigationViewEx.setIconsMarginTop(16);
+        mBinding.bottomNavigationViewEx.setItemHeight(DensityUtil.dp2px(48));
+        mBinding.bottomNavigationViewEx.setIconsMarginTop(DensityUtil.dp2px(5));
         mBinding.bottomNavigationViewEx.setTextSize(10);
         mBinding.bottomNavigationViewEx.setIconSize(24, 24);
 
