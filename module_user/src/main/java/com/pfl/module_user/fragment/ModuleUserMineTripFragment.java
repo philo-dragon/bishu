@@ -34,7 +34,7 @@ import javax.inject.Inject;
  * 我的行程
  */
 @Route(path = RouteUtils.MODULE_USER_FRAGMENT_MINE_TRIP)
-public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView, View.OnClickListener {
+public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserFragmentMineTripBinding> implements MyTripView {
 
     @Inject
     MyTripViewModel viewModel;
@@ -69,9 +69,10 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
         mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分规则") {
             @Override
             public void performAction(View view) {
-                Map<String,String> paramMap = new HashMap<>();
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_INTEGRATION_RULE);
+               /* Map<String,String> paramMap = new HashMap<>();
                 paramMap.put("mUrl","http://www.baidu.com");
-                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5,paramMap);
+                RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5,paramMap);*/
             }
         });
     }
@@ -104,10 +105,6 @@ public class ModuleUserMineTripFragment extends LazyLoadBaseFragment<ModuleUserF
         setRecyclerView();
         setRefreshView();
         mBinding.moduleRefreshLayout.commonRefreshLayout.autoRefresh(0);
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 
     @Override

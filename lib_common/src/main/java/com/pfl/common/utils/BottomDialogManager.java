@@ -208,7 +208,7 @@ public class BottomDialogManager {
                     }
                 });
 
-                v.findViewById(R.id.lib_common_tv_qq).setOnClickListener(new View.OnClickListener() {
+              /*  v.findViewById(R.id.lib_common_tv_qq).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         bottomDialog.dismiss();
@@ -228,7 +228,7 @@ public class BottomDialogManager {
                         bottomDialog.dismiss();
                         listener.onClick(v);
                     }
-                });
+                });*/
                 v.findViewById(R.id.lib_common_tv_cancel).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

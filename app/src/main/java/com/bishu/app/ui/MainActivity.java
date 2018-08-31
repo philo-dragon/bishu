@@ -56,8 +56,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mBinding.bottomNavigationViewEx.enableShiftingMode(false);
         mBinding.bottomNavigationViewEx.enableItemShiftingMode(false);
 
-        //mBinding.bottomNavigationViewEx.setItemHeight(144);
-        //mBinding.bottomNavigationViewEx.setIconsMarginTop(16);
         mBinding.bottomNavigationViewEx.setItemHeight(DensityUtil.dp2px(48));
         mBinding.bottomNavigationViewEx.setIconsMarginTop(DensityUtil.dp2px(5));
         mBinding.bottomNavigationViewEx.setTextSize(10);

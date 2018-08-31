@@ -1,21 +1,16 @@
 package com.pfl.module_user.activity;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pfl.common.base.BaseActivity;
-import com.pfl.common.base.MultiTypeAdapter;
 import com.pfl.common.di.AppComponent;
 import com.pfl.common.entity.module_user.ScoreLog;
 import com.pfl.common.imageloader.ImageLoader;
-import com.pfl.common.utils.App;
 import com.pfl.common.utils.BaseObserver;
 import com.pfl.common.utils.RouteUtils;
-import com.pfl.common.weidget.TitleBar;
 import com.pfl.module_user.R;
 import com.pfl.module_user.adapter.WalletAdapter;
 import com.pfl.module_user.databinding.ModuleUserActivityMyWalletBinding;
@@ -27,13 +22,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
-
-import static android.widget.LinearLayout.VERTICAL;
 
 /**
  * 我的钱包
@@ -76,7 +67,7 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
     @Override
     public void setToolBar() {
         setToolBarHasBack(mBinding.inToolbarLayout.titleBar);
-        mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分商城") {
+       /* mBinding.inToolbarLayout.titleBar.addAction(new TitleBar.TextAction("积分商城") {
             @Override
             public void performAction(View view) {
                 //Toast.makeText(App.getInstance(), "积分商城", Toast.LENGTH_SHORT).show();
@@ -84,7 +75,7 @@ public class ModuleUserMyWalletActivity extends BaseActivity<ModuleUserActivityM
                 paramMap.put("mUrl","http://www.baidu.com");
                 RouteUtils.actionStart(RouteUtils.MODULE_USER_ACTIVITY_H5,paramMap);
             }
-        });
+        });*/
     }
 
     @Override

@@ -114,6 +114,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:process=":h5"
             android:label="@string/module_user_str_h5" />
+        <activity
+            android:name=".activity.ModuleUserIntegrationRuleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/module_user_str_integration_rule" />
     </application>
 
 </manifest>

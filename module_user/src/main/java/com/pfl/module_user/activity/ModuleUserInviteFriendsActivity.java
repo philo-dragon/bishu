@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.zxing.client.android.ZxingUtils;
 import com.pfl.common.base.BaseActivity;
 import com.pfl.common.di.AppComponent;
@@ -51,7 +52,7 @@ public class ModuleUserInviteFriendsActivity extends BaseActivity<ModuleUserActi
 
         UserInfo userInfo = ModuleUserRouteService.getUserInfo();
         mBinding.moduleUserTvQrCode.setText(userInfo.getReferral_code());
-        mBinding.moduleUserImgQrCode.setImageBitmap(ZxingUtils.createBitmap(userInfo.getReferral_code()));
+        mBinding.moduleUserImgQrCode.setImageBitmap(ZxingUtils.createBitmap(SocialUtil.APP_YYB_URL));
     }
 
     @Override
@@ -93,78 +94,16 @@ public class ModuleUserInviteFriendsActivity extends BaseActivity<ModuleUserActi
         } else if (id == R.id.module_user_tv_copy) {
             copy();
         } else if (id == R.id.lib_common_tv_wechat) {
-            socialHelper.shareWX(this, createWXShareEntity(2), this);
+            socialHelper.shareWX(this, SocialUtil.INSTANCE.createWXShareEntity(false, 3, R.drawable.lib_resource_share_default_img), this);
         } else if (id == R.id.lib_common_tv_moment) {
-            socialHelper.shareWX(this, createWXShareEntity(3), this);
-        } else if (id == R.id.lib_common_tv_qq) {
-            socialHelper.shareQQ(this, createQQShareEntity(2), this);
+            socialHelper.shareWX(this, SocialUtil.INSTANCE.createWXShareEntity(true, 3, R.drawable.lib_resource_share_default_img), this);
+        }/* else if (id == R.id.lib_common_tv_qq) {
+            socialHelper.shareQQ(this, SocialUtil.INSTANCE.createQQShareEntity(2), this);
         } else if (id == R.id.lib_common_tv_qzone) {
-            socialHelper.shareQQ(this, createQQShareEntity(3), this);
+            socialHelper.shareQQ(this, SocialUtil.INSTANCE.createQQShareEntity(3), this);
         } else if (id == R.id.lib_common_tv_sina) {
-            socialHelper.shareWB(this, createWBShareEntity(2), this);
-        }
-    }
-
-    private String imgUrl = "https://upload-images.jianshu.io/upload_images/3157525-afe6f0ba902eb523.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    private String localImgUrl = "/storage/emulated/0/DCIM/Camera/IMG_20180422_113944.jpg";
-    private String title = "个人博客";
-    private String summary = "好好学习";
-    private String targetUrl = "https://arvinljw.github.io";
-
-    private final int img = 1;
-    private final int text = 2;
-    private final int web = 3;
-
-    private ShareEntity createQQShareEntity(int checkedRadioButtonId) {
-        ShareEntity shareEntity = null;
-        switch (checkedRadioButtonId) {
-            case img:
-                shareEntity = QQShareEntity.createImageInfo(localImgUrl, "ni6");
-                break;
-            case text:
-                shareEntity = QQShareEntity.createImageTextInfo(title, targetUrl, imgUrl, summary, "ni6");
-                break;
-            case web:
-                //分享到qq空间，因为qq图文就包含了targetUrl所以比较常用
-                ArrayList<String> imgUrls = new ArrayList<>();
-                imgUrls.add(imgUrl);
-                shareEntity = QQShareEntity.createImageTextInfoToQZone(title, targetUrl, imgUrls, summary, "ni6");
-                break;
-        }
-        return shareEntity;
-    }
-
-    private ShareEntity createWXShareEntity(int checkedRadioButtonId) {
-        ShareEntity shareEntity = null;
-        switch (checkedRadioButtonId) {
-            case img:
-                shareEntity = WXShareEntity.createImageInfo(false, localImgUrl);
-                break;
-            case text:
-                //微信图文是分开的，但是在分享到朋友圈的web中是可以有混合的
-                shareEntity = WXShareEntity.createImageInfo(false, R.mipmap.ic_launcher);
-                break;
-            case web:
-                shareEntity = WXShareEntity.createWebPageInfo(false, targetUrl, R.mipmap.ic_launcher, title, summary);
-                break;
-        }
-        return shareEntity;
-    }
-
-    private ShareEntity createWBShareEntity(int checkedRadioButtonId) {
-        ShareEntity shareEntity = null;
-        switch (checkedRadioButtonId) {
-            case img:
-                shareEntity = WBShareEntity.createImageTextInfo(localImgUrl, title);
-                break;
-            case text:
-                shareEntity = WBShareEntity.createImageTextInfo(R.mipmap.ic_launcher, title);
-                break;
-            case web:
-                shareEntity = WBShareEntity.createWebInfo(targetUrl, title, summary, R.mipmap.ic_launcher, "这是要说的内容");
-                break;
-        }
-        return shareEntity;
+            socialHelper.shareWB(this, SocialUtil.INSTANCE.createWBShareEntity(2, R.mipmap.ic_launcher), this);
+        }*/
     }
 
     //用处：qq登录和分享回调，以及微博登录回调
@@ -198,6 +137,6 @@ public class ModuleUserInviteFriendsActivity extends BaseActivity<ModuleUserActi
 
     @Override
     public void socialError(String msg) {
-
+        ToastUtils.showShort(msg);
     }
 }
